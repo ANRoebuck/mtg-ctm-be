@@ -10,4 +10,4 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
   res.send('Hello world');
 });
 
-app.listen(5000, () => console.log('Server running'));
+app.listen(process.env.PORT || 5000, () => console.log('Server running'));

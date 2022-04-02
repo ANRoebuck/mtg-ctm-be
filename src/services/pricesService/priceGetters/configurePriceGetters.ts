@@ -1,4 +1,4 @@
-import AbstractPriceGetter from "./AbstractPriceGetter";
+import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 
 const configurePriceGetters = (): { [key: string]: AbstractPriceGetter } => {
     return {};

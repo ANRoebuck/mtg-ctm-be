@@ -1,9 +1,11 @@
 import AbstractDataProcessor from './AbstractDataProcessor';
 
+// TODO: enforce minimum array length of 1
+
 class AbstractProcessorSelector {
 
-    dataProcessors: AbstractDataProcessor[]
-    parser: DOMParser
+    dataProcessors: AbstractDataProcessor[];
+    parser: DOMParser;
 
     constructor(dataProcessors: AbstractDataProcessor[]) {
         this.dataProcessors = dataProcessors;

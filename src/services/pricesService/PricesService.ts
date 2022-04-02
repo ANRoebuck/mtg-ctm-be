@@ -1,4 +1,4 @@
-import AbstractPriceGetter from "./priceGetters/AbstractPriceGetter";
+import AbstractPriceGetter from "./priceGetters/abstract/AbstractPriceGetter";
 import configurePriceGetters from "./priceGetters/configurePriceGetters";
 
 

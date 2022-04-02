@@ -1,4 +1,4 @@
-import Price from '../types/Price';
+import { Price } from '../types/Price';
 import pricesService from "../services/pricesService/PricesService";
 
 interface GetPricesRequest {

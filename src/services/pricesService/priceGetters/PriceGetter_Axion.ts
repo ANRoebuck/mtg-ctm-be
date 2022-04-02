@@ -34,6 +34,8 @@ class ProcessorSelector_Axion extends AbstractProcessorSelector {
 class DataProcessor_Axion extends AbstractDataProcessor {
     constructor() {
         super({
+            seller: 'Axion Now',
+
             resultSelector: 'ul.products > li.product',
             titleSelector: 'div.inner > div > div.meta > a > h4',
 

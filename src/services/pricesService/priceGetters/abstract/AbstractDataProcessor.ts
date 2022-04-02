@@ -1,7 +1,10 @@
 import { Price, StockStatus } from '../../../../types/Price';
+import { JSDOM } from 'jsdom';
 
 
 class AbstractDataProcessor {
+
+    seller: string;
 
     resultSelector: string;
     titleSelector: string;
@@ -26,16 +29,16 @@ class AbstractDataProcessor {
     productBaseUrl: string;
     productRefAttribute: string;
 
-    parser: DOMParser = new DOMParser();
-
     constructor({
-                    resultSelector, titleSelector,
+                    seller, resultSelector, titleSelector,
                     useSubResults, subresultSelector, subtitleSelector, subtitleFromText,
                     priceSelector, priceValueFromPriceText, stockSelector, stockValueFromStockText,
                     expansionSelector, isFoilSelector,
                     imgSelector, imgBaseUrl, imgSrcAttribute,
                     productSelector, productBaseUrl, productRefAttribute,
                 }: Args) {
+
+        this.seller = seller;
 
         this.resultSelector = resultSelector;
         this.titleSelector = titleSelector;
@@ -81,11 +84,13 @@ class AbstractDataProcessor {
 
                 const price = this.priceFromResultNode(subresult);
                 const stock = this.stockFromResultNode(subresult);
-                const subtitle = this.subtitleFromResultNode(subresult);
+                const subtitle = this.useSubResults ? this.subtitleFromResultNode(subresult) : '';
                 const isFoil = this.isFoilFromTitle(title)
-                    || this.isFoilFromTitle(subtitle) || this.isFoilFromResultNode(subresult);
+                    || this.isFoilFromTitle(subtitle)
+                    || this.isFoilFromResultNode(subresult);
 
                 processedResults.push({
+                    seller: this.seller,
                     title,
                     imgSrc,
                     productRef,
@@ -105,7 +110,8 @@ class AbstractDataProcessor {
     }
 
     dataToResultsArray = (rawData: string): Element[] => {
-        const document = this.parser.parseFromString(rawData, "text/html");
+        // const document = this.parser.parseFromString(rawData, "text/html");
+        const { document } = new JSDOM(rawData).window;
         return [...document.querySelectorAll(this.resultSelector)];
     }
 
@@ -113,8 +119,8 @@ class AbstractDataProcessor {
     subresultsFromResultNode = (resultNode: Element): Element[] => [...resultNode.querySelectorAll(this.subresultSelector)];
 
 
-    priceFromResultNode = (resultNode: Element): number => [...resultNode.querySelectorAll(this.priceSelector)]
-        .map((node: Element): number => this.priceValueFromPriceText(node.innerHTML))[0] || 9999;
+    priceFromResultNode = (resultNode: Element): number | null => [...resultNode.querySelectorAll(this.priceSelector)]
+        .map((node: Element): number => this.priceValueFromPriceText(node.innerHTML))[0] || null;
 
 
     titleFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.titleSelector)]
@@ -155,6 +161,8 @@ class AbstractDataProcessor {
 const stripWhitespace = (str: string) : string => str.replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);
 
 interface Args {
+    seller: string,
+
     resultSelector: string,
     titleSelector: string,
 

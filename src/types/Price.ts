@@ -4,11 +4,12 @@ export interface StockStatus {
 }
 
 export type Price = {
+    seller: string,
     title: string,
     imgSrc: string,
     productRef: string,
     expansion: string,
-    price: number,
+    price: number | null,
     stock: StockStatus,
     subtitle: string,
     isFoil: boolean,

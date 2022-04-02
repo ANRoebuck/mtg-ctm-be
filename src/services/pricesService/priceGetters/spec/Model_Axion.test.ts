@@ -1,11 +1,14 @@
-import axios from 'axios';
-import { response_axion_Tarmogoyf, expectedResults_axion_Tarmogoyf } from './test-resources/model-axion-search-response-tarmogoyf';
-import PriceGetter_Axion from '../PriceGetter_Axion';
+import axios, {AxiosStatic} from 'axios';
 import AbstractPriceGetter from '../abstract/AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
+import PriceGetter_Axion from '../PriceGetter_Axion';
+import {
+  response_axion_Tarmogoyf,
+  expectedResults_axion_Tarmogoyf
+} from './test-resources/model-axion-search-response-tarmogoyf';
 
 jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
+const mockedAxios: jest.Mocked<AxiosStatic> = axios as jest.Mocked<typeof axios>;
 
 
 describe('PriceGetter_Axion', () => {

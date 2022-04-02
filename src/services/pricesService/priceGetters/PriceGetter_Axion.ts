@@ -45,9 +45,9 @@ class DataProcessor_Axion extends AbstractDataProcessor {
             subtitleFromText: () => '',
 
             priceSelector: 'div.inner > div > div.meta > div.list-variants.grid > div > span > form > div > span.regular',
-            priceValueFromPriceText: (text) => text ? parseInt(text.replace(/\D/g,'')) : 9999,
+            priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g,'')),
             stockSelector: 'div.inner > div > div.meta > div> div > span.variant-main-info > span.variant-qty',
-            stockValueFromStockText: (text) => text === 'Out of stock.' ? 0 : parseInt(text.replace(/([0-9]*)([^0-9]*)/, `$1`)),
+            stockValueFromStockText: (text): number => text === 'Out of stock.' ? 0 : parseInt(text.replace(/([0-9]*)([^0-9]*)/, `$1`)),
             isFoilSelector: 'div.inner > div > div.meta > a > h4',
             expansionSelector: 'div.inner > div > div.meta > a > span.category',
 

@@ -110,8 +110,7 @@ class AbstractDataProcessor {
     }
 
     dataToResultsArray = (rawData: string): Element[] => {
-        // const document = this.parser.parseFromString(rawData, "text/html");
-        const { document } = new JSDOM(rawData).window;
+        const document: Document = new JSDOM(rawData).window.document;
         return [...document.querySelectorAll(this.resultSelector)];
     }
 

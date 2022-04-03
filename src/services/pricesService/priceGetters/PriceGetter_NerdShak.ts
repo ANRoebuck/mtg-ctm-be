@@ -1,8 +1,8 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
-import AbstractDataProcessor from './abstract/AbstractDataProcessor';
+import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
-import {StockStatus} from "../../../types/Price";
+import { StockStatus } from "../../../types/Price";
 
 
 class PriceGetter_NerdShak extends AbstractPriceGetter {
@@ -32,7 +32,7 @@ class ProcessorSelector_NerdShak extends AbstractProcessorSelector {
     }
 }
 
-class DataProcessor_NerdShak extends AbstractDataProcessor {
+class DataProcessor_NerdShak extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Nerd Shak',

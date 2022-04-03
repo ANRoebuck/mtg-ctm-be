@@ -1,8 +1,18 @@
 import { Price, StockStatus } from '../../../../types/Price';
 import { JSDOM } from 'jsdom';
 
+export interface AbstractDataProcessor {
+    processData: (rawData: any) => Price[]
+}
 
-class AbstractDataProcessor {
+export class AbstractJsonDataProcessor implements AbstractDataProcessor {
+    processData = (rawData: object): Price[] => {
+        return [];
+    }
+}
+
+
+export class AbstractHtmlDataProcessor implements AbstractDataProcessor {
 
     seller: string;
 
@@ -36,7 +46,7 @@ class AbstractDataProcessor {
                     expansionSelector, isFoilSelector,
                     imgSelector, imgBaseUrl, imgSrcAttribute,
                     productSelector, productBaseUrl, productRefAttribute,
-                }: Args) {
+                }: HtmlProcoessorArgs) {
 
         this.seller = seller;
 
@@ -159,7 +169,7 @@ class AbstractDataProcessor {
 
 const stripWhitespace = (str: string) : string => str.replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);
 
-interface Args {
+interface HtmlProcoessorArgs {
     seller: string,
 
     resultSelector: string,
@@ -185,5 +195,3 @@ interface Args {
     productBaseUrl: string,
     productRefAttribute: string,
 }
-
-export default AbstractDataProcessor;

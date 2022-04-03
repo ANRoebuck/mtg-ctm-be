@@ -1,5 +1,5 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
-import AbstractDataProcessor from './abstract/AbstractDataProcessor';
+import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 
@@ -31,7 +31,7 @@ class ProcessorSelector_Axion extends AbstractProcessorSelector {
     }
 }
 
-class DataProcessor_Axion extends AbstractDataProcessor {
+class DataProcessor_Axion extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Axion Now',
@@ -45,9 +45,9 @@ class DataProcessor_Axion extends AbstractDataProcessor {
             subtitleFromText: () => '',
 
             priceSelector: 'div.inner > div > div.meta > div.list-variants.grid > div > span > form > div > span.regular',
-            priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g,'')),
+            priceValueFromPriceText: (text: string): number => parseInt(text.replace(/\D/g,'')),
             stockSelector: 'div.inner > div > div.meta > div> div > span.variant-main-info > span.variant-qty',
-            stockValueFromStockText: (text): number => text === 'Out of stock.' ? 0 : parseInt(text.replace(/([0-9]*)([^0-9]*)/, `$1`)),
+            stockValueFromStockText: (text: string): number => text === 'Out of stock.' ? 0 : parseInt(text.replace(/([0-9]*)([^0-9]*)/, `$1`)),
             isFoilSelector: 'div.inner > div > div.meta > a > h4',
             expansionSelector: 'div.inner > div > div.meta > a > span.category',
 

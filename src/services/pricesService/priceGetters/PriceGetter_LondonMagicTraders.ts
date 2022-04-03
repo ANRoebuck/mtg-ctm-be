@@ -1,8 +1,8 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
-import AbstractDataProcessor from './abstract/AbstractDataProcessor';
+import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
-import {StockStatus} from "../../../types/Price";
+import { StockStatus } from "../../../types/Price";
 
 
 class PriceGetter_LondonMagicTraders extends AbstractPriceGetter {
@@ -32,7 +32,7 @@ class ProcessorSelector_LondonMagicTraders extends AbstractProcessorSelector {
     }
 }
 
-class DataProcessor_LondonMagicTraders extends AbstractDataProcessor {
+class DataProcessor_LondonMagicTraders extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'London Magic Traders',

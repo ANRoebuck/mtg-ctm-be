@@ -1,5 +1,5 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
-import AbstractDataProcessor from './abstract/AbstractDataProcessor';
+import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 
@@ -31,7 +31,7 @@ class ProcessorSelector_MountbattenCollectables extends AbstractProcessorSelecto
     }
 }
 
-class DataProcessor_MountbattenCollectables extends AbstractDataProcessor {
+class DataProcessor_MountbattenCollectables extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Mountbatten Collectables',

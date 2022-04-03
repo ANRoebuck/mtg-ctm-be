@@ -1,8 +1,8 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
-import AbstractDataProcessor from './abstract/AbstractDataProcessor';
+import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
-import {StockStatus} from "../../../types/Price";
+import { StockStatus } from "../../../types/Price";
 
 
 class PriceGetter_LvlUp extends AbstractPriceGetter {
@@ -32,7 +32,7 @@ class ProcessorSelector_LvlUp extends AbstractProcessorSelector {
     }
 }
 
-class DataProcessor_LvlUp extends AbstractDataProcessor {
+class DataProcessor_LvlUp extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Lvl Up',

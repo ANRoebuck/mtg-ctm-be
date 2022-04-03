@@ -1,7 +1,8 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
-import AbstractDataProcessor from './abstract/AbstractDataProcessor';
+import { AbstractJsonDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
+import {Price, StockStatus} from "../../../types/Price";
 
 
 class PriceGetter_MagicMadhouse extends AbstractPriceGetter {
@@ -31,65 +32,32 @@ class ProcessorSelector_MagicMadhouse extends AbstractProcessorSelector {
     }
 }
 
-class DataProcessor_MagicMadhouse extends AbstractDataProcessor {
+class DataProcessor_MagicMadhouse extends AbstractJsonDataProcessor {
+
+    seller: string;
+
     constructor() {
-        super({
-            seller: 'Magic Madhouse',
-
-            priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g,'')),
-
-            expansionSelector: "",
-            imgBaseUrl: "",
-            imgSelector: "",
-            imgSrcAttribute: "",
-            isFoilSelector: "",
-            priceSelector: "",
-            productBaseUrl: "",
-            productRefAttribute: "",
-            productSelector: "",
-            resultSelector: "",
-            stockSelector: "",
-            stockValueFromStockText(x: string): number {return 0;},
-            subresultSelector: "",
-            subtitleFromText(x: string): string {return "";},
-            subtitleSelector: "",
-            titleSelector: "",
-            useSubResults: false,
-        });
+        super();
+        this.seller = 'Magic Madhouse';
     }
 
     // @Override
-    dataToResultsArray = (data) => data.result || [];
+    processData = (rawData: any): Price[] => {
+        const results: object[] = rawData.result || [];
 
-    // @Override
-    titleFromResultNode = (resultNode) => resultNode.name.split('|')[0].replace(regex.whiteSpaceStripper, '$2');
+        return results.map((result: any): Price => {
+            const title: string = result.name.split('|')[0].replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, '$2');
+            const imgSrc: string = result.image;
+            const productRef: string = result.url;
+            const expansion: string = result.magic_set;
+            const price: number = parseInt(result.price.replace(/\D/g,''));
+            const inventoryLevel = parseInt(result.inventory_level);
+            const stock: StockStatus = inventoryLevel > 0 ? { inStock: true, stock: inventoryLevel } : { inStock: false, stock: 0 };
+            const isFoil: boolean = title.toLowerCase().includes('foil');
+            return { seller: this.seller, title, imgSrc, productRef, expansion, price, stock, subtitle: '', isFoil };
+        });
+    }
 
-    // @Override
-    isFoilFromResultNode = (resultNode) => this.isFoilFromTitle(this.titleFromResultNode(resultNode));
-
-    // @Override
-    priceFromResultNode = ({ price }: { price: string}): number => this.priceValueFromPriceText(price);
-
-    // @Override
-    stockFromResultNode = ({ inventory_level }) => {
-        const value = parseInt(inventory_level);
-        return {
-            value,
-            text: value > 0 ? value + ' in Stock' : 'Out of Stock',
-        };
-    };
-
-    // @Override
-    imgSrcFromResultNode = (resultNode) => resultNode.image;
-
-    // @Override
-    productRefFromResultNode = (resultNode) => resultNode.url;
-
-    // @Override
-    expansionFromResultNode = (resultNode) => resultNode.magic_set;
-
-    // Override
-    subtitleFromResultNode = (resultNode) => '';
 }
 
 export default PriceGetter_MagicMadhouse;

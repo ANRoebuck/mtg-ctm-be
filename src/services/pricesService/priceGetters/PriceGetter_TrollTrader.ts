@@ -1,5 +1,5 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
-import AbstractDataProcessor from './abstract/AbstractDataProcessor';
+import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 
@@ -31,7 +31,7 @@ class ProcessorSelector_TrollTrader extends AbstractProcessorSelector {
     }
 }
 
-class DataProcessor_TrollTrader extends AbstractDataProcessor {
+class DataProcessor_TrollTrader extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Troll Trader',

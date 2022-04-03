@@ -1,5 +1,5 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
-import AbstractDataProcessor from './abstract/AbstractDataProcessor';
+import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 import {StockStatus} from "../../../types/Price";
@@ -32,7 +32,7 @@ class ProcessorSelector_LazyDragonGaming extends AbstractProcessorSelector {
     }
 }
 
-class DataProcessor_LazyDragonGaming extends AbstractDataProcessor {
+class DataProcessor_LazyDragonGaming extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Lazy Dragon Gaming',

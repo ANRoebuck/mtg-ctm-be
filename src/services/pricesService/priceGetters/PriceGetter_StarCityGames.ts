@@ -1,5 +1,5 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
-import AbstractDataProcessor from './abstract/AbstractDataProcessor';
+import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 
@@ -53,7 +53,7 @@ class ProcessorSelector_StarCityGames extends AbstractProcessorSelector {
     }
 }
 
-class DataProcessor_StarCityGames extends AbstractDataProcessor {
+class DataProcessor_StarCityGames extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Star City Games',

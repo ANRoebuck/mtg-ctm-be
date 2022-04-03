@@ -1,5 +1,5 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
-import AbstractDataProcessor from './abstract/AbstractDataProcessor';
+import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 import {StockStatus} from "../../../types/Price";
@@ -32,7 +32,7 @@ class ProcessorSelector_ManaLeak extends AbstractProcessorSelector {
     }
 }
 
-class DataProcessor_ManaLeak extends AbstractDataProcessor {
+class DataProcessor_ManaLeak extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Mana Leak',

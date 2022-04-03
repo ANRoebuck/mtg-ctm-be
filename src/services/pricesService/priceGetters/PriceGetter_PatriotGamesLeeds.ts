@@ -1,5 +1,5 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
-import AbstractDataProcessor from './abstract/AbstractDataProcessor';
+import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 import {JSDOM} from "jsdom";
@@ -43,7 +43,7 @@ class ProcessorSelector_PatriotGamesLeeds extends AbstractProcessorSelector {
     };
 }
 
-class DataProceesor_PatriotGamesLeeds_Desktop extends AbstractDataProcessor {
+class DataProceesor_PatriotGamesLeeds_Desktop extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Patriot Games Leeds',
@@ -86,7 +86,7 @@ class DataProceesor_PatriotGamesLeeds_Desktop extends AbstractDataProcessor {
 
 }
 
-class DataProceesor_PatriotGamesLeeds_Mobile extends AbstractDataProcessor {
+class DataProceesor_PatriotGamesLeeds_Mobile extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Patriot Games Leeds',

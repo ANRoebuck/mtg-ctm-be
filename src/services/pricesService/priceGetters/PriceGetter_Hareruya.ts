@@ -6,26 +6,72 @@ import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 
 class PriceGetter_Hareruya extends AbstractPriceGetter {
     constructor() {
-        super();
+        super({
+            name: 'Hareruya',
+            dataGetter: new DataGetter_Hareruya(),
+            processorSelector: new ProcessorSelector_Hareruya(),
+        });
     }
 }
 
 class DataGetter_Hareruya extends AbstractDataGetter {
     constructor() {
-        super();
+        super({
+            baseUrl: 'https://www.hareruyamtg.com/en/',
+            searchPath: 'products/search?suggest_type=all&product=',
+            searchSuffix: '&image=%EE%A4%84',
+            searchJoin: '+',
+        });
     }
 }
 
 class ProcessorSelector_Hareruya extends AbstractProcessorSelector {
     constructor() {
-        super();
+        super([new DataProcessor_Hareruya()]);
     }
 }
 
 class DataProcessor_Hareruya extends AbstractDataProcessor {
     constructor() {
-        super();
+        super({
+            seller: 'Hareruya',
+
+            resultSelector: 'ul.itemListLine > li.itemList',
+            titleSelector: 'div.itemData > a',
+
+            useSubResults: false,
+            subresultSelector: '',
+            subtitleSelector: '',
+            subtitleFromText: () => '',
+
+            priceSelector: 'div.itemData > div.itemDetail > p.itemDetail__price',
+            priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g,'')),
+            stockSelector: 'div.itemData > div.itemDetail > p.itemDetail__stock',
+            stockValueFromStockText: (text): number => parseInt(text.replace(/\D/g,'')),
+            isFoilSelector: 'div.itemData > a',
+            expansionSelector: 'div.itemData > a',
+
+            imgSelector: 'a> div.itemImg > img',
+            imgBaseUrl: '',
+            imgSrcAttribute: 'data-original',
+
+            productSelector: 'div.itemData > a',
+            productBaseUrl: 'https://www.hareruyamtg.com',
+            productRefAttribute: 'href',
+        });
     }
+
+    // @Override
+    titleFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.titleSelector)]
+        .map(node => node.innerHTML
+                .replace(/(.*)\[.*/g, `$1`)                      // take first segment before opening [
+                .replace(/[【】《》\[\]■ ◆]/g, ' ')               // remove weird brackets
+                .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)    // remove leading+trailing whitespace
+        )[0] || '';
+
+    // @Override
+    expansionFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.expansionSelector)]
+        .map(node => node.innerHTML.replace(/.*\[(.*)\]/g, `$1`))[0] || '';
 }
 
 export default PriceGetter_Hareruya;

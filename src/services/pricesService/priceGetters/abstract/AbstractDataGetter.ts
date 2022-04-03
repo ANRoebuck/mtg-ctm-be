@@ -32,7 +32,7 @@ class AbstractDataGetter {
         + searchTerm.toLowerCase().split(' ').join(this.searchJoin)
         + this.searchSuffix;
 
-    extractData = ({ data } : { data: string }) => data || '';
+    extractData = ({ data } : { data: string }): string => data || '';
 }
 
 export default AbstractDataGetter;

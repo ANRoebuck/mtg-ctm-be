@@ -4,7 +4,6 @@ import pricesService from "../services/pricesService/PricesService";
 interface GetPricesRequest {
     seller: string,
     searchTerm: string,
-    // [key: string]: any,
 }
 
 

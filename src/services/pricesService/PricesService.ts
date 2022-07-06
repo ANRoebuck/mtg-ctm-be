@@ -11,7 +11,9 @@ class PricesService {
     }
 
     getPrices(seller: string, searchTerm: string) {
+        console.log("getting prices. seller = " + seller + ", searchTerm = "  + searchTerm);
         const priceGetter: AbstractPriceGetter = this.priceGetters[seller];
+        console.log("pricegetter = " + priceGetter.name);
         return priceGetter ? priceGetter.search(searchTerm) : [];
     }
 }

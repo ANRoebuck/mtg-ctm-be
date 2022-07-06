@@ -1,4 +1,4 @@
-import AbstractDataProcessor from './AbstractDataProcessor';
+import { AbstractDataProcessor } from './AbstractDataProcessor';
 
 
 // TODO: enforce minimum array length of 1

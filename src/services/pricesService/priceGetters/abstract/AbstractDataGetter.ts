@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+axios.defaults.headers.common['origin'] = "CTM";
+
 interface Args {
     baseUrl: string,
     searchPath: string,

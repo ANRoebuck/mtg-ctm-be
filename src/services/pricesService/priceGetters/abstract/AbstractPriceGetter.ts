@@ -1,6 +1,6 @@
 import AbstractDataGetter from './AbstractDataGetter';
 import AbstractProcessorSelector from './AbstractProcessorSelector';
-import AbstractDataProcessor from './AbstractDataProcessor';
+import { AbstractDataProcessor } from './AbstractDataProcessor';
 import { Price } from '../../../../types/Price';
 
 interface Args {

@@ -2,8 +2,8 @@ import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
-import {JSDOM} from "jsdom";
-import {StockStatus} from "../../../types/Price";
+import { JSDOM } from "jsdom";
+import { StockStatus } from "../../../types/Price";
 
 
 class PriceGetter_PatriotGamesLeeds extends AbstractPriceGetter {

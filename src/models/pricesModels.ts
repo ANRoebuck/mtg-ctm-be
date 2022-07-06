@@ -1,14 +1,12 @@
 import { Price } from '../types/Price';
 import pricesService from "../services/pricesService/PricesService";
 
-interface GetPricesRequest {
-    seller: string,
-    searchTerm: string,
-}
 
-
-const getPrices = async (getPricesRequest: GetPricesRequest): Promise<Price[]> => {
-    return pricesService.getPrices(getPricesRequest.seller, getPricesRequest.searchTerm);
+const getPrices = async (seller: string, searchTerm: string): Promise<Price[]> => {
+    if (pricesService.isValidSeller(seller)) {
+        return pricesService.getPrices(seller, searchTerm);
+    }
+    return Promise.reject({ status:404, message: `Invalid seller: ${seller}` });
 }
 
 export default getPrices;

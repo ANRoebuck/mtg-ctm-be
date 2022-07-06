@@ -67,14 +67,14 @@ class DataProcessor_LazyDragonGaming extends AbstractHtmlDataProcessor {
 
     // @Override
     priceFromResultNode = (resultNode: Element): number => {
-        const nodeText: string | null = resultNode.getAttribute('data-price');
+        const nodeText: string | null = resultNode.getAttribute('data-variantprice');
         return nodeText ? this.priceValueFromPriceText(nodeText) : 999999;
     }
 
     // @Override
     stockFromResultNode = (resultNode: Element): StockStatus => {
         // Only in stock results are shown
-        const value: string | null = resultNode.getAttribute('data-variantquantity');
+        const value: string | null = resultNode.getAttribute('data-variantqty');
         return { inStock: true, stock: parseInt(value || '0') };
     }
 

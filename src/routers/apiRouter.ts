@@ -1,10 +1,14 @@
 import express, { Application, Router, Request, Response, NextFunction } from 'express';
 import pricesRouter from './pricesRouter';
+import {errMethodNotAllowed} from '../errorHandling/errorHandling';
 
 
 const apiRouter: Router = express.Router();
 
-apiRouter.use('/prices', pricesRouter);
+apiRouter.route('/')
+    // .get((req, res, next) => res.send(endPoints))
+    .all(errMethodNotAllowed)
 
+apiRouter.use('/prices', pricesRouter);
 
 export default apiRouter;

@@ -10,6 +10,10 @@ class PricesService {
         this.priceGetters = configurePriceGetters();
     }
 
+    isValidSeller(seller: string) {
+        return Object.keys(this.priceGetters).includes(seller);
+    }
+
     getPrices(seller: string, searchTerm: string) {
         console.log("getting prices. seller = " + seller + ", searchTerm = "  + searchTerm);
         const priceGetter: AbstractPriceGetter = this.priceGetters[seller];

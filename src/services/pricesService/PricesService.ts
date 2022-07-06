@@ -10,6 +10,10 @@ class PricesService {
         this.priceGetters = configurePriceGetters();
     }
 
+    getSellers() {
+        return Object.keys(this.priceGetters);
+    }
+
     isValidSeller(seller: string) {
         return Object.keys(this.priceGetters).includes(seller);
     }

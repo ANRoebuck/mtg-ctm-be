@@ -5,7 +5,7 @@ import {errMethodNotAllowed} from "../errorHandling/errorHandling";
 const pricesRouter: Router = express.Router();
 
 pricesRouter.route('/')
-    .get(sendPrices)
+    .post(sendPrices)
     .all(errMethodNotAllowed)
 
 

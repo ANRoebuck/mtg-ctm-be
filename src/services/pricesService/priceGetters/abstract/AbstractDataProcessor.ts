@@ -1,5 +1,6 @@
 import { Price, StockStatus } from '../../../../types/Price';
 import { JSDOM } from 'jsdom';
+import currencyService from '../../../currencyService/CurrencyService';
 
 export interface AbstractDataProcessor {
     processData: (rawData: any) => Price[]
@@ -15,6 +16,7 @@ export class AbstractJsonDataProcessor implements AbstractDataProcessor {
 export class AbstractHtmlDataProcessor implements AbstractDataProcessor {
 
     seller: string;
+    currencyCode: string;
 
     resultSelector: string;
     titleSelector: string;
@@ -40,7 +42,7 @@ export class AbstractHtmlDataProcessor implements AbstractDataProcessor {
     productRefAttribute: string;
 
     constructor({
-                    seller, resultSelector, titleSelector,
+                    seller, currencyCode, resultSelector, titleSelector,
                     useSubResults, subresultSelector, subtitleSelector, subtitleFromText,
                     priceSelector, priceValueFromPriceText, stockSelector, stockValueFromStockText,
                     expansionSelector, isFoilSelector,
@@ -49,6 +51,7 @@ export class AbstractHtmlDataProcessor implements AbstractDataProcessor {
                 }: HtmlProcoessorArgs) {
 
         this.seller = seller;
+        this.currencyCode = currencyCode;
 
         this.resultSelector = resultSelector;
         this.titleSelector = titleSelector;
@@ -92,7 +95,10 @@ export class AbstractHtmlDataProcessor implements AbstractDataProcessor {
 
             subresultNodes.forEach((subresult : Element) => {
 
-                const price = this.priceFromResultNode(subresult);
+                const price_minorUnits = this.priceFromResultNode(subresult);
+                const price_majorUnits = currencyService.minorUnitsToMajorUnits(price_minorUnits, this.currencyCode);
+                const price_relativeUnits = currencyService.minorUnitsToRelativeUnits(price_minorUnits, this.currencyCode);
+                const price_textRepresentation = currencyService.majorUnitsToTextRepresentation(price_majorUnits, this.currencyCode);
                 const stock = this.stockFromResultNode(subresult);
                 const subtitle = this.useSubResults ? this.subtitleFromResultNode(subresult) : '';
                 const isFoil = this.isFoilFromTitle(title)
@@ -105,7 +111,8 @@ export class AbstractHtmlDataProcessor implements AbstractDataProcessor {
                     imgSrc,
                     productRef,
                     expansion,
-                    price,
+                    price_relativeUnits,
+                    price_textRepresentation,
                     stock,
                     subtitle,
                     isFoil,
@@ -128,8 +135,8 @@ export class AbstractHtmlDataProcessor implements AbstractDataProcessor {
     subresultsFromResultNode = (resultNode: Element): Element[] => [...resultNode.querySelectorAll(this.subresultSelector)];
 
 
-    priceFromResultNode = (resultNode: Element): number | null => [...resultNode.querySelectorAll(this.priceSelector)]
-        .map((node: Element): number => this.priceValueFromPriceText(node.innerHTML))[0] || null;
+    priceFromResultNode = (resultNode: Element): number => [...resultNode.querySelectorAll(this.priceSelector)]
+        .map((node: Element): number => this.priceValueFromPriceText(node.innerHTML))[0] || 0;
 
 
     titleFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.titleSelector)]
@@ -171,6 +178,7 @@ const stripWhitespace = (str: string) : string => str.replace(/([\s]*)(\S[\s\S]*
 
 interface HtmlProcoessorArgs {
     seller: string,
+    currencyCode: string,
 
     resultSelector: string,
     titleSelector: string,

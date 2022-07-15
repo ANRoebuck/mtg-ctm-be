@@ -1,8 +1,7 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
-import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
+import { AbstractHtmlDataProcessor, Stock } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
-import { StockStatus } from "../../../types/Price";
 
 
 class PriceGetter_NerdShak extends AbstractPriceGetter {
@@ -77,7 +76,7 @@ class DataProcessor_NerdShak extends AbstractHtmlDataProcessor {
         .map(node => node.innerHTML.replace(/.*\[(.*)\]/g, `$1`))[0] || '';
 
     // @Override
-    stockFromResultNode = (resultNode: Element): StockStatus => ({ inStock: true, stock: 1 });  // Only in stock results are shown
+    stockFromResultNode = (resultNode: Element): Stock => ({ inStock: true, level: '' + 1 });  // Only in stock results are shown
 }
 
 export default PriceGetter_NerdShak;

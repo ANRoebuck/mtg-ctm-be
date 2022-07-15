@@ -1,8 +1,7 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
-import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
+import { AbstractHtmlDataProcessor, Stock } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
-import {StockStatus} from "../../../types/Price";
 
 
 class PriceGetter_LazyDragonGaming extends AbstractPriceGetter {
@@ -73,10 +72,10 @@ class DataProcessor_LazyDragonGaming extends AbstractHtmlDataProcessor {
     }
 
     // @Override
-    stockFromResultNode = (resultNode: Element): StockStatus => {
+    stockFromResultNode = (resultNode: Element): Stock => {
         // Only in stock results are shown
-        const value: string | null = resultNode.getAttribute('data-variantqty');
-        return { inStock: true, stock: parseInt(value || '0') };
+        const value: string = resultNode.getAttribute('data-variantqty') || '0';
+        return { inStock: true, level: value };
     }
 
     // @Override

@@ -1,8 +1,7 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
-import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
+import { AbstractHtmlDataProcessor, Stock } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
-import {StockStatus} from "../../../types/Price";
 
 
 class PriceGetter_ManaLeak extends AbstractPriceGetter {
@@ -64,10 +63,10 @@ class DataProcessor_ManaLeak extends AbstractHtmlDataProcessor {
     }
 
     // @Override
-    stockFromResultNode = (resultNode: Element): StockStatus => {
+    stockFromResultNode = (resultNode: Element): Stock => {
         // Stock count is not displayed. An out of stock banner either is or is not present.
         let isInStock: boolean = resultNode.querySelectorAll(this.stockSelector).length === 0;
-        return isInStock ? { inStock: true, stock: 1 } : { inStock: false, stock: 0 };
+        return isInStock ? { inStock: true, level: '' + 1 } : { inStock: false, level: '' + 0 };
     }
 }
 

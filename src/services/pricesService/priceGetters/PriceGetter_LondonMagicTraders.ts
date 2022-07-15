@@ -1,8 +1,7 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
-import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
+import { AbstractHtmlDataProcessor, Stock } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
-import { StockStatus } from "../../../types/Price";
 
 
 class PriceGetter_LondonMagicTraders extends AbstractPriceGetter {
@@ -80,9 +79,9 @@ class DataProcessor_LondonMagicTraders extends AbstractHtmlDataProcessor {
         )[0] || '';
 
     // @Override
-    stockFromResultNode = (resultNode: Element): StockStatus => {
+    stockFromResultNode = (resultNode: Element): Stock => {
         const price: number | null = this.priceFromResultNode(resultNode);
-        return price ? { inStock: true, stock: 1 } : { inStock: false, stock: 0 };
+        return price ? { inStock: true, level: '' + 1 } : { inStock: false, level: '' + 0 };
     }
 }
 

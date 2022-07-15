@@ -1,9 +1,8 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
-import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
+import { AbstractHtmlDataProcessor, Stock } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 import { JSDOM } from "jsdom";
-import { StockStatus } from "../../../types/Price";
 
 
 class PriceGetter_PatriotGamesLeeds extends AbstractPriceGetter {
@@ -75,10 +74,10 @@ class DataProceesor_PatriotGamesLeeds_Desktop extends AbstractHtmlDataProcessor 
     }
 
     // @Override
-    stockFromResultNode = (resultNode: Element): StockStatus => [...resultNode.querySelectorAll(this.stockSelector)]
+    stockFromResultNode = (resultNode: Element): Stock => [...resultNode.querySelectorAll(this.stockSelector)]
         .map(node => {
             const isInStock: boolean = node.innerHTML !== '... more info';
-            return isInStock ? { inStock: true, stock: 1 } : { inStock: false, stock: 0 };
+            return isInStock ? { inStock: true, level: '' + 1 } : { inStock: false, level: '' + 0 };
         })[0];
 
     // @Override
@@ -119,10 +118,10 @@ class DataProceesor_PatriotGamesLeeds_Mobile extends AbstractHtmlDataProcessor {
     }
 
     // @Override
-    stockFromResultNode = (resultNode: Element): StockStatus => {
+    stockFromResultNode = (resultNode: Element): Stock => {
         // Stock count is not displayed. Add to basket either is or is not displayed
         let isInStock: boolean = resultNode.querySelectorAll(this.stockSelector).length > 0;
-        return isInStock ? { inStock: true, stock: 1 } : { inStock: false, stock: 0 };
+        return isInStock ? { inStock: true, level: '' + 1 } : { inStock: false, level: '' + 0 };
     }
 
     // @Override

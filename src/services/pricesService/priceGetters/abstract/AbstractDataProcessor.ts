@@ -148,8 +148,8 @@ export class AbstractHtmlDataProcessor implements AbstractDataProcessor {
         .map((node: Element): string => stripWhitespace(this.subtitleFromText(node.innerHTML)))[0] || '';
 
 
-    stockFromResultNode = (resultNode: Element): stock => [...resultNode.querySelectorAll(this.stockSelector)]
-        .map((node: Element): stock => {
+    stockFromResultNode = (resultNode: Element): Stock => [...resultNode.querySelectorAll(this.stockSelector)]
+        .map((node: Element): Stock => {
             const value = this.stockValueFromStockText(node.innerHTML);
             return {
                 inStock: value > 0,
@@ -205,7 +205,7 @@ interface HtmlProcoessorArgs {
     productRefAttribute: string,
 }
 
-type stock = {
+export type Stock = {
     inStock: boolean,
     level: string,
 }

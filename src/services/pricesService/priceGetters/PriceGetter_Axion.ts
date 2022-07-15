@@ -35,6 +35,7 @@ class DataProcessor_Axion extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Axion Now',
+            currencyCode: 'GBP',
 
             resultSelector: 'ul.products > li.product',
             titleSelector: 'div.inner > div > div.meta > a > h4',

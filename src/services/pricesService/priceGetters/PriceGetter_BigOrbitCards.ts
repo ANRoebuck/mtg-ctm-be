@@ -35,6 +35,7 @@ class DataProcesor_BigOrbitCards extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Big Orbit Cards',
+            currencyCode: 'GBP',
 
             resultSelector: 'div > div.ty-pagination-container > div.ty-compact-list > div.ty-compact-list__item',
             titleSelector: 'form > div.compact_title_add_to_cart_header > bdi > a',

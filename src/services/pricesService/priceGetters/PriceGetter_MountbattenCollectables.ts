@@ -35,6 +35,7 @@ class DataProcessor_MountbattenCollectables extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Mountbatten Collectables',
+            currencyCode: 'GBP',
 
             resultSelector: 'ul.products > li.product',
             titleSelector: 'div.inner > div > div.meta > a > h4',

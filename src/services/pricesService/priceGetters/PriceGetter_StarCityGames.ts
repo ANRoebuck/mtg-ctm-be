@@ -57,6 +57,7 @@ class DataProcessor_StarCityGames extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Star City Games',
+            currencyCode: 'USD',
 
             resultSelector: 'div > div.hawk-results-item',
             titleSelector: 'div > div > h2 > a',

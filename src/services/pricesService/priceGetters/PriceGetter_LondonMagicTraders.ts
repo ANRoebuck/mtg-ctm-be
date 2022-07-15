@@ -36,6 +36,7 @@ class DataProcessor_LondonMagicTraders extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'London Magic Traders',
+            currencyCode: 'GBP',
 
             resultSelector: 'div > div.row > div.col-md-4',
             titleSelector: 'div > p.productTitle',

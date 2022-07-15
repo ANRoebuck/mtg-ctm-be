@@ -36,6 +36,7 @@ class DataProcessor_NerdShak extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Nerd Shak',
+            currencyCode: 'GBP',
 
             resultSelector: 'div > div.row > div.col-md-4',
             titleSelector: 'div > p.productTitle',

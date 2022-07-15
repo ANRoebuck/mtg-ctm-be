@@ -36,6 +36,7 @@ class DataProcessor_ManaLeak extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Mana Leak',
+            currencyCode: 'GBP',
 
             resultSelector: 'div.main-products > div.product-list-item',
             titleSelector: 'div.caption > div.name > a',

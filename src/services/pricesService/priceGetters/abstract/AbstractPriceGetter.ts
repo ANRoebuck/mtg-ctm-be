@@ -34,7 +34,8 @@ class AbstractPriceGetter {
 
         return foundItems
             .filter(result => strongMatch(result.title, sanitisedSearchTerm))
-            .filter(result => excludeArtCard(result.title));
+            .filter(result => excludeArtCard(result.title))
+            .filter(result => result.stock_inStock);
     }
 
 

@@ -36,6 +36,7 @@ class DataProcessor_LazyDragonGaming extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Lazy Dragon Gaming',
+            currencyCode: 'GBP',
 
             resultSelector: 'div.collectionGrid > div.productCard__card',
             titleSelector: 'div.productCard__lower > p.productCard__title > a',

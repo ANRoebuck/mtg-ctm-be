@@ -35,6 +35,7 @@ class DataProcessor_Harlequins extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Harlequins',
+            currencyCode: 'GBP',
 
             resultSelector: 'ul.products > li.product',
             titleSelector: 'div.inner > div > div.meta > a > h4',

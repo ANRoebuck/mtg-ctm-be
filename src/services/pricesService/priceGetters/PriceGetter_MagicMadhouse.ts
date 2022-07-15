@@ -2,7 +2,8 @@ import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractJsonDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
-import {Price, StockStatus} from "../../../types/Price";
+import { Price } from '../../../types/Price';
+import currencyService from '../../currencyService/CurrencyService';
 
 
 class PriceGetter_MagicMadhouse extends AbstractPriceGetter {
@@ -35,10 +36,12 @@ class ProcessorSelector_MagicMadhouse extends AbstractProcessorSelector {
 class DataProcessor_MagicMadhouse extends AbstractJsonDataProcessor {
 
     seller: string;
+    currencyCode: string;
 
     constructor() {
         super();
         this.seller = 'Magic Madhouse';
+        this.currencyCode = 'GBP';
     }
 
     // @Override
@@ -50,11 +53,25 @@ class DataProcessor_MagicMadhouse extends AbstractJsonDataProcessor {
             const imgSrc: string = result.image;
             const productRef: string = result.url;
             const expansion: string = result.magic_set;
-            const price: number = parseInt(result.price.replace(/\D/g,''));
-            const inventoryLevel = parseInt(result.inventory_level);
-            const stock: StockStatus = inventoryLevel > 0 ? { inStock: true, stock: inventoryLevel } : { inStock: false, stock: 0 };
+            const price_minorUnits: number = parseInt(result.price.replace(/\D/g,''));
+            const price_majorUnits = currencyService.minorUnitsToMajorUnits(price_minorUnits, this.currencyCode);
+            const price_relativeUnits = currencyService.minorUnitsToRelativeUnits(price_minorUnits, this.currencyCode);
+            const price_textRepresentation = currencyService.majorUnitsToTextRepresentation(price_majorUnits, this.currencyCode);
+            const stock_level = parseInt(result.inventory_level);
+            const stock_inStock = stock_level > 0;
             const isFoil: boolean = title.toLowerCase().includes('foil');
-            return { seller: this.seller, title, imgSrc, productRef, expansion, price, stock, subtitle: '', isFoil };
+            return {
+                seller: this.seller,
+                title,
+                imgSrc,
+                productRef,
+                expansion,
+                price_relativeUnits,
+                price_textRepresentation,
+                stock_inStock,
+                stock_level: '' + stock_level,
+                subtitle: '',
+                isFoil };
         });
     }
 

@@ -35,6 +35,7 @@ class DataProcessor_TrollTrader extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Troll Trader',
+            currencyCode: 'GBP',
 
             resultSelector: 'div.products-container > ul > li.product',
             titleSelector: 'div.inner > div > div.meta > a > h4',

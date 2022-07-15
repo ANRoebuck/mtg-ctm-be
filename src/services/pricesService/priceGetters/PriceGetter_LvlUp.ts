@@ -36,6 +36,7 @@ class DataProcessor_LvlUp extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Lvl Up',
+            currencyCode: 'GBP',
 
             resultSelector: 'div > div.row > div.col-md-4',
             titleSelector: 'div > p.productTitle',

@@ -35,6 +35,7 @@ class DataProcessor_Hareruya extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Hareruya',
+            currencyCode: 'JPY',
 
             resultSelector: 'ul.itemListLine > li.itemList',
             titleSelector: 'div.itemData > a',

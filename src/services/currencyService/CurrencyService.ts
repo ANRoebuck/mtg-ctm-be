@@ -10,6 +10,10 @@ class CurrencyService {
         USD: { representation: '$', decimalPlaces: 2, conversionFactor: 1, },
     }
 
+    getCurrencyRepresentation(currencyCode: string) {
+        return this.currencies.currencyCode.representation;
+    }
+
     minorUnitsToMajorUnits(minorUnits: number, currencyCode: string): number {
         return minorUnits / (1 * 10 ^ this.currencies.currencyCode.decimalPlaces);
     }

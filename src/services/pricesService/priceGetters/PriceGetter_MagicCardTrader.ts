@@ -35,6 +35,7 @@ class DataProcessor_MagicCardTrader extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Magic Card Trader',
+            currencyCode: 'GBP',
 
             resultSelector: 'div.products-container > ul > li',
             titleSelector: 'div.inner > div.image-meta > div.meta > a > h4.name',

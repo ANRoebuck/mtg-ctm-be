@@ -1,8 +1,3 @@
-export interface StockStatus {
-    inStock: boolean,
-    stock: number,
-}
-
 export type Price = {
     seller: string,
     title: string,
@@ -11,7 +6,8 @@ export type Price = {
     expansion: string,
     price_relativeUnits: number,
     price_textRepresentation: string,
-    stock: StockStatus,
+    stock_inStock: boolean,
+    stock_level: string,
     subtitle: string,
     isFoil: boolean,
 }

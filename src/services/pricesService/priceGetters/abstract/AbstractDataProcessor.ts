@@ -1,4 +1,4 @@
-import { Price, StockStatus } from '../../../../types/Price';
+import { Price } from '../../../../types/Price';
 import { JSDOM } from 'jsdom';
 import currencyService from '../../../currencyService/CurrencyService';
 
@@ -113,7 +113,8 @@ export class AbstractHtmlDataProcessor implements AbstractDataProcessor {
                     expansion,
                     price_relativeUnits,
                     price_textRepresentation,
-                    stock,
+                    stock_inStock: stock.inStock,
+                    stock_level: stock.level,
                     subtitle,
                     isFoil,
                 });
@@ -147,14 +148,14 @@ export class AbstractHtmlDataProcessor implements AbstractDataProcessor {
         .map((node: Element): string => stripWhitespace(this.subtitleFromText(node.innerHTML)))[0] || '';
 
 
-    stockFromResultNode = (resultNode: Element): StockStatus => [...resultNode.querySelectorAll(this.stockSelector)]
-        .map((node: Element): StockStatus => {
+    stockFromResultNode = (resultNode: Element): stock => [...resultNode.querySelectorAll(this.stockSelector)]
+        .map((node: Element): stock => {
             const value = this.stockValueFromStockText(node.innerHTML);
             return {
                 inStock: value > 0,
-                stock: value,
+                level: '' + value,
             };
-        })[0] || { inStock: false, stock: 0 };
+        })[0] || { inStock: false, level: 0 };
 
 
     imgSrcFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.imgSelector)]
@@ -202,4 +203,9 @@ interface HtmlProcoessorArgs {
     productSelector: string,
     productBaseUrl: string,
     productRefAttribute: string,
+}
+
+type stock = {
+    inStock: boolean,
+    level: string,
 }

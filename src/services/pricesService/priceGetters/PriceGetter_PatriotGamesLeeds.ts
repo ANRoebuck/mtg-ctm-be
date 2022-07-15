@@ -47,6 +47,7 @@ class DataProceesor_PatriotGamesLeeds_Desktop extends AbstractHtmlDataProcessor 
     constructor() {
         super({
             seller: 'Patriot Games Leeds',
+            currencyCode: 'GBP',
 
             resultSelector: '#productListing > table > tbody> tr',
             titleSelector: 'td > h3.itemTitle > a',
@@ -90,6 +91,7 @@ class DataProceesor_PatriotGamesLeeds_Mobile extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Patriot Games Leeds',
+            currencyCode: 'GBP',
 
             resultSelector: 'div.listing > div',
             titleSelector: 'div > h3 > a',

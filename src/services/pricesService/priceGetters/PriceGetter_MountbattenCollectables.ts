@@ -1,7 +1,6 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
-import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 
 
 class PriceGetter_MountbattenCollectables extends AbstractPriceGetter {
@@ -9,7 +8,7 @@ class PriceGetter_MountbattenCollectables extends AbstractPriceGetter {
         super({
             name: 'Mountbatten Collectables',
             dataGetter: new DataGetter_MountbattenCollectables(),
-            processorSelector: new ProcessorSelector_MountbattenCollectables(),
+            dataProcessor: new DataProcessor_MountbattenCollectables(),
         });
     }
 }
@@ -22,12 +21,6 @@ class DataGetter_MountbattenCollectables extends AbstractDataGetter {
             searchSuffix: '',
             searchJoin: '+',
         });
-    }
-}
-
-class ProcessorSelector_MountbattenCollectables extends AbstractProcessorSelector {
-    constructor() {
-        super([new DataProcessor_MountbattenCollectables()]);
     }
 }
 

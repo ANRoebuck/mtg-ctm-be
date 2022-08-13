@@ -1,12 +1,11 @@
 import AbstractDataGetter from './AbstractDataGetter';
-import AbstractProcessorSelector from './AbstractProcessorSelector';
 import { AbstractDataProcessor } from './AbstractDataProcessor';
 import { Price } from '../../../../types/Price';
 
 interface Args {
     name: string,
     dataGetter: AbstractDataGetter,
-    processorSelector: AbstractProcessorSelector,
+    dataProcessor: AbstractDataProcessor,
 }
 
 
@@ -14,12 +13,12 @@ class AbstractPriceGetter {
 
     name: string;
     dataGetter: AbstractDataGetter;
-    processorSelector: AbstractProcessorSelector;
+    dataProcessor: AbstractDataProcessor;
 
-    constructor({ name, dataGetter, processorSelector }: Args) {
+    constructor({ name, dataGetter, dataProcessor }: Args) {
         this.name = name;
         this.dataGetter = dataGetter;
-        this.processorSelector = processorSelector;
+        this.dataProcessor = dataProcessor;
     }
 
     search = async (searchTerm: string) : Promise<Price[]>  => {
@@ -27,15 +26,18 @@ class AbstractPriceGetter {
         const sanitisedSearchTerm = removeDiacritics(searchTerm);
 
         const rawData: string = await this.dataGetter.getData(sanitisedSearchTerm);
+        
+        const foundItems: Price[] = await this.dataProcessor.processData(rawData);
 
-        const processor: AbstractDataProcessor = this.processorSelector.getProcessor(rawData, sanitisedSearchTerm);
-
-        const foundItems: Price[] = await processor.processData(rawData);
-
-        return foundItems
+        const validResults = foundItems
             .filter(result => strongMatch(result.title, sanitisedSearchTerm))
             .filter(result => excludeArtCard(result.title))
             .filter(result => result.stock_inStock);
+
+        // console.log(rawData);
+        // console.log(validResults);
+
+        return validResults;
     }
 
 

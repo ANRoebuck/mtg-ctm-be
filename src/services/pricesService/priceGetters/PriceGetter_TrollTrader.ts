@@ -1,7 +1,6 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
-import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 
 
 class PriceGetter_TrollTrader extends AbstractPriceGetter {
@@ -9,7 +8,7 @@ class PriceGetter_TrollTrader extends AbstractPriceGetter {
         super({
             name: 'Troll Trader',
             dataGetter: new DataGetter_TrollTrader(),
-            processorSelector: new ProcessorSelector_TrollTrader(),
+            dataProcessor: new DataProcessor_TrollTrader(),
         });
     }
 }
@@ -22,12 +21,6 @@ class DataGetter_TrollTrader extends AbstractDataGetter {
             searchSuffix: '',
             searchJoin: '+',
         });
-    }
-}
-
-class ProcessorSelector_TrollTrader extends AbstractProcessorSelector {
-    constructor() {
-        super([new DataProcessor_TrollTrader()]);
     }
 }
 

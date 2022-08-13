@@ -1,7 +1,6 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
-import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 
 
 class PriceGetter_Harlequins extends AbstractPriceGetter {
@@ -9,7 +8,7 @@ class PriceGetter_Harlequins extends AbstractPriceGetter {
         super({
             name: 'Harlequins',
             dataGetter: new DataGetter_Harlequins(),
-            processorSelector: new ProcessorSelector_Harlequins(),
+            dataProcessor: new DataProcessor_Harlequins(),
         });
     }
 }
@@ -22,12 +21,6 @@ class DataGetter_Harlequins extends AbstractDataGetter {
             searchSuffix: '&c=8&disable_mobile=1',
             searchJoin: '+',
         });
-    }
-}
-
-class ProcessorSelector_Harlequins extends AbstractProcessorSelector {
-    constructor() {
-        super([new DataProcessor_Harlequins()]);
     }
 }
 

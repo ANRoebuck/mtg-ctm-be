@@ -1,7 +1,6 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor, Stock } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
-import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 
 
 class PriceGetter_ManaLeak extends AbstractPriceGetter {
@@ -9,7 +8,7 @@ class PriceGetter_ManaLeak extends AbstractPriceGetter {
         super({
             name: 'Mana Leak',
             dataGetter: new DataGetter_ManaLeak(),
-            processorSelector: new ProcessorSelector_ManaLeak(),
+            dataProcessor: new DataProcessor_ManaLeak(),
         });
     }
 }
@@ -22,12 +21,6 @@ class DataGetter_ManaLeak extends AbstractDataGetter {
             searchSuffix: '',
             searchJoin: '+',
         });
-    }
-}
-
-class ProcessorSelector_ManaLeak extends AbstractProcessorSelector {
-    constructor() {
-        super([new DataProcessor_ManaLeak()]);
     }
 }
 

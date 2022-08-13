@@ -1,7 +1,6 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor, Stock } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
-import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 
 
 class PriceGetter_NerdShak extends AbstractPriceGetter {
@@ -9,7 +8,7 @@ class PriceGetter_NerdShak extends AbstractPriceGetter {
         super({
             name: 'Nerd Shak',
             dataGetter: new DataGetter_NerdShak(),
-            processorSelector: new ProcessorSelector_NerdShak(),
+            dataProcessor: new DataProcessor_NerdShak(),
         });
     }
 }
@@ -22,12 +21,6 @@ class DataGetter_NerdShak extends AbstractDataGetter {
             searchSuffix: '*',
             searchJoin: '+',
         });
-    }
-}
-
-class ProcessorSelector_NerdShak extends AbstractProcessorSelector {
-    constructor() {
-        super([new DataProcessor_NerdShak()]);
     }
 }
 

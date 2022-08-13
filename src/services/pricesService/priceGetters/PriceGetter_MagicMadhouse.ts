@@ -1,7 +1,6 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractJsonDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
-import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 import { Price } from '../../../types/Price';
 import currencyService from '../../currencyService/CurrencyService';
 
@@ -11,7 +10,7 @@ class PriceGetter_MagicMadhouse extends AbstractPriceGetter {
         super({
             name: 'Magic Madhouse',
             dataGetter: new DataGetter_MagicMadhouse(),
-            processorSelector: new ProcessorSelector_MagicMadhouse(),
+            dataProcessor: new DataProcessor_MagicMadhouse(),
         });
     }
 }
@@ -24,12 +23,6 @@ class DataGetter_MagicMadhouse extends AbstractDataGetter {
             searchSuffix: '&paginationStartsFrom=0&sortPrice=false&ipAddress=undefined&analyticsApiKey=klevu-161710301480613427&showOutOfStockProducts=true&klevuFetchPopularTerms=false&klevu_priceInterval=500&fetchMinMaxPrice=true&klevu_multiSelectFilters=true&noOfResults=36&klevuSort=rel&enableFilters=true&filterResults=&visibility=search&category=KLEVU_PRODUCT&klevu_filterLimit=400&sv=121&lsqt=&responseType=json&priceFieldSuffix=GBP&klevu_loginCustomerGroup=',
             searchJoin: '%20',
         });
-    }
-}
-
-class ProcessorSelector_MagicMadhouse extends AbstractProcessorSelector {
-    constructor() {
-        super([new DataProcessor_MagicMadhouse()]);
     }
 }
 

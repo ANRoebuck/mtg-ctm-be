@@ -1,8 +1,6 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor, Stock } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
-import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
-import { JSDOM } from "jsdom";
 
 
 class PriceGetter_PatriotGamesLeeds extends AbstractPriceGetter {
@@ -10,7 +8,7 @@ class PriceGetter_PatriotGamesLeeds extends AbstractPriceGetter {
         super({
             name: 'Patriot Games Leeds',
             dataGetter: new DataGetter_PatriotGamesLeeds(),
-            processorSelector: new ProcessorSelector_PatriotGamesLeeds(),
+            dataProcessor: new DataProceesor_PatriotGamesLeeds(),
         });
     }
 }
@@ -26,23 +24,7 @@ class DataGetter_PatriotGamesLeeds extends AbstractDataGetter {
     }
 }
 
-class ProcessorSelector_PatriotGamesLeeds extends AbstractProcessorSelector {
-    constructor() {
-        super([
-            new DataProceesor_PatriotGamesLeeds_Desktop(),
-            new DataProceesor_PatriotGamesLeeds_Mobile()
-        ]);
-    }
-
-    getProcessor = (rawData: string) => {
-        const document: Document = new JSDOM(rawData).window.document;
-        // resultsSelector
-        const desktopElements = document.querySelectorAll('#productListing > table > tbody> tr');
-        return desktopElements.length > 0 ? this.dataProcessors[0] : this.dataProcessors[1];
-    };
-}
-
-class DataProceesor_PatriotGamesLeeds_Desktop extends AbstractHtmlDataProcessor {
+class DataProceesor_PatriotGamesLeeds extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: 'Patriot Games Leeds',
@@ -79,50 +61,6 @@ class DataProceesor_PatriotGamesLeeds_Desktop extends AbstractHtmlDataProcessor 
             const isInStock: boolean = node.innerHTML !== '... more info';
             return isInStock ? { inStock: true, level: '' + 1 } : { inStock: false, level: '' + 0 };
         })[0];
-
-    // @Override
-    expansionFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.expansionSelector)]
-        .map(node => (node.innerHTML.replace(/.*Set:(.*)Rarity.*/, `$1`)))[0];
-
-}
-
-class DataProceesor_PatriotGamesLeeds_Mobile extends AbstractHtmlDataProcessor {
-    constructor() {
-        super({
-            seller: 'Patriot Games Leeds',
-            currencyCode: 'GBP',
-
-            resultSelector: 'div.listing > div',
-            titleSelector: 'div > h3 > a',
-
-            useSubResults: false,
-            subresultSelector: '',
-            subtitleSelector: '',
-            subtitleFromText: () => '',
-
-            priceSelector: 'div > div.list-price > span',
-            priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g,'')),
-            stockSelector: 'div > div.multiple-add-to-cart > div',
-            stockValueFromStockText: (x: string): number => parseInt(x),    // not used
-            isFoilSelector: 'div > h3 > a',
-            expansionSelector: 'div > div.listingDescription',
-
-            imgSelector: 'div > a > img',
-            imgBaseUrl: '',
-            imgSrcAttribute: 'src',
-
-            productSelector: 'div > h3 > a',
-            productBaseUrl: '',
-            productRefAttribute: 'href',
-        });
-    }
-
-    // @Override
-    stockFromResultNode = (resultNode: Element): Stock => {
-        // Stock count is not displayed. Add to basket either is or is not displayed
-        let isInStock: boolean = resultNode.querySelectorAll(this.stockSelector).length > 0;
-        return isInStock ? { inStock: true, level: '' + 1 } : { inStock: false, level: '' + 0 };
-    }
 
     // @Override
     expansionFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.expansionSelector)]

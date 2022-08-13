@@ -1,7 +1,6 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
-import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 
 
 class PriceGetter_Hareruya extends AbstractPriceGetter {
@@ -9,7 +8,7 @@ class PriceGetter_Hareruya extends AbstractPriceGetter {
         super({
             name: 'Hareruya',
             dataGetter: new DataGetter_Hareruya(),
-            processorSelector: new ProcessorSelector_Hareruya(),
+            dataProcessor: new DataProcessor_Hareruya(),
         });
     }
 }
@@ -22,12 +21,6 @@ class DataGetter_Hareruya extends AbstractDataGetter {
             searchSuffix: '&image=%EE%A4%84',
             searchJoin: '+',
         });
-    }
-}
-
-class ProcessorSelector_Hareruya extends AbstractProcessorSelector {
-    constructor() {
-        super([new DataProcessor_Hareruya()]);
     }
 }
 

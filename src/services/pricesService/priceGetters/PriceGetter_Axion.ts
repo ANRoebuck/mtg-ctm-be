@@ -1,7 +1,6 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
-import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 
 
 class PriceGetter_Axion extends AbstractPriceGetter {
@@ -9,7 +8,7 @@ class PriceGetter_Axion extends AbstractPriceGetter {
         super({
             name: 'Axion Now',
             dataGetter: new DataGetter_Axion(),
-            processorSelector: new ProcessorSelector_Axion(),
+            dataProcessor: new DataProcessor_Axion(),
         });
     }
 }
@@ -22,12 +21,6 @@ class DataGetter_Axion extends AbstractDataGetter {
             searchSuffix: '',
             searchJoin: '+'
         });
-    }
-}
-
-class ProcessorSelector_Axion extends AbstractProcessorSelector {
-    constructor() {
-        super([new DataProcessor_Axion()]);
     }
 }
 

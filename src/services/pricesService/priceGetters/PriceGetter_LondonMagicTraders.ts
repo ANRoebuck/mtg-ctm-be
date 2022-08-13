@@ -1,7 +1,6 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor, Stock } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
-import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 
 
 class PriceGetter_LondonMagicTraders extends AbstractPriceGetter {
@@ -9,7 +8,7 @@ class PriceGetter_LondonMagicTraders extends AbstractPriceGetter {
         super({
             name: 'London Magic Traders',
             dataGetter: new DataGetter_LondonMagicTraders(),
-            processorSelector: new ProcessorSelector_LondonMagicTraders(),
+            dataProcessor: new DataProcessor_LondonMagicTraders(),
         });
     }
 }
@@ -22,12 +21,6 @@ class DataGetter_LondonMagicTraders extends AbstractDataGetter {
             searchSuffix: '*',
             searchJoin: '+',
         });
-    }
-}
-
-class ProcessorSelector_LondonMagicTraders extends AbstractProcessorSelector {
-    constructor() {
-        super([new DataProcessor_LondonMagicTraders()]);
     }
 }
 

@@ -1,7 +1,6 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor, Stock } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
-import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 
 
 class PriceGetter_LazyDragonGaming extends AbstractPriceGetter {
@@ -9,7 +8,7 @@ class PriceGetter_LazyDragonGaming extends AbstractPriceGetter {
         super({
             name: 'Lazy Dragon Gaming',
             dataGetter: new DataGetter_LazyDragonGaming(),
-            processorSelector: new ProcessorSelector_LazyDragonGaming(),
+            dataProcessor: new DataProcessor_LazyDragonGaming(),
         });
     }
 }
@@ -22,12 +21,6 @@ class DataGetter_LazyDragonGaming extends AbstractDataGetter {
             searchSuffix: '*',
             searchJoin: '+',
         });
-    }
-}
-
-class ProcessorSelector_LazyDragonGaming extends AbstractProcessorSelector {
-    constructor() {
-        super([new DataProcessor_LazyDragonGaming()]);
     }
 }
 

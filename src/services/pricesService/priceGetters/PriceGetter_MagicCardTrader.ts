@@ -1,7 +1,6 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
-import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 
 
 class PriceGetter_MagicCardTrader extends AbstractPriceGetter {
@@ -9,7 +8,7 @@ class PriceGetter_MagicCardTrader extends AbstractPriceGetter {
         super({
             name: 'Magic Card Trader',
             dataGetter: new DataGetter_MagicCardTrader(),
-            processorSelector: new ProcessorSelector_MagicCardTrader(),
+            dataProcessor: new DataProcessor_MagicCardTrader(),
         });
     }
 }
@@ -22,12 +21,6 @@ class DataGetter_MagicCardTrader extends AbstractDataGetter {
             searchSuffix: '',
             searchJoin: '+',
         });
-    }
-}
-
-class ProcessorSelector_MagicCardTrader extends AbstractProcessorSelector {
-    constructor() {
-        super([new DataProcessor_MagicCardTrader()]);
     }
 }
 

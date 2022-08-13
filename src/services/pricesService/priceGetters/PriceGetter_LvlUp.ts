@@ -1,7 +1,6 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor, Stock } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
-import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 
 
 class PriceGetter_LvlUp extends AbstractPriceGetter {
@@ -9,7 +8,7 @@ class PriceGetter_LvlUp extends AbstractPriceGetter {
         super({
             name: 'Lvl Up',
             dataGetter: new DataGetter_LvlUp(),
-            processorSelector: new ProcessorSelector_LvlUp(),
+            dataProcessor: new DataProcessor_LvlUp(),
         });
     }
 }
@@ -22,12 +21,6 @@ class DataGetter_LvlUp extends AbstractDataGetter {
             searchSuffix: '*',
             searchJoin: '+',
         });
-    }
-}
-
-class ProcessorSelector_LvlUp extends AbstractProcessorSelector {
-    constructor() {
-        super([new DataProcessor_LvlUp()]);
     }
 }
 

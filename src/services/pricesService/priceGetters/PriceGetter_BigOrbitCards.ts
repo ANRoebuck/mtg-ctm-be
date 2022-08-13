@@ -1,7 +1,6 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
-import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 
 
 class PriceGetter_BigOrbitCards extends AbstractPriceGetter {
@@ -9,7 +8,7 @@ class PriceGetter_BigOrbitCards extends AbstractPriceGetter {
         super({
             name: 'Big Orbit Cards',
             dataGetter: new DataGetter_BigOrbitCards(),
-            processorSelector: new ProcessorSelector_BigOrbitCards(),
+            dataProcessor: new DataProcesor_BigOrbitCards(),
         });
     }
 }
@@ -22,12 +21,6 @@ class DataGetter_BigOrbitCards extends AbstractDataGetter {
             searchSuffix: '&dispatch=products.search',
             searchJoin: '+',
         });
-    }
-}
-
-class ProcessorSelector_BigOrbitCards extends AbstractProcessorSelector {
-    constructor() {
-        super([new DataProcesor_BigOrbitCards()]);
     }
 }
 

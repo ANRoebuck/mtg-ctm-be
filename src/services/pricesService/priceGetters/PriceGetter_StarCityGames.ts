@@ -1,7 +1,6 @@
 import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
-import AbstractProcessorSelector from './abstract/AbstractProcessorSelector';
 
 
 class PriceGetter_StarCityGames extends AbstractPriceGetter {
@@ -9,7 +8,7 @@ class PriceGetter_StarCityGames extends AbstractPriceGetter {
         super({
             name: 'Star City Games',
             dataGetter: new DataGetter_StarCityGames(),
-            processorSelector: new ProcessorSelector_StarCityGames(),
+            dataProcessor: new DataProcessor_StarCityGames(),
         });
     }
 }
@@ -45,12 +44,6 @@ class DataGetter_StarCityGames extends AbstractDataGetter {
 
         return o.html ;
     };
-}
-
-class ProcessorSelector_StarCityGames extends AbstractProcessorSelector {
-    constructor() {
-        super([new DataProcessor_StarCityGames()]);
-    }
 }
 
 class DataProcessor_StarCityGames extends AbstractHtmlDataProcessor {

@@ -1,3 +1,98 @@
+export const expectedResults_trollTrader_Tarmogoyf = [
+    {
+      seller: 'Troll Trader',
+      title: 'Tarmogoyf',
+      imgSrc: 'https://crystal-cdn2.crystalcommerce.com/photos/29933/medium/OMPYGJS6ajapjMAv.jpg',
+      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-time_spiral_block-future_sight/tarmogoyf/1357',
+      expansion: 'Future Sight',
+      price_relativeUnits: 5671,
+      price_textRepresentation: '£ 56.71',
+      stock_inStock: true,
+      stock_level: '5',
+      subtitle: '',
+      isFoil: false
+    },
+    {
+      seller: 'Troll Trader',
+      title: 'Tarmogoyf',
+      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/905658/medium/TG.jpg',
+      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-special_editions-modern_masters/tarmogoyf/65597',
+      expansion: 'Modern Masters',
+      price_relativeUnits: 3667,
+      price_textRepresentation: '£ 36.67',
+      stock_inStock: true,
+      stock_level: '4',
+      subtitle: '',
+      isFoil: false
+    },
+    {
+      seller: 'Troll Trader',
+      title: 'Tarmogoyf',
+      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/3643243/medium/tarmogoyf.jpg',
+      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-special_editions-modern_masters_2015_edition/tarmogoyf/117913',
+      expansion: 'Modern Masters 2015',
+      price_relativeUnits: 3578,
+      price_textRepresentation: '£ 35.78',
+      stock_inStock: true,
+      stock_level: '5',
+      subtitle: '',
+      isFoil: false
+    },
+    {
+      seller: 'Troll Trader',
+      title: 'Tarmogoyf',
+      imgSrc: 'https://crystal-cdn4.crystalcommerce.com/photos/6344442/medium/en_oYewlmYojE.png',
+      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-special_editions-modern_masters_2017_edition/tarmogoyf/220083',
+      expansion: 'Modern Masters 2017',
+      price_relativeUnits: 3157,
+      price_textRepresentation: '£ 31.57',
+      stock_inStock: true,
+      stock_level: '3',
+      subtitle: '',
+      isFoil: false
+    },
+    {
+      seller: 'Troll Trader',
+      title: 'Tarmogoyf',
+      imgSrc: 'https://crystal-cdn2.crystalcommerce.com/photos/6628687/medium/en_FtCnjfomHm.png',
+      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-time_spiral_block-time_spiral_remastered/tarmogoyf/321801',
+      expansion: 'Time Spiral: Remastered',
+      price_relativeUnits: 2480,
+      price_textRepresentation: '£ 24.80',
+      stock_inStock: true,
+      stock_level: '4',
+      subtitle: '',
+      isFoil: false
+    },
+    {
+      seller: 'Troll Trader',
+      title: 'Tarmogoyf - Foil',
+      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/6480115/medium/en_2G92JblwhT.png',
+      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-masterpiece_series-ultimate_masters_box_toppers/tarmogoyf__foil/301994',
+      expansion: 'Ultimate Masters Box Toppers',
+      price_relativeUnits: 8283,
+      price_textRepresentation: '£ 82.83',
+      stock_inStock: true,
+      stock_level: '5',
+      subtitle: '',
+      isFoil: true
+    },
+    {
+      seller: 'Troll Trader',
+      title: 'Tarmogoyf - The List',
+      imgSrc: 'https://crystal-cdn4.crystalcommerce.com/photos/6646224/medium/Tarmogoyf.jpg',
+      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-mystery_singles-the_list__zendikar_rising/tarmogoyf__the_list/326856',
+      expansion: 'The List',
+      price_relativeUnits: 3568,
+      price_textRepresentation: '£ 35.68',
+      stock_inStock: true,
+      stock_level: '2',
+      subtitle: '',
+      isFoil: false
+    }
+  ];
+
+
 export const response_trollTrader_Tarmogoyf =
   `<!DOCTYPE html>
 
@@ -13906,187 +14001,3 @@ _gaq.push(['b._trackPageLoadTime']);
 </html>
 
 `;
-
-export const expectedResults_trollTrader_Tarmogoyf =
-  [
-    {
-      name: 'Troll Trader',
-      logo: 'trollTrader 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: {text: '£56.71', value: 5671},
-      stock: {value: 5, text: '5 in Stock'},
-      imgSrc: 'https://crystal-cdn2.crystalcommerce.com/photos/29933/medium/OMPYGJS6ajapjMAv.jpg',
-      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-time_spiral_block-future_sight/tarmogoyf/1357',
-      expansion: 'Future Sight',
-      isFoil: false
-    },
-    {
-      name: 'Troll Trader',
-      logo: 'trollTrader 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: {text: '£36.67', value: 3667},
-      stock: {value: 4, text: '4 in Stock'},
-      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/905658/medium/TG.jpg',
-      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-special_editions-modern_masters/tarmogoyf/65597',
-      expansion: 'Modern Masters',
-      isFoil: false
-    },
-    {
-      name: 'Troll Trader',
-      logo: 'trollTrader 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: {text: '£35.78', value: 3578},
-      stock: {value: 5, text: '5 in Stock'},
-      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/3643243/medium/tarmogoyf.jpg',
-      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-special_editions-modern_masters_2015_edition/tarmogoyf/117913',
-      expansion: 'Modern Masters 2015',
-      isFoil: false
-    },
-    {
-      name: 'Troll Trader',
-      logo: 'trollTrader 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: {text: '£31.57', value: 3157},
-      stock: {value: 3, text: '3 in Stock'},
-      imgSrc: 'https://crystal-cdn4.crystalcommerce.com/photos/6344442/medium/en_oYewlmYojE.png',
-      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-special_editions-modern_masters_2017_edition/tarmogoyf/220083',
-      expansion: 'Modern Masters 2017',
-      isFoil: false
-    },
-    {
-      name: 'Troll Trader',
-      logo: 'trollTrader 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: {text: '£24.80', value: 2480},
-      stock: {value: 4, text: '4 in Stock'},
-      imgSrc: 'https://crystal-cdn2.crystalcommerce.com/photos/6628687/medium/en_FtCnjfomHm.png',
-      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-time_spiral_block-time_spiral_remastered/tarmogoyf/321801',
-      expansion: 'Time Spiral: Remastered',
-      isFoil: false
-    },
-    {
-      name: 'Troll Trader',
-      logo: 'trollTrader 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: {text: '£30.70', value: 3070},
-      stock: {text: 'Out of Stock', value: 0},
-      imgSrc: 'https://crystal-cdn4.crystalcommerce.com/photos/6480155/medium/en_HUH57diUq4.png',
-      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-special_editions-ultimate_masters/tarmogoyf/301912',
-      expansion: 'Ultimate Masters',
-      isFoil: false
-    },
-    {
-      name: 'Troll Trader',
-      logo: 'trollTrader 150x60.png',
-      title: 'Tarmogoyf - Foil',
-      subtitle: '',
-      price: {text: '£82.83', value: 8283},
-      stock: {value: 5, text: '5 in Stock'},
-      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/6480115/medium/en_2G92JblwhT.png',
-      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-masterpiece_series-ultimate_masters_box_toppers/tarmogoyf__foil/301994',
-      expansion: 'Ultimate Masters Box Toppers',
-      isFoil: true
-    },
-    {
-      name: 'Troll Trader',
-      logo: 'trollTrader 150x60.png',
-      title: 'Tarmogoyf - Foil',
-      subtitle: '',
-      price: {text: '£559.99', value: 55999},
-      stock: {text: 'Out of Stock', value: 0},
-      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/693662/medium/OMPYGJS6ajapjMAv.jpg',
-      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-time_spiral_block-future_sight/tarmogoyf__foil/52165',
-      expansion: 'Future Sight',
-      isFoil: true
-    },
-    {
-      name: 'Troll Trader',
-      logo: 'trollTrader 150x60.png',
-      title: 'Tarmogoyf - Foil',
-      subtitle: '',
-      price: {text: '£80.06', value: 8006},
-      stock: {text: 'Out of Stock', value: 0},
-      imgSrc: 'https://crystal-cdn3.crystalcommerce.com/photos/905723/medium/tarmogoyf.jpg',
-      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-special_editions-modern_masters/tarmogoyf__foil/65697',
-      expansion: 'Modern Masters',
-      isFoil: true
-    },
-    {
-      name: 'Troll Trader',
-      logo: 'trollTrader 150x60.png',
-      title: 'Tarmogoyf - Foil',
-      subtitle: '',
-      price: {text: '£55.45', value: 5545},
-      stock: {text: 'Out of Stock', value: 0},
-      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/3643253/medium/tarmogoyf.jpg',
-      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-special_editions-modern_masters_2015_edition/tarmogoyf__foil/117923',
-      expansion: 'Modern Masters 2015',
-      isFoil: true
-    },
-    {
-      name: 'Troll Trader',
-      logo: 'trollTrader 150x60.png',
-      title: 'Tarmogoyf - Foil',
-      subtitle: '',
-      price: {text: '£45.81', value: 4581},
-      stock: {text: 'Out of Stock', value: 0},
-      imgSrc: 'https://crystal-cdn3.crystalcommerce.com/photos/6344475/medium/en_oYewlmYojE.png',
-      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-special_editions-modern_masters_2017_edition/tarmogoyf__foil/220133',
-      expansion: 'Modern Masters 2017',
-      isFoil: true
-    },
-    {
-      name: 'Troll Trader',
-      logo: 'trollTrader 150x60.png',
-      title: 'Tarmogoyf - Foil',
-      subtitle: '',
-      price: {text: '£41.46', value: 4146},
-      stock: {text: 'Out of Stock', value: 0},
-      imgSrc: 'https://crystal-cdn4.crystalcommerce.com/photos/6628752/medium/en_FtCnjfomHm.png',
-      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-time_spiral_block-time_spiral_remastered/tarmogoyf__foil/322051',
-      expansion: 'Time Spiral: Remastered',
-      isFoil: true
-    },
-    {
-      name: 'Troll Trader',
-      logo: 'trollTrader 150x60.png',
-      title: 'Tarmogoyf - Foil',
-      subtitle: '',
-      price: {text: '£40.94', value: 4094},
-      stock: {text: 'Out of Stock', value: 0},
-      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/6480195/medium/en_HUH57diUq4.png',
-      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-special_editions-ultimate_masters/tarmogoyf__foil/301952',
-      expansion: 'Ultimate Masters',
-      isFoil: true
-    },
-    {
-      name: 'Troll Trader',
-      logo: 'trollTrader 150x60.png',
-      title: 'Tarmogoyf - The List',
-      subtitle: '',
-      price: {text: '£35.68', value: 3568},
-      stock: {value: 2, text: '2 in Stock'},
-      imgSrc: 'https://crystal-cdn4.crystalcommerce.com/photos/6646224/medium/Tarmogoyf.jpg',
-      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-mystery_singles-the_list__zendikar_rising/tarmogoyf__the_list/326856',
-      expansion: 'The List',
-      isFoil: false
-    },
-    {
-      name: 'Troll Trader',
-      logo: 'trollTrader 150x60.png',
-      title: 'Ultra Pro - Relic Tokens: Eternal Collection - Tarmogoyf',
-      subtitle: '',
-      price: {text: '£9.95', value: 995},
-      stock: {text: 'Out of Stock', value: 0},
-      imgSrc: 'https://crystal-cdn4.crystalcommerce.com/photos/6431101/medium/163803_200w.jpg',
-      productRef: 'https://www.trolltradercards.com//catalog/magic_singles-relic_tokens_eternal_collection/ultra_pro__relic_tokens_eternal_collection__tarmogoyf/272993',
-      expansion: 'Relic Tokens Eternal Collection',
-      isFoil: false
-    }
-  ];

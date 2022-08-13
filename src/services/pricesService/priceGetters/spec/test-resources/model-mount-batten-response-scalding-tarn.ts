@@ -1,3 +1,33 @@
+export const expectedResults_mountbattenCollectables_ScaldingTarn = [
+    {
+      seller: 'Mountbatten Collectables',
+      title: 'Scalding Tarn',
+      imgSrc: 'https://crystal-cdn2.crystalcommerce.com/photos/6639661/medium/en_9PIt9qxzRQ20210623-4014-h50zvp.png',
+      productRef: 'https://www.mountbattencollectables.com//catalog/magic_the_gathering_singles-modern_horizons_2/scalding_tarn/2052727',
+      expansion: 'Modern Horizons 2',
+      price_relativeUnits: 3250,
+      price_textRepresentation: '£ 32.50',
+      stock_inStock: true,
+      stock_level: '1',
+      subtitle: '',
+      isFoil: false
+    },
+    {
+      seller: 'Mountbatten Collectables',
+      title: 'Scalding Tarn - Retro Frame',
+      imgSrc: 'https://crystal-cdn2.crystalcommerce.com/photos/6639662/medium/en_hRDrfTJnhw20210623-4014-34maj1.png',
+      productRef: 'https://www.mountbattencollectables.com//catalog/magic_the_gathering_singles-modern_horizons_2/scalding_tarn__retro_frame/2052728',
+      expansion: 'Modern Horizons 2',
+      price_relativeUnits: 4975,
+      price_textRepresentation: '£ 49.75',
+      stock_inStock: true,
+      stock_level: '1',
+      subtitle: '',
+      isFoil: false
+    }
+  ];
+
+
 export const response_mountbattenCollectables_ScaldingTarn =
   `<!DOCTYPE html>
 
@@ -10505,31 +10535,3 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 </html>
 `;
-
-export const expectedResults_mountbattenCollectables_ScaldingTarn =
-  [
-    {
-      name: 'Mountbatten Collectables',
-      logo: 'mountBatten 150x60.png',
-      title: 'Scalding Tarn',
-      subtitle: '',
-      price: {text: '£32.50', value: 3250},
-      stock: {value: 1, text: '1 in Stock'},
-      imgSrc: 'https://crystal-cdn2.crystalcommerce.com/photos/6639661/medium/en_9PIt9qxzRQ20210623-4014-h50zvp.png',
-      productRef: 'https://www.mountbattencollectables.com//catalog/magic_the_gathering_singles-modern_horizons_2/scalding_tarn/2052727',
-      expansion: 'Modern Horizons 2',
-      isFoil: false
-    },
-    {
-      name: 'Mountbatten Collectables',
-      logo: 'mountBatten 150x60.png',
-      title: 'Scalding Tarn - Retro Frame',
-      subtitle: '',
-      price: {text: '£49.75', value: 4975},
-      stock: {value: 1, text: '1 in Stock'},
-      imgSrc: 'https://crystal-cdn2.crystalcommerce.com/photos/6639662/medium/en_hRDrfTJnhw20210623-4014-34maj1.png',
-      productRef: 'https://www.mountbattencollectables.com//catalog/magic_the_gathering_singles-modern_horizons_2/scalding_tarn__retro_frame/2052728',
-      expansion: 'Modern Horizons 2',
-      isFoil: false
-    }
-  ];

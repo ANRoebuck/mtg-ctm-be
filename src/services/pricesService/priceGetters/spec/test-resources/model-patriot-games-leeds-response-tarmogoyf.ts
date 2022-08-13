@@ -1,3 +1,46 @@
+export const expectedResults_patriotGamesLeeds_Tarmogoyf = [
+  {
+    seller: 'Patriot Games Leeds',
+    title: 'Tarmogoyf',
+    imgSrc: 'http://www.patriotgamesleeds.com/images/magic/future_sight/tarmogoyf.jpg',
+    productRef: 'http://www.patriotgamesleeds.com/index.php?main_page=product_info&cPath=3_29&products_id=4269&zenid=vf6cfpg5683coukt65soj16656',
+    expansion: 'Future Sight',
+    price_relativeUnits: 4500,
+    price_textRepresentation: '£ 45.00',
+    stock_inStock: true,
+    stock_level: '1',
+    subtitle: '',
+    isFoil: false
+  },
+  {
+    seller: 'Patriot Games Leeds',
+    title: 'Tarmogoyf',
+    imgSrc: 'http://www.patriotgamesleeds.com/images/magic/modern_masters_2017_edition/tarmogoyf.jpg',
+    productRef: 'http://www.patriotgamesleeds.com/index.php?main_page=product_info&cPath=3_427&products_id=35248&zenid=vf6cfpg5683coukt65soj16656',
+    expansion: 'Modern Masters 2017 Edition',
+    price_relativeUnits: 2500,
+    price_textRepresentation: '£ 25.00',
+    stock_inStock: true,
+    stock_level: '1',
+    subtitle: '',
+    isFoil: false
+  },
+  {
+    seller: 'Patriot Games Leeds',
+    title: 'Tarmogoyf',
+    imgSrc: 'http://www.patriotgamesleeds.com/images/magic/modern_masters/tarmogoyf.jpg',
+    productRef: 'http://www.patriotgamesleeds.com/index.php?main_page=product_info&cPath=3_334&products_id=26417&zenid=vf6cfpg5683coukt65soj16656',
+    expansion: 'Modern Masters',
+    price_relativeUnits: 3000,
+    price_textRepresentation: '£ 30.00',
+    stock_inStock: true,
+    stock_level: '1',
+    subtitle: '',
+    isFoil: false
+  }
+];
+
+
 export const response_patriotGamesLeeds_Tarmogoyf =
   `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -649,151 +692,3 @@ tarmogoyf
 </html>
 
 `;
-
-export const expectedResults_patriotGamesLeeds_Tarmogoyf =
-  [
-    {
-      name: 'Patriot Games Leeds',
-      logo: 'patriotGamesLeeds 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: {text: '£25.00', value: 2500},
-      stock: {text: 'Out of Stock', value: 0},
-      imgSrc: 'http://www.patriotgamesleeds.com/images/magic/time_spiral_remastered/tarmogoyf.jpg',
-      productRef: 'http://www.patriotgamesleeds.com/index.php?main_page=product_info&cPath=3_739&products_id=76717&zenid=vf6cfpg5683coukt65soj16656',
-      expansion: 'Time Spiral Remastered',
-      isFoil: false
-    },
-    {
-      name: 'Patriot Games Leeds',
-      logo: 'patriotGamesLeeds 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: {text: '£45.00', value: 4500},
-      stock: {text: 'In Stock', value: 1},
-      imgSrc: 'http://www.patriotgamesleeds.com/images/magic/future_sight/tarmogoyf.jpg',
-      productRef: 'http://www.patriotgamesleeds.com/index.php?main_page=product_info&cPath=3_29&products_id=4269&zenid=vf6cfpg5683coukt65soj16656',
-      expansion: 'Future Sight',
-      isFoil: false
-    },
-    {
-      name: 'Patriot Games Leeds',
-      logo: 'patriotGamesLeeds 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: {text: '£25.00', value: 2500},
-      stock: {text: 'Out of Stock', value: 0},
-      imgSrc: 'http://www.patriotgamesleeds.com/images/magic/ultimate_masters/tarmogoyf.jpg',
-      productRef: 'http://www.patriotgamesleeds.com/index.php?main_page=product_info&cPath=3_590&products_id=52577&zenid=vf6cfpg5683coukt65soj16656',
-      expansion: 'Ultimate Masters',
-      isFoil: false
-    },
-    {
-      name: 'Patriot Games Leeds',
-      logo: 'patriotGamesLeeds 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: {text: '£25.00', value: 2500},
-      stock: {text: 'In Stock', value: 1},
-      imgSrc: 'http://www.patriotgamesleeds.com/images/magic/modern_masters_2017_edition/tarmogoyf.jpg',
-      productRef: 'http://www.patriotgamesleeds.com/index.php?main_page=product_info&cPath=3_427&products_id=35248&zenid=vf6cfpg5683coukt65soj16656',
-      expansion: 'Modern Masters 2017 Edition',
-      isFoil: false
-    },
-    {
-      name: 'Patriot Games Leeds',
-      logo: 'patriotGamesLeeds 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: {text: '£30.00', value: 3000},
-      stock: {text: 'Out of Stock', value: 0},
-      imgSrc: 'http://www.patriotgamesleeds.com/images/magic/modern_masters_2015_edition/tarmogoyf.jpg',
-      productRef: 'http://www.patriotgamesleeds.com/index.php?main_page=product_info&cPath=3_335&products_id=25827&zenid=vf6cfpg5683coukt65soj16656',
-      expansion: 'Modern Masters 2015 Edition',
-      isFoil: false
-    },
-    {
-      name: 'Patriot Games Leeds',
-      logo: 'patriotGamesLeeds 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: {text: '£30.00', value: 3000},
-      stock: {text: 'In Stock', value: 1},
-      imgSrc: 'http://www.patriotgamesleeds.com/images/magic/modern_masters/tarmogoyf.jpg',
-      productRef: 'http://www.patriotgamesleeds.com/index.php?main_page=product_info&cPath=3_334&products_id=26417&zenid=vf6cfpg5683coukt65soj16656',
-      expansion: 'Modern Masters',
-      isFoil: false
-    },
-    {
-      name: 'Patriot Games Leeds',
-      logo: 'patriotGamesLeeds 150x60.png',
-      title: 'Tarmogoyf (Foil)',
-      subtitle: '',
-      price: {text: '£435.00', value: 43500},
-      stock: {text: 'Out of Stock', value: 0},
-      imgSrc: 'http://www.patriotgamesleeds.com/images/magic/future_sight_foil/tarmogoyf.jpg',
-      productRef: 'http://www.patriotgamesleeds.com/index.php?main_page=product_info&cPath=3_612&products_id=56737&zenid=vf6cfpg5683coukt65soj16656',
-      expansion: 'Future Sight',
-      isFoil: true
-    },
-    {
-      name: 'Patriot Games Leeds',
-      logo: 'patriotGamesLeeds 150x60.png',
-      title: 'Tarmogoyf (Foil)',
-      subtitle: '',
-      price: {text: '£40.00', value: 4000},
-      stock: {text: 'Out of Stock', value: 0},
-      imgSrc: 'http://www.patriotgamesleeds.com/images/magic/modern_masters_2017_edition_foil/tarmogoyf.jpg',
-      productRef: 'http://www.patriotgamesleeds.com/index.php?main_page=product_info&cPath=3_471&products_id=49519&zenid=vf6cfpg5683coukt65soj16656',
-      expansion: 'Modern Masters 2017 Edition',
-      isFoil: true
-    },
-    {
-      name: 'Patriot Games Leeds',
-      logo: 'patriotGamesLeeds 150x60.png',
-      title: 'Tarmogoyf (Foil)',
-      subtitle: '',
-      price: {text: '£60.00', value: 6000},
-      stock: {text: 'Out of Stock', value: 0},
-      imgSrc: 'http://www.patriotgamesleeds.com/images/magic/modern_masters_foil/tarmogoyf.jpg',
-      productRef: 'http://www.patriotgamesleeds.com/index.php?main_page=product_info&cPath=3_605&products_id=55053&zenid=vf6cfpg5683coukt65soj16656',
-      expansion: 'Modern Masters',
-      isFoil: true
-    },
-    {
-      name: 'Patriot Games Leeds',
-      logo: 'patriotGamesLeeds 150x60.png',
-      title: 'Tarmogoyf (Foil)',
-      subtitle: '',
-      price: {text: '£35.00', value: 3500},
-      stock: {text: 'Out of Stock', value: 0},
-      imgSrc: 'http://www.patriotgamesleeds.com/images/magic/modern_masters_2015_edition_foil/tarmogoyf.jpg',
-      productRef: 'http://www.patriotgamesleeds.com/index.php?main_page=product_info&cPath=3_601&products_id=54166&zenid=vf6cfpg5683coukt65soj16656',
-      expansion: 'Modern Masters 2015 Edition',
-      isFoil: true
-    },
-    {
-      name: 'Patriot Games Leeds',
-      logo: 'patriotGamesLeeds 150x60.png',
-      title: 'Tarmogoyf (Foil)',
-      subtitle: '',
-      price: {text: '£35.00', value: 3500},
-      stock: {text: 'Out of Stock', value: 0},
-      imgSrc: 'http://www.patriotgamesleeds.com/images/magic/ultimate_masters_foil/tarmogoyf.jpg',
-      productRef: 'http://www.patriotgamesleeds.com/index.php?main_page=product_info&cPath=3_591&products_id=55597&zenid=vf6cfpg5683coukt65soj16656',
-      expansion: 'Ultimate Masters',
-      isFoil: true
-    },
-    {
-      name: 'Patriot Games Leeds',
-      logo: 'patriotGamesLeeds 150x60.png',
-      title: 'Tarmogoyf - Ultimate Box Topper',
-      subtitle: '',
-      price: {text: '£85.00', value: 8500},
-      stock: {text: 'Out of Stock', value: 0},
-      imgSrc: 'http://www.patriotgamesleeds.com/images/magic/ultimate_box_toppers/tarmogoyf.jpg',
-      productRef: 'http://www.patriotgamesleeds.com/index.php?main_page=product_info&cPath=3_592&products_id=52687&zenid=vf6cfpg5683coukt65soj16656',
-      expansion: 'Ultimate Box Toppers',
-      isFoil: false
-    }
-  ];

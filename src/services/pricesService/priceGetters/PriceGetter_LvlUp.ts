@@ -6,7 +6,7 @@ import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 class PriceGetter_LvlUp extends AbstractPriceGetter {
     constructor() {
         super({
-            name: 'Lvl Up',
+            name: 'Lvl Up Gaming',
             dataGetter: new DataGetter_LvlUp(),
             dataProcessor: new DataProcessor_LvlUp(),
         });
@@ -27,7 +27,7 @@ class DataGetter_LvlUp extends AbstractDataGetter {
 class DataProcessor_LvlUp extends AbstractHtmlDataProcessor {
     constructor() {
         super({
-            seller: 'Lvl Up',
+            seller: 'Lvl Up Gaming',
             currencyCode: 'GBP',
 
             resultSelector: 'div > div.row > div.col-md-4',

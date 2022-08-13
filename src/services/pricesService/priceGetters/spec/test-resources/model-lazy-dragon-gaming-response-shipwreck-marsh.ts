@@ -1,3 +1,46 @@
+export const expectedResults_lazyDragonGaming_ShipwreckMarsh = [
+  {
+    seller: 'Lazy Dragon Gaming',
+    title: 'Shipwreck Marsh',
+    imgSrc: 'https:////cdn.shopify.com/s/files/1/0604/0030/4297/products/d994501f-a1d3-5b4b-bd61-265bf99afc48_large.jpg?v=1632882892',
+    productRef: 'https://www.lazydragongaming.com/products/shipwreck-marsh-innistrad-midnight-hunt?_pos=1&_sid=6ba69b656&_ss=r',
+    expansion: 'Innistrad: Midnight Hunt',
+    price_relativeUnits: 999999,
+    price_textRepresentation: '£ 9999.99',
+    stock_inStock: true,
+    stock_level: '0',
+    subtitle: 'Near Mint',
+    isFoil: false
+  },
+  {
+    seller: 'Lazy Dragon Gaming',
+    title: 'Shipwreck Marsh (Borderless)',
+    imgSrc: 'https:////cdn.shopify.com/s/files/1/0604/0030/4297/products/ab2f1665-f6db-554a-bfa9-1eb73ed0bed7_large.jpg?v=1632882894',
+    productRef: 'https://www.lazydragongaming.com/products/shipwreck-marsh-borderless-innistrad-midnight-hunt?_pos=2&_sid=6ba69b656&_ss=r',
+    expansion: 'Innistrad: Midnight Hunt',
+    price_relativeUnits: 999999,
+    price_textRepresentation: '£ 9999.99',
+    stock_inStock: true,
+    stock_level: '0',
+    subtitle: 'Near Mint Foil',
+    isFoil: true
+  },
+  {
+    seller: 'Lazy Dragon Gaming',
+    title: 'Shipwreck Marsh (Borderless)',
+    imgSrc: 'https:////cdn.shopify.com/s/files/1/0604/0030/4297/products/ab2f1665-f6db-554a-bfa9-1eb73ed0bed7_large.jpg?v=1632882894',
+    productRef: 'https://www.lazydragongaming.com/products/shipwreck-marsh-borderless-innistrad-midnight-hunt?_pos=2&_sid=6ba69b656&_ss=r',
+    expansion: 'Innistrad: Midnight Hunt',
+    price_relativeUnits: 999999,
+    price_textRepresentation: '£ 9999.99',
+    stock_inStock: true,
+    stock_level: '0',
+    subtitle: 'Near Mint',
+    isFoil: false
+  }
+];
+
+
 export const response_lazyDragonGaming_ShipwreckMarsh =
   `<!doctype html>
 <html>
@@ -2596,44 +2639,3 @@ var iStockAllowResubscribe = true;
 </body>
 </html>
 `;
-
-
-export const expectedResults_lazyDragonGaming_ShipwreckMarsh =
-  [
-    {
-      title: 'Shipwreck Marsh',
-      imgSrc: 'https:////cdn.shopify.com/s/files/1/0604/0030/4297/products/d994501f-a1d3-5b4b-bd61-265bf99afc48_large.jpg?v=1632882892',
-      productRef: 'https://www.lazydragongaming.com/products/shipwreck-marsh-innistrad-midnight-hunt?_pos=1&_sid=6ba69b656&_ss=r',
-      expansion: 'Innistrad: Midnight Hunt',
-      price: { text: '£7.10', value: 710 },
-      stock: { text: '1 in Stock', value: '1' },
-      subtitle: 'Near Mint',
-      isFoil: false,
-      name: 'Lazy Dragon Gaming',
-      logo: 'lazyDragonGaming-3 150x60.jpg'
-    },
-    {
-      title: 'Shipwreck Marsh (Borderless)',
-      imgSrc: 'https:////cdn.shopify.com/s/files/1/0604/0030/4297/products/ab2f1665-f6db-554a-bfa9-1eb73ed0bed7_large.jpg?v=1632882894',
-      productRef: 'https://www.lazydragongaming.com/products/shipwreck-marsh-borderless-innistrad-midnight-hunt?_pos=2&_sid=6ba69b656&_ss=r',
-      expansion: 'Innistrad: Midnight Hunt',
-      price: { text: '£13.60', value: 1360 },
-      stock: { text: '1 in Stock', value: '1' },
-      subtitle: 'Near Mint Foil',
-      isFoil: true,
-      name: 'Lazy Dragon Gaming',
-      logo: 'lazyDragonGaming-3 150x60.jpg'
-    },
-    {
-      title: 'Shipwreck Marsh (Borderless)',
-      imgSrc: 'https:////cdn.shopify.com/s/files/1/0604/0030/4297/products/ab2f1665-f6db-554a-bfa9-1eb73ed0bed7_large.jpg?v=1632882894',
-      productRef: 'https://www.lazydragongaming.com/products/shipwreck-marsh-borderless-innistrad-midnight-hunt?_pos=2&_sid=6ba69b656&_ss=r',
-      expansion: 'Innistrad: Midnight Hunt',
-      price: { text: '£7.90', value: 790 },
-      stock: { text: '2 in Stock', value: '2' },
-      subtitle: 'Near Mint',
-      isFoil: false,
-      name: 'Lazy Dragon Gaming',
-      logo: 'lazyDragonGaming-3 150x60.jpg'
-    }
-  ];

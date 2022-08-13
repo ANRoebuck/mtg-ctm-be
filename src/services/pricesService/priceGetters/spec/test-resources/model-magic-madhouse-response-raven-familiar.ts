@@ -1,6 +1,37 @@
 // 20211116195414
 // https://eucs25.ksearchnet.com/cloud-search/n-search/search?ticket=klevu-161710301480613427&term=raven%20familiar&paginationStartsFrom=0&sortPrice=false&ipAddress=undefined&analyticsApiKey=klevu-161710301480613427&showOutOfStockProducts=true&klevuFetchPopularTerms=false&klevu_priceInterval=500&fetchMinMaxPrice=true&klevu_multiSelectFilters=true&noOfResults=12&klevuSort=rel&enableFilters=true&filterResults=&visibility=search&category=KLEVU_PRODUCT&klevu_filterLimit=400&sv=121&lsqt=&responseType=json&priceFieldSuffix=GBP&klevu_loginCustomerGroup=
 
+
+export const expectedResults_magicMadhouse_RavenFamiliar = [
+  {
+    seller: 'Magic Madhouse',
+    title: 'Raven Familiar',
+    imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/407807/images/372503/1430149038-22568900__01899.1635849454.386.513.jpg?c=1',
+    productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-raven-familiar-commander-2013?sku=EC13-3055U',
+    expansion: 'Commander 2013',
+    price_relativeUnits: 20,
+    price_textRepresentation: '£ 0.20',
+    stock_inStock: true,
+    stock_level: '92',
+    subtitle: '',
+    isFoil: false
+  },
+  {
+    seller: 'Magic Madhouse',
+    title: 'Raven Familiar',
+    imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/195656/images/372231/1434538225-93434200__60361.1635846653.386.513.jpg?c=1',
+    productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-raven-familiar-urzas-legacy?sku=EULG-3039U',
+    expansion: "Urza's Legacy",
+    price_relativeUnits: 20,
+    price_textRepresentation: '£ 0.20',
+    stock_inStock: true,
+    stock_level: '1',
+    subtitle: '',
+    isFoil: false
+  }
+];
+
+
 export const response_magicMadhouse_RavenFamiliar=
   {
     "meta": {
@@ -421,43 +452,3 @@ export const response_magicMadhouse_RavenFamiliar=
       "errorMessage": ""
     }
   };
-
-export const expectedResults_magicMadhouse_RavenFamiliar =
-  [
-    {
-      name: 'Magic Madhouse',
-      logo: 'magicMadhouse 150x60.png',
-      title: 'Raven Familiar',
-      subtitle: '',
-      price: { text: '£ 0.20', value: 20 },
-      stock: { value: 92, text: '92 in Stock' },
-      imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/407807/images/372503/1430149038-22568900__01899.1635849454.386.513.jpg?c=1',
-      productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-raven-familiar-commander-2013?sku=EC13-3055U',
-      expansion: 'Commander 2013',
-      isFoil: false
-    },
-    {
-      name: 'Magic Madhouse',
-      logo: 'magicMadhouse 150x60.png',
-      title: 'Raven Familiar',
-      subtitle: '',
-      price: { text: '£ 0.20', value: 20 },
-      stock: { value: 1, text: '1 in Stock' },
-      imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/195656/images/372231/1434538225-93434200__60361.1635846653.386.513.jpg?c=1',
-      productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-raven-familiar-urzas-legacy?sku=EULG-3039U',
-      expansion: "Urza's Legacy",
-      isFoil: false
-    },
-    {
-      name: 'Magic Madhouse',
-      logo: 'magicMadhouse 150x60.png',
-      title: 'Raven Familiar (foil)',
-      subtitle: '',
-      price: { text: '£ 2.49', value: 249 },
-      stock: { value: 0, text: 'Out of Stock' },
-      imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/195801/images/73008/1434538226-21622100__27769.1624911414.386.513.jpg?c=1',
-      productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-raven-familiar-foil-urzas-legacy/?sku=EULG-3539U',
-      expansion: "Urza's Legacy",
-      isFoil: true
-    }
-  ];

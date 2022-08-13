@@ -1,3 +1,33 @@
+export const expectedResults_axion_Tarmogoyf = [
+  {
+    seller: 'Axion Now',
+    title: 'Tarmogoyf',
+    imgSrc: 'https://crystal-cdn2.crystalcommerce.com/photos/29933/medium/OMPYGJS6ajapjMAv.jpg',
+    productRef: 'https://www.axionnow.com//catalog/magic_singles-time_spiral_block-future_sight/tarmogoyf/1357',
+    expansion: 'Future Sight',
+    price_relativeUnits: 4299,
+    price_textRepresentation: '£ 42.99',
+    stock_inStock: true,
+    stock_level: '1',
+    subtitle: '',
+    isFoil: false
+  },
+  {
+    seller: 'Axion Now',
+    title: 'Tarmogoyf',
+    imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/905658/medium/TG.jpg',
+    productRef: 'https://www.axionnow.com//catalog/magic_singles-special_editions-modern_masters/tarmogoyf/962503',
+    expansion: 'Modern Masters',
+    price_relativeUnits: 3200,
+    price_textRepresentation: '£ 32.00',
+    stock_inStock: true,
+    stock_level: '1',
+    subtitle: '',
+    isFoil: false
+  }
+];
+
+
 export const response_axion_Tarmogoyf =
   `<!DOCTYPE html>
 
@@ -18053,140 +18083,3 @@ export const response_axion_Tarmogoyf =
 
 
                       </html>`;
-
-
-export const expectedResults_axion_Tarmogoyf =
-  [
-    {
-      seller: 'Axion Now',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: 4299,
-      stock: {inStock: true, stock: 1},
-      imgSrc: 'https://crystal-cdn2.crystalcommerce.com/photos/29933/medium/OMPYGJS6ajapjMAv.jpg',
-      productRef: 'https://www.axionnow.com//catalog/magic_singles-time_spiral_block-future_sight/tarmogoyf/1357',
-      expansion: 'Future Sight',
-      isFoil: false
-    },
-    {
-      seller: 'Axion Now',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: 3200,
-      stock: {inStock: true, stock: 1},
-      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/905658/medium/TG.jpg',
-      productRef: 'https://www.axionnow.com//catalog/magic_singles-special_editions-modern_masters/tarmogoyf/962503',
-      expansion: 'Modern Masters',
-      isFoil: false
-    },
-    {
-      seller: 'Axion Now',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: null,
-      stock: {inStock: false, stock: 0},
-      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/3643243/medium/tarmogoyf.jpg',
-      productRef: 'https://www.axionnow.com//catalog/magic_singles-masters_sets-modern_masters_2015/tarmogoyf/1094053',
-      expansion: 'Modern Masters 2015',
-      isFoil: false
-    },
-    {
-      seller: 'Axion Now',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: null,
-      stock: {inStock: false, stock: 0},
-      imgSrc: 'https://crystal-cdn4.crystalcommerce.com/photos/6344442/medium/en_oYewlmYojE.png',
-      productRef: 'https://www.axionnow.com//catalog/magic_singles-masters_sets-modern_masters_2017/tarmogoyf/1428781',
-      expansion: 'Modern Masters 2017',
-      isFoil: false
-    },
-    {
-      seller: 'Axion Now',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: null,
-      stock: {inStock: false, stock: 0},
-      imgSrc: 'https://crystal-cdn4.crystalcommerce.com/photos/6480155/medium/en_HUH57diUq4.png',
-      productRef: 'https://www.axionnow.com//catalog/magic_singles-masters_sets-ultimate_masters/tarmogoyf/1547328',
-      expansion: 'Ultimate Masters',
-      isFoil: false
-    },
-    {
-      seller: 'Axion Now',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: null,
-      stock: {inStock: false, stock: 0},
-      imgSrc: 'https://crystal-cdn2.crystalcommerce.com/photos/6628687/medium/en_FtCnjfomHm.png',
-      productRef: 'https://www.axionnow.com//catalog/magic_singles-time_spiral_remastered__set-time_spiral_remastered/tarmogoyf/1566777',
-      expansion: 'Time Spiral: Remastered',
-      isFoil: false
-    },
-    {
-      seller: 'Axion Now',
-      title: 'Tarmogoyf - Foil',
-      subtitle: '',
-      price: null,
-      stock: {inStock: false, stock: 0},
-      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/693662/medium/OMPYGJS6ajapjMAv.jpg',
-      productRef: 'https://www.axionnow.com//catalog/magic_singles-time_spiral_block-future_sight/tarmogoyf__foil/52165',
-      expansion: 'Future Sight',
-      isFoil: true
-    },
-    {
-      seller: 'Axion Now',
-      title: 'Tarmogoyf - Foil',
-      subtitle: '',
-      price: null,
-      stock: {inStock: false, stock: 0},
-      imgSrc: 'https://crystal-cdn3.crystalcommerce.com/photos/905723/medium/tarmogoyf.jpg',
-      productRef: 'https://www.axionnow.com//catalog/magic_singles-special_editions-modern_masters/tarmogoyf__foil/962504',
-      expansion: 'Modern Masters',
-      isFoil: true
-    },
-    {
-      seller: 'Axion Now',
-      title: 'Tarmogoyf - Foil',
-      subtitle: '',
-      price: null,
-      stock: {inStock: false, stock: 0},
-      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/6480115/medium/en_2G92JblwhT.png',
-      productRef: 'https://www.axionnow.com//catalog/magic_singles-masters_sets-ultimate_masters_box_toppers/tarmogoyf__foil/1547410',
-      expansion: 'Ultimate Masters Box Toppers',
-      isFoil: true
-    },
-    {
-      seller: 'Axion Now',
-      title: 'Tarmogoyf - Foil',
-      subtitle: '',
-      price: null,
-      stock: {inStock: false, stock: 0},
-      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/3643253/medium/tarmogoyf.jpg',
-      productRef: 'https://www.axionnow.com//catalog/magic_singles-masters_sets-modern_masters_2015/tarmogoyf__foil/1094063',
-      expansion: 'Modern Masters 2015',
-      isFoil: true
-    },
-    {
-      seller: 'Axion Now',
-      title: 'Tarmogoyf - Foil',
-      subtitle: '',
-      price: null,
-      stock: {inStock: false, stock: 0},
-      imgSrc: 'https://crystal-cdn3.crystalcommerce.com/photos/6344475/medium/en_oYewlmYojE.png',
-      productRef: 'https://www.axionnow.com//catalog/magic_singles-masters_sets-modern_masters_2017/tarmogoyf__foil/1428786',
-      expansion: 'Modern Masters 2017',
-      isFoil: true
-    },
-    {
-      seller: 'Axion Now',
-      title: 'Tarmogoyf - Foil',
-      subtitle: '',
-      price: null,
-      stock: {inStock: false, stock: 0},
-      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/6480195/medium/en_HUH57diUq4.png',
-      productRef: 'https://www.axionnow.com//catalog/magic_singles-masters_sets-ultimate_masters/tarmogoyf__foil/1547368',
-      expansion: 'Ultimate Masters',
-      isFoil: true
-    }
-  ];

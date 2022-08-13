@@ -1,3 +1,46 @@
+export const expectedResults_lvlUp_MistyRainforest = [
+    {
+      seller: 'Lvl Up Gaming',
+      title: 'Misty Rainforest',
+      imgSrc: '//cdn.shopify.com/s/files/1/0235/9200/9805/products/220_c549583d-7ff6-45dc-96e3-673d3a5e9d82_large.jpg?v=1569191697',
+      productRef: 'https://lvlupgaming.co.uk/products/mtg-misty-rainforestzendikar?_pos=1&_sid=c73d598eb&_ss=r',
+      expansion: '\nZendikar',
+      price_relativeUnits: 2600,
+      price_textRepresentation: '£ 26.00',
+      stock_inStock: true,
+      stock_level: '1',
+      subtitle: 'Near Mint',
+      isFoil: false
+    },
+    {
+      seller: 'Lvl Up Gaming',
+      title: 'Misty Rainforest',
+      imgSrc: '//cdn.shopify.com/s/files/1/0235/9200/9805/products/c9ba1d90-cea7-5d29-a87a-3fa505df91dc_large.png?v=1629305688',
+      productRef: 'https://lvlupgaming.co.uk/products/misty-rainforest-modern-horizons-2?_pos=2&_sid=c73d598eb&_ss=r',
+      expansion: '\nModern Horizons 2',
+      price_relativeUnits: 2200,
+      price_textRepresentation: '£ 22.00',
+      stock_inStock: true,
+      stock_level: '1',
+      subtitle: 'Near Mint',
+      isFoil: false
+    },
+    {
+      seller: 'Lvl Up Gaming',
+      title: 'Misty Rainforest',
+      imgSrc: '//cdn.shopify.com/s/files/1/0235/9200/9805/products/c9ba1d90-cea7-5d29-a87a-3fa505df91dc_large.png?v=1629305688',
+      productRef: 'https://lvlupgaming.co.uk/products/misty-rainforest-modern-horizons-2?_pos=2&_sid=c73d598eb&_ss=r',
+      expansion: '\nModern Horizons 2',
+      price_relativeUnits: 2780,
+      price_textRepresentation: '£ 27.80',
+      stock_inStock: true,
+      stock_level: '1',
+      subtitle: 'Near Mint Foil',
+      isFoil: true
+    }
+  ];
+
+
 export const response_lvlUp_MistyRainforest =
   `<!doctype html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
@@ -8192,44 +8235,3 @@ Sunday\t10am–6pm</p>
 </body>
 
 </html>`;
-
-
-export const expectedResults_lvlUp_MistyRainforest =
-  [
-    {
-      title: 'Misty Rainforest',
-      imgSrc: '//cdn.shopify.com/s/files/1/0235/9200/9805/products/220_c549583d-7ff6-45dc-96e3-673d3a5e9d82_large.jpg?v=1569191697',
-      productRef: 'https://lvlupgaming.co.uk/products/mtg-misty-rainforestzendikar?_pos=1&_sid=c73d598eb&_ss=r',
-      expansion: '\nZendikar',
-      price: { text: '£26.00', value: 2600 },
-      stock: { text: 'In Stock', value: 1 },
-      subtitle: 'Near Mint',
-      isFoil: false,
-      name: 'Lvl Up Gaming',
-      logo: 'lvlUp 150x60.png'
-    },
-    {
-      title: 'Misty Rainforest',
-      imgSrc: '//cdn.shopify.com/s/files/1/0235/9200/9805/products/c9ba1d90-cea7-5d29-a87a-3fa505df91dc_large.png?v=1629305688',
-      productRef: 'https://lvlupgaming.co.uk/products/misty-rainforest-modern-horizons-2?_pos=2&_sid=c73d598eb&_ss=r',
-      expansion: '\nModern Horizons 2',
-      price: { text: '£22.00', value: 2200 },
-      stock: { text: 'In Stock', value: 1 },
-      subtitle: 'Near Mint',
-      isFoil: false,
-      name: 'Lvl Up Gaming',
-      logo: 'lvlUp 150x60.png'
-    },
-    {
-      title: 'Misty Rainforest',
-      imgSrc: '//cdn.shopify.com/s/files/1/0235/9200/9805/products/c9ba1d90-cea7-5d29-a87a-3fa505df91dc_large.png?v=1629305688',
-      productRef: 'https://lvlupgaming.co.uk/products/misty-rainforest-modern-horizons-2?_pos=2&_sid=c73d598eb&_ss=r',
-      expansion: '\nModern Horizons 2',
-      price: { text: '£27.80', value: 2780 },
-      stock: { text: 'In Stock', value: 1 },
-      subtitle: 'Near Mint Foil',
-      isFoil: true,
-      name: 'Lvl Up Gaming',
-      logo: 'lvlUp 150x60.png'
-    }
-  ];

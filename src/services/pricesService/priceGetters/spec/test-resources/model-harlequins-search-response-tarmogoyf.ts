@@ -1,3 +1,46 @@
+export const expectedResults_harlequins_Tarmogoyf = [
+    {
+      seller: 'Harlequins',
+      title: 'Tarmogoyf',
+      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/3643243/medium/tarmogoyf.jpg',
+      productRef: 'https://www.harlequins-games.com/catalog/magic_the_gathering_singles-masters_sets-modern_masters_2015/tarmogoyf/1094053',
+      expansion: 'Modern Masters 2015',
+      price_relativeUnits: 2655,
+      price_textRepresentation: '£ 26.55',
+      stock_inStock: true,
+      stock_level: '1',
+      subtitle: 'Near Mint, English',
+      isFoil: false
+    },
+    {
+      seller: 'Harlequins',
+      title: 'Tarmogoyf',
+      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/3643243/medium/tarmogoyf.jpg',
+      productRef: 'https://www.harlequins-games.com/catalog/magic_the_gathering_singles-masters_sets-modern_masters_2015/tarmogoyf/1094053',
+      expansion: 'Modern Masters 2015',
+      price_relativeUnits: 2390,
+      price_textRepresentation: '£ 23.90',
+      stock_inStock: true,
+      stock_level: '1',
+      subtitle: 'Lightly Played, English',
+      isFoil: false
+    },
+    {
+      seller: 'Harlequins',
+      title: 'Tarmogoyf',
+      imgSrc: 'https://crystal-cdn4.crystalcommerce.com/photos/6344442/medium/en_oYewlmYojE.png',
+      productRef: 'https://www.harlequins-games.com/catalog/magic_the_gathering_singles-special_editions-modern_masters_2017/tarmogoyf/1428781',
+      expansion: 'Modern Masters 2017',
+      price_relativeUnits: 2280,
+      price_textRepresentation: '£ 22.80',
+      stock_inStock: true,
+      stock_level: '1',
+      subtitle: 'Near Mint, English',
+      isFoil: false
+    }
+  ];
+
+
 export const response_harlequins_Tarmogoyf =
   `
 <!DOCTYPE html>
@@ -6937,44 +6980,3 @@ Sat - Sun 12:00-20:00</span>
 </body>
 
 </html>`;
-
-
-export const expectedResults_harlequins_Tarmogoyf =
-  [
-    {
-      title: 'Tarmogoyf',
-      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/3643243/medium/tarmogoyf.jpg',
-      productRef: 'https://www.harlequins-games.com/catalog/magic_the_gathering_singles-masters_sets-modern_masters_2015/tarmogoyf/1094053',
-      expansion: 'Modern Masters 2015',
-      price: { text: '£26.55', value: 2655 },
-      stock: { value: 1, text: '1 in Stock' },
-      subtitle: 'Near Mint, English',
-      isFoil: false,
-      name: 'Harlequins',
-      logo: 'harlequins 150x60.png'
-    },
-    {
-      title: 'Tarmogoyf',
-      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/3643243/medium/tarmogoyf.jpg',
-      productRef: 'https://www.harlequins-games.com/catalog/magic_the_gathering_singles-masters_sets-modern_masters_2015/tarmogoyf/1094053',
-      expansion: 'Modern Masters 2015',
-      price: { text: '£23.90', value: 2390 },
-      stock: { value: 1, text: '1 in Stock' },
-      subtitle: 'Lightly Played, English',
-      isFoil: false,
-      name: 'Harlequins',
-      logo: 'harlequins 150x60.png'
-    },
-    {
-      title: 'Tarmogoyf',
-      imgSrc: 'https://crystal-cdn4.crystalcommerce.com/photos/6344442/medium/en_oYewlmYojE.png',
-      productRef: 'https://www.harlequins-games.com/catalog/magic_the_gathering_singles-special_editions-modern_masters_2017/tarmogoyf/1428781',
-      expansion: 'Modern Masters 2017',
-      price: { text: '£22.80', value: 2280 },
-      stock: { value: 1, text: '1 in Stock' },
-      subtitle: 'Near Mint, English',
-      isFoil: false,
-      name: 'Harlequins',
-      logo: 'harlequins 150x60.png'
-    }
-  ];

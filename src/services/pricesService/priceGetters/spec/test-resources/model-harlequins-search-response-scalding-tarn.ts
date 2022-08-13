@@ -1,3 +1,59 @@
+export const expectedResults_harlequins_ScaldingTarn = [
+    {
+      seller: 'Harlequins',
+      title: 'Scalding Tarn',
+      imgSrc: 'https://crystal-cdn4.crystalcommerce.com/photos/6600654/medium/en_Kkj94YEmWj.png',
+      productRef: 'https://www.harlequins-games.com/catalog/magic_the_gathering_singles-zendikar_rising_expeditions/scalding_tarn/2044809',
+      expansion: 'Zendikar Rising Expeditions',
+      price_relativeUnits: 5534,
+      price_textRepresentation: '£ 55.34',
+      stock_inStock: true,
+      stock_level: '1',
+      subtitle: 'Near Mint, English',
+      isFoil: false
+    },
+    {
+      seller: 'Harlequins',
+      title: 'Scalding Tarn',
+      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/6343706/medium/en_EZD9GGrljv.png',
+      productRef: 'https://www.harlequins-games.com/catalog/magic_the_gathering_singles-special_editions-modern_masters_2017/scalding_tarn/1428653',
+      expansion: 'Modern Masters 2017',
+      price_relativeUnits: 3624,
+      price_textRepresentation: '£ 36.24',
+      stock_inStock: true,
+      stock_level: '1',
+      subtitle: 'Near Mint, English',
+      isFoil: false
+    },
+    {
+      seller: 'Harlequins',
+      title: 'Scalding Tarn',
+      imgSrc: 'https://crystal-cdn2.crystalcommerce.com/photos/6639661/medium/en_9PIt9qxzRQ20210623-4014-h50zvp.png',
+      productRef: 'https://www.harlequins-games.com/catalog/magic_the_gathering_singles-modern_horizons_2/scalding_tarn/2055687',
+      expansion: 'Modern Horizons 2',
+      price_relativeUnits: 2796,
+      price_textRepresentation: '£ 27.96',
+      stock_inStock: true,
+      stock_level: '2',
+      subtitle: 'Near Mint, English',
+      isFoil: false
+    },
+    {
+      seller: 'Harlequins',
+      title: 'Scalding Tarn - Retro Frame',
+      imgSrc: 'https://crystal-cdn2.crystalcommerce.com/photos/6639662/medium/en_hRDrfTJnhw20210623-4014-34maj1.png',
+      productRef: 'https://www.harlequins-games.com/catalog/magic_the_gathering_singles-modern_horizons_2/scalding_tarn__retro_frame/2055688',
+      expansion: 'Modern Horizons 2',
+      price_relativeUnits: 5266,
+      price_textRepresentation: '£ 52.66',
+      stock_inStock: true,
+      stock_level: '1',
+      subtitle: 'Near Mint, English',
+      isFoil: false
+    }
+  ];
+
+
 export const response_harlequins_ScaldingTarn =
   `<!DOCTYPE html>
 
@@ -10845,56 +10901,3 @@ Sat - Sun 12:00-20:00</span>
 
 </html>
 `;
-
-
-export const expectedResults_harlequins_ScaldingTarn =
-  [
-    {
-      title: 'Scalding Tarn',
-      imgSrc: 'https://crystal-cdn4.crystalcommerce.com/photos/6600654/medium/en_Kkj94YEmWj.png',
-      productRef: 'https://www.harlequins-games.com/catalog/magic_the_gathering_singles-zendikar_rising_expeditions/scalding_tarn/2044809',
-      expansion: 'Zendikar Rising Expeditions',
-      price: { text: '£55.34', value: 5534 },
-      stock: { value: 1, text: '1 in Stock' },
-      subtitle: 'Near Mint, English',
-      isFoil: false,
-      name: 'Harlequins',
-      logo: 'harlequins 150x60.png'
-    },
-    {
-      title: 'Scalding Tarn',
-      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/6343706/medium/en_EZD9GGrljv.png',
-      productRef: 'https://www.harlequins-games.com/catalog/magic_the_gathering_singles-special_editions-modern_masters_2017/scalding_tarn/1428653',
-      expansion: 'Modern Masters 2017',
-      price: { text: '£36.24', value: 3624 },
-      stock: { value: 1, text: '1 in Stock' },
-      subtitle: 'Near Mint, English',
-      isFoil: false,
-      name: 'Harlequins',
-      logo: 'harlequins 150x60.png'
-    },
-    {
-      title: 'Scalding Tarn',
-      imgSrc: 'https://crystal-cdn2.crystalcommerce.com/photos/6639661/medium/en_9PIt9qxzRQ20210623-4014-h50zvp.png',
-      productRef: 'https://www.harlequins-games.com/catalog/magic_the_gathering_singles-modern_horizons_2/scalding_tarn/2055687',
-      expansion: 'Modern Horizons 2',
-      price: { text: '£27.96', value: 2796 },
-      stock: { value: 2, text: '2 in Stock' },
-      subtitle: 'Near Mint, English',
-      isFoil: false,
-      name: 'Harlequins',
-      logo: 'harlequins 150x60.png'
-    },
-    {
-      title: 'Scalding Tarn - Retro Frame',
-      imgSrc: 'https://crystal-cdn2.crystalcommerce.com/photos/6639662/medium/en_hRDrfTJnhw20210623-4014-34maj1.png',
-      productRef: 'https://www.harlequins-games.com/catalog/magic_the_gathering_singles-modern_horizons_2/scalding_tarn__retro_frame/2055688',
-      expansion: 'Modern Horizons 2',
-      price: { text: '£52.66', value: 5266 },
-      stock: { value: 1, text: '1 in Stock' },
-      subtitle: 'Near Mint, English',
-      isFoil: false,
-      name: 'Harlequins',
-      logo: 'harlequins 150x60.png'
-    }
-  ];

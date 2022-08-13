@@ -1,3 +1,33 @@
+export const expectedResults_magicCardTrader_Tarmogoyf = [
+    {
+      seller: 'Magic Card Trader',
+      title: 'Tarmogoyf',
+      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/905658/medium/TG.jpg',
+      productRef: 'https://www.themagiccardtrader.com//catalog/magic_singles-commander_series-commander/tarmogoyf/60286',
+      expansion: 'Modern Masters',
+      price_relativeUnits: 3000,
+      price_textRepresentation: '£ 30.00',
+      stock_inStock: true,
+      stock_level: '1',
+      subtitle: '',
+      isFoil: false
+    },
+    {
+      seller: 'Magic Card Trader',
+      title: 'Tarmogoyf',
+      imgSrc: 'https://crystal-cdn4.crystalcommerce.com/photos/6480155/medium/en_HUH57diUq4.png',
+      productRef: 'https://www.themagiccardtrader.com//catalog/magic_singles-commander_series-commander_2015/tarmogoyf/252478',
+      expansion: 'Ultimate Masters',
+      price_relativeUnits: 2800,
+      price_textRepresentation: '£ 28.00',
+      stock_inStock: true,
+      stock_level: '2',
+      subtitle: '',
+      isFoil: false
+    }
+  ];
+
+
 export const response_magicCardTrader_Tarmogoyf =
   `<!DOCTYPE html>
 
@@ -8856,127 +8886,3 @@ _gaq.push(['b._trackPageLoadTime']);
 </html>
 AbstractModel.js:93
 `;
-
-export const expectedResults_magicCardTrader_Tarmogoyf =
-  [
-    {
-      name: 'Magic Card Trader',
-      logo: 'magicCardTrader-black 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: {text: '£30.00', value: 3000},
-      stock: {value: 1, text: '1 in Stock'},
-      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/905658/medium/TG.jpg',
-      productRef: 'https://www.themagiccardtrader.com//catalog/magic_singles-commander_series-commander/tarmogoyf/60286',
-      expansion: 'Modern Masters',
-      isFoil: false
-    },
-    {
-      name: 'Magic Card Trader',
-      logo: 'magicCardTrader-black 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: {text: '£28.00', value: 2800},
-      stock: {value: 2, text: '2 in Stock'},
-      imgSrc: 'https://crystal-cdn4.crystalcommerce.com/photos/6480155/medium/en_HUH57diUq4.png',
-      productRef: 'https://www.themagiccardtrader.com//catalog/magic_singles-commander_series-commander_2015/tarmogoyf/252478',
-      expansion: 'Ultimate Masters',
-      isFoil: false
-    },
-    {
-      name: 'Magic Card Trader',
-      logo: 'magicCardTrader-black 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: {text: '', value: 9999},
-      stock: {value: 0, text: 'Out of Stock'},
-      imgSrc: 'https://crystal-cdn4.crystalcommerce.com/photos/6344442/medium/en_oYewlmYojE.png',
-      productRef: 'https://www.themagiccardtrader.com//catalog/magic_singles-commander_series-commander_2014/tarmogoyf/197153',
-      expansion: 'Modern Masters 2017',
-      isFoil: false
-    },
-    {
-      name: 'Magic Card Trader',
-      logo: 'magicCardTrader-black 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: {text: '', value: 9999},
-      stock: {value: 0, text: 'Out of Stock'},
-      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/3643243/medium/tarmogoyf.jpg',
-      productRef: 'https://www.themagiccardtrader.com//catalog/magic_singles-commander_series-commander_2013/tarmogoyf/116413',
-      expansion: 'Modern Masters 2015',
-      isFoil: false
-    },
-    {
-      name: 'Magic Card Trader',
-      logo: 'magicCardTrader-black 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: {text: '', value: 9999},
-      stock: {value: 0, text: 'Out of Stock'},
-      imgSrc: 'https://crystal-cdn2.crystalcommerce.com/photos/29933/medium/OMPYGJS6ajapjMAv.jpg',
-      productRef: 'https://www.themagiccardtrader.com//catalog/magic_singles-time_spiral_block-future_sight/tarmogoyf/1357',
-      expansion: 'Future Sight',
-      isFoil: false
-    },
-    {
-      name: 'Magic Card Trader',
-      logo: 'magicCardTrader-black 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: {text: '', value: 9999},
-      stock: {value: 0, text: 'Out of Stock'},
-      imgSrc: 'https://crystal-cdn2.crystalcommerce.com/photos/6628687/medium/en_FtCnjfomHm.png',
-      productRef: 'https://www.themagiccardtrader.com//catalog/magic_singles-time_spiral_remastered/tarmogoyf/262385',
-      expansion: 'Time Spiral Remastered',
-      isFoil: false
-    },
-    {
-      name: 'Magic Card Trader',
-      logo: 'magicCardTrader-black 150x60.png',
-      title: 'Tarmogoyf - Foil',
-      subtitle: '',
-      price: {text: '', value: 9999},
-      stock: {value: 0, text: 'Out of Stock'},
-      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/3643253/medium/tarmogoyf.jpg',
-      productRef: 'https://www.themagiccardtrader.com//catalog/magic_singles-commander_series-commander_2013/tarmogoyf__foil/162063',
-      expansion: 'Modern Masters 2015',
-      isFoil: true
-    },
-    {
-      name: 'Magic Card Trader',
-      logo: 'magicCardTrader-black 150x60.png',
-      title: 'Tarmogoyf - Foil',
-      subtitle: '',
-      price: {text: '', value: 9999},
-      stock: {value: 0, text: 'Out of Stock'},
-      imgSrc: 'https://crystal-cdn3.crystalcommerce.com/photos/905723/medium/tarmogoyf.jpg',
-      productRef: 'https://www.themagiccardtrader.com//catalog/magic_singles-commander_series-commander/tarmogoyf__foil/237223',
-      expansion: 'Modern Masters',
-      isFoil: true
-    },
-    {
-      name: 'Magic Card Trader',
-      logo: 'magicCardTrader-black 150x60.png',
-      title: 'Tarmogoyf - Foil',
-      subtitle: '',
-      price: {text: '', value: 9999},
-      stock: {value: 0, text: 'Out of Stock'},
-      imgSrc: 'https://crystal-cdn1.crystalcommerce.com/photos/6480115/medium/en_2G92JblwhT.png',
-      productRef: 'https://www.themagiccardtrader.com//catalog/magic_singles-commander_series-commander_2015/tarmogoyf__foil/262409',
-      expansion: 'Ultimate Masters',
-      isFoil: true
-    },
-    {
-      name: 'Magic Card Trader',
-      logo: 'magicCardTrader-black 150x60.png',
-      title: 'Tarmogoyf - Foil',
-      subtitle: '',
-      price: {text: '', value: 9999},
-      stock: {value: 0, text: 'Out of Stock'},
-      imgSrc: 'https://crystal-cdn3.crystalcommerce.com/photos/6344475/medium/en_oYewlmYojE.png',
-      productRef: 'https://www.themagiccardtrader.com//catalog/magic_singles-commander_series-commander_2014/tarmogoyf__foil/204013',
-      expansion: 'Modern Masters 2017',
-      isFoil: true
-    }
-  ];

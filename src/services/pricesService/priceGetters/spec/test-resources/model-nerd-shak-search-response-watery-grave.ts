@@ -1,3 +1,85 @@
+export const expectedResults_nerdShak_WateryGrave = [
+    {
+      seller: 'Nerd Shak',
+      title: 'Watery Grave',
+      imgSrc: '//cdn.shopify.com/s/files/1/0375/7726/1115/products/47fde349-010e-4a2e-838e-e924dbeec355_large.jpg?v=1620772985',
+      productRef: 'https://nerdshak.com/products/watery-grave-gatecrash?_pos=1&_sid=af25b038e&_ss=r',
+      expansion: '\n\nGatecrash',
+      price_relativeUnits: 860,
+      price_textRepresentation: '£ 8.60',
+      stock_inStock: true,
+      stock_level: '1',
+      subtitle: 'Near Mint',
+      isFoil: false
+    },
+    {
+      seller: 'Nerd Shak',
+      title: 'Watery Grave',
+      imgSrc: '//cdn.shopify.com/s/files/1/0375/7726/1115/products/47fde349-010e-4a2e-838e-e924dbeec355_large.jpg?v=1620772985',
+      productRef: 'https://nerdshak.com/products/watery-grave-gatecrash?_pos=1&_sid=af25b038e&_ss=r',
+      expansion: '\n\nGatecrash',
+      price_relativeUnits: 810,
+      price_textRepresentation: '£ 8.10',
+      stock_inStock: true,
+      stock_level: '1',
+      subtitle: 'Lightly Played',
+      isFoil: false
+    },
+    {
+      seller: 'Nerd Shak',
+      title: 'Watery Grave',
+      imgSrc: '//cdn.shopify.com/s/files/1/0375/7726/1115/products/47fde349-010e-4a2e-838e-e924dbeec355_large.jpg?v=1620772985',
+      productRef: 'https://nerdshak.com/products/watery-grave-gatecrash?_pos=1&_sid=af25b038e&_ss=r',
+      expansion: '\n\nGatecrash',
+      price_relativeUnits: 2330,
+      price_textRepresentation: '£ 23.30',
+      stock_inStock: true,
+      stock_level: '1',
+      subtitle: 'Lightly Played Foil',
+      isFoil: true
+    },
+    {
+      seller: 'Nerd Shak',
+      title: 'Watery Grave',
+      imgSrc: '//cdn.shopify.com/s/files/1/0375/7726/1115/products/af6d2e24-9467-4aa6-8841-7716d051edf7_large.jpg?v=1620781498',
+      productRef: 'https://nerdshak.com/products/watery-grave-zendikar-expeditions?_pos=2&_sid=af25b038e&_ss=r',
+      expansion: '\n\nZendikar Expeditions',
+      price_relativeUnits: 15840,
+      price_textRepresentation: '£ 158.40',
+      stock_inStock: true,
+      stock_level: '1',
+      subtitle: 'Near Mint Foil',
+      isFoil: true
+    },
+    {
+      seller: 'Nerd Shak',
+      title: 'Watery Grave',
+      imgSrc: '//cdn.shopify.com/s/files/1/0375/7726/1115/products/7d4595f2-9297-40dc-b2dd-7144bbb401f7_large.jpg?v=1620777298',
+      productRef: 'https://nerdshak.com/products/watery-grave-guilds-of-ravnica?_pos=3&_sid=af25b038e&_ss=r',
+      expansion: '\n\nGuilds of Ravnica',
+      price_relativeUnits: 840,
+      price_textRepresentation: '£ 8.40',
+      stock_inStock: true,
+      stock_level: '1',
+      subtitle: 'Near Mint',
+      isFoil: false
+    },
+    {
+      seller: 'Nerd Shak',
+      title: 'Watery Grave',
+      imgSrc: '//cdn.shopify.com/s/files/1/0375/7726/1115/products/38604307-021f-4e17-8f5b-43350726471b_large.jpg?v=1620792029',
+      productRef: 'https://nerdshak.com/products/watery-grave-guilds-of-ravnica-promos?_pos=4&_sid=af25b038e&_ss=r',
+      expansion: '\n\nGuilds of Ravnica Promos',
+      price_relativeUnits: 1900,
+      price_textRepresentation: '£ 19.00',
+      stock_inStock: true,
+      stock_level: '1',
+      subtitle: 'Near Mint Foil',
+      isFoil: true
+    }
+  ];
+
+
 export const response_nerdShak_WateryGrave =
   `<!doctype html>
 
@@ -6902,81 +6984,3 @@ for (var attr in meta) {
 
 
 </html>`;
-
-
-export const expectedResults_nerdShak_WateryGrave =
-  [
-    {
-      title: 'Watery Grave',
-      imgSrc: '//cdn.shopify.com/s/files/1/0375/7726/1115/products/47fde349-010e-4a2e-838e-e924dbeec355_large.jpg?v=1620772985',
-      productRef: 'https://nerdshak.com/products/watery-grave-gatecrash?_pos=1&_sid=af25b038e&_ss=r',
-      expansion: '\n\nGatecrash',
-      price: { text: '£8.60', value: 860 },
-      stock: { text: 'In Stock', value: 1 },
-      subtitle: 'Near Mint',
-      isFoil: false,
-      name: 'Nerd Shak',
-      logo: 'nerdShak 150x60.jpg'
-    },
-    {
-      title: 'Watery Grave',
-      imgSrc: '//cdn.shopify.com/s/files/1/0375/7726/1115/products/47fde349-010e-4a2e-838e-e924dbeec355_large.jpg?v=1620772985',
-      productRef: 'https://nerdshak.com/products/watery-grave-gatecrash?_pos=1&_sid=af25b038e&_ss=r',
-      expansion: '\n\nGatecrash',
-      price: { text: '£8.10', value: 810 },
-      stock: { text: 'In Stock', value: 1 },
-      subtitle: 'Lightly Played',
-      isFoil: false,
-      name: 'Nerd Shak',
-      logo: 'nerdShak 150x60.jpg'
-    },
-    {
-      title: 'Watery Grave',
-      imgSrc: '//cdn.shopify.com/s/files/1/0375/7726/1115/products/47fde349-010e-4a2e-838e-e924dbeec355_large.jpg?v=1620772985',
-      productRef: 'https://nerdshak.com/products/watery-grave-gatecrash?_pos=1&_sid=af25b038e&_ss=r',
-      expansion: '\n\nGatecrash',
-      price: { text: '£23.30', value: 2330 },
-      stock: { text: 'In Stock', value: 1 },
-      subtitle: 'Lightly Played Foil',
-      isFoil: true,
-      name: 'Nerd Shak',
-      logo: 'nerdShak 150x60.jpg'
-    },
-    {
-      title: 'Watery Grave',
-      imgSrc: '//cdn.shopify.com/s/files/1/0375/7726/1115/products/af6d2e24-9467-4aa6-8841-7716d051edf7_large.jpg?v=1620781498',
-      productRef: 'https://nerdshak.com/products/watery-grave-zendikar-expeditions?_pos=2&_sid=af25b038e&_ss=r',
-      expansion: '\n\nZendikar Expeditions',
-      price: { text: '£158.40', value: 15840 },
-      stock: { text: 'In Stock', value: 1 },
-      subtitle: 'Near Mint Foil',
-      isFoil: true,
-      name: 'Nerd Shak',
-      logo: 'nerdShak 150x60.jpg'
-    },
-    {
-      title: 'Watery Grave',
-      imgSrc: '//cdn.shopify.com/s/files/1/0375/7726/1115/products/7d4595f2-9297-40dc-b2dd-7144bbb401f7_large.jpg?v=1620777298',
-      productRef: 'https://nerdshak.com/products/watery-grave-guilds-of-ravnica?_pos=3&_sid=af25b038e&_ss=r',
-      expansion: '\n\nGuilds of Ravnica',
-      price: { text: '£8.40', value: 840 },
-      stock: { text: 'In Stock', value: 1 },
-      subtitle: 'Near Mint',
-      isFoil: false,
-      name: 'Nerd Shak',
-      logo: 'nerdShak 150x60.jpg'
-    },
-    {
-      title: 'Watery Grave',
-      imgSrc: '//cdn.shopify.com/s/files/1/0375/7726/1115/products/38604307-021f-4e17-8f5b-43350726471b_large.jpg?v=1620792029',
-      productRef: 'https://nerdshak.com/products/watery-grave-guilds-of-ravnica-promos?_pos=4&_sid=af25b038e&_ss=r',
-      expansion: '\n\nGuilds of Ravnica Promos',
-      price_relativeUnits: 1900,
-      price_textRepresentation: "£ 19.00",
-      stock_inStock: true,
-      stock_level: 1,
-      isFoil: true,
-      name: 'Nerd Shak',
-      logo: 'nerdShak 150x60.jpg'
-    }
-  ];

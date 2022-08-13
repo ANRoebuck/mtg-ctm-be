@@ -3,17 +3,17 @@ import { AbstractHtmlDataProcessor, Stock } from './abstract/AbstractDataProcess
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 
 
-class PriceGetter_ManaLeak extends AbstractPriceGetter {
+class PriceGetter_Manaleak extends AbstractPriceGetter {
     constructor() {
         super({
-            name: 'Mana Leak',
-            dataGetter: new DataGetter_ManaLeak(),
-            dataProcessor: new DataProcessor_ManaLeak(),
+            name: 'Manaleak',
+            dataGetter: new DataGetter_Manaleak(),
+            dataProcessor: new DataProcessor_Manaleak(),
         });
     }
 }
 
-class DataGetter_ManaLeak extends AbstractDataGetter {
+class DataGetter_Manaleak extends AbstractDataGetter {
     constructor() {
         super({
             baseUrl: 'https://www.manaleak.com/',
@@ -24,10 +24,10 @@ class DataGetter_ManaLeak extends AbstractDataGetter {
     }
 }
 
-class DataProcessor_ManaLeak extends AbstractHtmlDataProcessor {
+class DataProcessor_Manaleak extends AbstractHtmlDataProcessor {
     constructor() {
         super({
-            seller: 'Mana Leak',
+            seller: 'Manaleak',
             currencyCode: 'GBP',
 
             resultSelector: 'div.main-products > div.product-list-item',
@@ -63,4 +63,4 @@ class DataProcessor_ManaLeak extends AbstractHtmlDataProcessor {
     }
 }
 
-export default PriceGetter_ManaLeak;
+export default PriceGetter_Manaleak;

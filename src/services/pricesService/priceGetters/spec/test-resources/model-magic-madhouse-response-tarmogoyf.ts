@@ -1,6 +1,128 @@
 // 20211116194212
 // https://eucs25.ksearchnet.com/cloud-search/n-search/search?ticket=klevu-161710301480613427&term=tarmogoyf&paginationStartsFrom=0&sortPrice=false&ipAddress=undefined&analyticsApiKey=klevu-161710301480613427&showOutOfStockProducts=true&klevuFetchPopularTerms=false&klevu_priceInterval=500&fetchMinMaxPrice=true&klevu_multiSelectFilters=true&noOfResults=24&klevuSort=rel&enableFilters=true&filterResults=&visibility=search&category=KLEVU_PRODUCT&klevu_filterLimit=400&sv=121&lsqt=&responseType=json&priceFieldSuffix=GBP&klevu_loginCustomerGroup=
 
+
+export const expectedResults_magicMadhouse_Tarmogoyf = [
+  {
+    seller: 'Magic Madhouse',
+    title: 'Tarmogoyf',
+    imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/412836/images/340135/1614956320-35642800__85690.1634574717.386.513.jpg?c=1',
+    productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-time-spiral-remastered?sku=ETSR-3235M',
+    expansion: 'Time Spiral Remastered',
+    price_relativeUnits: 2499,
+    price_textRepresentation: '£ 24.99',
+    stock_inStock: true,
+    stock_level: '6',
+    subtitle: '',
+    isFoil: false
+  },
+  {
+    seller: 'Magic Madhouse',
+    title: 'Tarmogoyf (Box Topper Promo)',
+    imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/214924/images/85332/1541604876-67255000__38712.1624916261.386.513.jpg?c=1',
+    productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-box-topper-promo-ultimate-masters/?sku=EUMA-3U19M',
+    expansion: 'Ultimate Masters',
+    price_relativeUnits: 7499,
+    price_textRepresentation: '£ 74.99',
+    stock_inStock: true,
+    stock_level: '4',
+    subtitle: '',
+    isFoil: false
+  },
+  {
+    seller: 'Magic Madhouse',
+    title: 'Tarmogoyf',
+    imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/412835/images/221832/1488640328-17351200__59149.1626190633.386.513.jpg?c=1',
+    productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-modern-masters-2017-edition/?sku=EMM3-3141M',
+    expansion: 'Modern Masters 2017 Edition',
+    price_relativeUnits: 3499,
+    price_textRepresentation: '£ 34.99',
+    stock_inStock: true,
+    stock_level: '3',
+    subtitle: '',
+    isFoil: false
+  },
+  {
+    seller: 'Magic Madhouse',
+    title: 'Tarmogoyf',
+    imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/412833/images/196460/1422030797-32261000__05993.1626179419.386.513.jpg?c=1',
+    productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-modern-masters/?sku=EMMA-3166M',
+    expansion: 'Modern Masters',
+    price_relativeUnits: 3499,
+    price_textRepresentation: '£ 34.99',
+    stock_inStock: true,
+    stock_level: '8',
+    subtitle: '',
+    isFoil: false
+  },
+  {
+    seller: 'Magic Madhouse',
+    title: 'Tarmogoyf',
+    imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/412832/images/199628/1422444276-95411900__66758.1626180510.386.513.jpg?c=1',
+    productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-future-sight/?sku=EFUT-2153R',
+    expansion: 'Future Sight',
+    price_relativeUnits: 4499,
+    price_textRepresentation: '£ 44.99',
+    stock_inStock: true,
+    stock_level: '13',
+    subtitle: '',
+    isFoil: false
+  },
+  {
+    seller: 'Magic Madhouse',
+    title: 'Tarmogoyf',
+    imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/412834/images/204331/1431109097-99087300__17129.1626182505.386.513.jpg?c=1',
+    productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-modern-masters-2015-edition/?sku=EMM2-3165M',
+    expansion: 'Modern Masters 2015 Edition',
+    price_relativeUnits: 3499,
+    price_textRepresentation: '£ 34.99',
+    stock_inStock: true,
+    stock_level: '5',
+    subtitle: '',
+    isFoil: false
+  },
+  {
+    seller: 'Magic Madhouse',
+    title: 'Tarmogoyf (foil)',
+    imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/412830/images/222137/1489596266-46183200__43426.1626190765.386.513.jpg?c=1',
+    productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-foil-modern-masters-2017-edition/?sku=EMM3-2641M',
+    expansion: 'Modern Masters 2017 Edition',
+    price_relativeUnits: 4499,
+    price_textRepresentation: '£ 44.99',
+    stock_inStock: true,
+    stock_level: '1',
+    subtitle: '',
+    isFoil: true
+  },
+  {
+    seller: 'Magic Madhouse',
+    title: 'Tarmogoyf (foil)',
+    imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/412831/images/344089/1615396223-07174800__76163.1634677072.386.513.jpg?c=1',
+    productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-foil-time-spiral-remastered?sku=ETSR-3735M',
+    expansion: 'Time Spiral Remastered',
+    price_relativeUnits: 3999,
+    price_textRepresentation: '£ 39.99',
+    stock_inStock: true,
+    stock_level: '2',
+    subtitle: '',
+    isFoil: true
+  },
+  {
+    seller: 'Magic Madhouse',
+    title: 'Tarmogoyf (foil)',
+    imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/412829/images/204550/1431109856-94954300__25521.1626182580.386.513.jpg?c=1',
+    productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-foil-modern-masters-2015-edition/?sku=EMM2-3665M',
+    expansion: 'Modern Masters 2015 Edition',
+    price_relativeUnits: 4999,
+    price_textRepresentation: '£ 49.99',
+    stock_inStock: true,
+    stock_level: '16',
+    subtitle: '',
+    isFoil: true
+  }
+];
+
+
 export const response_magicMadhouse_Tarmogoyf =
   {
     "meta": {
@@ -1108,162 +1230,4 @@ export const response_magicMadhouse_Tarmogoyf =
     }
   };
 
-export const expectedResults_magicMadhouse_Tarmogoyf =
-  [
-    {
-      name: 'Magic Madhouse',
-      logo: 'magicMadhouse 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: { text: '£ 24.99', value: 2499 },
-      stock: { value: 6, text: '6 in Stock' },
-      imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/412836/images/340135/1614956320-35642800__85690.1634574717.386.513.jpg?c=1',
-      productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-time-spiral-remastered?sku=ETSR-3235M',
-      expansion: 'Time Spiral Remastered',
-      isFoil: false
-    },
-    {
-      name: 'Magic Madhouse',
-      logo: 'magicMadhouse 150x60.png',
-      title: 'Tarmogoyf (Box Topper Promo)',
-      subtitle: '',
-      price: { text: '£ 74.99', value: 7499 },
-      stock: { value: 4, text: '4 in Stock' },
-      imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/214924/images/85332/1541604876-67255000__38712.1624916261.386.513.jpg?c=1',
-      productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-box-topper-promo-ultimate-masters/?sku=EUMA-3U19M',
-      expansion: 'Ultimate Masters',
-      isFoil: false
-    },
-    {
-      name: 'Magic Madhouse',
-      logo: 'magicMadhouse 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: { text: '£ 34.99', value: 3499 },
-      stock: { value: 3, text: '3 in Stock' },
-      imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/412835/images/221832/1488640328-17351200__59149.1626190633.386.513.jpg?c=1',
-      productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-modern-masters-2017-edition/?sku=EMM3-3141M',
-      expansion: 'Modern Masters 2017 Edition',
-      isFoil: false
-    },
-    {
-      name: 'Magic Madhouse',
-      logo: 'magicMadhouse 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: { text: '£ 34.99', value: 3499 },
-      stock: { value: 8, text: '8 in Stock' },
-      imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/412833/images/196460/1422030797-32261000__05993.1626179419.386.513.jpg?c=1',
-      productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-modern-masters/?sku=EMMA-3166M',
-      expansion: 'Modern Masters',
-      isFoil: false
-    },
-    {
-      name: 'Magic Madhouse',
-      logo: 'magicMadhouse 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: { text: '£ 44.99', value: 4499 },
-      stock: { value: 13, text: '13 in Stock' },
-      imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/412832/images/199628/1422444276-95411900__66758.1626180510.386.513.jpg?c=1',
-      productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-future-sight/?sku=EFUT-2153R',
-      expansion: 'Future Sight',
-      isFoil: false
-    },
-    {
-      name: 'Magic Madhouse',
-      logo: 'magicMadhouse 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: { text: '£ 34.99', value: 3499 },
-      stock: { value: 5, text: '5 in Stock' },
-      imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/412834/images/204331/1431109097-99087300__17129.1626182505.386.513.jpg?c=1',
-      productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-modern-masters-2015-edition/?sku=EMM2-3165M',
-      expansion: 'Modern Masters 2015 Edition',
-      isFoil: false
-    },
-    {
-      name: 'Magic Madhouse',
-      logo: 'magicMadhouse 150x60.png',
-      title: 'Tarmogoyf (foil)',
-      subtitle: '',
-      price: { text: '£ 44.99', value: 4499 },
-      stock: { value: 1, text: '1 in Stock' },
-      imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/412830/images/222137/1489596266-46183200__43426.1626190765.386.513.jpg?c=1',
-      productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-foil-modern-masters-2017-edition/?sku=EMM3-2641M',
-      expansion: 'Modern Masters 2017 Edition',
-      isFoil: true
-    },
-    {
-      name: 'Magic Madhouse',
-      logo: 'magicMadhouse 150x60.png',
-      title: 'Tarmogoyf (foil)',
-      subtitle: '',
-      price: { text: '£ 39.99', value: 3999 },
-      stock: { value: 2, text: '2 in Stock' },
-      imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/412831/images/344089/1615396223-07174800__76163.1634677072.386.513.jpg?c=1',
-      productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-foil-time-spiral-remastered?sku=ETSR-3735M',
-      expansion: 'Time Spiral Remastered',
-      isFoil: true
-    },
-    {
-      name: 'Magic Madhouse',
-      logo: 'magicMadhouse 150x60.png',
-      title: 'Tarmogoyf (foil)',
-      subtitle: '',
-      price: { text: '£ 49.99', value: 4999 },
-      stock: { value: 16, text: '16 in Stock' },
-      imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/412829/images/204550/1431109856-94954300__25521.1626182580.386.513.jpg?c=1',
-      productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-foil-modern-masters-2015-edition/?sku=EMM2-3665M',
-      expansion: 'Modern Masters 2015 Edition',
-      isFoil: true
-    },
-    {
-      name: 'Magic Madhouse',
-      logo: 'magicMadhouse 150x60.png',
-      title: 'Tarmogoyf',
-      subtitle: '',
-      price: { text: '£ 29.99', value: 2999 },
-      stock: { value: 0, text: 'Out of Stock' },
-      imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/214579/images/85129/1541605628-80452500__32920.1624916116.386.513.jpg?c=1',
-      productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-ultimate-masters/?sku=EUMA-3187M',
-      expansion: 'Ultimate Masters',
-      isFoil: false
-    },
-    {
-      name: 'Magic Madhouse',
-      logo: 'magicMadhouse 150x60.png',
-      title: 'Tarmogoyf (foil)',
-      subtitle: '',
-      price: { text: '£ 499.99', value: 49999 },
-      stock: { value: 0, text: 'Out of Stock' },
-      imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/412827/images/199754/1422444791-11436700__85135.1626180556.386.513.jpg?c=1',
-      productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-foil-future-sight/?sku=EFUT-3653R',
-      expansion: 'Future Sight',
-      isFoil: true
-    },
-    {
-      name: 'Magic Madhouse',
-      logo: 'magicMadhouse 150x60.png',
-      title: 'Tarmogoyf (foil)',
-      subtitle: '',
-      price: { text: '£ 79.99', value: 7999 },
-      stock: { value: 0, text: 'Out of Stock' },
-      imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/412828/images/196664/1422030875-68241900__32896.1626179487.386.513.jpg?c=1',
-      productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-foil-modern-masters/?sku=EMMA-3666M',
-      expansion: 'Modern Masters',
-      isFoil: true
-    },
-    {
-      name: 'Magic Madhouse',
-      logo: 'magicMadhouse 150x60.png',
-      title: 'Tarmogoyf (foil)',
-      subtitle: '',
-      price: { text: '£ 49.99', value: 4999 },
-      stock: { value: 0, text: 'Out of Stock' },
-      imgSrc: 'https://cdn11.bigcommerce.com/s-b4ioc4fed9/products/214838/images/85277/1544023657-81445400__65758.1624916223.386.513.jpg?c=1',
-      productRef: 'https://magicmadhouse.co.uk/magic-the-gathering-tarmogoyf-foil-ultimate-masters/?sku=EUMA-3687M',
-      expansion: 'Ultimate Masters',
-      isFoil: true
-    }
-  ];
+

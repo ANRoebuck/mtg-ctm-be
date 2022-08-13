@@ -6971,9 +6971,10 @@ export const expectedResults_nerdShak_WateryGrave =
       imgSrc: '//cdn.shopify.com/s/files/1/0375/7726/1115/products/38604307-021f-4e17-8f5b-43350726471b_large.jpg?v=1620792029',
       productRef: 'https://nerdshak.com/products/watery-grave-guilds-of-ravnica-promos?_pos=4&_sid=af25b038e&_ss=r',
       expansion: '\n\nGuilds of Ravnica Promos',
-      price: { text: '£19.00', value: 1900 },
-      stock: { text: 'In Stock', value: 1 },
-      subtitle: 'Near Mint Foil',
+      price_relativeUnits: 1900,
+      price_textRepresentation: "£ 19.00",
+      stock_inStock: true,
+      stock_level: 1,
       isFoil: true,
       name: 'Nerd Shak',
       logo: 'nerdShak 150x60.jpg'

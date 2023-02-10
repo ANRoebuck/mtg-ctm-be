@@ -1,6 +1,7 @@
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 import PriceGetter_Axion from './PriceGetter_Axion';
 import PriceGetter_BigOrbitCards from './PriceGetter_BigOrbitCards';
+import PriceGetter_DiceSaloon from './PriceGetter_DiceSaloon';
 import PriceGetter_Hareruya from './PriceGetter_Hareruya';
 import PriceGetter_Harlequins from './PriceGetter_Harlequins';
 import PriceGetter_HighlanderGames from './PriceGetter_HighlanderGames';
@@ -21,6 +22,7 @@ export {
     AbstractPriceGetter,
     PriceGetter_Axion,
     PriceGetter_BigOrbitCards,
+    PriceGetter_DiceSaloon,
     PriceGetter_Hareruya,
     PriceGetter_Harlequins,
     PriceGetter_HighlanderGames,

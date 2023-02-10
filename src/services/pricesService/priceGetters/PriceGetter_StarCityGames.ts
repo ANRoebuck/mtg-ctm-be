@@ -2,11 +2,12 @@ import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 
+const sellerName = 'Star City Games';
 
 class PriceGetter_StarCityGames extends AbstractPriceGetter {
     constructor() {
         super({
-            name: 'Star City Games',
+            name: sellerName,
             dataGetter: new DataGetter_StarCityGames(),
             dataProcessor: new DataProcessor_StarCityGames(),
         });
@@ -49,7 +50,7 @@ class DataGetter_StarCityGames extends AbstractDataGetter {
 class DataProcessor_StarCityGames extends AbstractHtmlDataProcessor {
     constructor() {
         super({
-            seller: 'Star City Games',
+            seller: sellerName,
             currencyCode: 'USD',
 
             resultSelector: 'div > div.hawk-results-item',

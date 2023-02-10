@@ -2,11 +2,12 @@ import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 
+const sellerName = 'Highlander Games';
 
 class PriceGetter_HighlanderGames extends AbstractPriceGetter {
     constructor() {
         super({
-            name: 'Highlander Games',
+            name: sellerName,
             dataGetter: new DataGetter_HighlanderGames(),
             dataProcessor: new DataProcessor_HighlanderGames(),
         });
@@ -27,7 +28,7 @@ class DataGetter_HighlanderGames extends AbstractDataGetter {
 class DataProcessor_HighlanderGames extends AbstractHtmlDataProcessor {
     constructor() {
         super({
-            seller: 'Highlander Games',
+            seller: sellerName,
             currencyCode: 'GBP',
 
             resultSelector: 'div.grid-uniform > div.grid-item',

@@ -2,6 +2,7 @@ import {
     AbstractPriceGetter,
     PriceGetter_Axion,
     PriceGetter_BigOrbitCards,
+    PriceGetter_DiceSaloon,
     PriceGetter_Hareruya,
     PriceGetter_Harlequins,
     PriceGetter_HighlanderGames,
@@ -22,6 +23,7 @@ import {
 const priceGettersArray = [
     new PriceGetter_Axion(),
     new PriceGetter_BigOrbitCards(),
+    new PriceGetter_DiceSaloon(),
     new PriceGetter_Hareruya(),
     new PriceGetter_Harlequins(),
     new PriceGetter_HighlanderGames(),

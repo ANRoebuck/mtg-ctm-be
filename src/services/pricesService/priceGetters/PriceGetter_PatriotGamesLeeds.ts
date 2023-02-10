@@ -2,11 +2,12 @@ import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor, Stock } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 
+const sellerName = 'Patriot Games Leeds';
 
 class PriceGetter_PatriotGamesLeeds extends AbstractPriceGetter {
     constructor() {
         super({
-            name: 'Patriot Games Leeds',
+            name: sellerName,
             dataGetter: new DataGetter_PatriotGamesLeeds(),
             dataProcessor: new DataProceesor_PatriotGamesLeeds(),
         });
@@ -27,7 +28,7 @@ class DataGetter_PatriotGamesLeeds extends AbstractDataGetter {
 class DataProceesor_PatriotGamesLeeds extends AbstractHtmlDataProcessor {
     constructor() {
         super({
-            seller: 'Patriot Games Leeds',
+            seller: sellerName,
             currencyCode: 'GBP',
 
             resultSelector: '#productListing > table > tbody> tr',

@@ -2,11 +2,12 @@ import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 
+const sellerName = 'Big Orbit Cards';
 
 class PriceGetter_BigOrbitCards extends AbstractPriceGetter {
     constructor() {
         super({
-            name: 'Big Orbit Cards',
+            name: sellerName,
             dataGetter: new DataGetter_BigOrbitCards(),
             dataProcessor: new DataProcesor_BigOrbitCards(),
         });
@@ -27,7 +28,7 @@ class DataGetter_BigOrbitCards extends AbstractDataGetter {
 class DataProcesor_BigOrbitCards extends AbstractHtmlDataProcessor {
     constructor() {
         super({
-            seller: 'Big Orbit Cards',
+            seller: sellerName,
             currencyCode: 'GBP',
 
             resultSelector: 'div > div.ty-pagination-container > div.ty-compact-list > div.ty-compact-list__item',

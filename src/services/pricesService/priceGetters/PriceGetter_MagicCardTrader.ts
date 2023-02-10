@@ -2,11 +2,12 @@ import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 
+const sellerName = 'Magic Card Trader';
 
 class PriceGetter_MagicCardTrader extends AbstractPriceGetter {
     constructor() {
         super({
-            name: 'Magic Card Trader',
+            name: sellerName,
             dataGetter: new DataGetter_MagicCardTrader(),
             dataProcessor: new DataProcessor_MagicCardTrader(),
         });
@@ -27,7 +28,7 @@ class DataGetter_MagicCardTrader extends AbstractDataGetter {
 class DataProcessor_MagicCardTrader extends AbstractHtmlDataProcessor {
     constructor() {
         super({
-            seller: 'Magic Card Trader',
+            seller: sellerName,
             currencyCode: 'GBP',
 
             resultSelector: 'div.products-container > ul > li',

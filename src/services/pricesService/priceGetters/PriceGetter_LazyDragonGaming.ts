@@ -2,11 +2,12 @@ import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor, Stock } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 
+const sellerName = 'Lazy Dragon Gaming';
 
 class PriceGetter_LazyDragonGaming extends AbstractPriceGetter {
     constructor() {
         super({
-            name: 'Lazy Dragon Gaming',
+            name: sellerName,
             dataGetter: new DataGetter_LazyDragonGaming(),
             dataProcessor: new DataProcessor_LazyDragonGaming(),
         });
@@ -27,7 +28,7 @@ class DataGetter_LazyDragonGaming extends AbstractDataGetter {
 class DataProcessor_LazyDragonGaming extends AbstractHtmlDataProcessor {
     constructor() {
         super({
-            seller: 'Lazy Dragon Gaming',
+            seller: sellerName,
             currencyCode: 'GBP',
 
             resultSelector: 'div.collectionGrid > div.productCard__card',

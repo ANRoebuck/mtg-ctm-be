@@ -2,11 +2,12 @@ import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 
+const sellerName = 'Mountbatten Collectables';
 
 class PriceGetter_MountbattenCollectables extends AbstractPriceGetter {
     constructor() {
         super({
-            name: 'Mountbatten Collectables',
+            name: sellerName,
             dataGetter: new DataGetter_MountbattenCollectables(),
             dataProcessor: new DataProcessor_MountbattenCollectables(),
         });
@@ -27,7 +28,7 @@ class DataGetter_MountbattenCollectables extends AbstractDataGetter {
 class DataProcessor_MountbattenCollectables extends AbstractHtmlDataProcessor {
     constructor() {
         super({
-            seller: 'Mountbatten Collectables',
+            seller: sellerName,
             currencyCode: 'GBP',
 
             resultSelector: 'ul.products > li.product',

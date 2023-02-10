@@ -2,11 +2,12 @@ import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 
+const sellerName = 'Axion Now';
 
 class PriceGetter_Axion extends AbstractPriceGetter {
     constructor() {
         super({
-            name: 'Axion Now',
+            name: sellerName,
             dataGetter: new DataGetter_Axion(),
             dataProcessor: new DataProcessor_Axion(),
         });
@@ -27,7 +28,7 @@ class DataGetter_Axion extends AbstractDataGetter {
 class DataProcessor_Axion extends AbstractHtmlDataProcessor {
     constructor() {
         super({
-            seller: 'Axion Now',
+            seller: sellerName,
             currencyCode: 'GBP',
 
             resultSelector: 'ul.products > li.product',

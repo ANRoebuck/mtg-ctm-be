@@ -4,11 +4,12 @@ import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 import { Price } from '../../../types/Price';
 import currencyService from '../../currencyService/CurrencyService';
 
+const sellerName = 'Magic Madhouse';
 
 class PriceGetter_MagicMadhouse extends AbstractPriceGetter {
     constructor() {
         super({
-            name: 'Magic Madhouse',
+            name: sellerName,
             dataGetter: new DataGetter_MagicMadhouse(),
             dataProcessor: new DataProcessor_MagicMadhouse(),
         });
@@ -33,7 +34,7 @@ class DataProcessor_MagicMadhouse extends AbstractJsonDataProcessor {
 
     constructor() {
         super();
-        this.seller = 'Magic Madhouse';
+        this.seller = sellerName;
         this.currencyCode = 'GBP';
     }
 

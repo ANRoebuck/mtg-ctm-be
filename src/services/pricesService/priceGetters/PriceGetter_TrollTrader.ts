@@ -2,11 +2,12 @@ import AbstractDataGetter from './abstract/AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
 import AbstractPriceGetter from './abstract/AbstractPriceGetter';
 
+const sellerName = 'Troll Trader';
 
 class PriceGetter_TrollTrader extends AbstractPriceGetter {
     constructor() {
         super({
-            name: 'Troll Trader',
+            name: sellerName,
             dataGetter: new DataGetter_TrollTrader(),
             dataProcessor: new DataProcessor_TrollTrader(),
         });
@@ -27,7 +28,7 @@ class DataGetter_TrollTrader extends AbstractDataGetter {
 class DataProcessor_TrollTrader extends AbstractHtmlDataProcessor {
     constructor() {
         super({
-            seller: 'Troll Trader',
+            seller: sellerName,
             currencyCode: 'GBP',
 
             resultSelector: 'div.products-container > ul > li.product',

@@ -1,5 +1,5 @@
 import { Price } from '../types/Price';
-import pricesService from "../services/pricesService/PricesService";
+import pricesService from '../services/pricesService/PricesService';
 
 
 const getPrices = async (seller: string, searchTerm: string): Promise<Price[]> => {

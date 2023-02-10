@@ -123,6 +123,8 @@ export class AbstractHtmlDataProcessor implements AbstractDataProcessor {
 
         });
 
+        // console.log(processedResults);
+
         return processedResults;
 
     }

@@ -12,10 +12,12 @@ import PriceGetter_Manaleak from './PriceGetter_Manaleak';
 import PriceGetter_MountbattenCollectables from './PriceGetter_MountbattenCollectables';
 import PriceGetter_NerdShak from './PriceGetter_NerdShak';
 import PriceGetter_PatriotGamesLeeds from './PriceGetter_PatriotGamesLeeds';
+import PriceGetter_SkywardFire from './PriceGetter_SkywardFire';
 import PriceGetter_StarCityGames from './PriceGetter_StarCityGames';
 import PriceGetter_TrollTrader from './PriceGetter_TrollTrader';
 
 export {
+    AbstractPriceGetter,
     PriceGetter_Axion,
     PriceGetter_BigOrbitCards,
     PriceGetter_Hareruya,
@@ -29,6 +31,7 @@ export {
     PriceGetter_MountbattenCollectables,
     PriceGetter_NerdShak,
     PriceGetter_PatriotGamesLeeds,
+    PriceGetter_SkywardFire,
     PriceGetter_StarCityGames,
     PriceGetter_TrollTrader,
 }

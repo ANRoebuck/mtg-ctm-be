@@ -3,6 +3,7 @@ import PriceGetter_Axion from './PriceGetter_Axion';
 import PriceGetter_BigOrbitCards from './PriceGetter_BigOrbitCards';
 import PriceGetter_Hareruya from './PriceGetter_Hareruya';
 import PriceGetter_Harlequins from './PriceGetter_Harlequins';
+import PriceGetter_HighlanderGames from './PriceGetter_HighlanderGames';
 import PriceGetter_LazyDragonGaming from './PriceGetter_LazyDragonGaming';
 import PriceGetter_LondonMagicTraders from './PriceGetter_LondonMagicTraders';
 import PriceGetter_LvlUp from './PriceGetter_LvlUp';
@@ -22,6 +23,7 @@ export {
     PriceGetter_BigOrbitCards,
     PriceGetter_Hareruya,
     PriceGetter_Harlequins,
+    PriceGetter_HighlanderGames,
     PriceGetter_LazyDragonGaming,
     PriceGetter_LondonMagicTraders,
     PriceGetter_LvlUp,

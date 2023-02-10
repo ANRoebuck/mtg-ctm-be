@@ -4,6 +4,7 @@ import {
     PriceGetter_BigOrbitCards,
     PriceGetter_Hareruya,
     PriceGetter_Harlequins,
+    PriceGetter_HighlanderGames,
     PriceGetter_LazyDragonGaming,
     PriceGetter_LondonMagicTraders,
     PriceGetter_LvlUp,
@@ -18,27 +19,28 @@ import {
     PriceGetter_TrollTrader
 } from './';
 
+const priceGettersArray = [
+    new PriceGetter_Axion(),
+    new PriceGetter_BigOrbitCards(),
+    new PriceGetter_Hareruya(),
+    new PriceGetter_Harlequins(),
+    new PriceGetter_HighlanderGames(),
+    new PriceGetter_LazyDragonGaming(),
+    new PriceGetter_LondonMagicTraders(),
+    new PriceGetter_LvlUp(),
+    new PriceGetter_MagicCardTrader(),
+    new PriceGetter_MagicMadhouse(),
+    new PriceGetter_Manaleak(),
+    new PriceGetter_MountbattenCollectables(),
+    new PriceGetter_NerdShak(),
+    new PriceGetter_PatriotGamesLeeds(),
+    new PriceGetter_SkywardFire(),
+    new PriceGetter_StarCityGames(),
+    new PriceGetter_TrollTrader(),
+];
 
 const configurePriceGetters = (): { [key: string]: AbstractPriceGetter } => {
-    const priceGettersArray = [
-        new PriceGetter_Axion(),
-        new PriceGetter_BigOrbitCards(),
-        new PriceGetter_Hareruya(),
-        new PriceGetter_Harlequins(),
-        new PriceGetter_LazyDragonGaming(),
-        new PriceGetter_LondonMagicTraders(),
-        new PriceGetter_LvlUp(),
-        new PriceGetter_MagicCardTrader(),
-        new PriceGetter_MagicMadhouse(),
-        new PriceGetter_Manaleak(),
-        new PriceGetter_MountbattenCollectables(),
-        new PriceGetter_NerdShak(),
-        new PriceGetter_PatriotGamesLeeds(),
-        new PriceGetter_SkywardFire(),
-        new PriceGetter_StarCityGames(),
-        new PriceGetter_TrollTrader(),
-    ];
-
+    
     const priceGetters = priceGettersArray.reduce((acc: { [key: string]: AbstractPriceGetter }, ele : AbstractPriceGetter) => {
         acc[ele.name] = ele;
         return acc;

@@ -83,12 +83,15 @@ export class AbstractHtmlDataProcessor implements AbstractDataProcessor {
 
         const resultNodes: Element[] = this.dataToResultsArray(rawData);
 
+        // console.log(resultNodes);
+
         resultNodes.forEach(resultNode => {
 
             const subresultNodes: Element[] = this.useSubResults
                 ? this.subresultsFromResultNode(resultNode) : [resultNode];
 
             const title = this.titleFromResultNode(resultNode);
+            console.log(title);
             const imgSrc = this.imgSrcFromResultNode(resultNode);
             const productRef = this.productRefFromResultNode(resultNode);
             const expansion = this.expansionFromResultNode(resultNode);
@@ -123,7 +126,7 @@ export class AbstractHtmlDataProcessor implements AbstractDataProcessor {
 
         });
 
-        // console.log(processedResults);
+        console.log(processedResults);
 
         return processedResults;
 

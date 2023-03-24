@@ -83,29 +83,32 @@ export class AbstractHtmlDataProcessor implements AbstractDataProcessor {
 
         const resultNodes: Element[] = this.dataToResultsArray(rawData);
 
-        // console.log(resultNodes);
-
         resultNodes.forEach(resultNode => {
 
             const subresultNodes: Element[] = this.useSubResults
                 ? this.subresultsFromResultNode(resultNode) : [resultNode];
 
             const title = this.titleFromResultNode(resultNode);
-            console.log(title);
             const imgSrc = this.imgSrcFromResultNode(resultNode);
             const productRef = this.productRefFromResultNode(resultNode);
             const expansion = this.expansionFromResultNode(resultNode);
 
             subresultNodes.forEach((subresult : Element) => {
 
+                const stock = this.stockFromResultNode(subresult);
+                if(!stock.inStock) return;
+
                 const price_minorUnits = this.priceFromResultNode(subresult);
                 const price_majorUnits = currencyService.minorUnitsToMajorUnits(price_minorUnits, this.currencyCode);
                 const price_relativeUnits = currencyService.minorUnitsToRelativeUnits(price_minorUnits, this.currencyCode);
                 const price_textRepresentation = currencyService.majorUnitsToTextRepresentation(price_majorUnits, this.currencyCode);
-                const stock = this.stockFromResultNode(subresult);
+                
                 const subtitle = this.useSubResults ? this.subtitleFromResultNode(subresult) : '';
-                const isFoil = this.isFoilFromTitle(title)
+                
+                const isFoil =
+                       this.isFoilFromTitle(title)
                     || this.isFoilFromTitle(subtitle)
+                    || this.isFoilFromTitle(expansion)
                     || this.isFoilFromResultNode(subresult);
 
                 processedResults.push({
@@ -126,7 +129,7 @@ export class AbstractHtmlDataProcessor implements AbstractDataProcessor {
 
         });
 
-        console.log(processedResults);
+        // console.log(processedResults);
 
         return processedResults;
 
@@ -141,18 +144,6 @@ export class AbstractHtmlDataProcessor implements AbstractDataProcessor {
     subresultsFromResultNode = (resultNode: Element): Element[] => [...resultNode.querySelectorAll(this.subresultSelector)];
 
 
-    priceFromResultNode = (resultNode: Element): number => [...resultNode.querySelectorAll(this.priceSelector)]
-        .map((node: Element): number => this.priceValueFromPriceText(node.innerHTML))[0] || 0;
-
-
-    titleFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.titleSelector)]
-        .map((node: Element): string => stripWhitespace(node.innerHTML))[0] || '';
-
-
-    subtitleFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.subtitleSelector)]
-        .map((node: Element): string => stripWhitespace(this.subtitleFromText(node.innerHTML)))[0] || '';
-
-
     stockFromResultNode = (resultNode: Element): Stock => [...resultNode.querySelectorAll(this.stockSelector)]
         .map((node: Element): Stock => {
             const value = this.stockValueFromStockText(node.innerHTML);
@@ -163,24 +154,37 @@ export class AbstractHtmlDataProcessor implements AbstractDataProcessor {
         })[0] || { inStock: false, level: 0 };
 
 
+    priceFromResultNode = (resultNode: Element): number => [...resultNode.querySelectorAll(this.priceSelector)]
+        .map((node: Element): number => this.priceValueFromPriceText(node.innerHTML))[0] || 0;
+
+
+    titleFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.titleSelector)]
+        .map((node: Element): string => this.stripWhitespace(node.innerHTML))[0] || '';
+
+
+    subtitleFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.subtitleSelector)]
+        .map((node: Element): string => this.stripWhitespace(this.subtitleFromText(node.innerHTML)))[0] || '';
+
+
     imgSrcFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.imgSelector)]
         .map((node: Element): string => this.imgBaseUrl + node.getAttribute(this.imgSrcAttribute))[0] || '';
 
 
     productRefFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.productSelector)]
-        .map((node: Element): string => this.productBaseUrl + stripWhitespace(node.getAttribute(this.productRefAttribute) || ''))[0] || '';
+        .map((node: Element): string => this.productBaseUrl + this.stripWhitespace(node.getAttribute(this.productRefAttribute) || ''))[0] || '';
 
 
     expansionFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.expansionSelector)]
-        .map((node: Element): string => stripWhitespace(node.innerHTML))[0] || '';
+        .map((node: Element): string => this.stripWhitespace(node.innerHTML))[0] || '';
 
 
     isFoilFromTitle = (title: string): boolean => title.toLowerCase().includes('foil');
     isFoilFromResultNode = (resultNode: Element): boolean => [...resultNode.querySelectorAll(this.isFoilSelector)]
             .map((node: Element): boolean => this.isFoilFromTitle(node.innerHTML.toLowerCase()))[0] || false;
-}
 
-const stripWhitespace = (str: string) : string => str.replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);
+
+    stripWhitespace = (str: string) : string => str.replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);
+}
 
 interface HtmlProcoessorArgs {
     seller: string,

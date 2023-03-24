@@ -10,6 +10,7 @@ import PriceGetter_LondonMagicTraders from './PriceGetter_LondonMagicTraders';
 import PriceGetter_LvlUp from './PriceGetter_LvlUp';
 import PriceGetter_MagicCardTrader from './PriceGetter_MagicCardTrader';
 import PriceGetter_MagicMadhouse from './PriceGetter_MagicMadhouse';
+import PriceGetter_ManaGaming from './PriceGetter_ManaGaming';
 import PriceGetter_Manaleak from './PriceGetter_Manaleak';
 import PriceGetter_MountbattenCollectables from './PriceGetter_MountbattenCollectables';
 import PriceGetter_NerdShak from './PriceGetter_NerdShak';
@@ -31,6 +32,7 @@ export {
     PriceGetter_LvlUp,
     PriceGetter_MagicCardTrader,
     PriceGetter_MagicMadhouse,
+    PriceGetter_ManaGaming,
     PriceGetter_Manaleak,
     PriceGetter_MountbattenCollectables,
     PriceGetter_NerdShak,

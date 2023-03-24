@@ -31,8 +31,7 @@ class AbstractPriceGetter {
 
         const validResults = foundItems
             .filter(result => strongMatch(result.title, sanitisedSearchTerm))
-            .filter(result => excludeArtCard(result.title))
-            .filter(result => result.stock_inStock);
+            .filter(result => excludeArtCard(result.title));
 
         // console.log(rawData);
         // console.log(validResults);

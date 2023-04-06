@@ -17,4 +17,4 @@ app.use('/api', apiRouter);
 app.use('/*', errHandleInvalidEnpoint);
 app.use(errHandleCustom);
 
-app.listen(process.env.PORT || 5000, () => console.log('Server running'));
+app.listen(process.env.PORT || 5001, () => console.log('Server running'));

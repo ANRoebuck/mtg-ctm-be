@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html class="ie ie6"  lang="en"> <![endif]--><!--[if IE 7 ]>    <html class="ie ie7"  lang="en"> <![endif]--><!--[if IE 8 ]>    <html class="ie ie8"  lang="en"> <![endif]--><!--[if IE 9 ]>    <html class="ie ie9"  lang="en"> <![endif]--><!--[if gt IE 9]><!--><html lang="en">
+<!--<![endif]-->
+  <head data-hook="inside_head">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+<title>Dice Saloon Singles</title>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="https://www.dicesaloonsingles.com/products/?keywords=tarmogoyf&search[in_stock][]=true" rel="canonical" />
+<link rel="shortcut icon" type="image/x-icon" href="/assets/favicon-8a7bc546ae2f861cde3f54852714d37a5ec2b011792ac92260dbf7957cb79c06.ico" />
+<link rel="stylesheet" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" media="all" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" />
+<link rel="stylesheet" media="screen" href="/assets/spree/frontend/all-2ce4644f9a87fd6d9f127b956dd44fced1997063d8c053ad7b2410cf1c9e9faa.css" />
+<link rel="stylesheet" media="all" href="/assets/spree/frontend/spree_dicesaloon_theme-85c83f31e805dd96b0766667574a9f2ee7daf78139ca6bbefd4e64b5095522c9.css" />
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="wQpep90GoeOwvRyYt4Vf8O6284PP7nuv6BXu9X9zdRTe/Q2KzK6lZztJNiYpps3tpBvvmesPUXNC5l7M7L8wPQ==" />
+<script>
+  SpreePaths = {"mounted_at":"/","admin":"admin/"}
+</script>
+
+<script src="/assets/spree/frontend/all-a9bff8e82eeb0126562f0931f53e91b7b155cb4ebdf218b315b1cccfd1d9fc19.js"></script>
+<script src="/assets/spree/frontend/spree_dicesaloon_theme-f75758c3ab6f23874d6495c54bf91601a0a58fc2deafc3a997b05e925e00915c.js" media="all"></script>
+<!--[if lt IE 9]>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6/html5shiv.min.js"></script>
+<![endif]-->
+
+
+<script>
+  Spree.translations = {"coupon_code_applied":"The coupon code was successfully applied to your order."}
+</script>
+
+
+  <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/f5a4a11df5db5a6511e7f6e81/5898475229f1fbf5ed9e62040.js");</script>
+</head>
+  <body class="two-col" id="default" data-hook="body">
+      <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-135466055-2', 'auto');
+
+    ga('require', 'displayfeatures');
+    
+    ga('send', 'pageview');
+  </script>
+
+    
+    <div id="spree-header">
+  <header id="header" data-hook>
+    <div class="container-fluid theme-container relative">
+      <div class="row no-margin">
+        <figure id="logo" class="pull-left" data-hook>
+          <a href="/"><img src="/assets/logo/logo-black-ed7c2adf5f46986ddaebe81ecebb68eb8b541758a6f39a5a60708a4fe6370985.svg" alt="Logo black" /></a>
+        </figure>
+
+        <nav id="top-nav-bar">
+  <ul class="list-unstyled" data-hook="top-nav-bar">
+          
+    <li ><a href="/products">Singles</a></li>
+
+    
+    <li ><a href="/t/magic-the-gathering/sealed-product">Sealed Product</a></li>
+
+    
+    <li ><a href="/events">Events</a></li>
+
+
+
+  <li id="link-to-login"><a href="/login">Login</a></li>
+
+    <li id="main-nav-bar" class="inline-block" data-hook>
+  <div id="link-to-cart" data-hook>
+    <noscript>
+      <a class="cart-info empty" href="/cart"><span class='glyphicon glyphicon-shopping-cart'></span> Cart: (Empty)</a>
+    </noscript>
+  </div>
+  <script>Spree.fetch_cart()</script>
+</li>
+ <!-- this is the cart link -->
+    <script>
+  //Removed async call to add in account links. Added to menu directly.
+  //if(typeof Spree.fetch_account !== 'undefined') Spree.fetch_account()
+</script>
+<li id="search-bar" data-hook>
+<script>
+    $(document).ready(function() {
+        if(typeof Spree.typeaheadSearch !== 'undefined') Spree.typeaheadSearch();
+    });
+</script>
+
+  
+<li>
+  <!-- commented out to render in the theme gem -->
+</li>
+</ul>
+</nav>
+
+
+<form class="header-search form-inline" id="navbar_products_search" action="/products" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
+  <div class="serach-form-section">
+    <div class="form-group">
+        <select name="taxon" id="taxon" aria-label="Taxon" class="form-control" style="max-width: 150px;"><option value="">All departments</option>
+<option value="1">Magic the Gathering</option>
+<option value="243">Events</option></select>
+    </div>
+    <div class="form-group keyword-form-group">
+      <input type="search" name="keywords" id="keywords" value="tarmogoyf" placeholder="Search" class="form-control" />
+    </div>
+  </div>
+  <label class="btn btn-unite btn-search">
+    <i class="fa fa-search"></i>
+    <input type="submit" value="Search" class="hide" data-disable-with="Search" />
+  </label>
+  <label class="btn btn-unite btn-helper" for="keywords">
+    <i class="fa fa-search"></i>
+  </label>
+  <label class="btn btn-unite btn-close" for="keywords">
+    <i class="fa fa-close"></i>
+  </label><script>
+    $(document).ready(function() {
+        if(typeof Spree.typeaheadSearch !== 'undefined') Spree.typeaheadSearch();
+    });
+</script>
+
+</form>
+
+
+        
+        <div class="unite-menu">
+          <ul class="unite-menu-list">
+                  
+    <li ><a href="/products">Singles</a></li>
+
+    
+    <li ><a href="/t/magic-the-gathering/sealed-product">Sealed Product</a></li>
+
+    
+    <li ><a href="/events">Events</a></li>
+
+
+
+  <li id="link-to-login"><a href="/login">Login</a></li>
+
+          </ul>
+        </div>
+        <div class="unite-menu-handler">
+          <span class="one"></span>
+          <span class="two"></span>
+          <span class="three"></span>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+
+<script type="text/javascript">
+
+  $(function(){
+    $(".unite-menu-handler").click(function(){
+      $("body").toggleClass( "main-menu-active");
+    })
+    $(".header-search .btn-helper").click(function(){
+      $("body").addClass( "serach-header-active");
+      $(".unite-overlay").addClass('search-active-overlay');
+      $(".header-search").addClass('active');
+    })
+
+    $("body").on('click', '.search-active-overlay', function(){
+      $("body").removeClass( "serach-header-active");
+      $(".unite-overlay").removeClass('search-active-overlay');
+      $(".header-search").removeClass('active');     
+    })
+    $(".header-search .btn-close").click(function(){
+      $(".header-search").removeClass('active');
+    })
+  })
+</script>
+
+
+    <div id="fixed-header-helper"></div>
+
+    <div class="main-container container-fluid theme-container">
+      <div class="row" data-hook>
+
+
+        
+
+        <aside id="sidebar" class="col-sm-3 col-md-2" data-hook>
+          <div data-hook="taxon_sidebar_navigation">
+          
+<h4 id="filters-refine" class="filter-title">
+  Search Filters
+</h4>
+<div class="filters-container" id="filters-container">
+<form id="sidebar_products_search" action="" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
+    <input type="hidden" name="per_page" id="per_page" />
+    <input type="hidden" name="keywords" id="keywords" value="tarmogoyf" />
+    <input type="hidden" name="taxon" id="taxon" />
+    <input type="hidden" name="sort" id="sort" />
+
+    <div class="navigation" data-hook="filters-selection">
+      <h4 class="filter-title">Your Selection</h4>
+      <div class="filter-group-container">
+        <ul class="list-group">
+          <li class="list-group-item">Search: tarmogoyf <a class="pull-right" href="/products?search%5Bin_stock%5D%5B%5D=true">x</a></li>
+          
+                        <li class="list-group-item">in_stock: true <a class="pull-right" href="/products?&amp;keywords=tarmogoyf">x</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="navigation" data-hook="filters-keywords">
+      <h4 class="filter-title"><span class="translation_missing" title="translation missing: en.spree.esfilters.in_stock">Keyword</span></h4>
+      <div class="">
+        <div class="form-group keyword-form-group">
+            <select name="taxon" id="taxon" aria-label="Taxon" class="form-control"><option selected="selected" value="">All departments</option>
+<option value="1">Magic the Gathering</option>
+<option value="243">Events</option></select>
+          <input type="search" name="keywords" id="keywords" value="tarmogoyf" placeholder="Search" class="form-control" />
+        </div>
+    </div>
+    </div>
+
+            
+<div class="navigation" data-hook="navigation">
+  <h4 class="filter-title"><span class="translation_missing" title="translation missing: en.spree.esfilters.in_stock">In Stock</span>
+    <a class="btn " role="button" data-toggle="collapse" href="#filter-collapse-in_stock" aria-expanded="true" aria-controls="filter-collapse-in_stock"><span class="filter-collapse-in_stock glyphicon glyphicon-minus"></span></a>
+  </h4>
+  <div class="filter-group-container collapse in" id="filter-collapse-in_stock" aria-expanded="true">
+    <ul class="list-group">
+
+
+          <li class="list-group-item">
+            <input type="checkbox"
+                   id="yes"
+                   name="search[in_stock][]"
+                   value="true"
+                   checked
+            />
+            <label class="nowrap" for="yes"> yes </label>
+          </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+      $('#filter-collapse-in_stock').on('shown.bs.collapse', function (target) {
+          $(".glyphicon.filter-collapse-in_stock").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+      });
+
+      $('#filter-collapse-in_stock').on('hidden.bs.collapse', function () {
+          $(".glyphicon.filter-collapse-in_stock").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+      });
+    });
+</script>
+            
+<div class="navigation" data-hook="navigation">
+  <h4 class="filter-title"><span class="translation_missing" title="translation missing: en.spree.esfilters.price">Price</span>
+    <a class="btn " role="button" data-toggle="collapse" href="#filter-collapse-price" aria-expanded="true" aria-controls="filter-collapse-price"><span class="filter-collapse-price glyphicon glyphicon-minus"></span></a>
+  </h4>
+  <div class="filter-group-container collapse in" id="filter-collapse-price" aria-expanded="true">
+    <br/><br/>
+    <div style="width:85%;margin:auto;"><input name="slider-price" id="slider-price" type="text" /></div>
+    <input type="hidden" id="price" name="search[price]" value="" />
+  </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+      $('#filter-collapse-price').on('shown.bs.collapse', function (target) {
+          $(".glyphicon.filter-collapse-price").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+      });
+
+        $('#filter-collapse-price').on('hidden.bs.collapse', function () {
+            $(".glyphicon.filter-collapse-price").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+        });
+
+        var slider = $('#slider-price');
+        var priceOutput = $('#price');
+
+        slider.bootstrapSlider({
+            precision: 1,
+            min: 11,
+            max: 12,
+            value: [11,12],
+            tooltip: 'always',
+            formatter: function(values) {
+                return "£" + values[0] + " to £" + values[1];
+            },
+        });
+
+        slider.on('slide', function(event) {
+            console.log(event);
+            priceOutput.val('{"gte": '+event.value[0]+', "lte": '+event.value[1]+'}');
+        });
+
+        priceOutput.val(''.split("&quot;").join('"'));
+    });
+</script>
+            
+<div class="navigation" data-hook="navigation">
+  <h4 class="filter-title"><span class="translation_missing" title="translation missing: en.spree.esfilters.card rarity">Card Rarity</span>
+    <a class="btn collapsed" role="button" data-toggle="collapse" href="#filter-collapse-card_rarity" aria-expanded="false" aria-controls="filter-collapse-card_rarity"><span class="filter-collapse-card_rarity glyphicon glyphicon-plus"></span></a>
+  </h4>
+  <div class="filter-group-container collapse " id="filter-collapse-card_rarity" aria-expanded="false">
+    <ul class="list-group">
+
+
+          <li class="list-group-item">
+            <input type="checkbox"
+                   id="Mythic"
+                   name="search[card rarity][]"
+                   value="Mythic"
+                   
+            />
+            <label class="nowrap" for="Mythic"> Mythic </label>
+          </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+      $('#filter-collapse-card_rarity').on('shown.bs.collapse', function (target) {
+          $(".glyphicon.filter-collapse-card_rarity").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+      });
+
+      $('#filter-collapse-card_rarity').on('hidden.bs.collapse', function () {
+          $(".glyphicon.filter-collapse-card_rarity").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+      });
+    });
+</script>
+            
+<div class="navigation" data-hook="navigation">
+  <h4 class="filter-title"><span class="translation_missing" title="translation missing: en.spree.esfilters.foil">Foil</span>
+    <a class="btn collapsed" role="button" data-toggle="collapse" href="#filter-collapse-foil" aria-expanded="false" aria-controls="filter-collapse-foil"><span class="filter-collapse-foil glyphicon glyphicon-plus"></span></a>
+  </h4>
+  <div class="filter-group-container collapse " id="filter-collapse-foil" aria-expanded="false">
+    <ul class="list-group">
+
+
+          <li class="list-group-item">
+            <input type="checkbox"
+                   id="no"
+                   name="search[foil][]"
+                   value="no"
+                   
+            />
+            <label class="nowrap" for="no"> no </label>
+          </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+      $('#filter-collapse-foil').on('shown.bs.collapse', function (target) {
+          $(".glyphicon.filter-collapse-foil").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+      });
+
+      $('#filter-collapse-foil').on('hidden.bs.collapse', function () {
+          $(".glyphicon.filter-collapse-foil").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+      });
+    });
+</script>
+            
+<div class="navigation" data-hook="navigation">
+  <h4 class="filter-title"><span class="translation_missing" title="translation missing: en.spree.esfilters.magic set">Magic Set</span>
+    <a class="btn collapsed" role="button" data-toggle="collapse" href="#filter-collapse-magic_set" aria-expanded="false" aria-controls="filter-collapse-magic_set"><span class="filter-collapse-magic_set glyphicon glyphicon-plus"></span></a>
+  </h4>
+  <div class="filter-group-container collapse " id="filter-collapse-magic_set" aria-expanded="false">
+    <ul class="list-group">
+
+
+          <li class="list-group-item">
+            <input type="checkbox"
+                   id="Modern Masters 2015"
+                   name="search[magic set][]"
+                   value="Modern Masters 2015"
+                   
+            />
+            <label class="nowrap" for="Modern Masters 2015"> Modern Masters 2015 </label>
+          </li>
+
+
+          <li class="list-group-item">
+            <input type="checkbox"
+                   id="Modern Masters 2017"
+                   name="search[magic set][]"
+                   value="Modern Masters 2017"
+                   
+            />
+            <label class="nowrap" for="Modern Masters 2017"> Modern Masters 2017 </label>
+          </li>
+
+
+          <li class="list-group-item">
+            <input type="checkbox"
+                   id="Time Spiral: Remastered"
+                   name="search[magic set][]"
+                   value="Time Spiral: Remastered"
+                   
+            />
+            <label class="nowrap" for="Time Spiral: Remastered"> Time Spiral: Remastered </label>
+          </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+      $('#filter-collapse-magic_set').on('shown.bs.collapse', function (target) {
+          $(".glyphicon.filter-collapse-magic_set").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+      });
+
+      $('#filter-collapse-magic_set').on('hidden.bs.collapse', function () {
+          $(".glyphicon.filter-collapse-magic_set").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+      });
+    });
+</script>
+            
+<div class="navigation" data-hook="navigation">
+  <h4 class="filter-title"><span class="translation_missing" title="translation missing: en.spree.esfilters.card type">Card Type</span>
+    <a class="btn collapsed" role="button" data-toggle="collapse" href="#filter-collapse-card_type" aria-expanded="false" aria-controls="filter-collapse-card_type"><span class="filter-collapse-card_type glyphicon glyphicon-plus"></span></a>
+  </h4>
+  <div class="filter-group-container collapse " id="filter-collapse-card_type" aria-expanded="false">
+    <ul class="list-group">
+
+
+          <li class="list-group-item">
+            <input type="checkbox"
+                   id="Creature"
+                   name="search[card type][]"
+                   value="Creature"
+                   
+            />
+            <label class="nowrap" for="Creature"> Creature </label>
+          </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+      $('#filter-collapse-card_type').on('shown.bs.collapse', function (target) {
+          $(".glyphicon.filter-collapse-card_type").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+      });
+
+      $('#filter-collapse-card_type').on('hidden.bs.collapse', function () {
+          $(".glyphicon.filter-collapse-card_type").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+      });
+    });
+</script>
+            
+<div class="navigation" data-hook="navigation">
+  <h4 class="filter-title"><span class="translation_missing" title="translation missing: en.spree.esfilters.cmc">Cmc</span>
+    <a class="btn collapsed" role="button" data-toggle="collapse" href="#filter-collapse-cmc" aria-expanded="false" aria-controls="filter-collapse-cmc"><span class="filter-collapse-cmc glyphicon glyphicon-plus"></span></a>
+  </h4>
+  <div class="filter-group-container collapse " id="filter-collapse-cmc" aria-expanded="false">
+    <ul class="list-group">
+
+
+          <li class="list-group-item">
+            <input type="checkbox"
+                   id="2"
+                   name="search[cmc][]"
+                   value="2"
+                   
+            />
+            <label class="nowrap" for="2"> 2 </label>
+          </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+      $('#filter-collapse-cmc').on('shown.bs.collapse', function (target) {
+          $(".glyphicon.filter-collapse-cmc").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+      });
+
+      $('#filter-collapse-cmc').on('hidden.bs.collapse', function () {
+          $(".glyphicon.filter-collapse-cmc").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+      });
+    });
+</script>
+            
+<div class="navigation" data-hook="navigation">
+  <h4 class="filter-title"><span class="translation_missing" title="translation missing: en.spree.esfilters.color">Color</span>
+    <a class="btn collapsed" role="button" data-toggle="collapse" href="#filter-collapse-color" aria-expanded="false" aria-controls="filter-collapse-color"><span class="filter-collapse-color glyphicon glyphicon-plus"></span></a>
+  </h4>
+  <div class="filter-group-container collapse " id="filter-collapse-color" aria-expanded="false">
+    <ul class="list-group">
+
+
+          <li class="list-group-item">
+            <input type="checkbox"
+                   id="Green"
+                   name="search[color][]"
+                   value="Green"
+                   
+            />
+            <label class="nowrap" for="Green"> Green </label>
+          </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+      $('#filter-collapse-color').on('shown.bs.collapse', function (target) {
+          $(".glyphicon.filter-collapse-color").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+      });
+
+      $('#filter-collapse-color').on('hidden.bs.collapse', function () {
+          $(".glyphicon.filter-collapse-color").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+      });
+    });
+</script>
+            
+<div class="navigation" data-hook="navigation">
+  <h4 class="filter-title"><span class="translation_missing" title="translation missing: en.spree.esfilters.creature type">Creature Type</span>
+    <a class="btn collapsed" role="button" data-toggle="collapse" href="#filter-collapse-creature_type" aria-expanded="false" aria-controls="filter-collapse-creature_type"><span class="filter-collapse-creature_type glyphicon glyphicon-plus"></span></a>
+  </h4>
+  <div class="filter-group-container collapse " id="filter-collapse-creature_type" aria-expanded="false">
+    <ul class="list-group">
+
+
+          <li class="list-group-item">
+            <input type="checkbox"
+                   id="Lhurgoyf"
+                   name="search[creature type][]"
+                   value="Lhurgoyf"
+                   
+            />
+            <label class="nowrap" for="Lhurgoyf"> Lhurgoyf </label>
+          </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+      $('#filter-collapse-creature_type').on('shown.bs.collapse', function (target) {
+          $(".glyphicon.filter-collapse-creature_type").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+      });
+
+      $('#filter-collapse-creature_type').on('hidden.bs.collapse', function () {
+          $(".glyphicon.filter-collapse-creature_type").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+      });
+    });
+</script>
+
+    <br/>
+    <input type="submit" value="Search" class="btn btn-primary" data-disable-with="Search" />
+</form></div>
+<div class="filter-spacer"></div>
+        </div>
+
+</aside>
+
+
+        <div id="content" class='col-sm-9 col-md-10 col-xs-12 pull-right' data-hook>
+          
+          <div id="alert-message" class="alert alert-dismissible" role="alert" style="position: fixed; top: 20px; right: 20px; z-index:100; display:none;">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <span></span>
+          </div>
+          <div class="theme-container">
+            
+  <div data-hook="search_results">
+      
+<div class="container-fluid" style="padding: 0px 0px 10px 0px;">
+
+  <div class="pull-left" data-hook="products_search_results_heading">
+      <div data-hook="products_search_results_heading_results_found">
+        <h5 class="search-results-title">Search results for &#39;tarmogoyf&#39;</h5>
+      </div>
+  </div>
+
+    <!-- only show sort filter if not an alchemy taxon on homepage -->
+    <div class="btn-group pull-right">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Sort Products <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="/products?keywords=tarmogoyf&amp;search%5Bin_stock%5D%5B%5D=true">Best match</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="/products?keywords=tarmogoyf&amp;search%5Bin_stock%5D%5B%5D=true&amp;sort=1">Name A to Z</a></li>
+        <li><a href="/products?keywords=tarmogoyf&amp;search%5Bin_stock%5D%5B%5D=true&amp;sort=2">Name Z to A</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="/products?keywords=tarmogoyf&amp;search%5Bin_stock%5D%5B%5D=true&amp;sort=3">Price low to high</a></li>
+        <li><a href="/products?keywords=tarmogoyf&amp;search%5Bin_stock%5D%5B%5D=true&amp;sort=4">Price high to low</a></li>
+      </ul>
+    </div>
+</div>
+
+  <div id="products" class="row" data-hook>
+      <div id="product_49291" class="col-md-3 col-sm-6 col-xs-6 product-list-item" data-hook="products_list_item" itemscope itemtype="https://schema.org/Product">
+        <div class="panel panel-default">
+            <figure class="text-center figure">
+              <a itemprop="url" href="/products/tarmogoyf-modern-masters-2017">
+                <span class="img-overlay"></span>
+                <img itemprop="image" class="product-img" alt="Tarmogoyf - Modern Masters 2017" src="/spree/products/269823/large/open-uri20191004-4871-yeq6ic.?1570222803" />
+</a>            </figure>
+              
+            <div class="product-ino-bar text-center">
+              <p itemprop="offers" itemscope itemtype="https://schema.org/Offer" class="item-price">
+                <span style="font-size: 14px; display: inline-block; color: #0d1b25; -webkit-text-stroke: 0px;">from</span> <strong class="price selling" itemprop="price">&#x00A3;12.00</strong>
+                <span style="font-size: 24px;">2 In Stock</span>
+              </p>
+              <span class="info" itemprop="name" title="Tarmogoyf - Modern Masters 2017">Tarmogoyf - Modern Masters 2017</span>
+            </div>
+        </div>
+      </div>
+      <div id="product_88573" class="col-md-3 col-sm-6 col-xs-6 product-list-item" data-hook="products_list_item" itemscope itemtype="https://schema.org/Product">
+        <div class="panel panel-default">
+            <figure class="text-center figure">
+              <a itemprop="url" href="/products/tarmogoyf-time-spiral-remastered">
+                <span class="img-overlay"></span>
+                <img itemprop="image" class="product-img" alt="Tarmogoyf - Time Spiral: Remastered" src="/spree/products/312295/large/open-uri20210305-19207-2kkmyn.?1614939017" />
+</a>            </figure>
+              
+            <div class="product-ino-bar text-center">
+              <p itemprop="offers" itemscope itemtype="https://schema.org/Offer" class="item-price">
+                <span style="font-size: 14px; display: inline-block; color: #0d1b25; -webkit-text-stroke: 0px;">from</span> <strong class="price selling" itemprop="price">&#x00A3;11.00</strong>
+                <span style="font-size: 24px;">2 In Stock</span>
+              </p>
+              <span class="info" itemprop="name" title="Tarmogoyf - Time Spiral: Remastered">Tarmogoyf - Time Spiral: Remastered</span>
+            </div>
+        </div>
+      </div>
+      <div id="product_41166" class="col-md-3 col-sm-6 col-xs-6 product-list-item" data-hook="products_list_item" itemscope itemtype="https://schema.org/Product">
+        <div class="panel panel-default">
+            <figure class="text-center figure">
+              <a itemprop="url" href="/products/tarmogoyf-modern-masters-2015">
+                <span class="img-overlay"></span>
+                <img itemprop="image" class="product-img" alt="Tarmogoyf - Modern Masters 2015" src="/spree/products/273454/large/open-uri20191005-4871-140vsgx.?1570235217" />
+</a>            </figure>
+              
+            <div class="product-ino-bar text-center">
+              <p itemprop="offers" itemscope itemtype="https://schema.org/Offer" class="item-price">
+                <span style="font-size: 14px; display: inline-block; color: #0d1b25; -webkit-text-stroke: 0px;">from</span> <strong class="price selling" itemprop="price">&#x00A3;11.50</strong>
+                <span style="font-size: 24px;">3 In Stock</span>
+              </p>
+              <span class="info" itemprop="name" title="Tarmogoyf - Modern Masters 2015">Tarmogoyf - Modern Masters 2015</span>
+            </div>
+        </div>
+      </div>
+  </div>
+
+
+  </div>
+
+          </div>
+        </div>
+
+        
+      </div>
+    </div>
+        <div id="footer_9" class="footer">    <footer class="theme-footer" style="width:100vw;overflow:hidden;">
+
+      <div class="row footer-btm-row" style="padding:20px;">
+
+              <div id="footer_links_10" class="col-md-3 col-sm-6 col-xs-6">    <h4>Dice Saloon Singles</h4>
+      
+    <a href="/pages/contact">Contact Us</a><br/>
+
+</div>
+              <div id="footer_links_14" class="col-md-3 col-sm-6 col-xs-6">    <h4>Information</h4>
+      
+    <a href="/pages/condition-guide">Condition Guide</a><br/>
+
+      
+    <a href="/pages/terms-and-conditions">Terms and Conditions</a><br/>
+
+      
+    <a href="/pages/delivery-and-returns">Delivery and Returns</a><br/>
+
+      
+    <a href="/pages/privacy-and-cookie-policy">Privacy and Cookie Policy</a><br/>
+
+</div>
+              <div id="footer_links_19" class="col-md-3 col-sm-6 col-xs-6">    <h4>STAY IN TOUCH</h4>
+      
+    <a href="https://www.facebook.com/Dice-Saloon-Singles-155995598628417"><i class='fa fa-facebook-square'></i>Facebook</a><br/>
+
+</div>
+              <div id="footer_links_23" class="col-md-3 col-sm-6 col-xs-6">    <h4>Products</h4>
+      
+    <a href="/t/magic-the-gathering">Magic the Gathering</a><br/>
+
+      
+    <a href="/gift_cards/new">Gift Cards</a><br/>
+
+</div>
+
+        <div class="col-md-12 text-center">
+        </div>
+
+        <div class="col-md-12 text-center" style="max-height: 36px;">
+          <span style="font-size:24px;">
+            <i class="fa fa-cc-paypal"></i>
+            <i class="fa fa-cc-visa"></i>
+            <i class="fa fa-cc-mastercard"></i>
+            <i class="fa fa-cc-jcb"></i>
+            <i class="fa fa-cc-stripe"></i>
+            <i class="fa fa-cc-amex"></i>
+          </span><br/>
+          <span>
+            &copy; 2018 - Dice Saloon Singles Limited
+          </span>
+        </div>
+      </div>
+    </footer>
+      <div class="cookies-eu js-cookies-eu">
+    <span class="cookies-eu-content-holder">Cookies help us deliver our services. By using our services, you agree to our use of cookies.</span>
+    <span class="cookies-eu-button-holder">
+    <button class="cookies-eu-ok js-cookies-eu-ok"> OK </button>
+      <a href="/pages/privacy-and-cookie-policy" class="cookies-eu-link" target=""> Learn more </a>
+    </span>
+  </div>
+
+</div>
+
+
+    <div class="unite-overlay"></div>
+    
+
+  </body>
+</html>

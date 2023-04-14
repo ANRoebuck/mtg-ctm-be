@@ -1,0 +1,41 @@
+[
+    {
+        "seller": "Dice Saloon",
+        "title": "Tarmogoyf",
+        "imgSrc": "https://www.dicesaloonsingles.com/spree/products/269823/large/open-uri20191004-4871-yeq6ic.?1570222803",
+        "productRef": "https://www.dicesaloonsingles.com/products/tarmogoyf-modern-masters-2017",
+        "expansion": "Modern Masters 2017",
+        "price_relativeUnits": 1200,
+        "price_textRepresentation": "£ 12.00",
+        "stock_inStock": true,
+        "stock_level": "2",
+        "subtitle": "",
+        "isFoil": false
+    },
+    {
+        "seller": "Dice Saloon",
+        "title": "Tarmogoyf",
+        "imgSrc": "https://www.dicesaloonsingles.com/spree/products/312295/large/open-uri20210305-19207-2kkmyn.?1614939017",
+        "productRef": "https://www.dicesaloonsingles.com/products/tarmogoyf-time-spiral-remastered",
+        "expansion": "Time Spiral: Remastered",
+        "price_relativeUnits": 1100,
+        "price_textRepresentation": "£ 11.00",
+        "stock_inStock": true,
+        "stock_level": "2",
+        "subtitle": "",
+        "isFoil": false
+    },
+    {
+        "seller": "Dice Saloon",
+        "title": "Tarmogoyf",
+        "imgSrc": "https://www.dicesaloonsingles.com/spree/products/273454/large/open-uri20191005-4871-140vsgx.?1570235217",
+        "productRef": "https://www.dicesaloonsingles.com/products/tarmogoyf-modern-masters-2015",
+        "expansion": "Modern Masters 2015",
+        "price_relativeUnits": 1150,
+        "price_textRepresentation": "£ 11.50",
+        "stock_inStock": true,
+        "stock_level": "3",
+        "subtitle": "",
+        "isFoil": false
+    }
+]

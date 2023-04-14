@@ -3,7 +3,7 @@ import AbstractPriceGetter from '../abstract/AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from './test-resources/_fsUtils';
 
-import { PriceGetter_Axion } from '..';
+import { PriceGetter_Hareruya } from '..';
 
 
 jest.mock('axios');
@@ -15,13 +15,13 @@ let priceGetter: AbstractPriceGetter;
 
 beforeEach(() => {
   jest.clearAllMocks();
-  priceGetter = new PriceGetter_Axion();
+  priceGetter = new PriceGetter_Hareruya();
 });
 
-describe('PriceGetter_Axion', () => {
+describe('PriceGetter_Hareruya', () => {
 
   it('has correct seller name', () => {
-    expect(priceGetter.name).toBe('Axion Now');
+    expect(priceGetter.name).toBe('Hareruya');
   });
 
   it('gets results for Tarmogoyf', async () => {
@@ -34,8 +34,8 @@ describe('PriceGetter_Axion', () => {
 
     const results: Price[] = await priceGetter.search(searchTerm, false);
 
-    expect(mockedAxios.get).toHaveBeenCalledWith(stub + 'https://www.axionnow.com/products/search?q=tarmogoyf');
-    expect(results.length).toBe(7);
+    expect(mockedAxios.get).toHaveBeenCalledWith(stub + 'https://www.hareruyamtg.com/en/products/search?suggest_type=all&product=tarmogoyf');
+    expect(results.length).toBe(15);
     expect(results).toStrictEqual(expectedResults);
   });
 

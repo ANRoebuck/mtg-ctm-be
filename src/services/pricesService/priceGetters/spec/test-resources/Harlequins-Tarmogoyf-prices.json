@@ -1,1 +1,54 @@
-[{"seller":"Harlequins","title":"Tarmogoyf","imgSrc":"https://crystal-cdn2.crystalcommerce.com/photos/29933/medium/OMPYGJS6ajapjMAv.jpg","productRef":"https://www.harlequins-games.com/catalog/magic_the_gathering_singles-time_spiral_block-future_sight/tarmogoyf/1357","expansion":"Future Sight","price_relativeUnits":3019,"price_textRepresentation":"£ 30.19","stock_inStock":true,"stock_level":"2","subtitle":"Lightly Played, English","isFoil":false},{"seller":"Harlequins","title":"Tarmogoyf","imgSrc":"https://crystal-cdn2.crystalcommerce.com/photos/29933/medium/OMPYGJS6ajapjMAv.jpg","productRef":"https://www.harlequins-games.com/catalog/magic_the_gathering_singles-time_spiral_block-future_sight/tarmogoyf/1357","expansion":"Future Sight","price_relativeUnits":2683,"price_textRepresentation":"£ 26.83","stock_inStock":true,"stock_level":"2","subtitle":"Moderately Played, English","isFoil":false},{"seller":"Harlequins","title":"Tarmogoyf","imgSrc":"https://crystal-cdn2.crystalcommerce.com/photos/6628687/medium/en_FtCnjfomHm.png","productRef":"https://www.harlequins-games.com/catalog/magic_the_gathering_singles-special_editions-time_spiral_remastered/tarmogoyf/2058380","expansion":"Time Spiral Remastered","price_relativeUnits":1066,"price_textRepresentation":"£ 10.66","stock_inStock":true,"stock_level":"1","subtitle":"Near Mint, English","isFoil":false},{"seller":"Harlequins","title":"Tarmogoyf - Foil","imgSrc":"https://crystal-cdn3.crystalcommerce.com/photos/6344475/medium/en_oYewlmYojE.png","productRef":"https://www.harlequins-games.com/catalog/magic_the_gathering_singles-masters_sets-modern_masters_2017/tarmogoyf__foil/1428786","expansion":"Modern Masters 2017","price_relativeUnits":2632,"price_textRepresentation":"£ 26.32","stock_inStock":true,"stock_level":"4","subtitle":"Near Mint, English","isFoil":true}]
+[
+    {
+        "seller": "Harlequins",
+        "title": "Tarmogoyf",
+        "imgSrc": "https://crystal-cdn2.crystalcommerce.com/photos/29933/medium/OMPYGJS6ajapjMAv.jpg",
+        "productRef": "https://www.harlequins-games.com/catalog/magic_the_gathering_singles-time_spiral_block-future_sight/tarmogoyf/1357",
+        "expansion": "Future Sight",
+        "price_relativeUnits": 3019,
+        "price_textRepresentation": "£ 30.19",
+        "stock_inStock": true,
+        "stock_level": "2",
+        "subtitle": "Lightly Played, English",
+        "isFoil": false
+    },
+    {
+        "seller": "Harlequins",
+        "title": "Tarmogoyf",
+        "imgSrc": "https://crystal-cdn2.crystalcommerce.com/photos/29933/medium/OMPYGJS6ajapjMAv.jpg",
+        "productRef": "https://www.harlequins-games.com/catalog/magic_the_gathering_singles-time_spiral_block-future_sight/tarmogoyf/1357",
+        "expansion": "Future Sight",
+        "price_relativeUnits": 2683,
+        "price_textRepresentation": "£ 26.83",
+        "stock_inStock": true,
+        "stock_level": "2",
+        "subtitle": "Moderately Played, English",
+        "isFoil": false
+    },
+    {
+        "seller": "Harlequins",
+        "title": "Tarmogoyf",
+        "imgSrc": "https://crystal-cdn2.crystalcommerce.com/photos/6628687/medium/en_FtCnjfomHm.png",
+        "productRef": "https://www.harlequins-games.com/catalog/magic_the_gathering_singles-special_editions-time_spiral_remastered/tarmogoyf/2058380",
+        "expansion": "Time Spiral Remastered",
+        "price_relativeUnits": 1066,
+        "price_textRepresentation": "£ 10.66",
+        "stock_inStock": true,
+        "stock_level": "1",
+        "subtitle": "Near Mint, English",
+        "isFoil": false
+    },
+    {
+        "seller": "Harlequins",
+        "title": "Tarmogoyf - Foil",
+        "imgSrc": "https://crystal-cdn3.crystalcommerce.com/photos/6344475/medium/en_oYewlmYojE.png",
+        "productRef": "https://www.harlequins-games.com/catalog/magic_the_gathering_singles-masters_sets-modern_masters_2017/tarmogoyf__foil/1428786",
+        "expansion": "Modern Masters 2017",
+        "price_relativeUnits": 2632,
+        "price_textRepresentation": "£ 26.32",
+        "stock_inStock": true,
+        "stock_level": "4",
+        "subtitle": "Near Mint, English",
+        "isFoil": true
+    }
+]

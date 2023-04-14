@@ -19,7 +19,7 @@ class DataGetter_Hareruya extends AbstractDataGetter {
         super({
             baseUrl: 'https://www.hareruyamtg.com/en/',
             searchPath: 'products/search?suggest_type=all&product=',
-            searchSuffix: '&image=%EE%A4%84',
+            searchSuffix: '',
             searchJoin: '+',
         });
     }

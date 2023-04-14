@@ -183,6 +183,7 @@ export class AbstractHtmlDataProcessor implements AbstractDataProcessor {
             .map((node: Element): boolean => this.isFoilFromTitle(node.innerHTML.toLowerCase()))[0] || false;
 
 
+    stripNewLines = (str: string) : string => str.replace(/\n/, "");
     stripWhitespace = (str: string) : string => str.replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);
 }
 

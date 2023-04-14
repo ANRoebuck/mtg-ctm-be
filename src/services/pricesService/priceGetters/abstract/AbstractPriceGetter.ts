@@ -3,10 +3,6 @@ import { AbstractDataProcessor } from './AbstractDataProcessor';
 import { Price } from '../../../../types/Price';
 import { writeFileSync } from 'fs';
 
-// for use during development
-// when true, raw HTML and processed results will be output to local directory (gitignored)
-const saveOutPut: boolean = false;
-
 interface Args {
     name: string,
     dataGetter: AbstractDataGetter,
@@ -26,7 +22,7 @@ class AbstractPriceGetter {
         this.dataProcessor = dataProcessor;
     }
 
-    search = async (searchTerm: string) : Promise<Price[]>  => {
+    search = async (searchTerm: string, saveOutput: boolean) : Promise<Price[]>  => {
 
         const sanitisedSearchTerm = removeDiacritics(searchTerm);
 
@@ -42,7 +38,10 @@ class AbstractPriceGetter {
         // console.log(rawData);
         // console.log(validResults);
         
-        if (saveOutPut) {
+        if (saveOutput) {
+            // for use during development
+            // when true, raw HTML and processed results will be output to local directory (gitignored)
+            console.log('Saving output');
             const filePath: string = './src/services/pricesService/priceGetters/output/'
             saveToFile(`${filePath}${this.name}-${searchTerm}-html.txt`, rawData);
             saveToFile(`${filePath}${this.name}-${searchTerm}-prices.json`, JSON.stringify(validResults));

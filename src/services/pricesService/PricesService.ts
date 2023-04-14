@@ -20,11 +20,11 @@ class PricesService {
         return Object.keys(this.priceGetters).includes(seller);
     }
 
-    getPrices(seller: string, searchTerm: string): Promise<Price[]> | [] {
+    getPrices(seller: string, searchTerm: string, saveOutput: boolean): Promise<Price[]> | [] {
         console.log("Getting prices. seller = " + seller + ", searchTerm = "  + searchTerm);
         const priceGetter: AbstractPriceGetter = this.priceGetters[seller];
         console.log("Pricegetter = " + priceGetter.name);
-        return priceGetter ? priceGetter.search(searchTerm) : [];
+        return priceGetter ? priceGetter.search(searchTerm, saveOutput) : [];
     }
 }
 

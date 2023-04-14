@@ -36,7 +36,8 @@ const priceGettersArray = [
     new PriceGetter_ManaGaming(),
     new PriceGetter_Manaleak(),
     new PriceGetter_MountbattenCollectables(),
-    new PriceGetter_NerdShak(),
+    // Nerd Shack have been removed following repeated complaints from customers regarding poor service
+    // new PriceGetter_NerdShak(),
     new PriceGetter_PatriotGamesLeeds(),
     new PriceGetter_SkywardFire(),
     new PriceGetter_StarCityGames(),
@@ -49,8 +50,6 @@ const configurePriceGetters = (): { [key: string]: AbstractPriceGetter } => {
         acc[ele.name] = ele;
         return acc;
     }, {});
-
-    // console.log(Object.keys(priceGetters));
 
     return priceGetters;
 }

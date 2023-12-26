@@ -3,7 +3,7 @@ import AbstractPriceGetter from '../abstract/AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from './test-resources/_fsUtils';
 
-import { PriceGetter_Harlequins } from '..';
+import { PriceGetter_BigOrbitCards } from '..';
 
 
 jest.mock('axios');
@@ -15,17 +15,17 @@ let priceGetter: AbstractPriceGetter;
 
 beforeEach(() => {
   jest.clearAllMocks();
-  priceGetter = new PriceGetter_Harlequins();
+  priceGetter = new PriceGetter_BigOrbitCards();
 });
 
-describe('PriceGetter_Harlequins', () => {
+describe('PriceGetter_BigOrbitCards', () => {
 
   it('has correct seller name', () => {
-    expect(priceGetter.name).toBe('Harlequins');
+    expect(priceGetter.name).toBe('Big Orbit Cards');
   });
 
-  it('gets results for Tarmogoyf', async () => {
-    const searchTerm = 'Tarmogoyf';
+  it('gets results for Seachrome Coast', async () => {
+    const searchTerm = 'Seachrome Coast';
 
     const expectedResults = readResults(priceGetter.name, searchTerm);
 
@@ -34,8 +34,8 @@ describe('PriceGetter_Harlequins', () => {
 
     const results: Price[] = await priceGetter.search(searchTerm, false);
 
-    expect(mockedAxios.get).toHaveBeenCalledWith(stub + 'https://www.harlequins-games.com/products/search?q=tarmogoyf&c=8&disable_mobile=1');
-    expect(results.length).toBe(4);
+    expect(mockedAxios.get).toHaveBeenCalledWith(stub + 'https://www.bigorbitcards.co.uk/shop-all-games/search/seachrome+coast/');
+    expect(results.length).toBe(7);
     expect(results).toStrictEqual(expectedResults);
   });
 

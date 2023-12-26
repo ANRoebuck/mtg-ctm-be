@@ -35,7 +35,7 @@ class AbstractPriceGetter {
             .filter(result => excludeArtCard(result.title));
 
 
-        // console.log(rawData);
+        console.log(rawData);
         // console.log(validResults);
         
         if (saveOutput) {
@@ -43,7 +43,7 @@ class AbstractPriceGetter {
             // when true, raw HTML and processed results will be output to local directory (gitignored)
             console.log('Saving output');
             const filePath: string = './src/services/pricesService/priceGetters/output/'
-            saveToFile(`${filePath}${this.name}-${searchTerm}-html.txt`, rawData);
+            saveToFile(`${filePath}${this.name}-${searchTerm}-html.txt`, JSON.stringify(rawData));
             saveToFile(`${filePath}${this.name}-${searchTerm}-prices.json`, JSON.stringify(validResults));
         }
 

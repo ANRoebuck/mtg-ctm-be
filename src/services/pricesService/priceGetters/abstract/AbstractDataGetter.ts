@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 axios.defaults.headers.common['origin'] = "CTM";
 
 interface Args {
@@ -29,10 +30,14 @@ class AbstractDataGetter {
         .then(this.extractData)
         .catch(() => '');
 
-    searchTermToUrl = (searchTerm: string) => this.cors
-        + this.baseUrl + this.searchPath
-        + searchTerm.toLowerCase().split(' ').join(this.searchJoin)
-        + this.searchSuffix;
+    searchTermToUrl = (searchTerm: string) => {
+        const url = this.baseUrl
+            + this.searchPath
+            + searchTerm.toLowerCase().split(' ').join(this.searchJoin)
+            + this.searchSuffix;
+        console.log('requesting data from ' + url);    
+        return this.cors + url;
+    };
 
     extractData = ({ data } : { data: string }): string => data || '';
 }

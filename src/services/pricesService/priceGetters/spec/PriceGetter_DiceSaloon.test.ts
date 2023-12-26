@@ -18,7 +18,7 @@ beforeEach(() => {
   priceGetter = new PriceGetter_DiceSaloon();
 });
 
-describe('PriceGetter_Axion', () => {
+describe('PriceGetter_DiceSaloon', () => {
 
   it('has correct seller name', () => {
     expect(priceGetter.name).toBe('Dice Saloon');

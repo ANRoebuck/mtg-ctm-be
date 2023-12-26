@@ -1,0 +1,17 @@
+
+			<script type="application/ld+json">
+			{
+			"@context": "https://schema.org",
+			"@type": "WebSite",
+			"url": "https://www.bigorbitcards.co.uk/",
+			"potentialAction": {
+				"@type": "SearchAction",
+				"target": {
+				"@type": "EntryPoint",
+				"urlTemplate": "https://www.bigorbitcards.co.uk/shop-all-games/search/{search_term_string}/"
+				},
+				"query-input": "required name=search_term_string"
+			}
+			}
+			</script>
+		

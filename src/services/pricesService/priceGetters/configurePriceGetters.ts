@@ -14,7 +14,7 @@ import {
     PriceGetter_ManaGaming,
     PriceGetter_Manaleak,
     PriceGetter_MountbattenCollectables,
-    PriceGetter_NerdShak,
+    // PriceGetter_NerdShak,
     PriceGetter_PatriotGamesLeeds,
     PriceGetter_SkywardFire,
     PriceGetter_StarCityGames,

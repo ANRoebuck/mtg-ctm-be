@@ -7,14 +7,14 @@ export interface AbstractDataProcessor {
     processData: (rawData: any) => Price[]
 }
 
-export class AbstractJsonDataProcessor implements AbstractDataProcessor {
+export abstract class AbstractJsonDataProcessor implements AbstractDataProcessor {
     processData = (rawData: object): Price[] => {
         return [];
     }
 }
 
 
-export class AbstractHtmlDataProcessor implements AbstractDataProcessor {
+export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor {
 
     seller: string;
     currencyCode: string;

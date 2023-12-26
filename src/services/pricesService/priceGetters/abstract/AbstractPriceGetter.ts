@@ -10,7 +10,7 @@ interface Args {
 }
 
 
-class AbstractPriceGetter {
+abstract class AbstractPriceGetter {
 
     name: string;
     dataGetter: AbstractDataGetter;
@@ -22,7 +22,7 @@ class AbstractPriceGetter {
         this.dataProcessor = dataProcessor;
     }
 
-    search = async (searchTerm: string, saveOutput: boolean) : Promise<Price[]>  => {
+    search = async (searchTerm: string, saveOutput: boolean = false) : Promise<Price[]>  => {
 
         const sanitisedSearchTerm = removeDiacritics(searchTerm);
 
@@ -35,7 +35,7 @@ class AbstractPriceGetter {
             .filter(result => excludeArtCard(result.title));
 
 
-        console.log(rawData);
+        // console.log(rawData);
         // console.log(validResults);
         
         if (saveOutput) {

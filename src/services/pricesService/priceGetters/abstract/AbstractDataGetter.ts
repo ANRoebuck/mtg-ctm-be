@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-axios.defaults.headers.common['origin'] = "CTM";
+// axios.defaults.headers.common['origin'] = "CTM";
 
 interface Args {
     baseUrl: string,
@@ -10,7 +10,7 @@ interface Args {
     searchJoin: string,
 }
 
-class AbstractDataGetter {
+abstract class AbstractDataGetter {
 
     cors: string = 'https://mtg-shelf.herokuapp.com/';
     baseUrl: string;

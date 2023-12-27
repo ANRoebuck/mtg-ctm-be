@@ -1,7 +1,7 @@
 import axios, { AxiosStatic } from 'axios';
 import AbstractPriceGetter from '../abstract/AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
-import { readHtmlString, readResults } from './test-resources/_fsUtils';
+import { readHtmlString, readResults } from '../../../../utils';
 
 import { PriceGetter_DiceSaloon } from '..';
 

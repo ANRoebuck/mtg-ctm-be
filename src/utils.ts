@@ -1,6 +1,27 @@
 import { readFileSync, writeFileSync } from 'fs';
-import { Price } from '../../../../../types/Price';
+import { Price } from './types/Price';
 
+export const sanitizeString = (text: string) => text.toLowerCase().replace(/\n/g, '').normalize("NFD").replace(/\p{Diacritic}/gu, '');
+
+const defaultBannedTerms = ['artcard', 'artseries', '(Art)'];
+
+export const strongMatch = (textBody: string, searchTerm: string, bannedTerms: string[] = defaultBannedTerms) => {
+    // Ignore case, new lines, special chars and diacritics
+    const sanitizedTextBody = sanitizeString(textBody);
+
+    // Check for banned terms
+    if (bannedTerms.some(term => sanitizedTextBody.includes(sanitizeString(term)))) {
+        return false;
+    }
+
+    // Ignore case, new lines, special chars and diacritics
+    const sanitizedSearchTerm = sanitizeString(searchTerm);
+
+    // Use a regular expression for strong matching
+    const regex = new RegExp(`\\b${sanitizedSearchTerm}\\b`, 'g');
+
+    return regex.test(sanitizedTextBody);
+}
 
 export const saveToFile = (filePath: string, contents: string) => {
     try {

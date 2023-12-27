@@ -1,7 +1,7 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import apiRouter from './routers/apiRouter';
-import {errHandleCustom, errHandleInvalidEnpoint} from "./errorHandling/errorHandling";
+import { errHandleCustom, errHandleInvalidEnpoint } from "./errorHandling/errorHandling";
 
 const app: Application = express();
 

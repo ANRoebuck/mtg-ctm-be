@@ -1,4 +1,5 @@
-import { strongMatch } from './AbstractPriceGetter';
+import { strongMatch } from "./utils";
+
 
 describe('strongMatch', () => {
 

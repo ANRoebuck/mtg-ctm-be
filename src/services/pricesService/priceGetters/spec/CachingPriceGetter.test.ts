@@ -1,14 +1,14 @@
-import { Price } from "../../../types/Price";
-import AbstractPriceGetter from "./abstract/AbstractPriceGetter";
-import CachingPriceGetter from "./CachingPriceGetter";
-import PriceGetter_Axion from './PriceGetter_Axion';
+import { Price } from "../../../../types/Price";
+import AbstractPriceGetter from "../abstract/AbstractPriceGetter";
+import CachingPriceGetter from "../CachingPriceGetter";
+import PriceGetter_Axion from '../PriceGetter_Axion';
 
 
 jest.useFakeTimers();
 
 
 const mockSearch = jest.fn();
-jest.mock('./PriceGetter_Axion', () => {
+jest.mock('../PriceGetter_Axion', () => {
     return jest.fn().mockImplementation(() => {
         return { search: mockSearch }
     })

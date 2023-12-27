@@ -1,7 +1,6 @@
 import { Price } from '../../../../types/Price';
 import { JSDOM } from 'jsdom';
 import currencyService from '../../../currencyService/CurrencyService';
-import { writeFileSync } from 'fs';
 
 export interface AbstractDataProcessor {
     processData: (rawData: any) => Price[]
@@ -186,14 +185,6 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
 
     stripNewLines = (str: string) : string => str.replace(/\n/, "");
     stripWhitespace = (str: string) : string => str.replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);
-}
-
-const saveToFile = (filePath: string, contents: string) => {
-    try {
-        writeFileSync(filePath, contents);  
-    } catch (e) {
-        console.log(e);
-    }
 }
 
 interface HtmlProcoessorArgs {

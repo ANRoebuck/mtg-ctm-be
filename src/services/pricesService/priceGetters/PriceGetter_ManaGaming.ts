@@ -1,6 +1,6 @@
-import AbstractDataGetter from './abstract/AbstractDataGetter';
-import { AbstractHtmlDataProcessor, Stock } from './abstract/AbstractDataProcessor';
-import AbstractPriceGetter from './abstract/AbstractPriceGetter';
+import AbstractDataGetter from './AbstractDataGetter';
+import { AbstractHtmlDataProcessor, Stock } from './AbstractDataProcessor';
+import AbstractPriceGetter from './AbstractPriceGetter';
 
 const sellerName = 'Mana Gaming';
 

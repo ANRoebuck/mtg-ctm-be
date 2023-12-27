@@ -1,6 +1,6 @@
-import AbstractDataGetter from './abstract/AbstractDataGetter';
-import { AbstractJsonDataProcessor } from './abstract/AbstractDataProcessor';
-import AbstractPriceGetter from './abstract/AbstractPriceGetter';
+import AbstractDataGetter from './AbstractDataGetter';
+import { AbstractJsonDataProcessor } from './AbstractDataProcessor';
+import AbstractPriceGetter from './AbstractPriceGetter';
 import { Price } from '../../../types/Price';
 import currencyService from '../../currencyService/CurrencyService';
 

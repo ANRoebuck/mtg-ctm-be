@@ -1,7 +1,7 @@
 import AbstractDataGetter from './AbstractDataGetter';
 import { AbstractDataProcessor } from './AbstractDataProcessor';
-import { Price } from '../../../../types/Price';
-import { sanitizeString, saveToFile, strongMatch } from '../../../../utils';
+import { Price } from '../../../types/Price';
+import { sanitizeString, saveToFile, strongMatch } from '../../../utils';
 
 interface Args {
     name: string,

@@ -1,6 +1,6 @@
-import AbstractDataGetter from './abstract/AbstractDataGetter';
-import { AbstractHtmlDataProcessor } from './abstract/AbstractDataProcessor';
-import AbstractPriceGetter from './abstract/AbstractPriceGetter';
+import AbstractDataGetter from './AbstractDataGetter';
+import { AbstractHtmlDataProcessor } from './AbstractDataProcessor';
+import AbstractPriceGetter from './AbstractPriceGetter';
 
 const sellerName = 'Magic Card Trader';
 

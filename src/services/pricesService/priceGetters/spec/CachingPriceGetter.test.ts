@@ -1,5 +1,5 @@
 import { Price } from "../../../../types/Price";
-import AbstractPriceGetter from "../abstract/AbstractPriceGetter";
+import AbstractPriceGetter from "../AbstractPriceGetter";
 import CachingPriceGetter from "../CachingPriceGetter";
 import PriceGetter_Axion from '../PriceGetter_Axion';
 

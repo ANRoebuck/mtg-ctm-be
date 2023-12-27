@@ -1,5 +1,5 @@
 import axios, { AxiosStatic } from 'axios';
-import AbstractPriceGetter from '../abstract/AbstractPriceGetter';
+import AbstractPriceGetter from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils';
 

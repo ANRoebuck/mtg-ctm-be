@@ -1,6 +1,6 @@
-import { Price } from '../../../../types/Price';
+import { Price } from '../../../types/Price';
 import { JSDOM } from 'jsdom';
-import currencyService from '../../../currencyService/CurrencyService';
+import currencyService from '../../currencyService/CurrencyService';
 
 export interface AbstractDataProcessor {
     processData: (rawData: any) => Price[]

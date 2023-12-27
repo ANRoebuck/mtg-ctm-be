@@ -1,6 +1,14 @@
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { Price } from '../../../../../types/Price';
 
+
+export const saveToFile = (filePath: string, contents: string) => {
+    try {
+        writeFileSync(filePath, contents);
+    } catch (e) {
+        console.log(e);
+    }
+}
 
 export const readHtmlString = (sellerName: string, searchTerm: string): string => {
     let htmlString: string = '';

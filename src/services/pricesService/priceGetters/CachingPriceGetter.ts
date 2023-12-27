@@ -1,4 +1,4 @@
-import AbstractPriceGetter from './abstract/AbstractPriceGetter';
+import AbstractPriceGetter from './AbstractPriceGetter';
 import { Price } from '../../../types/Price';
 
 interface TimeStampedPrices {

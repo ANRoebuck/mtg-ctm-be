@@ -34,7 +34,7 @@ export const saveToFile = (filePath: string, contents: string) => {
 export const readHtmlString = (sellerName: string, searchTerm: string): string => {
     let htmlString: string = '';
     try {
-        const file = `./src/services/pricesService/priceGetters/spec/test-resources/${sellerName}-${searchTerm}-html.txt`;
+        const file = `./src/services/pricesService/priceGetters/spec/test-resources/${sellerName}_${searchTerm}_html.txt`;
         htmlString = readFileSync(file, 'utf8');
     } catch(e) {
         console.log(e);
@@ -45,7 +45,7 @@ export const readHtmlString = (sellerName: string, searchTerm: string): string =
 export const readResults = (sellerName: string, searchTerm: string): Price[] => {
     let results: Price[] = [];
     try {
-        const file = `./src/services/pricesService/priceGetters/spec/test-resources/${sellerName}-${searchTerm}-prices.json`;
+        const file = `./src/services/pricesService/priceGetters/spec/test-resources/${sellerName}_${searchTerm}_prices.json`;
         results = JSON.parse(readFileSync(file, 'utf8'));
     } catch(e) {
         console.log(e);

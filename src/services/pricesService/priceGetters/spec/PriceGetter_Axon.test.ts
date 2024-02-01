@@ -34,7 +34,7 @@ describe('PriceGetter_Axion', () => {
 
     const results: Price[] = await priceGetter.search(searchTerm, false);
 
-    expect(mockedAxios.get).toHaveBeenCalledWith(stub + 'https://www.axionnow.com/products/search?q=tarmogoyf');
+    expect(mockedAxios.get).toHaveBeenCalledWith(stub + 'https://www.axionnow.com/products/search?q=tarmogoyf', {"headers": {"Origin": "compare-the-magic"}});
     expect(results.length).toBe(7);
     expect(results).toStrictEqual(expectedResults);
   });

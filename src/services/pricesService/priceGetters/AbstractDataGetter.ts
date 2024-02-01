@@ -13,6 +13,7 @@ interface Args {
 abstract class AbstractDataGetter {
 
     cors: string = 'https://mtg-shelf.herokuapp.com/';
+    // cors: string = 'https://cors-anywhere.herokuapp.com/corsdemo/';
     baseUrl: string;
     searchPath: string;
     searchSuffix: string;
@@ -26,9 +27,12 @@ abstract class AbstractDataGetter {
     }
 
     getData = async (searchTerm: string) : Promise<string> => axios
-        .get(this.searchTermToUrl(searchTerm))
+        .get(this.searchTermToUrl(searchTerm), { 'headers': { 'Origin': 'compare-the-magic' } })
         .then(this.extractData)
-        .catch(() => '');
+        .catch((e) => {
+            console.log(e);
+            return '';
+        });
 
     searchTermToUrl = (searchTerm: string) => {
         const url = this.baseUrl

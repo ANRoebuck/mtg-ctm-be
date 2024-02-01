@@ -34,7 +34,7 @@ describe('PriceGetter_Hareruya', () => {
 
     const results: Price[] = await priceGetter.search(searchTerm, false);
 
-    expect(mockedAxios.get).toHaveBeenCalledWith(stub + 'https://www.hareruyamtg.com/en/products/search?suggest_type=all&product=tarmogoyf');
+    expect(mockedAxios.get).toHaveBeenCalledWith(stub + 'https://www.hareruyamtg.com/en/products/search?suggest_type=all&product=tarmogoyf', {"headers": {"Origin": "compare-the-magic"}});
     expect(results.length).toBe(15);
     expect(results).toStrictEqual(expectedResults);
   });

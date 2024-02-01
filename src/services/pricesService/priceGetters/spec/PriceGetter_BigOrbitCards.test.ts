@@ -34,7 +34,7 @@ describe('PriceGetter_BigOrbitCards', () => {
 
     const results: Price[] = await priceGetter.search(searchTerm, false);
 
-    expect(mockedAxios.get).toHaveBeenCalledWith(stub + 'https://www.bigorbitcards.co.uk/shop-all-games/search/seachrome+coast/');
+    expect(mockedAxios.get).toHaveBeenCalledWith(stub + 'https://www.bigorbitcards.co.uk/shop-all-games/search/seachrome+coast/', {"headers": {"Origin": "compare-the-magic"}});
     // expect(results.length).toBe(7);
     // expect(results).toStrictEqual(expectedResults);
   });

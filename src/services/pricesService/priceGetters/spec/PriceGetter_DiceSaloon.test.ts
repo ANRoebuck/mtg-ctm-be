@@ -34,7 +34,7 @@ describe('PriceGetter_DiceSaloon', () => {
 
     const results: Price[] = await priceGetter.search(searchTerm, false);
 
-    expect(mockedAxios.get).toHaveBeenCalledWith(stub + 'https://www.dicesaloonsingles.com/products?keywords=tarmogoyf&search%5Bin_stock%5D%5B%5D=true');
+    expect(mockedAxios.get).toHaveBeenCalledWith(stub + 'https://www.dicesaloonsingles.com/products?keywords=tarmogoyf&search%5Bin_stock%5D%5B%5D=true', {"headers": {"Origin": "compare-the-magic"}});
     expect(results.length).toBe(3);
     expect(results).toStrictEqual(expectedResults);
   });

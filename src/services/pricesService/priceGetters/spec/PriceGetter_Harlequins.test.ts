@@ -34,7 +34,7 @@ describe('PriceGetter_Harlequins', () => {
 
     const results: Price[] = await priceGetter.search(searchTerm, false);
 
-    expect(mockedAxios.get).toHaveBeenCalledWith(stub + 'https://www.harlequins-games.com/products/search?q=tarmogoyf&c=8&disable_mobile=1');
+    expect(mockedAxios.get).toHaveBeenCalledWith(stub + 'https://www.harlequins-games.com/products/search?q=tarmogoyf&c=8&disable_mobile=1', {"headers": {"Origin": "compare-the-magic"}});
     expect(results.length).toBe(4);
     expect(results).toStrictEqual(expectedResults);
   });

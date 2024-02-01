@@ -18,7 +18,7 @@ class DataGetter_Axion extends AbstractDataGetter {
     constructor() {
         super({
             baseUrl: 'https://www.axionnow.com/',
-            searchPath: 'products/search?q=',
+            searchPath: 'search?type=product&q=',
             searchSuffix: '',
             searchJoin: '+'
         });
@@ -31,7 +31,7 @@ class DataProcessor_Axion extends AbstractHtmlDataProcessor {
             seller: sellerName,
             currencyCode: 'GBP',
 
-            resultSelector: 'ul.products > li.product',
+            resultSelector: 'div.#grid > div.#product-card',
             titleSelector: 'div.inner > div > div.meta > a > h4',
 
             useSubResults: false,

@@ -28,13 +28,15 @@ abstract class AbstractPriceGetter {
 
         const rawData: string = await this.dataGetter.getData(sanitisedSearchTerm);
 
-        console.log('got data')
+        console.log('got data');
 
         const foundItems: Price[] = this.dataProcessor.processData(rawData);
 
         console.log('found items: ' + foundItems.length);
 
         const validResults = foundItems.filter(result => strongMatch(result.title, sanitisedSearchTerm));
+
+        console.log('found valid results: ' + validResults.length);
 
         // console.log(rawData);
         // console.log(validResults);

@@ -1,12 +1,12 @@
 import {
     AbstractPriceGetter,
     PriceGetter_Axion,
-    // PriceGetter_BigOrbitCards,
+    PriceGetter_BigOrbitCards,
     PriceGetter_DiceSaloon,
     PriceGetter_Hareruya,
     PriceGetter_Harlequins,
     PriceGetter_HighlanderGames,
-    PriceGetter_LazyDragonGaming,
+    // PriceGetter_LazyDragonGaming,
     PriceGetter_LondonMagicTraders,
     PriceGetter_LvlUp,
     PriceGetter_MagicCardTrader,
@@ -23,12 +23,13 @@ import {
 
 const priceGettersArray = [
     new PriceGetter_Axion(),
-    // new PriceGetter_BigOrbitCards(),
+    new PriceGetter_BigOrbitCards(),
     new PriceGetter_DiceSaloon(),
     new PriceGetter_Hareruya(),
     new PriceGetter_Harlequins(),
     new PriceGetter_HighlanderGames(),
-    new PriceGetter_LazyDragonGaming(),
+    // Lazy Dragon Gaming's site shows all cards as out of stock. Not sure if maintenance or shutting down
+    // new PriceGetter_LazyDragonGaming(),
     new PriceGetter_LondonMagicTraders(),
     new PriceGetter_LvlUp(),
     new PriceGetter_MagicCardTrader(),

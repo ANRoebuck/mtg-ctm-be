@@ -115,8 +115,6 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
                     || this.isFoilFromTitle(expansion)
                     || this.isFoilFromResultNode(subresult);
 
-                console.log('pushing result');
-
                 processedResults.push({
                     seller: this.seller,
                     title,
@@ -134,8 +132,6 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
             });
 
         });
-
-        console.log(processedResults);
 
         return processedResults;
 

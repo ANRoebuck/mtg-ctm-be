@@ -30,6 +30,7 @@ abstract class AbstractDataGetter {
         .get(this.searchTermToUrl(searchTerm), { 'headers': { 'Origin': 'compare-the-magic' } })
         .then(this.extractData)
         .catch((e) => {
+            console.log('failed to get data');
             console.log(e);
             return '';
         });

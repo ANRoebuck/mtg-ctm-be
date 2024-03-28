@@ -19,7 +19,8 @@ class DataGetter_Axion extends AbstractDataGetter {
         super({
             baseUrl: 'https://www.axionnow.com/',
             searchPath: 'search?type=product&q=',
-            searchSuffix: '',
+            searchSuffix: '&filter.v.availability=1&filter.v.option.finish=Non-Foil',
+            // searchSuffix: '&filter.v.availability=1&filter.v.option.finish=Foil',
             searchJoin: '+'
         });
     }
@@ -31,26 +32,27 @@ class DataProcessor_Axion extends AbstractHtmlDataProcessor {
             seller: sellerName,
             currencyCode: 'GBP',
 
-            resultSelector: 'div.#grid > div.#product-card',
-            titleSelector: 'div.inner > div > div.meta > a > h4',
+            // resultSelector: 'div[class="#collection-grid"] > div[class="#grid"] > div[class="#product-card"]',
+            resultSelector: 'div[class="#collection-grid"] > div > div',
+            titleSelector: 'a',
 
             useSubResults: false,
             subresultSelector: '',
             subtitleSelector: '',
             subtitleFromText: () => '',
-
-            priceSelector: 'div.inner > div > div.meta > div.list-variants.grid > div > span > form > div > span.regular',
+            
+            priceSelector: 'div[class="#product-card-caption @offset-top"] > div[class="#product-card-price"] > dl > div > dd',
             priceValueFromPriceText: (text: string): number => parseInt(text.replace(/\D/g,'')),
-            stockSelector: 'div.inner > div > div.meta > div> div > span.variant-main-info > span.variant-qty',
-            stockValueFromStockText: (text: string): number => text === 'Out of stock.' ? 0 : parseInt(text.replace(/([0-9]*)([^0-9]*)/, `$1`)),
+            stockSelector: 'a', // there is no stock selector, but map requires an element
+            stockValueFromStockText: (text: string): number => 1,
             isFoilSelector: 'div.inner > div > div.meta > a > h4',
             expansionSelector: 'div.inner > div > div.meta > a > span.category',
 
-            imgSelector: 'div.inner > div > div.image > a > img',
-            imgBaseUrl: '',
+            imgSelector: 'div[class="#product-card-media"] > div > div[class="#media-image-wrapper"] > img',
+            imgBaseUrl: 'https:',
             imgSrcAttribute: 'src',
 
-            productSelector: 'div.inner > div > div.image > a',
+            productSelector: 'a',
             productBaseUrl: 'https://www.axionnow.com/',
             productRefAttribute: 'href',
         });

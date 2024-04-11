@@ -28,25 +28,18 @@ abstract class AbstractPriceGetter {
 
         const rawData: string = await this.dataGetter.getData(sanitisedSearchTerm);
 
-        console.log('got data');
-
         const foundItems: Price[] = this.dataProcessor.processData(rawData);
-
-        console.log('found items: ' + foundItems.length);
+        console.log(`Parsed ${foundItems.length} potential results`);
 
         const validResults = foundItems.filter(result => strongMatch(result.title, sanitisedSearchTerm));
-
-        console.log('found valid results: ' + validResults.length);
-
-        // console.log(rawData);
-        // console.log(validResults);
+        console.log(`Found ${validResults.length} valid results`);
 
         if (saveOutput) {
             // for use during development
             // when true, raw HTML and processed results will be output to local directory (gitignored)
             console.log('Saving output');
             const filePath: string = './src/services/pricesService/priceGetters/output/'
-            saveToFile(`${filePath}${this.name}_${searchTerm}_html.txt`, JSON.stringify(rawData));
+            saveToFile(`${filePath}${this.name}_${searchTerm}_html.txt`, rawData);
             saveToFile(`${filePath}${this.name}_${searchTerm}_prices.json`, JSON.stringify(validResults));
         }
 

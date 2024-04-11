@@ -3,7 +3,7 @@ import AbstractPriceGetter from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils';
 
-import { PriceGetter_Harlequins } from '..';
+import { PriceGetter_TrollTrader } from '..';
 
 
 jest.mock('axios');
@@ -15,13 +15,13 @@ let priceGetter: AbstractPriceGetter;
 
 beforeEach(() => {
   jest.clearAllMocks();
-  priceGetter = new PriceGetter_Harlequins();
+  priceGetter = new PriceGetter_TrollTrader();
 });
 
-describe('PriceGetter_Harlequins', () => {
+describe('PriceGetter_TrollTrader', () => {
 
   it('has correct seller name', () => {
-    expect(priceGetter.name).toBe('Harlequins');
+    expect(priceGetter.name).toBe('Troll Trader');
   });
 
   it('gets results for Tarmogoyf', async () => {
@@ -35,10 +35,10 @@ describe('PriceGetter_Harlequins', () => {
     const results: Price[] = await priceGetter.search(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      stub + 'https://www.harlequins-games.com/products/search?q=tarmogoyf&c=8&disable_mobile=1',
-      {"headers": {"Origin": "compare-the-magic"}}
+      stub + 'https://www.trolltradercards.com/products/search?q=tarmogoyf',
+      { "headers": { "Origin": "compare-the-magic" } }
     );
-    expect(results.length).toBe(4);
+    expect(results.length).toBe(8);
     expect(results).toStrictEqual(expectedResults);
   });
 

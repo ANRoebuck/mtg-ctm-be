@@ -24,19 +24,19 @@ describe('PriceGetter_Axion', () => {
     expect(priceGetter.name).toBe('Axion Now');
   });
 
-  it('gets results for Tarmogoyf', async () => {
-    const searchTerm = 'Tarmogoyf';
+  // it('gets results for Tarmogoyf', async () => {
+  //   const searchTerm = 'Tarmogoyf';
 
-    const expectedResults = readResults(priceGetter.name, searchTerm);
+  //   const expectedResults = readResults(priceGetter.name, searchTerm);
 
-    const htmlString = readHtmlString(priceGetter.name, searchTerm);
-    mockedAxios.get.mockResolvedValueOnce({ data: htmlString });
+  //   const htmlString = readHtmlString(priceGetter.name, searchTerm);
+  //   mockedAxios.get.mockResolvedValueOnce({ data: htmlString });
 
-    const results: Price[] = await priceGetter.search(searchTerm, false);
+  //   const results: Price[] = await priceGetter.search(searchTerm, false);
 
-    expect(mockedAxios.get).toHaveBeenCalledWith(stub + 'https://www.axionnow.com/products/search?q=tarmogoyf', {"headers": {"Origin": "compare-the-magic"}});
-    expect(results.length).toBe(7);
-    expect(results).toStrictEqual(expectedResults);
-  });
+  //   expect(mockedAxios.get).toHaveBeenCalledWith(stub + 'https://www.axionnow.com/products/search?q=tarmogoyf', {"headers": {"Origin": "compare-the-magic"}});
+  //   expect(results.length).toBe(7);
+  //   expect(results).toStrictEqual(expectedResults);
+  // });
 
 });

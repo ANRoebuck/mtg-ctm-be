@@ -59,8 +59,8 @@ class DataProcessor_MagicCardTrader extends AbstractHtmlDataProcessor {
     // @Override
     isFoilFromResultNode = (resultNode: Element): boolean => [...resultNode.querySelectorAll(this.isFoilSelector)]
             .map(node => node.innerHTML)
-            .map(text => this.isFoilFromTitle(text.toLowerCase()))
-            [0] || this.isFoilFromTitle(this.titleFromResultNode(resultNode));
+            .map(text => this.isFoilFromString(text.toLowerCase()))
+            [0] || this.isFoilFromString(this.titleFromResultNode(resultNode));
 }
 
 export default PriceGetter_MagicCardTrader;

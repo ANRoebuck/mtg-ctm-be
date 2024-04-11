@@ -42,13 +42,13 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
     productRefAttribute: string;
 
     constructor({
-                    seller, currencyCode, resultSelector, titleSelector,
-                    useSubResults, subresultSelector, subtitleSelector, subtitleFromText,
-                    priceSelector, priceValueFromPriceText, stockSelector, stockValueFromStockText,
-                    expansionSelector, isFoilSelector,
-                    imgSelector, imgBaseUrl, imgSrcAttribute,
-                    productSelector, productBaseUrl, productRefAttribute,
-                }: HtmlProcoessorArgs) {
+        seller, currencyCode, resultSelector, titleSelector,
+        useSubResults, subresultSelector, subtitleSelector, subtitleFromText,
+        priceSelector, priceValueFromPriceText, stockSelector, stockValueFromStockText,
+        expansionSelector, isFoilSelector,
+        imgSelector, imgBaseUrl, imgSrcAttribute,
+        productSelector, productBaseUrl, productRefAttribute,
+    }: HtmlProcoessorArgs) {
 
         this.seller = seller;
         this.currencyCode = currencyCode;
@@ -78,7 +78,7 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
     }
 
 
-    processData = (rawData: string) : Price[] => {
+    processData = (rawData: string): Price[] => {
         const processedResults: Price[] = [];
 
         const resultNodes: Element[] = this.dataToResultsArray(rawData);
@@ -94,22 +94,21 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
             const productRef = this.productRefFromResultNode(resultNode);
             const expansion = this.expansionFromResultNode(resultNode);
 
-            subresultNodes.forEach((subresult : Element) => {
+            subresultNodes.forEach((subresult: Element) => {
 
                 const stock = this.stockFromResultNode(subresult);
-                if(!stock.inStock) return;
+                if (!stock.inStock) return;
 
                 const price_minorUnits = this.priceFromResultNode(subresult);
                 const price_majorUnits = currencyService.minorUnitsToMajorUnits(price_minorUnits, this.currencyCode);
                 const price_relativeUnits = currencyService.minorUnitsToRelativeUnits(price_minorUnits, this.currencyCode);
                 const price_textRepresentation = currencyService.majorUnitsToTextRepresentation(price_majorUnits, this.currencyCode);
-                
+
                 const subtitle = this.useSubResults ? this.subtitleFromResultNode(subresult) : '';
-                
-                const isFoil =
-                       this.isFoilFromTitle(title)
-                    || this.isFoilFromTitle(subtitle)
-                    || this.isFoilFromTitle(expansion)
+
+                const isFoil = this.isFoilFromString(title)
+                    || this.isFoilFromString(subtitle)
+                    || this.isFoilFromString(expansion)
                     || this.isFoilFromResultNode(subresult);
 
                 processedResults.push({
@@ -177,13 +176,14 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
         .map((node: Element): string => this.stripWhitespace(node.innerHTML))[0] || '';
 
 
-    isFoilFromTitle = (title: string): boolean => title.toLowerCase().includes('foil');
+    // returns false for an undefined string
+    isFoilFromString = (str: string): boolean => Boolean(str) && str.toLowerCase().includes('foil');
     isFoilFromResultNode = (resultNode: Element): boolean => [...resultNode.querySelectorAll(this.isFoilSelector)]
-            .map((node: Element): boolean => this.isFoilFromTitle(node.innerHTML.toLowerCase()))[0] || false;
+        .map((node: Element): boolean => this.isFoilFromString(node.innerHTML.toLowerCase()))[0] || false;
 
 
-    stripNewLines = (str: string) : string => str.replace(/\n/, "");
-    stripWhitespace = (str: string) : string => str.replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);
+    stripNewLines = (str: string): string => str.replace(/\n/, "");
+    stripWhitespace = (str: string): string => str.replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);
 }
 
 interface HtmlProcoessorArgs {

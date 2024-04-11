@@ -73,7 +73,7 @@ class DataProcessor_LazyDragonGaming extends AbstractHtmlDataProcessor {
     }
 
     // @Override
-    isFoilFromResultNode = (resultNode: Element): boolean => this.isFoilFromTitle(this.subtitleFromResultNode(resultNode));
+    isFoilFromResultNode = (resultNode: Element): boolean => this.isFoilFromString(this.subtitleFromResultNode(resultNode));
 }
 
 const OVERRIDDEN_METHOD: string = 'this method is overriden';

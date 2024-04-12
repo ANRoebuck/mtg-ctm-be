@@ -19,7 +19,7 @@ class DataGetter_Manaleak extends AbstractDataGetter {
         super({
             baseUrl: 'https://www.manaleak.com/',
             searchPath: '/index.php?route=product/search&search=',
-            searchSuffix: '',
+            searchSuffix: '#/availability=1',
             searchJoin: '+',
         });
     }

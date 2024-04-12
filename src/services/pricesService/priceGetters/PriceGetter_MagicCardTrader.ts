@@ -34,16 +34,16 @@ class DataProcessor_MagicCardTrader extends AbstractHtmlDataProcessor {
             resultSelector: 'div.products-container > ul > li',
             titleSelector: 'div.inner > div.image-meta > div.meta > a > h4.name',
 
-            useSubResults: false,
-            subresultSelector: '',
-            subtitleSelector: '',
-            subtitleFromText: () => '',
+            useSubResults: true,
+            subresultSelector: 'div.inner > div.variants > div.variant-row',
+            subtitleSelector: 'span.variant-main-info > span.variant-description',
+            subtitleFromText: (x) => x,
 
-            priceSelector: 'div.inner > div.variants > div.variant-row > span.variant-buttons > form > div.product-price-qty > span',
+            priceSelector: 'span.variant-buttons > form > div.product-price-qty > span',
             priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g,'')),
-            stockSelector: 'div.inner > div.variants > div.variant-row > span.variant-main-info > span.variant-qty',
+            stockSelector: 'span.variant-main-info > span.variant-qty',
             stockValueFromStockText: (text) => text === 'Out of stock' ? 0 : parseInt(text.replace(/([0-9]*)([^0-9]*)/, `$1`)),
-            isFoilSelector: 'div.inner > div.variants > div.variant-row > span.variant-main-info > span.variant-description',
+            isFoilSelector: 'span.variant-main-info > span.variant-description',
             expansionSelector: 'div.inner > div.image-meta > div.meta > a > span.category',
 
             imgSelector: 'div.inner > div.image-meta > div.image > a > img',

@@ -39,8 +39,8 @@ abstract class AbstractPriceGetter {
             // when true, raw HTML and processed results will be output to local directory (gitignored)
             console.log('Saving output');
             const filePath: string = './src/services/pricesService/priceGetters/output/'
-            // saveToFile(`${filePath}${this.name}_${searchTerm}_html.txt`, rawData);
-            saveToFile(`${filePath}${this.name}_${searchTerm}_html.txt`, JSON.stringify(rawData));
+            saveToFile(`${filePath}${this.name}_${searchTerm}_html.txt`, rawData);
+            // saveToFile(`${filePath}${this.name}_${searchTerm}_html.txt`, JSON.stringify(rawData));
             saveToFile(`${filePath}${this.name}_${searchTerm}_prices.json`, JSON.stringify(validResults));
         }
 

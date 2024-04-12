@@ -60,21 +60,34 @@ describe('strongMatch', () => {
     });
 
     it('ignores special chars and diacritics in both searchTerm and textBody', () => {
-        const noSpecialChars = 'aceiou';
-        const hasSpecialChars = 'àçéïôü';
+        const noSpecialChars = 'aceiouxyz';
+        const hasSpecialChars = 'àçéïôüxyz';
   
         expect(strongMatch(noSpecialChars, hasSpecialChars)).toBeTruthy();
         expect(strongMatch(hasSpecialChars, noSpecialChars)).toBeTruthy();
     });
 
     it('false for banned terms; case insensitive', () => {
-        const bannedTerms = ['foo', 'bar'];
+        const bannedTerms = ['foo', '(Bar)'];
         const searchTerm = 'match me';
         const textBody1 = 'bad string despite match me foo';
-        const textBody2 = 'bad string despite match me BAR';
+        const textBody2 = 'bad string despite match me (bar)';
+        const textBody3 = 'good string match me bar';   // bar not in brackets
   
         expect(strongMatch(textBody1, searchTerm, bannedTerms)).toBeFalsy();
         expect(strongMatch(textBody2, searchTerm, bannedTerms)).toBeFalsy();
+        expect(strongMatch(textBody3, searchTerm, bannedTerms)).toBeTruthy();
     });
+
+    it('ignores certain punctuation', () => {
+        const searchTerm1 = 'hyphenated-word';
+        const textBody1 = 'hyphenatedword';
+
+        const searchTerm2 = 'apos\'trophe';
+        const textBody2 = 'apostrophe'
+
+        expect(strongMatch(textBody1, searchTerm1)).toBeTruthy();
+        expect(strongMatch(textBody2, searchTerm2)).toBeTruthy();
+    })
 
 });

@@ -34,14 +34,14 @@ class DataProcessor_SkywardFire extends AbstractHtmlDataProcessor {
             resultSelector: 'div > section > div > div > ul > li.product',
             titleSelector: 'div.inner > div > div.meta > a > h4',
 
-            useSubResults: false,
-            subresultSelector: '',
-            subtitleSelector: '',
-            subtitleFromText: () => '',
+            useSubResults: true,
+            subresultSelector: 'div.inner > div.variants > div.variant-row',
+            subtitleSelector: 'span.variant-main-info > span.variant-short-info',
+            subtitleFromText: (x) => x.replace(/<.*>.*<\/.*>/, '').replace(/(.*),/, `$1`), // remove inner tags, then remove trailing comma
 
-            priceSelector: 'div.inner > div > div > span > form > div.product-price-qty > span',
+            priceSelector: 'span.variant-buttons > form > div.product-price-qty > span',
             priceValueFromPriceText: (text: string): number => parseInt(text.replace(/\D/g,'')),
-            stockSelector: 'div.inner > div.variants > div > span > span > em',
+            stockSelector: 'span.variant-main-info > span.variant-short-info > em',
             stockValueFromStockText: (text: string): number => text === 'Out of stock.' ? 0 : parseInt(text.replace(/([0-9]*)([^0-9]*)/, `$1`)),
             isFoilSelector: 'div.inner > div > div.meta > a > h4',
             expansionSelector: 'div.inner > div > div.meta > a > span.category',

@@ -42,4 +42,22 @@ describe('PriceGetter_SkywardFire', () => {
     expect(results).toStrictEqual(expectedResults);
   });
 
+  it('gets results for Dromokas Command', async () => {
+    const searchTerm = 'Dromokas Command';
+
+    const expectedResults = readResults(priceGetter.name, searchTerm);
+
+    const htmlString = readHtmlString(priceGetter.name, searchTerm);
+    mockedAxios.get.mockResolvedValueOnce({ data: htmlString });
+
+    const results: Price[] = await priceGetter.search(searchTerm, false);
+
+    expect(mockedAxios.get).toHaveBeenCalledWith(
+      stub + 'https://www.skywardfire.com/products/search?q=dromokas+command',
+      { "headers": { "Origin": "compare-the-magic" } }
+    );
+    expect(results.length).toBe(5);
+    expect(results).toStrictEqual(expectedResults);
+  });
+
 });

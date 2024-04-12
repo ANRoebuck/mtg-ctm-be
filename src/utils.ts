@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { Price } from './types/Price';
 
-export const sanitizeString = (text: string) => text.toLowerCase().replace(/\n/g, '').normalize("NFD").replace(/\p{Diacritic}/gu, '');
+export const sanitizeString = (text: string) => text.toLowerCase().replace(/[\n'-]/g, '').normalize("NFD").replace(/\p{Diacritic}/gu, '');
 
 const defaultBannedTerms = ['artcard', 'artseries', '(Art)'];
 
@@ -10,7 +10,7 @@ export const strongMatch = (textBody: string, searchTerm: string, bannedTerms: s
     const sanitizedTextBody = sanitizeString(textBody);
 
     // Check for banned terms
-    if (bannedTerms.some(term => sanitizedTextBody.includes(sanitizeString(term)))) {
+    if (bannedTerms.some(term => sanitizedTextBody.includes(term.toLocaleLowerCase()))) {
         return false;
     }
 

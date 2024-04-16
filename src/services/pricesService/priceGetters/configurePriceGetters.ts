@@ -21,7 +21,7 @@ import {
     PriceGetter_TrollTrader
 } from './';
 
-const priceGettersArray = [
+const priceGettersArray: AbstractPriceGetter[] = [
     new PriceGetter_Axion(),
     new PriceGetter_BigOrbitCards(),
     new PriceGetter_DiceSaloon(),

@@ -12,7 +12,7 @@ jest.mock('../PriceGetter_Axion', () => {
     return jest.fn().mockImplementation(() => {
         return { search: mockSearch }
     })
-})
+});
 
 let mockPriceGetter: AbstractPriceGetter;
 
@@ -23,7 +23,7 @@ beforeEach(() => {
 
 afterAll(() => jest.useRealTimers());
 
-describe.only('CachingPriceGetter', () => {
+describe('CachingPriceGetter', () => {
     it('Requests results from PriceGetter', async () => {
         const cachingPriceGetter = new CachingPriceGetter(0, mockPriceGetter);
         mockSearch.mockReturnValueOnce(somePrices).mockReturnValueOnce(morePrices);
@@ -52,7 +52,9 @@ describe.only('CachingPriceGetter', () => {
         mockSearch.mockReturnValueOnce(somePrices).mockReturnValueOnce(morePrices);
 
         const firstPrices = await(cachingPriceGetter.search('foo'));
+
         jest.advanceTimersByTime(2000);
+        
         const secondPrices = await(cachingPriceGetter.search('foo'));
 
         expect(mockPriceGetter.search).toHaveBeenCalledTimes(2);

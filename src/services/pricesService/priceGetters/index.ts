@@ -1,4 +1,5 @@
 import AbstractPriceGetter from './AbstractPriceGetter';
+import { IPriceGetterBehaviour } from './AbstractPriceGetter';
 import PriceGetter_Axion from './PriceGetter_Axion';
 import PriceGetter_BigOrbitCards from './PriceGetter_BigOrbitCards';
 import PriceGetter_DiceSaloon from './PriceGetter_DiceSaloon';
@@ -21,6 +22,7 @@ import PriceGetter_TrollTrader from './PriceGetter_TrollTrader';
 
 export {
     AbstractPriceGetter,
+    IPriceGetterBehaviour,
     PriceGetter_Axion,
     PriceGetter_BigOrbitCards,
     PriceGetter_DiceSaloon,

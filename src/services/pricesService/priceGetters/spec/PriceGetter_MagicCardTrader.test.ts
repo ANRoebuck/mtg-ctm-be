@@ -32,7 +32,7 @@ describe('PriceGetter_MagicCardTrader', () => {
     const htmlString = readHtmlString(priceGetter.name, searchTerm);
     mockedAxios.get.mockResolvedValueOnce({ data: htmlString });
 
-    const results: Price[] = await priceGetter.search(searchTerm, false);
+    const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
       stub + 'https://www.themagiccardtrader.com/products/search?q=restless+spire',

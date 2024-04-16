@@ -24,7 +24,7 @@ class PricesService {
         console.log("Getting prices. seller = " + seller + ", searchTerm = "  + searchTerm);
         const priceGetter: AbstractPriceGetter = this.priceGetters[seller];
         console.log("Pricegetter = " + priceGetter.name);
-        return priceGetter ? priceGetter.search(searchTerm, saveOutput) : [];
+        return priceGetter ? priceGetter.getPrices(searchTerm, saveOutput) : [];
     }
 }
 

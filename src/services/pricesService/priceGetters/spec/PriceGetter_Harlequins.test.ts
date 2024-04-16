@@ -32,7 +32,7 @@ describe('PriceGetter_Harlequins', () => {
     const htmlString = readHtmlString(priceGetter.name, searchTerm);
     mockedAxios.get.mockResolvedValueOnce({ data: htmlString });
 
-    const results: Price[] = await priceGetter.search(searchTerm, false);
+    const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
       stub + 'https://www.harlequins-games.com/products/search?q=tarmogoyf&c=8&disable_mobile=1',

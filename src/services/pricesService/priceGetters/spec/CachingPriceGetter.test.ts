@@ -10,7 +10,7 @@ jest.useFakeTimers();
 const mockSearch = jest.fn();
 jest.mock('../PriceGetter_Axion', () => {
     return jest.fn().mockImplementation(() => {
-        return { search: mockSearch }
+        return { getPrices: mockSearch }
     })
 });
 
@@ -30,7 +30,7 @@ describe('CachingPriceGetter', () => {
 
         const prices = await(cachingPriceGetter.search('foo'));
 
-        expect(mockPriceGetter.search).toHaveBeenCalledWith('foo');
+        expect(mockPriceGetter.getPrices).toHaveBeenCalledWith('foo');
         expect(prices).toBe(somePrices);
     });
 
@@ -42,7 +42,7 @@ describe('CachingPriceGetter', () => {
         // call again immediately
         const secondPrices = await(cachingPriceGetter.search('foo'));
 
-        expect(mockPriceGetter.search).toHaveBeenCalledTimes(1);
+        expect(mockPriceGetter.getPrices).toHaveBeenCalledTimes(1);
         expect(firstPrices).toBe(somePrices);
         expect(secondPrices).toBe(somePrices);
     });
@@ -54,10 +54,10 @@ describe('CachingPriceGetter', () => {
         const firstPrices = await(cachingPriceGetter.search('foo'));
 
         jest.advanceTimersByTime(2000);
-        
+
         const secondPrices = await(cachingPriceGetter.search('foo'));
 
-        expect(mockPriceGetter.search).toHaveBeenCalledTimes(2);
+        expect(mockPriceGetter.getPrices).toHaveBeenCalledTimes(2);
         expect(firstPrices).toBe(somePrices);
         expect(secondPrices).toBe(morePrices);
     });

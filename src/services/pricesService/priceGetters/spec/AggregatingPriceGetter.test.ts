@@ -1,6 +1,6 @@
 import { Price } from "../../../../types/Price";
-import AbstractPriceGetter from "../AbstractPriceGetter";
 import AggregatingPriceGetter from "../AggregatingPriceGetter";
+import { IPriceGetterBehaviour } from "../AbstractPriceGetter";
 
 import PriceGetter_Axion from '../PriceGetter_Axion';
 import PriceGetter_BigOrbitCards from "../PriceGetter_BigOrbitCards";
@@ -11,20 +11,20 @@ const mockSearch2 = jest.fn();
 
 jest.mock('../PriceGetter_Axion', () => {
     return jest.fn().mockImplementation(() => {
-        return { search: mockSearch1 }
+        return { getPrices: mockSearch1 }
     })
 });
 
 jest.mock('../PriceGetter_BigOrbitCards', () => {
     return jest.fn().mockImplementation(() => {
-        return { search: mockSearch2 }
+        return { getPrices: mockSearch2 }
     })
 });
 
 
-let mockPriceGetter1: AbstractPriceGetter;
-let mockPriceGetter2: AbstractPriceGetter;
-let mockPriceGetters: AbstractPriceGetter[];
+let mockPriceGetter1: IPriceGetterBehaviour;
+let mockPriceGetter2: IPriceGetterBehaviour;
+let mockPriceGetters: IPriceGetterBehaviour[];
 
 beforeEach(() => {
     mockSearch1.mockReset();
@@ -45,11 +45,11 @@ describe('CachingPriceGetter', () => {
 
         const prices = await (aggregatingPriceGetter.search('some card'));
 
-        expect(mockPriceGetter1.search).toHaveBeenCalledWith('some card');
-        expect(mockPriceGetter1.search).toHaveBeenCalledTimes(1);
+        expect(mockPriceGetter1.getPrices).toHaveBeenCalledWith('some card');
+        expect(mockPriceGetter1.getPrices).toHaveBeenCalledTimes(1);
 
-        expect(mockPriceGetter2.search).toHaveBeenCalledWith('some card');
-        expect(mockPriceGetter2.search).toHaveBeenCalledTimes(1);
+        expect(mockPriceGetter2.getPrices).toHaveBeenCalledWith('some card');
+        expect(mockPriceGetter2.getPrices).toHaveBeenCalledTimes(1);
 
         expect(prices).toEqual([priceA, priceB, priceC]);
     });

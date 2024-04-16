@@ -32,7 +32,7 @@ describe('PriceGetter_MagicMadhouse', () => {
     const htmlString = readHtmlString(priceGetter.name, searchTerm);
     mockedAxios.get.mockResolvedValueOnce({ data: JSON.parse(htmlString) });
 
-    const results: Price[] = await priceGetter.search(searchTerm, false);
+    const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
       stub + 'https://eucs25.ksearchnet.com/cloud-search/n-search/search?ticket=klevu-161710301480613427&term=watery%20grave&paginationStartsFrom=0&sortPrice=false&ipAddress=undefined&analyticsApiKey=klevu-161710301480613427&showOutOfStockProducts=true&klevuFetchPopularTerms=false&klevu_priceInterval=500&fetchMinMaxPrice=true&klevu_multiSelectFilters=true&noOfResults=36&klevuSort=rel&enableFilters=true&filterResults=&visibility=search&category=KLEVU_PRODUCT&klevu_filterLimit=400&sv=121&lsqt=&responseType=json&priceFieldSuffix=GBP&klevu_loginCustomerGroup=',

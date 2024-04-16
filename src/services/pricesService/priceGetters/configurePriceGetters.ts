@@ -1,5 +1,5 @@
 import {
-    AbstractPriceGetter,
+    IPriceGetterBehaviour,
     PriceGetter_Axion,
     PriceGetter_BigOrbitCards,
     PriceGetter_DiceSaloon,
@@ -21,7 +21,7 @@ import {
     PriceGetter_TrollTrader
 } from './';
 
-const priceGettersArray: AbstractPriceGetter[] = [
+const priceGettersArray: IPriceGetterBehaviour[] = [
     new PriceGetter_Axion(),
     new PriceGetter_BigOrbitCards(),
     new PriceGetter_DiceSaloon(),
@@ -45,9 +45,9 @@ const priceGettersArray: AbstractPriceGetter[] = [
     new PriceGetter_TrollTrader(),
 ];
 
-const configurePriceGetters = (): { [key: string]: AbstractPriceGetter } => {
+const configurePriceGetters = (): { [key: string]: IPriceGetterBehaviour } => {
     
-    const priceGetters = priceGettersArray.reduce((acc: { [key: string]: AbstractPriceGetter }, ele : AbstractPriceGetter) => {
+    const priceGetters = priceGettersArray.reduce((acc: { [key: string]: IPriceGetterBehaviour }, ele : IPriceGetterBehaviour) => {
         acc[ele.name] = ele;
         return acc;
     }, {});

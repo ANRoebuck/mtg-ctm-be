@@ -1,4 +1,4 @@
-import AbstractPriceGetter from './AbstractPriceGetter';
+import { IPriceGetterBehaviour } from './AbstractPriceGetter';
 import { Price } from '../../../types/Price';
 
 interface TimeStampedPrices {
@@ -14,9 +14,9 @@ class CachingPriceGetter {
 
     #cachingAge: number;
     #cachedPricesMap: CachedPricesMap = {};
-    #priceGetter: AbstractPriceGetter;
+    #priceGetter: IPriceGetterBehaviour;
 
-    constructor(cachingAge: number, priceGetter: AbstractPriceGetter){
+    constructor(cachingAge: number, priceGetter: IPriceGetterBehaviour){
         this.#cachingAge = cachingAge;
         this.#priceGetter = priceGetter;
     }
@@ -50,7 +50,7 @@ class CachingPriceGetter {
     }
 
     #getFreshPrices = async (searchTerm: string): Promise<Price[]> => {
-        const prices: Price[] = await this.#priceGetter.search(searchTerm);
+        const prices: Price[] = await this.#priceGetter.getPrices(searchTerm);
         this.#cachePrices(searchTerm, prices);
         return prices;
     }

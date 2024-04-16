@@ -32,7 +32,7 @@ describe('PriceGetter_Manaleak', () => {
     const htmlString = readHtmlString(priceGetter.name, searchTerm);
     mockedAxios.get.mockResolvedValueOnce({ data: htmlString });
 
-    const results: Price[] = await priceGetter.search(searchTerm, false);
+    const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
       stub + 'https://www.manaleak.com//index.php?route=product/search&search=tarmogoyf#/availability=1',

@@ -1,15 +1,15 @@
-import AbstractPriceGetter from "./AbstractPriceGetter";
+import { IPriceGetterBehaviour } from './AbstractPriceGetter';
 import { Price } from '../../../types/Price';
 
 interface Args {
     name: string,
-    priceGetters: AbstractPriceGetter[]
+    priceGetters: IPriceGetterBehaviour[]
 }
 
 class AggregatingPriceGetter {
 
     name: string;
-    priceGetters: AbstractPriceGetter[];
+    priceGetters: IPriceGetterBehaviour[];
 
     constructor({ name, priceGetters }: Args) {
         this.name = name;
@@ -20,7 +20,7 @@ class AggregatingPriceGetter {
         let aggregatedPrices: Price[] = [];
 
         this.priceGetters.forEach(async getter => (
-            await getter.search(searchTerm)).forEach(p => aggregatedPrices.push(p)));
+            await getter.getPrices(searchTerm)).forEach(p => aggregatedPrices.push(p)));
 
         return aggregatedPrices;
     }

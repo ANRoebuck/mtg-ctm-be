@@ -3,14 +3,19 @@ import { AbstractDataProcessor } from './AbstractDataProcessor';
 import { Price } from '../../../types/Price';
 import { sanitizeString, saveToFile, strongMatch } from '../../../utils';
 
-interface Args {
+type Args = {
     name: string,
     dataGetter: AbstractDataGetter,
     dataProcessor: AbstractDataProcessor,
 }
 
+export interface IPriceGetterBehaviour {
+    name: string;
+    getPrices(searchTerm: string): Promise<Price[]>;
+}
 
-abstract class AbstractPriceGetter {
+
+abstract class AbstractPriceGetter implements IPriceGetterBehaviour {
 
     name: string;
     dataGetter: AbstractDataGetter;
@@ -22,7 +27,7 @@ abstract class AbstractPriceGetter {
         this.dataProcessor = dataProcessor;
     }
 
-    search = async (searchTerm: string, saveOutput: boolean = false): Promise<Price[]> => {
+    getPrices = async (searchTerm: string, saveOutput: boolean = false): Promise<Price[]> => {
 
         const sanitisedSearchTerm = sanitizeString(searchTerm);
 

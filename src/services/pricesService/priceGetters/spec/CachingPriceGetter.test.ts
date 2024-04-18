@@ -1,5 +1,5 @@
 import { Price } from "../../../../types/Price";
-import AbstractPriceGetter from "../AbstractPriceGetter";
+import { IPriceGetterBehaviour } from "../AbstractPriceGetter";
 import CachingPriceGetter from "../CachingPriceGetter";
 import PriceGetter_Axion from '../PriceGetter_Axion';
 
@@ -14,7 +14,7 @@ jest.mock('../PriceGetter_Axion', () => {
     })
 });
 
-let mockPriceGetter: AbstractPriceGetter;
+let mockPriceGetter: IPriceGetterBehaviour;
 
 beforeEach(() => {
     mockSearch.mockReset();

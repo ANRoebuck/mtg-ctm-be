@@ -43,7 +43,7 @@ describe('CachingPriceGetter', () => {
         mockSearch1.mockReturnValueOnce([priceA, priceB]);
         mockSearch2.mockReturnValueOnce([priceC]);
 
-        const prices = await (aggregatingPriceGetter.search('some card'));
+        const prices = await (aggregatingPriceGetter.getPrices('some card'));
 
         expect(mockPriceGetter1.getPrices).toHaveBeenCalledWith('some card');
         expect(mockPriceGetter1.getPrices).toHaveBeenCalledTimes(1);

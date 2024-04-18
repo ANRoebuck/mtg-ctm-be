@@ -11,7 +11,7 @@ type Args = {
 
 export interface IPriceGetterBehaviour {
     name: string;
-    getPrices(searchTerm: string): Promise<Price[]>;
+    getPrices(searchTerm: string, saveOutput?: boolean): Promise<Price[]>;
 }
 
 

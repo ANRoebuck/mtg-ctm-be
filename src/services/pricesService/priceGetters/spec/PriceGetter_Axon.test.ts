@@ -1,5 +1,5 @@
 import axios, { AxiosStatic } from 'axios';
-import AbstractPriceGetter from '../AbstractPriceGetter';
+import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils';
 
@@ -11,7 +11,7 @@ const mockedAxios: jest.Mocked<AxiosStatic> = axios as jest.Mocked<typeof axios>
 
 const stub = 'https://mtg-shelf.herokuapp.com/';
 
-let priceGetter: AbstractPriceGetter;
+let priceGetter: IPriceGetterBehaviour;
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -24,19 +24,41 @@ describe('PriceGetter_Axion', () => {
     expect(priceGetter.name).toBe('Axion Now');
   });
 
-  // it('gets results for Tarmogoyf', async () => {
-  //   const searchTerm = 'Tarmogoyf';
+  it('gets results for Tarmogoyf', async () => {
+    const searchTerm = 'Tarmogoyf';
 
-  //   const expectedResults = readResults(priceGetter.name, searchTerm);
+    // const expectedResults = readResults(priceGetter.name, searchTerm);
+    const expectedResults: Price[] = [];
 
-  //   const htmlString = readHtmlString(priceGetter.name, searchTerm);
-  //   mockedAxios.get.mockResolvedValueOnce({ data: htmlString });
+    // const htmlString = readHtmlString(priceGetter.name, searchTerm);
+    const htmlString1 = '';
+    const htmlString2 = '';
 
-  //   const results: Price[] = await priceGetter.search(searchTerm, false);
+    mockedAxios.get
+      .mockResolvedValue({ data: htmlString1 })
+      .mockResolvedValueOnce({ data: htmlString2 });
 
-  //   expect(mockedAxios.get).toHaveBeenCalledWith(stub + 'https://www.axionnow.com/products/search?q=tarmogoyf', {"headers": {"Origin": "compare-the-magic"}});
-  //   expect(results.length).toBe(7);
-  //   expect(results).toStrictEqual(expectedResults);
-  // });
+    const results: Price[] = await priceGetter.getPrices(searchTerm);
+
+    expect(mockedAxios.get).toHaveBeenCalledTimes(2);
+    // expect(mockedAxios.get).toHaveBeenCalledWith(
+    //   stub + 'https://www.axionnow.com/search?type=product&q=tarmogoyf&filter.v.availability=1&filter.v.option.finish=Non-Foil',
+    //   { "headers": { "Origin": "compare-the-magic" } });
+    // expect(mockedAxios.get).toHaveBeenCalledWith(
+    //   stub + 'https://www.axionnow.com/search?type=product&q=tarmogoyf&filter.v.availability=1&filter.v.option.finish=Foil',
+    //   { "headers": { "Origin": "compare-the-magic" } });
+    expect(mockedAxios.get.mock.calls).toEqual([
+      [
+        stub + 'https://www.axionnow.com/search?type=product&q=tarmogoyf&filter.v.availability=1&filter.v.option.finish=Non-Foil',
+        { "headers": { "Origin": "compare-the-magic" } }
+      ],
+      [
+        stub + 'https://www.axionnow.com/search?type=product&q=tarmogoyf&filter.v.availability=1&filter.v.option.finish=Foil',
+        { "headers": { "Origin": "compare-the-magic" } }
+      ],
+    ]);
+    expect(results.length).toBe(0);
+    expect(results).toStrictEqual(expectedResults);
+  });
 
 });

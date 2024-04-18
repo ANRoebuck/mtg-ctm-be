@@ -16,7 +16,7 @@ class AggregatingPriceGetter {
         this.priceGetters = priceGetters;
     }
 
-    search = async (searchTerm: string): Promise<Price[]> => {
+    getPrices = async (searchTerm: string): Promise<Price[]> => {
         let aggregatedPrices: Price[] = [];
 
         this.priceGetters.forEach(async getter => (

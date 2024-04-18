@@ -1,5 +1,5 @@
 import axios, { AxiosStatic } from 'axios';
-import AbstractPriceGetter from '../AbstractPriceGetter';
+import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils';
 
@@ -11,7 +11,7 @@ const mockedAxios: jest.Mocked<AxiosStatic> = axios as jest.Mocked<typeof axios>
 
 const stub = 'https://mtg-shelf.herokuapp.com/';
 
-let priceGetter: AbstractPriceGetter;
+let priceGetter: IPriceGetterBehaviour;
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -32,7 +32,7 @@ describe('PriceGetter_Harlequins', () => {
     const htmlString = readHtmlString(priceGetter.name, searchTerm);
     mockedAxios.get.mockResolvedValueOnce({ data: htmlString });
 
-    const results: Price[] = await priceGetter.getPrices(searchTerm, false);
+    const results: Price[] = await priceGetter.getPrices(searchTerm);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
       stub + 'https://www.harlequins-games.com/products/search?q=tarmogoyf&c=8&disable_mobile=1',

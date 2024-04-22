@@ -1,6 +1,7 @@
 import AbstractDataGetter from './AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
+import { currencies } from '../../../types/Currency';
 
 const sellerName = 'Skyward Fire';
 
@@ -29,7 +30,7 @@ class DataProcessor_SkywardFire extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: sellerName,
-            currencyCode: 'GBP',
+            currency: currencies.GBP,
 
             resultSelector: 'div > section > div > div > ul > li.product',
             titleSelector: 'div.inner > div > div.meta > a > h4',

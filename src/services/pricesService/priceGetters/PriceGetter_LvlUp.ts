@@ -1,6 +1,7 @@
 import AbstractDataGetter from './AbstractDataGetter';
 import { AbstractHtmlDataProcessor, Stock } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
+import { currencies } from '../../../types/Currency';
 
 const sellerName = 'Lvl Up Gaming';
 
@@ -29,7 +30,7 @@ class DataProcessor_LvlUp extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: sellerName,
-            currencyCode: 'GBP',
+            currency: currencies.GBP,
 
             resultSelector: 'div > div.row > div.col-md-4',
             titleSelector: 'div > p.productTitle',

@@ -1,6 +1,7 @@
 import AbstractDataGetter from './AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
+import { currencies } from '../../../types/Currency';
 
 const sellerName = 'Highlander Games';
 
@@ -29,7 +30,7 @@ class DataProcessor_HighlanderGames extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: sellerName,
-            currencyCode: 'GBP',
+            currency: currencies.GBP,
 
             resultSelector: 'div.grid-uniform > div.grid-item',
             titleSelector: 'a > p',

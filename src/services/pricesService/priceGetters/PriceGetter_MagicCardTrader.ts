@@ -1,6 +1,7 @@
 import AbstractDataGetter from './AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
+import { currencies } from '../../../types/Currency';
 
 const sellerName = 'Magic Card Trader';
 
@@ -29,7 +30,7 @@ class DataProcessor_MagicCardTrader extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: sellerName,
-            currencyCode: 'GBP',
+            currency: currencies.GBP,
 
             resultSelector: 'div.products-container > ul > li',
             titleSelector: 'div.inner > div.image-meta > div.meta > a > h4.name',

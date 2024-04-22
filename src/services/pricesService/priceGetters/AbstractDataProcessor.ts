@@ -1,4 +1,5 @@
 import { Price } from '../../../types/Price';
+import { Currency } from '../../../types/Currency';
 import { JSDOM } from 'jsdom';
 import currencyService from '../../currencyService/CurrencyService';
 
@@ -16,7 +17,7 @@ export abstract class AbstractJsonDataProcessor implements AbstractDataProcessor
 export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor {
 
     seller: string;
-    currencyCode: string;
+    currency: Currency;
 
     resultSelector: string;
     titleSelector: string;
@@ -42,7 +43,7 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
     productRefAttribute: string;
 
     constructor({
-        seller, currencyCode, resultSelector, titleSelector,
+        seller, currency: currencyCode, resultSelector, titleSelector,
         useSubResults, subresultSelector, subtitleSelector, subtitleFromText,
         priceSelector, priceValueFromPriceText, stockSelector, stockValueFromStockText,
         expansionSelector, isFoilSelector,
@@ -51,7 +52,7 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
     }: HtmlProcoessorArgs) {
 
         this.seller = seller;
-        this.currencyCode = currencyCode;
+        this.currency = currencyCode;
 
         this.resultSelector = resultSelector;
         this.titleSelector = titleSelector;
@@ -100,9 +101,9 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
                 if (!stock.inStock) return;
 
                 const price_minorUnits = this.priceFromResultNode(subresult);
-                const price_majorUnits = currencyService.minorUnitsToMajorUnits(price_minorUnits, this.currencyCode);
-                const price_relativeUnits = currencyService.minorUnitsToRelativeUnits(price_minorUnits, this.currencyCode);
-                const price_textRepresentation = currencyService.majorUnitsToTextRepresentation(price_majorUnits, this.currencyCode);
+                const price_majorUnits = currencyService.minorUnitsToMajorUnits(price_minorUnits, this.currency);
+                const price_relativeUnits = currencyService.minorUnitsToRelativeUnits(price_minorUnits, this.currency);
+                const price_textRepresentation = currencyService.majorUnitsToTextRepresentation(price_majorUnits, this.currency);
 
                 const subtitle = this.useSubResults ? this.subtitleFromResultNode(subresult) : '';
 
@@ -188,7 +189,7 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
 
 interface HtmlProcoessorArgs {
     seller: string,
-    currencyCode: string,
+    currency: Currency,
 
     resultSelector: string,
     titleSelector: string,

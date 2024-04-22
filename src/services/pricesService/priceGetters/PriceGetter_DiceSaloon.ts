@@ -1,6 +1,7 @@
 import AbstractDataGetter from './AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
+import { currencies } from '../../../types/Currency';
 
 const sellerName = 'Dice Saloon';
 
@@ -29,7 +30,7 @@ class DataProcessor_DiceSaloon extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: sellerName,
-            currencyCode: 'GBP',
+            currency: currencies.GBP,
 
             resultSelector: 'div.row > div.product-list-item',
             titleSelector: 'div > div > span.info',

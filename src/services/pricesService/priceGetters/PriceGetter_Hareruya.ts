@@ -1,6 +1,7 @@
 import AbstractDataGetter from './AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
+import { currencies } from '../../../types/Currency';
 
 const sellerName = 'Hareruya';
 
@@ -29,7 +30,7 @@ class DataProcessor_Hareruya extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: sellerName,
-            currencyCode: 'JPY',
+            currency: currencies.JPY,
 
             resultSelector: 'ul.itemListLine > li.itemList',
             titleSelector: 'div.itemData > a',

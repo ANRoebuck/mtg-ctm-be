@@ -1,6 +1,7 @@
 import AbstractDataGetter from './AbstractDataGetter';
 import { AbstractHtmlDataProcessor, Stock } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
+import { currencies } from '../../../types/Currency';
 
 const sellerName = 'Patriot Games Leeds';
 
@@ -29,7 +30,7 @@ class DataProceesor_PatriotGamesLeeds extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: sellerName,
-            currencyCode: 'GBP',
+            currency: currencies.GBP,
 
             resultSelector: '#productListing > table > tbody> tr',
             titleSelector: 'td > h3.itemTitle > a',

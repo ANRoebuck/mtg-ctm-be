@@ -1,6 +1,7 @@
 import AbstractDataGetter from './AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
+import { currencies } from '../../../types/Currency';
 
 const sellerName = 'Star City Games';
 
@@ -51,7 +52,7 @@ class DataProcessor_StarCityGames extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: sellerName,
-            currencyCode: 'USD',
+            currency: currencies.USD,
 
             resultSelector: 'div > div.hawk-results-item',
             titleSelector: 'div > div > h2 > a',

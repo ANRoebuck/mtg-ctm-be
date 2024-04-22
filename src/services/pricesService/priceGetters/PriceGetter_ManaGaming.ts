@@ -1,6 +1,7 @@
 import AbstractDataGetter from './AbstractDataGetter';
 import { AbstractHtmlDataProcessor, Stock } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
+import { currencies } from '../../../types/Currency';
 
 const sellerName = 'Mana Gaming';
 
@@ -29,7 +30,7 @@ class DataProcessor_ManaGaming extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: sellerName,
-            currencyCode: 'GBP',
+            currency: currencies.GBP,
 
             resultSelector: 'div.collectionGrid > div.productCard__card',
             titleSelector: 'div.productCard__lower > p.productCard__title > a',
@@ -60,10 +61,10 @@ class DataProcessor_ManaGaming extends AbstractHtmlDataProcessor {
 
     // @Override
     stockFromResultNode = (resultNode: Element): Stock => {
-            const value = resultNode.getAttribute(this.stockSelector) || 0;
+            const value = resultNode.getAttribute(this.stockSelector) || '0';
             return {
-                inStock: value > 0,
-                level: '' + value,
+                inStock: parseInt(value) > 0,
+                level: value,
             };
         };
 

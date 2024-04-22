@@ -2,6 +2,7 @@ import AbstractDataGetter from './AbstractDataGetter';
 import { AbstractJsonDataProcessor } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
 import { Price } from '../../../types/Price';
+import { currencies, Currency } from '../../../types/Currency';
 import currencyService from '../../currencyService/CurrencyService';
 
 const sellerName = 'Big Orbit Cards';
@@ -30,12 +31,12 @@ class DataGetter_BigOrbitCards extends AbstractDataGetter {
 class DataProcesor_BigOrbitCards extends AbstractJsonDataProcessor {
 
     seller: string;
-    currencyCode: string;
+    currency: Currency;
 
     constructor() {
         super();
         this.seller = sellerName;
-        this.currencyCode = 'GBP';
+        this.currency = currencies.GBP;
     }
 
     // @Override
@@ -48,9 +49,9 @@ class DataProcesor_BigOrbitCards extends AbstractJsonDataProcessor {
             const productRef: string = result.url;
             const expansion: string = result.magic_set;
             const price_minorUnits: number = parseInt(result.price.replace(/\D/g,''));
-            const price_majorUnits = currencyService.minorUnitsToMajorUnits(price_minorUnits, this.currencyCode);
-            const price_relativeUnits = currencyService.minorUnitsToRelativeUnits(price_minorUnits, this.currencyCode);
-            const price_textRepresentation = currencyService.majorUnitsToTextRepresentation(price_majorUnits, this.currencyCode);
+            const price_majorUnits = currencyService.minorUnitsToMajorUnits(price_minorUnits, this.currency);
+            const price_relativeUnits = currencyService.minorUnitsToRelativeUnits(price_minorUnits, this.currency);
+            const price_textRepresentation = currencyService.majorUnitsToTextRepresentation(price_majorUnits, this.currency);
             const stock_level = parseInt(result.inventory_level);
             const stock_inStock = stock_level > 0;
             const isFoil: boolean = title.toLowerCase().includes('foil');

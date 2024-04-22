@@ -1,6 +1,7 @@
 import AbstractDataGetter from './AbstractDataGetter';
 import { AbstractHtmlDataProcessor, Stock } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
+import { currencies } from '../../../types/Currency';
 
 const sellerName = 'Lazy Dragon Gaming';
 
@@ -29,7 +30,7 @@ class DataProcessor_LazyDragonGaming extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: sellerName,
-            currencyCode: 'GBP',
+            currency: currencies.GBP,
 
             resultSelector: 'div.collectionGrid > div.productCard__card',
             titleSelector: 'div.productCard__lower > p.productCard__title > a',

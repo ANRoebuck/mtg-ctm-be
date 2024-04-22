@@ -2,6 +2,7 @@ import AbstractDataGetter from './AbstractDataGetter';
 import { AbstractHtmlDataProcessor } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
 import AggregatingPriceGetter from './AggregatingPriceGetter';
+import { currencies } from '../../../types/Currency';
 
 const sellerName = 'Axion Now';
 
@@ -60,7 +61,7 @@ class DataProcessor_Axion extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: sellerName,
-            currencyCode: 'GBP',
+            currency: currencies.GBP,
 
             // resultSelector: 'div[class="#collection-grid"] > div[class="#grid"] > div[class="#product-card"]',
             resultSelector: 'div[class="#collection-grid"] > div > div',

@@ -1,10 +1,10 @@
-import AbstractPriceGetter from "./priceGetters/AbstractPriceGetter";
+import { IPriceGetterBehaviour } from "./priceGetters/AbstractPriceGetter";
 import configurePriceGetters from "./priceGetters/configurePriceGetters";
 import { Price } from '../../types/Price';
 
 class PricesService {
 
-    priceGetters: { [key: string]: AbstractPriceGetter }
+    priceGetters: { [key: string]: IPriceGetterBehaviour }
 
     constructor() {
         this.priceGetters = configurePriceGetters();
@@ -22,7 +22,7 @@ class PricesService {
 
     getPrices(seller: string, searchTerm: string, saveOutput: boolean): Promise<Price[]> | [] {
         console.log("Getting prices. seller = " + seller + ", searchTerm = "  + searchTerm);
-        const priceGetter: AbstractPriceGetter = this.priceGetters[seller];
+        const priceGetter: IPriceGetterBehaviour = this.priceGetters[seller];
         console.log("Pricegetter = " + priceGetter.name);
         return priceGetter ? priceGetter.getPrices(searchTerm, saveOutput) : [];
     }

@@ -1,7 +1,18 @@
-import { StringCleaner } from "./StringCleaner";
+import StringCleaner from "./StringCleaner";
 
 
 describe('StringCleaner', () => {
+
+    it('removes inner html', () => {
+        const input = 'foo <div>bar</div> baz';
+        const expected = 'foo  baz';
+
+        const output: string = new StringCleaner(input)
+            .removeInnerHtml()
+            .get();
+
+        expect(output).toBe(expected);
+    });
 
     it('removes line break html tags', () => {
         const input = 'foo <br> bar';
@@ -46,6 +57,17 @@ describe('StringCleaner', () => {
 
         expect(expected).toBe(output);
     });
+
+    it('removes trailing comma', () => {
+        const input = 'foo bar,';
+        const expected = 'foo bar';
+
+        const output: string = new StringCleaner(input)
+            .removeTrailingComma()
+            .get();
+
+        expect(expected).toBe(output);
+    });  
 
     it('removes trailing FOIL', () => {
         const input = 'foo Foil';

@@ -60,10 +60,10 @@ class DataProcessor_LvlUp extends AbstractHtmlDataProcessor {
     // @Override
     titleFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.titleSelector)]
         .map(node => node.innerHTML
-                .replace(/(.*)\[.*/g, `$1`)                 // take first segment before opening [
-                .replace(/<br>/, '')                        // remove linebreak html
-                .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)    // remove leading+trailing whitespace
-                .replace(/[【】《》\[\]■ ◆]/g, ' ')               // remove weird brackets
+                .replace(/(.*)\[.*/g, `$1`)                     // take first segment before opening [
+                .replace(/<br>/, '')                            // remove linebreak html
+                .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)   // remove leading+trailing whitespace
+                .replace(/[【】《》\[\]■ ◆]/g, ' ')              // remove weird brackets
         )[0] || '';
 
     // @Override

@@ -2,10 +2,12 @@
 interface IStringCleaner {
     str: string,
     get: () => string,
+    removeInnerHtml: () => IStringCleaner,
     removeLineBreakHtml: () => IStringCleaner,
     removeNewLines: () => IStringCleaner,
     removeNonDigits: () => IStringCleaner,
     removeSegmentInSquareBrackets: () => IStringCleaner,
+    removeTrailingComma: () => IStringCleaner,
     removeTrailingFOIL: () => IStringCleaner,
     removeWeirdBrackets: () => IStringCleaner,
     selectSegmentInSquareBrackets: () => IStringCleaner,
@@ -13,7 +15,7 @@ interface IStringCleaner {
     trimWhitespace: () => IStringCleaner
 }
 
-export class StringCleaner implements IStringCleaner {
+class StringCleaner implements IStringCleaner {
 
     str: string;
 
@@ -23,6 +25,11 @@ export class StringCleaner implements IStringCleaner {
 
     get() {
         return this.str;
+    }
+
+    removeInnerHtml(): IStringCleaner {
+        this.str = this.str.replace(/<.*>.*<\/.*>/, '');
+        return this;
     }
 
     removeLineBreakHtml(): IStringCleaner {
@@ -42,6 +49,11 @@ export class StringCleaner implements IStringCleaner {
 
     removeSegmentInSquareBrackets(): IStringCleaner {
         this.str = this.str.replace(/(.*)\[(.*)\]/g, `$1`);
+        return this;
+    }
+
+    removeTrailingComma(): IStringCleaner {
+        this.str = this.str.replace(/(.*),/, `$1`);
         return this;
     }
 
@@ -72,6 +84,8 @@ export class StringCleaner implements IStringCleaner {
 
 }
 
+export default StringCleaner
+
 
 // to check
 
@@ -80,4 +94,10 @@ const textStringFromInnerHtml: RegExp = /(.|\n)*£([0-9]+).([0-9]{2})[\D]*/;
 
 // harlequins
 // stockvaluefromstocktext
+
+// pg leeds
+// expansion
+
+// starcity
+const removeTags = (text: string): string => text.replace(/<.*?>/g, '');
 

@@ -60,17 +60,17 @@ class DataProcessor_LondonMagicTraders extends AbstractHtmlDataProcessor {
     // @Override
     titleFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.titleSelector)]
         .map(node => node.innerHTML
-                .replace(/(.*)[-~](.*)/, `$1`)              // pre-dash text
-                .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)    // remove leading+trailing whitespace
+                .replace(/(.*)[-~](.*)/, `$1`)                  // pre-dash text
+                .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)   // remove leading+trailing whitespace
         )[0] || '';
 
     // @Override
     expansionFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.expansionSelector)]
         .map(node => node.innerHTML
-                .replace(/(.*)[-~](.*)/, `$2`)              // post-dash text
-                .replace(/<br>/, '')                        // remove linebreak html
-                .replace(/(.*)\[.*/g, `$1`)                 // take first segment before opening [
-                .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)    // remove leading+trailing whitespace
+                .replace(/(.*)[-~](.*)/, `$2`)                  // post-dash text
+                .replace(/<br>/, '')                            // remove linebreak html
+                .replace(/(.*)\[.*/g, `$1`)                     // take first segment before opening [
+                .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)   // remove leading+trailing whitespace
         )[0] || '';
 
     // @Override

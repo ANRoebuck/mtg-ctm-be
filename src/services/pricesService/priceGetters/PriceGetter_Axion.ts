@@ -10,7 +10,7 @@ class PriceGetter_Axion extends AggregatingPriceGetter {
     constructor() {
         super({
             name: sellerName,
-            priceGetters: [new PriceGetter_Axion_NonFoil(), new PriceGetter_Axion_Foil()],
+            priceGetters: [new PriceGetter_Axion_Foil()],
         });
     }
 }

@@ -16,11 +16,13 @@ class AggregatingPriceGetter {
         this.priceGetters = priceGetters;
     }
 
-    getPrices = async (searchTerm: string): Promise<Price[]> => {
+    getPrices = async (searchTerm: string, saveOutput: boolean = false): Promise<Price[]> => {
         let aggregatedPrices: Price[] = [];
-
-        this.priceGetters.forEach(async getter => (
-            await getter.getPrices(searchTerm)).forEach(p => aggregatedPrices.push(p)));
+        
+        await Promise.all(this.priceGetters.map(async getter => {
+            const prices = await getter.getPrices(searchTerm, saveOutput);
+            prices.forEach(p => aggregatedPrices.push(p));
+        }));
 
         return aggregatedPrices;
     }

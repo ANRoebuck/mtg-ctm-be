@@ -24,19 +24,22 @@ describe('PriceGetter_DiceSaloon', () => {
     expect(priceGetter.name).toBe('Dice Saloon');
   });
 
-  // it('gets results for Tarmogoyf', async () => {
-  //   const searchTerm = 'Tarmogoyf';
+  it('gets results for Steam Vents', async () => {
+    const searchTerm = 'Steam Vents';
 
-  //   const expectedResults = readResults(priceGetter.name, searchTerm);
+    const expectedResults = readResults(priceGetter.name, searchTerm);
 
-  //   const htmlString = readHtmlString(priceGetter.name, searchTerm);
-  //   mockedAxios.get.mockResolvedValueOnce({ data: htmlString });
+    const htmlString = readHtmlString(priceGetter.name, searchTerm);
+    mockedAxios.get.mockResolvedValueOnce({ data: htmlString });
 
-  //   const results: Price[] = await priceGetter.search(searchTerm, false);
+    const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
-  //   expect(mockedAxios.get).toHaveBeenCalledWith(stub + 'https://www.dicesaloonsingles.com/products?keywords=tarmogoyf&search%5Bin_stock%5D%5B%5D=true', {"headers": {"Origin": "compare-the-magic"}});
-  //   expect(results.length).toBe(3);
-  //   expect(results).toStrictEqual(expectedResults);
-  // });
+    expect(mockedAxios.get).toHaveBeenCalledWith(
+      stub + 'https://www.dicesaloonsingles.co.uk/search?options%5Bprefix%5D=last&type=product&q=steam+vents',
+      { "headers": { "Origin": "compare-the-magic" } }
+    );
+    expect(results.length).toBe(2);
+    expect(results).toStrictEqual(expectedResults);
+  });
 
 });

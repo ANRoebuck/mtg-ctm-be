@@ -45,10 +45,10 @@ describe('CachingPriceGetter', () => {
 
         const prices = await (aggregatingPriceGetter.getPrices('some card'));
 
-        expect(mockPriceGetter1.getPrices).toHaveBeenCalledWith('some card');
+        expect(mockPriceGetter1.getPrices).toHaveBeenCalledWith('some card', false);
         expect(mockPriceGetter1.getPrices).toHaveBeenCalledTimes(1);
 
-        expect(mockPriceGetter2.getPrices).toHaveBeenCalledWith('some card');
+        expect(mockPriceGetter2.getPrices).toHaveBeenCalledWith('some card', false);
         expect(mockPriceGetter2.getPrices).toHaveBeenCalledTimes(1);
 
         expect(prices).toEqual([priceA, priceB, priceC]);

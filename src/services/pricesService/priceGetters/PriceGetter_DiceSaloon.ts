@@ -65,7 +65,7 @@ class DataProcessor_DiceSaloon extends AbstractHtmlDataProcessor {
         // There is a tool-tip element displayed when hovering over add-to-cart button
         // The text from this element is either 'SOLD OUT' or 'Add To Cart'
         const addToCartToolTipElement = [...resultNode.querySelectorAll(this.stockSelector)][0];
-        const inStock = addToCartToolTipElement.innerHTML.includes('Add To Cart');
+        const inStock = addToCartToolTipElement?.innerHTML.includes('Add To Cart') || false;
         return {
             inStock,
             level: inStock ? '1' : '0'

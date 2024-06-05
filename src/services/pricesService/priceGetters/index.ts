@@ -2,6 +2,7 @@ import AbstractPriceGetter from './AbstractPriceGetter';
 import { IPriceGetterBehaviour } from './AbstractPriceGetter';
 import PriceGetter_Axion from './PriceGetter_Axion';
 import PriceGetter_BigOrbitCards from './PriceGetter_BigOrbitCards';
+import PriceGetter_BoardsAndSwords from './PriceGetter_BoardsAndSwords';
 import PriceGetter_DiceSaloon from './PriceGetter_DiceSaloon';
 import PriceGetter_Hareruya from './PriceGetter_Hareruya';
 import PriceGetter_Harlequins from './PriceGetter_Harlequins';
@@ -25,6 +26,7 @@ export {
     IPriceGetterBehaviour,
     PriceGetter_Axion,
     PriceGetter_BigOrbitCards,
+    PriceGetter_BoardsAndSwords,
     PriceGetter_DiceSaloon,
     PriceGetter_Hareruya,
     PriceGetter_Harlequins,

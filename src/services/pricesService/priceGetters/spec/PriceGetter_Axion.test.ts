@@ -40,14 +40,6 @@ describe('PriceGetter_Axion', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm);
 
     expect(mockedAxios.get).toHaveBeenCalledTimes(2);
-
-    // expect(mockedAxios.get).toHaveBeenCalledWith(
-    //   stub + 'https://www.axionnow.com/search?type=product&q=tarmogoyf&filter.v.availability=1&filter.v.option.finish=Non-Foil',
-    //   { "headers": { "Origin": "compare-the-magic" } });
-    // expect(mockedAxios.get).toHaveBeenCalledWith(
-    //   stub + 'https://www.axionnow.com/search?type=product&q=tarmogoyf&filter.v.availability=1&filter.v.option.finish=Foil',
-    //   { "headers": { "Origin": "compare-the-magic" } });
-
     expect(mockedAxios.get.mock.calls).toEqual([
       [
         stub + 'https://www.axionnow.com/search?type=product&q=steam+vents&filter.v.availability=1&filter.v.option.finish=Non-Foil',
@@ -65,3 +57,6 @@ describe('PriceGetter_Axion', () => {
   });
 
 });
+
+// NB: Axion's site attaches session IDs to product ref urls
+// this makes capturing data for tests tricky but does not break app functionality

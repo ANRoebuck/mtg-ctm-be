@@ -2,6 +2,7 @@ import {
     IPriceGetterBehaviour,
     PriceGetter_Axion,
     PriceGetter_BigOrbitCards,
+    PriceGetter_BoardsAndSwords,
     PriceGetter_DiceSaloon,
     PriceGetter_Hareruya,
     PriceGetter_Harlequins,
@@ -24,6 +25,7 @@ import {
 const priceGettersArray: IPriceGetterBehaviour[] = [
     new PriceGetter_Axion(),
     new PriceGetter_BigOrbitCards(),
+    new PriceGetter_BoardsAndSwords,
     new PriceGetter_DiceSaloon(),
     new PriceGetter_Hareruya(),
     new PriceGetter_Harlequins(),

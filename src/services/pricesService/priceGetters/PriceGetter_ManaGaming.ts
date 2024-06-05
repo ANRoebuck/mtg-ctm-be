@@ -43,7 +43,7 @@ class DataProcessor_ManaGaming extends AbstractHtmlDataProcessor {
             priceSelector: 'data-variantprice', // attribute
             priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g,'')),
             stockSelector: 'data-variantqty', // attribute
-            stockValueFromStockText: () => 1, // not used
+            stockValueFromStockText: (_: string): number => 1, // not used
             isFoilSelector: 'div.inner > div > div.meta > a > h4',
             expansionSelector: 'div.productCard__lower > p.productCard__setName',
 

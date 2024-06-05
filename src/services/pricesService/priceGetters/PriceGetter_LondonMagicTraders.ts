@@ -19,8 +19,8 @@ class DataGetter_LondonMagicTraders extends AbstractDataGetter {
     constructor() {
         super({
             baseUrl: 'https://londonmagictraders.com/',
-            searchPath: 'search?q=*',
-            searchSuffix: '*',
+            searchPath: 'search?q=',
+            searchSuffix: '&options%5Bprefix%5D=last&filter.v.availability=1',
             searchJoin: '+',
         });
     }
@@ -32,26 +32,26 @@ class DataProcessor_LondonMagicTraders extends AbstractHtmlDataProcessor {
             seller: sellerName,
             currency: currencies.GBP,
 
-            resultSelector: 'div > div.row > div.col-md-4',
-            titleSelector: 'div > p.productTitle',
+            resultSelector: 'div > ul > li.grid__item',
+            titleSelector: 'div.card-wrapper > div > div.card__content > div.card__information > h3 > a',
 
             useSubResults: false,
             subresultSelector: '',
             subtitleSelector: '',
             subtitleFromText: () => '',
 
-            priceSelector: 'div > p.productPrice',
+            priceSelector: 'div.card-wrapper > div > div.card__content > div.card__information > div.card-information > div > div.price__container > div.price__regular > span.price-item',
             priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g,'')),
-            stockSelector: 'p',
-            stockValueFromStockText: (x: string): number => parseInt(x),    // not used
-            isFoilSelector: 'div > p.productTitle',
-            expansionSelector: 'div > p.productTitle',
+            stockSelector: '', // not used
+            stockValueFromStockText: (_: string): number => 1, // not used
+            isFoilSelector: 'div.card-wrapper > div > div.card__content > div.card__information > h3 > a',
+            expansionSelector: 'div.card-wrapper > div > div.card__content > div.card__information > h3 > a',
 
-            imgSelector: 'div > div.imgWrapper > img.items-even',
-            imgBaseUrl: '',
+            imgSelector: 'div.card-wrapper > div > div.card__inner > div.card__media > div.media > img',
+            imgBaseUrl: 'https:',
             imgSrcAttribute: 'src',
 
-            productSelector: 'div > div > div.view > a',
+            productSelector: 'div.card-wrapper > div > div.card__inner > div.card__content > div.card__information > h3 > a',
             productBaseUrl: 'https://londonmagictraders.com',
             productRefAttribute: 'href',
         });
@@ -70,13 +70,14 @@ class DataProcessor_LondonMagicTraders extends AbstractHtmlDataProcessor {
                 .replace(/(.*)[-~](.*)/, `$2`)                  // post-dash text
                 .replace(/<br>/, '')                            // remove linebreak html
                 .replace(/(.*)\[.*/g, `$1`)                     // take first segment before opening [
+                .replace(/(.*)\[.*/g, `$1`)                     // take first segment before opening [      // removing two sets []
                 .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)   // remove leading+trailing whitespace
         )[0] || '';
 
     // @Override
     stockFromResultNode = (resultNode: Element): Stock => {
-        const price: number | null = this.priceFromResultNode(resultNode);
-        return price ? { inStock: true, level: '' + 1 } : { inStock: false, level: '' + 0 };
+        // filtered to only show in stock resluts
+        return { inStock: true, level: '1' };
     }
 }
 

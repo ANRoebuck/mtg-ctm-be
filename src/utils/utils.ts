@@ -9,7 +9,7 @@ export const strongMatch = (textBody: string, searchTerm: string, bannedTerms: s
 
     // Ignore case, new lines, special chars and diacritics
     const sanitizedTextBody = sanitizeString(textBody);
-    console.log('Text body = ' + sanitizedTextBody);
+    // console.log('Text body = ' + sanitizedTextBody);
 
     // Check for banned terms
     if (bannedTerms.some(term => sanitizedTextBody.includes(term.toLocaleLowerCase()))) {
@@ -18,7 +18,7 @@ export const strongMatch = (textBody: string, searchTerm: string, bannedTerms: s
 
     // Ignore case, new lines, special chars and diacritics
     const sanitizedSearchTerm = sanitizeString(searchTerm);
-    console.log(sanitizedSearchTerm);
+    // console.log(sanitizedSearchTerm);
 
     // Use a regular expression for strong matching
     const regex = new RegExp(`\\b${sanitizedSearchTerm}\\b`, 'g');

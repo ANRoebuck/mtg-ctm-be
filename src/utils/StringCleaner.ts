@@ -101,5 +101,9 @@ const textStringFromInnerHtml: RegExp = /(.|\n)*£([0-9]+).([0-9]{2})[\D]*/;
 // starcity
 const removeTags = (text: string): string => text.replace(/<.*?>/g, '');
 
+// abstractdataprocessor
+// stripNewLines = (str: string): string => str.replace(/\n/, "");
+// stripWhitespace = (str: string): string => str.replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);
+
 // utils
 const sanitizeString = (text: string) => text.toLowerCase().replace(/[\n'-]/g, '').normalize("NFD").replace(/\p{Diacritic}/gu, '');

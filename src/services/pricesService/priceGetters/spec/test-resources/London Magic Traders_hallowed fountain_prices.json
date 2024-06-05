@@ -1,0 +1,54 @@
+[
+    {
+        "seller": "London Magic Traders",
+        "title": "Hallowed Fountain",
+        "imgSrc": "https://londonmagictraders.com/cdn/shop/products/295863932241-0.jpg?v=1693512839&width=533",
+        "productRef": "https://londonmagictraders.com/products/hallowed-fountain-ravnica-allegiance-nearmint-magic-mtg-1?_pos=1&_sid=f87652214&_ss=r&_fid=3936fc882",
+        "expansion": "Ravnica Allegiance",
+        "price_relativeUnits": 1398,
+        "price_textRepresentation": "£ 13.98",
+        "stock_inStock": true,
+        "stock_level": "1",
+        "subtitle": "",
+        "isFoil": false
+    },
+    {
+        "seller": "London Magic Traders",
+        "title": "Hallowed Fountain",
+        "imgSrc": "https://londonmagictraders.com/cdn/shop/products/302585070604-0_41476102-1591-449a-8202-7b86611bdd92.jpg?v=1693555942&width=533",
+        "productRef": "https://londonmagictraders.com/products/hallowed-fountain-return-to-ravnica-nearmint-magic-mtg?_pos=2&_sid=f87652214&_ss=r&_fid=3936fc882",
+        "expansion": "Return to Ravnica",
+        "price_relativeUnits": 1398,
+        "price_textRepresentation": "£ 13.98",
+        "stock_inStock": true,
+        "stock_level": "1",
+        "subtitle": "",
+        "isFoil": false
+    },
+    {
+        "seller": "London Magic Traders",
+        "title": "FOIL Hallowed Fountain",
+        "imgSrc": "https://londonmagictraders.com/cdn/shop/files/296312864214-0.jpg?v=1711195193&width=533",
+        "productRef": "https://londonmagictraders.com/products/foil-hallowed-fountain-ravnica-allegiance-nearmint-magic-mtg?_pos=3&_sid=f87652214&_ss=r&_fid=3936fc882",
+        "expansion": "Ravnica Allegiance",
+        "price_relativeUnits": 1998,
+        "price_textRepresentation": "£ 19.98",
+        "stock_inStock": true,
+        "stock_level": "1",
+        "subtitle": "",
+        "isFoil": true
+    },
+    {
+        "seller": "London Magic Traders",
+        "title": "FOIL BORDERLESS Hallowed Fountain",
+        "imgSrc": "https://londonmagictraders.com/cdn/shop/products/304652896731-0_ff5d6e9c-03d6-4845-b1ec-cb91d660d0e0.jpg?v=1693549703&width=533",
+        "productRef": "https://londonmagictraders.com/products/foil-borderless-hallowed-fountain-unfinity-nearmint-magic-mtg-1?_pos=4&_sid=f87652214&_ss=r&_fid=3936fc882",
+        "expansion": "Unfinity",
+        "price_relativeUnits": 4098,
+        "price_textRepresentation": "£ 40.98",
+        "stock_inStock": true,
+        "stock_level": "1",
+        "subtitle": "",
+        "isFoil": true
+    }
+]

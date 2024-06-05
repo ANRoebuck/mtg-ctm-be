@@ -76,7 +76,7 @@ const args = {
     priceSelector: 'div[class="#product-card-caption @offset-top"] > div[class="#product-card-price"] > dl > div > dd',
     priceValueFromPriceText: (text: string): number => parseInt(text.replace(/\D/g,'')),
     stockSelector: 'a', // there is no stock selector, but map requires an element
-    stockValueFromStockText: (text: string): number => 1,
+    stockValueFromStockText: (_: string): number => 1,
     isFoilSelector: 'div.inner > div > div.meta > a > h4',
     expansionSelector: 'div.inner > div > div.meta > a > span.category',
 

@@ -148,7 +148,7 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
             const value = this.stockValueFromStockText(node.innerHTML);
             return {
                 inStock: value > 0,
-                level: '' + value,
+                level: `${value}`,
             };
         })[0] || { inStock: false, level: 0 };
 

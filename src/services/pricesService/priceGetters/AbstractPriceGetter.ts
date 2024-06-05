@@ -1,7 +1,7 @@
 import AbstractDataGetter from './AbstractDataGetter';
 import { AbstractDataProcessor } from './AbstractDataProcessor';
 import { Price } from '../../../types/Price';
-import { sanitizeString, saveToFile, strongMatch } from '../../../utils';
+import { sanitizeString, saveToFile, strongMatch } from '../../../utils/utils';
 
 type Args = {
     name: string,

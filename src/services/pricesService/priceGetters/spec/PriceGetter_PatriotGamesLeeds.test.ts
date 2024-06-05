@@ -1,7 +1,7 @@
 import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
-import { readHtmlString, readResults } from '../../../../utils';
+import { readHtmlString, readResults } from '../../../../utils/utils';
 
 import { PriceGetter_PatriotGamesLeeds } from '..';
 

@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from 'fs';
-import { Price } from './types/Price';
+import { Price } from '../types/Price';
 
 export const sanitizeString = (text: string) => text.toLowerCase().replace(/[\n'-]/g, '').normalize("NFD").replace(/\p{Diacritic}/gu, '');
 
@@ -34,10 +34,10 @@ export const saveToFile = (filePath: string, contents: string) => {
     }
 }
 
-export const readHtmlString = (sellerName: string, searchTerm: string): string => {
+export const readHtmlString = (sellerName: string, searchTerm: string, suffix: string = ''): string => {
     let htmlString: string = '';
     try {
-        const file = `./src/services/pricesService/priceGetters/spec/test-resources/${sellerName}_${searchTerm}_html.txt`;
+        const file = `./src/services/pricesService/priceGetters/spec/test-resources/${sellerName}_${searchTerm}${suffix}_html.txt`;
         htmlString = readFileSync(file, 'utf8');
     } catch(e) {
         console.log(e);
@@ -45,10 +45,10 @@ export const readHtmlString = (sellerName: string, searchTerm: string): string =
     return htmlString;
 }
 
-export const readResults = (sellerName: string, searchTerm: string): Price[] => {
+export const readResults = (sellerName: string, searchTerm: string, suffix: string = ''): Price[] => {
     let results: Price[] = [];
     try {
-        const file = `./src/services/pricesService/priceGetters/spec/test-resources/${sellerName}_${searchTerm}_prices.json`;
+        const file = `./src/services/pricesService/priceGetters/spec/test-resources/${sellerName}_${searchTerm}${suffix}_prices.json`;
         results = JSON.parse(readFileSync(file, 'utf8'));
     } catch(e) {
         console.log(e);

@@ -10,7 +10,10 @@ class PriceGetter_Axion extends AggregatingPriceGetter {
     constructor() {
         super({
             name: sellerName,
-            priceGetters: [new PriceGetter_Axion_Foil()],
+            priceGetters: [
+                new PriceGetter_Axion_NonFoil(),
+                new PriceGetter_Axion_Foil(),
+            ],
         });
     }
 }
@@ -20,7 +23,7 @@ class PriceGetter_Axion_NonFoil extends AbstractPriceGetter {
         super({
             name: sellerName,
             dataGetter: new DataGetter_Axion_NonFoil(),
-            dataProcessor: new DataProcessor_Axion(),
+            dataProcessor: new DataProcessor_Axion_NonFoil(),
         });
     }
 }
@@ -30,7 +33,7 @@ class PriceGetter_Axion_Foil extends AbstractPriceGetter {
         super({
             name: sellerName,
             dataGetter: new DataGetter_Axion_Foil(),
-            dataProcessor: new DataProcessor_Axion(),
+            dataProcessor: new DataProcessor_Axion_Foil(),
         });
     }
 }
@@ -57,37 +60,48 @@ class DataGetter_Axion_Foil extends AbstractDataGetter {
     }
 }
 
-class DataProcessor_Axion extends AbstractHtmlDataProcessor {
+const args = {
+    seller: sellerName,
+    currency: currencies.GBP,
+
+    // resultSelector: 'div[class="#collection-grid"] > div[class="#grid"] > div[class="#product-card"]',
+    resultSelector: 'div[class="#collection-grid"] > div > div',
+    titleSelector: 'a',
+
+    useSubResults: false,
+    subresultSelector: '',
+    subtitleSelector: '',
+    subtitleFromText: () => '',
+    
+    priceSelector: 'div[class="#product-card-caption @offset-top"] > div[class="#product-card-price"] > dl > div > dd',
+    priceValueFromPriceText: (text: string): number => parseInt(text.replace(/\D/g,'')),
+    stockSelector: 'a', // there is no stock selector, but map requires an element
+    stockValueFromStockText: (text: string): number => 1,
+    isFoilSelector: 'div.inner > div > div.meta > a > h4',
+    expansionSelector: 'div.inner > div > div.meta > a > span.category',
+
+    imgSelector: 'div[class="#product-card-media"] > div > div[class="#media-image-wrapper"] > img',
+    imgBaseUrl: 'https:',
+    imgSrcAttribute: 'src',
+
+    productSelector: 'a',
+    productBaseUrl: 'https://www.axionnow.com/',
+    productRefAttribute: 'href',
+};
+
+class DataProcessor_Axion_NonFoil extends AbstractHtmlDataProcessor {
     constructor() {
-        super({
-            seller: sellerName,
-            currency: currencies.GBP,
-
-            // resultSelector: 'div[class="#collection-grid"] > div[class="#grid"] > div[class="#product-card"]',
-            resultSelector: 'div[class="#collection-grid"] > div > div',
-            titleSelector: 'a',
-
-            useSubResults: false,
-            subresultSelector: '',
-            subtitleSelector: '',
-            subtitleFromText: () => '',
-            
-            priceSelector: 'div[class="#product-card-caption @offset-top"] > div[class="#product-card-price"] > dl > div > dd',
-            priceValueFromPriceText: (text: string): number => parseInt(text.replace(/\D/g,'')),
-            stockSelector: 'a', // there is no stock selector, but map requires an element
-            stockValueFromStockText: (text: string): number => 1,
-            isFoilSelector: 'div.inner > div > div.meta > a > h4',
-            expansionSelector: 'div.inner > div > div.meta > a > span.category',
-
-            imgSelector: 'div[class="#product-card-media"] > div > div[class="#media-image-wrapper"] > img',
-            imgBaseUrl: 'https:',
-            imgSrcAttribute: 'src',
-
-            productSelector: 'a',
-            productBaseUrl: 'https://www.axionnow.com/',
-            productRefAttribute: 'href',
-        });
+        super(args);
     }
+}
+
+class DataProcessor_Axion_Foil extends AbstractHtmlDataProcessor {
+    constructor() {
+        super(args);
+    }
+
+    // @Override
+    isFoilFromString = (_: string): boolean => true;
 }
 
 export default PriceGetter_Axion;

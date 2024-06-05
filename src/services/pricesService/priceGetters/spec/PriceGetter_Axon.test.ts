@@ -1,7 +1,7 @@
 import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
-import { readHtmlString, readResults } from '../../../../utils';
+import { readHtmlString, readResults } from '../../../../utils/utils';
 
 import { PriceGetter_Axion } from '..';
 
@@ -24,23 +24,22 @@ describe('PriceGetter_Axion', () => {
     expect(priceGetter.name).toBe('Axion Now');
   });
 
-  it('gets results for Tarmogoyf', async () => {
-    const searchTerm = 'Tarmogoyf';
+  it('gets results for Steam Vents', async () => {
+    const searchTerm = 'Steam Vents';
 
-    // const expectedResults = readResults(priceGetter.name, searchTerm);
-    const expectedResults: Price[] = [];
+    const expectedResults = readResults(priceGetter.name, searchTerm);
+    // const expectedResults: Price[] = [];
 
-    // const htmlString = readHtmlString(priceGetter.name, searchTerm);
-    const htmlString1 = '';
-    const htmlString2 = '';
+    const htmlString1 = readHtmlString(priceGetter.name, searchTerm);
+    const htmlString2 = readHtmlString(priceGetter.name, searchTerm, '_FOIL');
 
     mockedAxios.get
-      .mockResolvedValue({ data: htmlString1 })
+      .mockResolvedValueOnce({ data: htmlString1 })
       .mockResolvedValueOnce({ data: htmlString2 });
 
     const results: Price[] = await priceGetter.getPrices(searchTerm);
 
-    // expect(mockedAxios.get).toHaveBeenCalledTimes(2);
+    expect(mockedAxios.get).toHaveBeenCalledTimes(2);
 
     // expect(mockedAxios.get).toHaveBeenCalledWith(
     //   stub + 'https://www.axionnow.com/search?type=product&q=tarmogoyf&filter.v.availability=1&filter.v.option.finish=Non-Foil',
@@ -49,19 +48,20 @@ describe('PriceGetter_Axion', () => {
     //   stub + 'https://www.axionnow.com/search?type=product&q=tarmogoyf&filter.v.availability=1&filter.v.option.finish=Foil',
     //   { "headers": { "Origin": "compare-the-magic" } });
 
-    // expect(mockedAxios.get.mock.calls).toEqual([
-    //   [
-    //     stub + 'https://www.axionnow.com/search?type=product&q=tarmogoyf&filter.v.availability=1&filter.v.option.finish=Non-Foil',
-    //     { "headers": { "Origin": "compare-the-magic" } }
-    //   ],
-    //   [
-    //     stub + 'https://www.axionnow.com/search?type=product&q=tarmogoyf&filter.v.availability=1&filter.v.option.finish=Foil',
-    //     { "headers": { "Origin": "compare-the-magic" } }
-    //   ],
-    // ]);
+    expect(mockedAxios.get.mock.calls).toEqual([
+      [
+        stub + 'https://www.axionnow.com/search?type=product&q=steam+vents&filter.v.availability=1&filter.v.option.finish=Non-Foil',
+        { "headers": { "Origin": "compare-the-magic" } }
+      ],
+      [
+        stub + 'https://www.axionnow.com/search?type=product&q=steam+vents&filter.v.availability=1&filter.v.option.finish=Foil',
+        { "headers": { "Origin": "compare-the-magic" } }
+      ],
+    ]);
 
-    expect(results.length).toBe(0);
-    expect(results).toStrictEqual(expectedResults);
+    expect(results.length).toBe(7);
+    // AggregatingPriceGetter cannot guarantee order, so compare results as sets
+    expect(new Set(results)).toEqual(new Set(expectedResults));
   });
 
 });

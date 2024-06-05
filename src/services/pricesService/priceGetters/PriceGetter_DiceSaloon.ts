@@ -64,6 +64,7 @@ class DataProcessor_DiceSaloon extends AbstractHtmlDataProcessor {
         // Out of stock banner loads lazily and cannot be used
         // There is a tool-tip element displayed when hovering over add-to-cart button
         // The text from this element is either 'SOLD OUT' or 'Add To Cart'
+        // The add-to-cart button itself may be absent, in which case item is out of stock
         const addToCartToolTipElement = [...resultNode.querySelectorAll(this.stockSelector)][0];
         const inStock = addToCartToolTipElement?.innerHTML.includes('Add To Cart') || false;
         return {

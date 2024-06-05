@@ -75,10 +75,7 @@ class DataProcessor_LondonMagicTraders extends AbstractHtmlDataProcessor {
         )[0] || '';
 
     // @Override
-    stockFromResultNode = (resultNode: Element): Stock => {
-        // filtered to only show in stock resluts
-        return { inStock: true, level: '1' };
-    }
+    stockFromResultNode = (_: Element): Stock => ({ inStock: true, level: '' + 1 });  // Only in stock results are shown
 }
 
 export default PriceGetter_LondonMagicTraders;

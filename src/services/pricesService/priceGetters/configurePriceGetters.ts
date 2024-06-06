@@ -19,6 +19,7 @@ import {
     PriceGetter_PatriotGamesLeeds,
     PriceGetter_SkywardFire,
     PriceGetter_StarCityGames,
+    PriceGetter_TotalCards,
     PriceGetter_TrollTrader
 } from './';
 
@@ -46,6 +47,7 @@ const priceGettersArray: IPriceGetterBehaviour[] = [
     new PriceGetter_PatriotGamesLeeds(),
     new PriceGetter_SkywardFire(),
     new PriceGetter_StarCityGames(),
+    new PriceGetter_TotalCards(),
     new PriceGetter_TrollTrader(),
 ];
 
@@ -55,6 +57,8 @@ const configurePriceGetters = (): { [key: string]: IPriceGetterBehaviour } => {
         acc[ele.name] = ele;
         return acc;
     }, {});
+
+    console.log(`Configured ${priceGettersArray.length} priceGetters`);
 
     return priceGetters;
 }

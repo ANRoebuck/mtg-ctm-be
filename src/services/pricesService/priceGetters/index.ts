@@ -20,6 +20,7 @@ import PriceGetter_NerdShak from './PriceGetter_NerdShak';
 import PriceGetter_PatriotGamesLeeds from './PriceGetter_PatriotGamesLeeds';
 import PriceGetter_SkywardFire from './PriceGetter_SkywardFire';
 import PriceGetter_StarCityGames from './PriceGetter_StarCityGames';
+import PriceGetter_TotalCards from './PriceGetter_TotalCards';
 import PriceGetter_TrollTrader from './PriceGetter_TrollTrader';
 
 export {
@@ -44,5 +45,6 @@ export {
     PriceGetter_PatriotGamesLeeds,
     PriceGetter_SkywardFire,
     PriceGetter_StarCityGames,
+    PriceGetter_TotalCards,
     PriceGetter_TrollTrader,
 }

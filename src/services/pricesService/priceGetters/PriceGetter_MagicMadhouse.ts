@@ -30,45 +30,43 @@ class DataGetter_MagicMadhouse extends AbstractDataGetter {
 
 class DataProcessor_MagicMadhouse extends AbstractJsonDataProcessor {
 
-    seller: string;
-    currency: Currency;
-
     constructor() {
-        super();
-        this.seller = sellerName;
-        this.currency = currencies.GBP;
-    }
+        super({
+            seller: sellerName,
+            currency: currencies.GBP,
 
-    // @Override
-    processData = (rawData: any): Price[] => {
-        const results: object[] = rawData.result || [];
-
-        return results.map((result: any): Price => {
-            const title: string = result.name.split('|')[0].replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, '$2');
-            const imgSrc: string = result.image;
-            const productRef: string = result.url;
-            const expansion: string = result.magic_set;
-            const price_minorUnits: number = parseInt(result.price.replace(/\D/g,''));
-            const price_majorUnits = currencyService.minorUnitsToMajorUnits(price_minorUnits, this.currency);
-            const price_relativeUnits = currencyService.minorUnitsToRelativeUnits(price_minorUnits, this.currency);
-            const price_textRepresentation = currencyService.majorUnitsToTextRepresentation(price_majorUnits, this.currency);
-            const stock_level = parseInt(result.inventory_level);
-            const stock_inStock = stock_level > 0;
-            const isFoil: boolean = title.toLowerCase().includes('foil');
-            return {
-                seller: this.seller,
-                title,
-                imgSrc,
-                productRef,
-                expansion,
-                price_relativeUnits,
-                price_textRepresentation,
-                stock_inStock,
-                stock_level: '' + stock_level,
-                subtitle: '',
-                isFoil };
+            processData: (rawData: any): Price[] => {
+                const results: object[] = rawData.result || [];
+        
+                return results.map((result: any): Price => {
+                    const title: string = result.name.split('|')[0].replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, '$2');
+                    const imgSrc: string = result.image;
+                    const productRef: string = result.url;
+                    const expansion: string = result.magic_set;
+                    const price_minorUnits: number = parseInt(result.price.replace(/\D/g,''));
+                    const price_majorUnits = currencyService.minorUnitsToMajorUnits(price_minorUnits, this.currency);
+                    const price_relativeUnits = currencyService.minorUnitsToRelativeUnits(price_minorUnits, this.currency);
+                    const price_textRepresentation = currencyService.majorUnitsToTextRepresentation(price_majorUnits, this.currency);
+                    const stock_level = parseInt(result.inventory_level);
+                    const stock_inStock = stock_level > 0;
+                    const isFoil: boolean = title.toLowerCase().includes('foil');
+                    return {
+                        seller: this.seller,
+                        title,
+                        imgSrc,
+                        productRef,
+                        expansion,
+                        price_relativeUnits,
+                        price_textRepresentation,
+                        stock_inStock,
+                        stock_level: '' + stock_level,
+                        subtitle: '',
+                        isFoil
+                    };
+                });
+            }
         });
-    }
+    };
 
 }
 

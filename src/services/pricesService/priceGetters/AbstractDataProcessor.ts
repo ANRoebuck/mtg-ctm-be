@@ -8,9 +8,22 @@ export interface AbstractDataProcessor {
 }
 
 export abstract class AbstractJsonDataProcessor implements AbstractDataProcessor {
-    processData = (rawData: object): Price[] => {
-        return [];
+
+    seller: string;
+    currency: Currency;
+
+    processData: (rawData: any) => Price[];
+
+    constructor({
+        seller,
+        currency,
+        processData,
+    }: JsonProcessorArgs){
+        this.seller = seller;
+        this.currency = currency;
+        this.processData = processData;
     }
+
 }
 
 
@@ -232,6 +245,13 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
 
     stripNewLines = (str: string): string => str.replace(/\n/, "");
     stripWhitespace = (str: string): string => str.replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);
+}
+
+
+interface JsonProcessorArgs {
+    seller: string;
+    currency: Currency;
+    processData: (rawData: any) => Price[];
 }
 
 interface HtmlProcoessorArgs {

@@ -3,7 +3,7 @@ import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils/utils';
 
-import { PriceGetter_TotalCards } from '..';
+import { PriceGetter_StarCityGames } from '..';
 
 
 jest.mock('axios');
@@ -15,30 +15,38 @@ let priceGetter: IPriceGetterBehaviour;
 
 beforeEach(() => {
   jest.clearAllMocks();
-  priceGetter = new PriceGetter_TotalCards();
+  priceGetter = new PriceGetter_StarCityGames();
 });
 
-describe('PriceGetter_TotalCards', () => {
+describe('PriceGetter_StarCityGames', () => {
 
   it('has correct seller name', () => {
-    expect(priceGetter.name).toBe('Total Cards');
+    expect(priceGetter.name).toBe('Star City Games');
   });
 
-  it('gets results for Botanical Sanctum', async () => {
-    const searchTerm = 'Botanical Sanctum';
+  it('gets results for Steam Vents', async () => {
+    const searchTerm = 'Steam Vents';
 
     const expectedResults = readResults(priceGetter.name, searchTerm);
 
     const htmlString = readHtmlString(priceGetter.name, searchTerm);
-    mockedAxios.get.mockResolvedValueOnce({ data: htmlString });
+    mockedAxios.post.mockResolvedValueOnce({ data: JSON.parse(htmlString) });
 
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
-    expect(mockedAxios.get).toHaveBeenCalledWith(
-      stub + 'https://totalcards.net/search?type=product&options%5Bprefix%5D=last&q=botanical+sanctum',
-      { "headers": { "Origin": "compare-the-magic" } }
+    expect(mockedAxios.post).toHaveBeenCalledWith(
+      'https://essearchapi-na.hawksearch.com/api/v2/search',
+      {
+        'Keyword': 'steam vents',
+        'Variant': { 'Origin': 'compare-the-magic' },
+        'SortBy': 'score',
+        'FacetSelections': { 'variant_instockonly': ['Yes'] },
+        'MaxPerPage': 24,
+        'clientguid': 'cc3be22005ef47d3969c3de28f09571b'
+    }
     );
-    expect(results.length).toBe(2);
+    
+    expect(results.length).toBe(9);
     expect(results).toStrictEqual(expectedResults);
   });
 

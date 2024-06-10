@@ -4,6 +4,7 @@ import {
     // PriceGetter_BigOrbitCards,
     PriceGetter_BoardsAndSwords,
     PriceGetter_DiceSaloon,
+    PriceGetter_GatheringPointGames,
     PriceGetter_Hareruya,
     PriceGetter_Harlequins,
     PriceGetter_HighlanderGames,
@@ -29,6 +30,7 @@ const priceGettersArray: IPriceGetterBehaviour[] = [
     // new PriceGetter_BigOrbitCards(),
     new PriceGetter_BoardsAndSwords,
     new PriceGetter_DiceSaloon(),
+    new PriceGetter_GatheringPointGames(),
     new PriceGetter_Hareruya(),
     new PriceGetter_Harlequins(),
     new PriceGetter_HighlanderGames(),
@@ -42,6 +44,7 @@ const priceGettersArray: IPriceGetterBehaviour[] = [
     new PriceGetter_Manaleak(),
     // Mountbatten's site appears to have closed down
     // new PriceGetter_MountbattenCollectables(),
+    //
     // Nerd Shack have been removed following repeated complaints from customers regarding poor service
     // new PriceGetter_NerdShak(),
     new PriceGetter_PatriotGamesLeeds(),

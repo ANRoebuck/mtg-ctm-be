@@ -5,6 +5,7 @@ import PriceGetter_Axion from './PriceGetter_Axion';
 import PriceGetter_BigOrbitCards from './PriceGetter_BigOrbitCards';
 import PriceGetter_BoardsAndSwords from './PriceGetter_BoardsAndSwords';
 import PriceGetter_DiceSaloon from './PriceGetter_DiceSaloon';
+import PriceGetter_GameHQ from './PriceGetter_GameHQ';
 import PriceGetter_GatheringPointGames from './PriceGetter_GatheringPointGames';
 import PriceGetter_Hareruya from './PriceGetter_Hareruya';
 import PriceGetter_Harlequins from './PriceGetter_Harlequins';
@@ -31,6 +32,7 @@ export {
     PriceGetter_BigOrbitCards,
     PriceGetter_BoardsAndSwords,
     PriceGetter_DiceSaloon,
+    PriceGetter_GameHQ,
     PriceGetter_GatheringPointGames,
     PriceGetter_Hareruya,
     PriceGetter_Harlequins,

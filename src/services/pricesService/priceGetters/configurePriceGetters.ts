@@ -4,6 +4,7 @@ import {
     // PriceGetter_BigOrbitCards,
     PriceGetter_BoardsAndSwords,
     PriceGetter_DiceSaloon,
+    PriceGetter_GameHQ,
     PriceGetter_GatheringPointGames,
     // PriceGetter_Hareruya,
     PriceGetter_Harlequins,
@@ -31,6 +32,7 @@ const priceGettersArray: IPriceGetterBehaviour[] = [
     new PriceGetter_BoardsAndSwords,
     // Want to add ChaosCards but currently unable due to lazy-loading and inaccessible API
     new PriceGetter_DiceSaloon(),
+    new PriceGetter_GameHQ(),
     new PriceGetter_GatheringPointGames(),
     // Hareruya currently disabled due to lazy-loading and inaccessible API
     // new PriceGetter_Hareruya(),

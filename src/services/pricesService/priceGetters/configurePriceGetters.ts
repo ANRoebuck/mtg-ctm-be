@@ -5,7 +5,7 @@ import {
     PriceGetter_BoardsAndSwords,
     PriceGetter_DiceSaloon,
     PriceGetter_GatheringPointGames,
-    PriceGetter_Hareruya,
+    // PriceGetter_Hareruya,
     PriceGetter_Harlequins,
     PriceGetter_HighlanderGames,
     // PriceGetter_LazyDragonGaming,
@@ -29,9 +29,11 @@ const priceGettersArray: IPriceGetterBehaviour[] = [
     // Big Orbit has almost all items out of stock
     // new PriceGetter_BigOrbitCards(),
     new PriceGetter_BoardsAndSwords,
+    // Want to add ChaosCards but currently unable due to lazy-loading and inaccessible API
     new PriceGetter_DiceSaloon(),
     new PriceGetter_GatheringPointGames(),
-    new PriceGetter_Hareruya(),
+    // Hareruya currently disabled due to lazy-loading and inaccessible API
+    // new PriceGetter_Hareruya(),
     new PriceGetter_Harlequins(),
     new PriceGetter_HighlanderGames(),
     // Lazy Dragon Gaming's site shows all cards as out of stock. Not sure if maintenance or shutting down

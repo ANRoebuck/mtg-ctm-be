@@ -48,12 +48,12 @@ class DataProcessor_TotalCards extends AbstractHtmlDataProcessor {
             isFoilSelector: 'div.product-footer > a',
             expansionSelector: 'div.product-footer > a',
 
-            imgSelector: 'div.product-card-list2__image-wrapper > a > div > div > img',
+            imgSelector: 'div.product-image > div.image-inner > a > image-srcset > img',
             imgBaseUrl: 'https:',
             imgSrcAttribute: 'src',
 
-            productSelector: 'div.product-card-list2__image-wrapper > a',
-            productBaseUrl: 'https://lvlupgaming.co.uk',
+            productSelector: 'div.product-footer > a',
+            productBaseUrl: 'https://totalcards.net',
             productRefAttribute: 'href',
         });
     }

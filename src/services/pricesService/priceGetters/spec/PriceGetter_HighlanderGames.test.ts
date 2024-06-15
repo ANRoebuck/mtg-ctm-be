@@ -42,4 +42,22 @@ describe('PriceGetter_HighlanderGames', () => {
     expect(results).toStrictEqual(expectedResults);
   });
 
+  it('gets results for Steam Vents', async () => {
+    const searchTerm = 'Steam Vents';
+
+    const expectedResults = readResults(priceGetter.name, searchTerm);
+
+    const htmlString = readHtmlString(priceGetter.name, searchTerm);
+    mockedAxios.get.mockResolvedValueOnce({ data: htmlString });
+
+    const results: Price[] = await priceGetter.getPrices(searchTerm, false);
+
+    expect(mockedAxios.get).toHaveBeenCalledWith(
+      stub + 'https://highlandergames.co.uk/search?type=product&q=search?type=product&q=steam+vents',
+      { "headers": { "Origin": "compare-the-magic" } }
+    );
+    expect(results.length).toBe(1);
+    expect(results).toStrictEqual(expectedResults);
+  });
+
 });

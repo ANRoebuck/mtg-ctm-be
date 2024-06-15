@@ -1,5 +1,5 @@
 import AbstractDataGetter from './AbstractDataGetter';
-import { AbstractHtmlDataProcessor } from './AbstractDataProcessor';
+import { AbstractHtmlDataProcessor, Stock } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
 import { currencies } from '../../../types/Currency';
 
@@ -41,9 +41,9 @@ class DataProcessor_HighlanderGames extends AbstractHtmlDataProcessor {
             subtitleFromText: () => '',
 
             priceSelector: 'a > div.product-item--price > span > small',
-            priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g,'')),
-            stockSelector: 'a > div.product-item--price > span > small',
-            stockValueFromStockText: () => 1,
+            priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g, '')),
+            stockSelector: 'a > div > div > div.badge > span',
+            stockValueFromStockText: () => 1,   // not used
             isFoilSelector: 'a > p',
             expansionSelector: 'a > p',
 
@@ -63,6 +63,13 @@ class DataProcessor_HighlanderGames extends AbstractHtmlDataProcessor {
             .replace(/(.*)-(.*)/g, `$1`)                     // take segment before -
             .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)    // remove leading+trailing whitespace
         )[0] || '';
+
+    // @Override
+    stockFromResultNode = (resultNode: Element): Stock => {
+        // Stock count is not displayed. An out of stock banner either is or is not present.
+        let isInStock: boolean = resultNode.querySelectorAll(this.stockSelector).length === 0;
+        return isInStock ? { inStock: true, level: '1' } : { inStock: false, level: '0' };
+    }
 
     // @Override
     expansionFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.expansionSelector)]

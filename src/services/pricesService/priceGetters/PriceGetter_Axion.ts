@@ -72,9 +72,9 @@ const args = {
     subresultSelector: '',
     subtitleSelector: '',
     subtitleFromText: () => '',
-    
+
     priceSelector: 'div[class="#product-card-caption @offset-top"] > div[class="#product-card-price"] > dl > div > dd',
-    priceValueFromPriceText: (text: string): number => parseInt(text.replace(/\D/g,'')),
+    priceValueFromPriceText: (text: string): number => parseInt(text.replace(/\D/g, '')),
     stockSelector: 'a', // there is no stock selector, but map requires an element
     stockValueFromStockText: (_: string): number => 1,
     isFoilSelector: 'div.inner > div > div.meta > a > h4',
@@ -93,12 +93,26 @@ class DataProcessor_Axion_NonFoil extends AbstractHtmlDataProcessor {
     constructor() {
         super(args);
     }
+
+    // @Override
+    titleFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.titleSelector)]
+        .map(node => node.innerHTML
+            .replace(/(.*)\((.*)\)/g, `$1`)                  // remove segment in brackets
+            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)    // remove leading+trailing whitespace
+        )[0] || '';
 }
 
 class DataProcessor_Axion_Foil extends AbstractHtmlDataProcessor {
     constructor() {
         super(args);
     }
+
+    // @Override
+    titleFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.titleSelector)]
+        .map(node => node.innerHTML
+            .replace(/(.*)\((.*)\)/g, `$1`)                  // remove segment in brackets
+            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)    // remove leading+trailing whitespace
+        )[0] || '';
 
     // @Override
     isFoilFromString = (_: string): boolean => true;

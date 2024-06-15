@@ -98,9 +98,6 @@ const textStringFromInnerHtml: RegExp = /(.|\n)*£([0-9]+).([0-9]{2})[\D]*/;
 // pg leeds
 // expansion
 
-// starcity
-const removeTags = (text: string): string => text.replace(/<.*?>/g, '');
-
 // abstractdataprocessor
 // stripNewLines = (str: string): string => str.replace(/\n/, "");
 // stripWhitespace = (str: string): string => str.replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);

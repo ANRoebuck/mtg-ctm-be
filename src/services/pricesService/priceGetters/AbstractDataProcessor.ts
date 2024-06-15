@@ -2,6 +2,7 @@ import { Price } from '../../../types/Price';
 import { Currency } from '../../../types/Currency';
 import { JSDOM } from 'jsdom';
 import currencyService from '../../currencyService/CurrencyService';
+import StringCleaner from '../../../utils/StringCleaner';
 
 export interface AbstractDataProcessor {
     processData: (rawData: any) => Price[];
@@ -173,20 +174,20 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
 
 
     priceFromResultNode = (resultNode: Element): number => {
-        const html = this.getFirstElementHtml(resultNode, this.priceSelector);
-        return html ? this.priceValueFromPriceText(html) : 0;
+        const str = this.getFirstElementHtml(resultNode, this.priceSelector);
+        return str ? this.priceValueFromPriceText(str) : 0;
     }
 
 
     titleFromResultNode = (resultNode: Element): string => {
-        const html = this.getFirstElementHtml(resultNode, this.titleSelector);
-        return this.stripWhitespace(html);
+        const str = this.getFirstElementHtml(resultNode, this.titleSelector);
+        return new StringCleaner(str).trimWhitespace().get();
     }
 
 
     subtitleFromResultNode = (resultNode: Element): string => {
-        const html = this.getFirstElementHtml(resultNode, this.subtitleSelector);
-        return this.stripWhitespace(this.subtitleFromText(html));
+        const str = this.getFirstElementHtml(resultNode, this.subtitleSelector);
+        return new StringCleaner(this.subtitleFromText(str)).trimWhitespace().get();
     }
 
 
@@ -198,26 +199,22 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
 
     productRefFromResultNode = (resultNode: Element): string => {
         const attributeValue = this.getFirstelementAttr(resultNode, this.productSelector, this.productRefAttribute);
-        return this.productBaseUrl + this.stripWhitespace(attributeValue);
+        return this.productBaseUrl + new StringCleaner(attributeValue).trimWhitespace().get();
     }
 
 
     expansionFromResultNode = (resultNode: Element): string => {
-        const html = this.getFirstElementHtml(resultNode, this.expansionSelector);
-        return this.stripWhitespace(html);
+        const str = this.getFirstElementHtml(resultNode, this.expansionSelector);
+        return new StringCleaner(str).trimWhitespace().get();
     }
 
 
     // returns false for an undefined string
     isFoilFromString = (str: string): boolean => Boolean(str) && str.toLowerCase().includes('foil');
     isFoilFromResultNode = (resultNode: Element): boolean => {
-        const html = this.getFirstElementHtml(resultNode, this.isFoilSelector);
-        return this.isFoilFromString(html.toLowerCase()) || false;
+        const str = this.getFirstElementHtml(resultNode, this.isFoilSelector);
+        return this.isFoilFromString(str);
     }
-
-
-    stripNewLines = (str: string): string => str.replace(/\n/, "");
-    stripWhitespace = (str: string): string => str.replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);
 }
 
 

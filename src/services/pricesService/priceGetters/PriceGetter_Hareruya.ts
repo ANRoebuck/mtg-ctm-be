@@ -41,9 +41,9 @@ class DataProcessor_Hareruya extends AbstractHtmlDataProcessor {
             subtitleFromText: () => '',
 
             priceSelector: 'div.itemData > div.itemDetail > p.itemDetail__price',
-            priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g,'')),
+            priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g, '')),
             stockSelector: 'div.itemData > div.itemDetail > p.itemDetail__stock',
-            stockValueFromStockText: (text): number => parseInt(text.replace(/\D/g,'')),
+            stockValueFromStockText: (text): number => parseInt(text.replace(/\D/g, '')),
             isFoilSelector: 'div.itemData > a',
             expansionSelector: 'div.itemData > a',
 
@@ -58,16 +58,18 @@ class DataProcessor_Hareruya extends AbstractHtmlDataProcessor {
     }
 
     // @Override
-    titleFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.titleSelector)]
-        .map(node => node.innerHTML
-                .replace(/(.*)\[.*/g, `$1`)                      // take first segment before opening [
-                .replace(/[【】《》\[\]■ ◆]/g, ' ')               // remove weird brackets
-                .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)    // remove leading+trailing whitespace
-        )[0] || '';
+    titleFromResultNode = (resultNode: Element): string => {
+        return this.getFirstElementHtml(resultNode, this.titleSelector)
+            .replace(/(.*)\[.*/g, `$1`)                      // take first segment before opening [
+            .replace(/[【】《》\[\]■ ◆]/g, ' ')               // remove weird brackets
+            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)    // remove leading+trailing whitespace
+    }
 
     // @Override
-    expansionFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.expansionSelector)]
-        .map(node => node.innerHTML.replace(/.*\[(.*)\]/g, `$1`))[0] || '';
+    expansionFromResultNode = (resultNode: Element): string => {
+        return this.getFirstElementHtml(resultNode, this.expansionSelector)
+            .replace(/.*\[(.*)\]/g, `$1`);
+    }
 }
 
 export default PriceGetter_Hareruya;

@@ -58,11 +58,11 @@ class DataProcessor_HighlanderGames extends AbstractHtmlDataProcessor {
     }
 
     // @Override
-    titleFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.titleSelector)]
-        .map(node => node.innerHTML
+    titleFromResultNode = (resultNode: Element): string => {
+        return this.getFirstElementHtml(resultNode, this.titleSelector)
             .replace(/(.*)-(.*)/g, `$1`)                     // take segment before -
-            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)    // remove leading+trailing whitespace
-        )[0] || '';
+            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);   // remove leading+trailing whitespace;
+    }
 
     // @Override
     stockFromResultNode = (resultNode: Element): Stock => {
@@ -72,20 +72,19 @@ class DataProcessor_HighlanderGames extends AbstractHtmlDataProcessor {
     }
 
     // @Override
-    expansionFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.expansionSelector)]
-        .map(node => node.innerHTML
+    expansionFromResultNode = (resultNode: Element): string => {
+        return this.getFirstElementHtml(resultNode, this.expansionSelector)
             .replace(/(.*)-(.*)/g, `$2`)                     // take segment after -
             .replace(/(.*)Foil/g, `$1`)                      // remove trailing FOIL if present
-            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)    // remove leading+trailing whitespace
-        )[0] || '';
+            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);   // remove leading+trailing whitespace
+    }
 
     // @Override
-    imgSrcFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.imgSelector)]
-        .map((node: Element): string => {
-            const imgSrc = node.getAttribute(this.imgSrcAttribute)?.replace('{width}', '180');
-            return this.imgBaseUrl + imgSrc;
-        })[0] || '';
-
+    imgSrcFromResultNode = (resultNode: Element): string => {
+        const attributeValue = this.getFirstelementAttr(resultNode, this.imgSelector, this.imgSrcAttribute);
+        const imgSrc = attributeValue.replace('{width}', '180');
+        return this.imgBaseUrl + imgSrc;
+    }
 }
 
 export default PriceGetter_HighlanderGames;

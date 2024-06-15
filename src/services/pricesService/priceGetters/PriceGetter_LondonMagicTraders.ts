@@ -41,7 +41,7 @@ class DataProcessor_LondonMagicTraders extends AbstractHtmlDataProcessor {
             subtitleFromText: () => '',
 
             priceSelector: 'div.card-wrapper > div > div.card__content > div.card__information > div.card-information > div > div.price__container > div.price__regular > span.price-item',
-            priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g,'')),
+            priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g, '')),
             stockSelector: '', // not used
             stockValueFromStockText: (_: string): number => 1, // not used
             isFoilSelector: 'div.card-wrapper > div > div.card__content > div.card__information > h3 > a',
@@ -58,21 +58,21 @@ class DataProcessor_LondonMagicTraders extends AbstractHtmlDataProcessor {
     }
 
     // @Override
-    titleFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.titleSelector)]
-        .map(node => node.innerHTML
-                .replace(/(.*)[-~](.*)/, `$1`)                  // pre-dash text
-                .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)   // remove leading+trailing whitespace
-        )[0] || '';
+    titleFromResultNode = (resultNode: Element): string => {
+        return this.getFirstElementHtml(resultNode, this.titleSelector)
+            .replace(/(.*)[-~](.*)/, `$1`)                  // pre-dash text
+            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);  // remove leading+trailing whitespace
+    }
 
     // @Override
-    expansionFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.expansionSelector)]
-        .map(node => node.innerHTML
-                .replace(/(.*)[-~](.*)/, `$2`)                  // post-dash text
-                .replace(/<br>/, '')                            // remove linebreak html
-                .replace(/(.*)\[.*/g, `$1`)                     // take first segment before opening [
-                .replace(/(.*)\[.*/g, `$1`)                     // take first segment before opening [      // removing two sets []
-                .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)   // remove leading+trailing whitespace
-        )[0] || '';
+    expansionFromResultNode = (resultNode: Element): string => {
+        return this.getFirstElementHtml(resultNode, this.expansionSelector)
+            .replace(/(.*)[-~](.*)/, `$2`)                  // post-dash text
+            .replace(/<br>/, '')                            // remove linebreak html
+            .replace(/(.*)\[.*/g, `$1`)                     // take first segment before opening [
+            .replace(/(.*)\[.*/g, `$1`)                     // take first segment before opening [      // removing two sets []
+            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)   // remove leading+trailing whitespace
+    }
 
     // @Override
     stockFromResultNode = (_: Element): Stock => ({ inStock: true, level: '' + 1 });  // Only in stock results are shown

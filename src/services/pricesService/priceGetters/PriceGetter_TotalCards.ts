@@ -66,21 +66,22 @@ class DataProcessor_TotalCards extends AbstractHtmlDataProcessor {
     }
 
     // @Override
-    titleFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.titleSelector)]
-        .map((node: Element): string => new StringCleaner(node.innerHTML)
+    titleFromResultNode = (resultNode: Element): string => {
+        const html = this.getFirstElementHtml(resultNode, this.titleSelector);
+        return new StringCleaner(html)
             .splitOnSymbolAndSelectSection('-', 2)
             .trimWhitespace()
-            .get()
-        )[0] || '';
-
+            .get();
+    }
 
     // @Override
-    expansionFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.expansionSelector)]
-        .map(node => new StringCleaner(node.innerHTML)
+    expansionFromResultNode = (resultNode: Element): string => {
+        const html = this.getFirstElementHtml(resultNode, this.expansionSelector);
+        return new StringCleaner(html)
             .splitOnSymbolAndSelectSection('-', 1)
             .trimWhitespace()
-            .get()
-        )[0] || '';
+            .get();
+    }
 }
 
 export default PriceGetter_TotalCards;

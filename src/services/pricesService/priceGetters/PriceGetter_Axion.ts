@@ -95,11 +95,11 @@ class DataProcessor_Axion_NonFoil extends AbstractHtmlDataProcessor {
     }
 
     // @Override
-    titleFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.titleSelector)]
-        .map(node => node.innerHTML
+    titleFromResultNode = (resultNode: Element): string => {
+        return this.getFirstElementHtml(resultNode, this.titleSelector)
             .replace(/(.*)\((.*)\)/g, `$1`)                  // remove segment in brackets
-            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)    // remove leading+trailing whitespace
-        )[0] || '';
+            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);   // remove leading+trailing whitespace
+    }
 }
 
 class DataProcessor_Axion_Foil extends AbstractHtmlDataProcessor {
@@ -108,11 +108,11 @@ class DataProcessor_Axion_Foil extends AbstractHtmlDataProcessor {
     }
 
     // @Override
-    titleFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.titleSelector)]
-        .map(node => node.innerHTML
+    titleFromResultNode = (resultNode: Element): string => {
+        return this.getFirstElementHtml(resultNode, this.titleSelector)
             .replace(/(.*)\((.*)\)/g, `$1`)                  // remove segment in brackets
-            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)    // remove leading+trailing whitespace
-        )[0] || '';
+            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);   // remove leading+trailing whitespace
+    }
 
     // @Override
     isFoilFromString = (_: string): boolean => true;

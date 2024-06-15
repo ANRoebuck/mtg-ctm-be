@@ -41,7 +41,7 @@ class DataProceesor_PatriotGamesLeeds extends AbstractHtmlDataProcessor {
             subtitleFromText: () => '',
 
             priceSelector: 'td.productListing-data > span.productBasePrice',
-            priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g,'')),
+            priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g, '')),
             stockSelector: 'td[align="right"] > a',
             stockValueFromStockText: (x: string): number => parseInt(x),    // not used
             isFoilSelector: 'td > h3.itemTitle > a',
@@ -65,9 +65,10 @@ class DataProceesor_PatriotGamesLeeds extends AbstractHtmlDataProcessor {
     }
 
     // @Override
-    expansionFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.expansionSelector)]
-        .map(node => (node.innerHTML.replace(/.*Set:(.*)Rarity.*/, `$1`)))[0];
-
+    expansionFromResultNode = (resultNode: Element): string => {
+        return this.getFirstElementHtml(resultNode, this.expansionSelector)
+            .replace(/.*Set:(.*)Rarity.*/, `$1`);
+    }
 }
 
 export default PriceGetter_PatriotGamesLeeds;

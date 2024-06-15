@@ -65,8 +65,8 @@ class DataProcessor_GameHQ extends AbstractHtmlDataProcessor {
         // There is a tool-tip element displayed when hovering over add-to-cart button
         // The text from this element is either 'SOLD OUT' or 'Add To Cart'
         // The add-to-cart button itself may be absent, in which case item is out of stock
-        const addToCartToolTipElement = [...resultNode.querySelectorAll(this.stockSelector)][0];
-        const inStock = addToCartToolTipElement?.innerHTML.includes('Add To Cart') || false;
+        const addToCartToolTipElement: string = this.getFirstElementHtml(resultNode, this.stockSelector);
+        const inStock: boolean = addToCartToolTipElement?.includes('Add To Cart') || false;
         return {
             inStock,
             level: inStock ? '1' : '0'
@@ -75,29 +75,24 @@ class DataProcessor_GameHQ extends AbstractHtmlDataProcessor {
 
     // @Override
     titleFromResultNode = (resultNode: Element): string => {
-        const title: string = [...resultNode.querySelectorAll(this.titleSelector)]
-            .map((node: Element): string => node.innerHTML
-                .replace(/(.*)\[(.*)\]/g, `$1`)                 // ignore segment in [square brackets]
-                .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)   // remove leading+trailing whitespace
-            )[0] || '';
+        const title: string = this.getFirstElementHtml(resultNode, this.titleSelector)
+            .replace(/(.*)\[(.*)\]/g, `$1`)                     // ignore segment in [square brackets]
+            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);      // remove leading+trailing whitespace
 
-        let subtitle: string = [...resultNode.querySelectorAll(this.isFoilSelector)]
-            .find((node: Element): boolean => node.hasAttribute('selected'))
-            ?.innerHTML
+        let subtitle: string = this.getFirstElementWithAttrHtml(resultNode, this.isFoilSelector, 'selected')
             .replace(/\n/, '')                                  // remove new line characters
-            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)       // remove leading+trailing whitespace
-            || '';
+            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);      // remove leading+trailing whitespace
         subtitle = subtitle && ` - ${subtitle}`;
 
         return `${title}${subtitle}`;
-    };
+    }
 
     // @Override
-    expansionFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.expansionSelector)]
-        .map(node => node.innerHTML
+    expansionFromResultNode = (resultNode: Element): string => {
+        return this.getFirstElementHtml(resultNode, this.expansionSelector)
             .replace(/(.*)\[(.*)\]/g, `$2`)                     // take segment in [square brackets]
-            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)       // remove leading+trailing whitespace
-        )[0] || '';
+            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);      // remove leading+trailing whitespace
+    }
 
 }
 

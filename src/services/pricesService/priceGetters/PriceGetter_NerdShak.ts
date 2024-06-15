@@ -41,7 +41,7 @@ class DataProcessor_NerdShak extends AbstractHtmlDataProcessor {
             subtitleFromText: (text: string): string => text.replace(/(.*)[-~](.*)/, `$1`), //pre-dash text
 
             priceSelector: 'p',
-            priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g,'')),
+            priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g, '')),
             stockSelector: 'p',
             stockValueFromStockText: (x: string): number => parseInt(x),    // not used
             isFoilSelector: 'div > p.productTitle',
@@ -58,20 +58,22 @@ class DataProcessor_NerdShak extends AbstractHtmlDataProcessor {
     }
 
     // @Override
-    titleFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.titleSelector)]
-        .map(node => node.innerHTML
+    titleFromResultNode = (resultNode: Element): string => {
+        return this.getFirstElementHtml(resultNode, this.titleSelector)
             .replace(/(.*)\[.*/g, `$1`)                     // take first segment before opening [
             .replace(/<br>/, '')                            // remove linebreak html
             .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)   // remove leading+trailing whitespace
-            .replace(/[【】《》\[\]■ ◆]/g, ' ')              // remove weird brackets
-        )[0] || '';
+            .replace(/[【】《》\[\]■ ◆]/g, ' ');             // remove weird brackets
+    }
 
     // @Override
-    expansionFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.expansionSelector)]
-        .map(node => node.innerHTML.replace(/.*\[(.*)\]/g, `$1`))[0] || '';
+    expansionFromResultNode = (resultNode: Element): string => {
+        return this.getFirstElementHtml(resultNode, this.expansionSelector)
+            .replace(/.*\[(.*)\]/g, `$1`);
+    }
 
     // @Override
-    stockFromResultNode = (resultNode: Element): Stock => ({ inStock: true, level: '' + 1 });  // Only in stock results are shown
+    stockFromResultNode = (_: Element): Stock => ({ inStock: true, level: '' + 1 });  // Only in stock results are shown
 }
 
 export default PriceGetter_NerdShak;

@@ -4,7 +4,7 @@ import { JSDOM } from 'jsdom';
 import currencyService from '../../currencyService/CurrencyService';
 
 export interface AbstractDataProcessor {
-    processData: (rawData: any) => Price[]
+    processData: (rawData: any) => Price[];
 }
 
 export abstract class AbstractJsonDataProcessor implements AbstractDataProcessor {
@@ -18,7 +18,7 @@ export abstract class AbstractJsonDataProcessor implements AbstractDataProcessor
         seller,
         currency,
         processData,
-    }: JsonProcessorArgs){
+    }: JsonProcessorArgs) {
         this.seller = seller;
         this.currency = currency;
         this.processData = processData;
@@ -158,16 +158,9 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
 
     getFirstElementHtml = (node: Element, selector: string): string => [...node.querySelectorAll(selector)][0]?.innerHTML || '';
     getFirstelementAttr = (node: Element, selector: string, attr: string): string => [...node.querySelectorAll(selector)][0]?.getAttribute(attr) || '';
+    getFirstElementWithAttrHtml = (node: Element, selector: string, attr: string): string => [...node.querySelectorAll(selector)]
+        .find((node: Element): boolean => node.hasAttribute(attr))?.innerHTML || '';
 
-
-    // stockFromResultNode = (resultNode: Element): Stock => [...resultNode.querySelectorAll(this.stockSelector)]
-    //     .map((node: Element): Stock => {
-    //         const value = this.stockValueFromStockText(node.innerHTML);
-    //         return {
-    //             inStock: value > 0,
-    //             level: `${value}`,
-    //         };
-    //     })[0] || { inStock: false, level: 0 };
 
     stockFromResultNode = (resultNode: Element): Stock => {
         const html = this.getFirstElementHtml(resultNode, this.stockSelector);
@@ -179,17 +172,11 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
     }
 
 
-    // priceFromResultNode = (resultNode: Element): number => [...resultNode.querySelectorAll(this.priceSelector)]
-    //     .map((node: Element): number => this.priceValueFromPriceText(node.innerHTML))[0] || 0;
-
     priceFromResultNode = (resultNode: Element): number => {
         const html = this.getFirstElementHtml(resultNode, this.priceSelector);
         return html ? this.priceValueFromPriceText(html) : 0;
     }
 
-
-    // titleFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.titleSelector)]
-    //     .map((node: Element): string => this.stripWhitespace(node.innerHTML))[0] || '';
 
     titleFromResultNode = (resultNode: Element): string => {
         const html = this.getFirstElementHtml(resultNode, this.titleSelector);
@@ -197,17 +184,11 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
     }
 
 
-    // subtitleFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.subtitleSelector)]
-    //     .map((node: Element): string => this.stripWhitespace(this.subtitleFromText(node.innerHTML)))[0] || '';
-
     subtitleFromResultNode = (resultNode: Element): string => {
         const html = this.getFirstElementHtml(resultNode, this.subtitleSelector);
         return this.stripWhitespace(this.subtitleFromText(html));
     }
 
-
-    // imgSrcFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.imgSelector)]
-    //     .map((node: Element): string => this.imgBaseUrl + node.getAttribute(this.imgSrcAttribute))[0] || ''; 
 
     imgSrcFromResultNode = (resultNode: Element): string => {
         const attributeValue = this.getFirstelementAttr(resultNode, this.imgSelector, this.imgSrcAttribute);
@@ -215,17 +196,11 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
     }
 
 
-    // productRefFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.productSelector)]
-    //     .map((node: Element): string => this.productBaseUrl + this.stripWhitespace(node.getAttribute(this.productRefAttribute) || ''))[0] || '';
-
     productRefFromResultNode = (resultNode: Element): string => {
         const attributeValue = this.getFirstelementAttr(resultNode, this.productSelector, this.productRefAttribute);
         return this.productBaseUrl + this.stripWhitespace(attributeValue);
     }
 
-
-    // expansionFromResultNode = (resultNode: Element): string => [...resultNode.querySelectorAll(this.expansionSelector)]
-    //     .map((node: Element): string => this.stripWhitespace(node.innerHTML))[0] || '';
 
     expansionFromResultNode = (resultNode: Element): string => {
         const html = this.getFirstElementHtml(resultNode, this.expansionSelector);
@@ -235,8 +210,6 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
 
     // returns false for an undefined string
     isFoilFromString = (str: string): boolean => Boolean(str) && str.toLowerCase().includes('foil');
-    // isFoilFromResultNode = (resultNode: Element): boolean => [...resultNode.querySelectorAll(this.isFoilSelector)]
-    //     .map((node: Element): boolean => this.isFoilFromString(node.innerHTML.toLowerCase()))[0] || false;
     isFoilFromResultNode = (resultNode: Element): boolean => {
         const html = this.getFirstElementHtml(resultNode, this.isFoilSelector);
         return this.isFoilFromString(html.toLowerCase()) || false;

@@ -1,4 +1,5 @@
 import StringCleaner from "./StringCleaner";
+// import { readFileSync, writeFileSync } from 'fs';
 
 
 describe('StringCleaner', () => {
@@ -149,3 +150,34 @@ describe('chaining methods', () => {
         expect(expected).toBe(output);
     });
 });
+
+// describe('foo', () => {
+//     it('bar', () => {
+//         const saveToFile = (contents: string) => {
+//             try {
+//                 writeFileSync('./src/utils/bar.txt', contents);
+//             } catch (e) {
+//                 console.log(e);
+//             }
+//         }
+        
+//         const readTxt = (): string => {
+//             let htmlString: string = '';
+//             try {
+//                 const file = `./src/utils/foo.txt`;
+//                 htmlString = readFileSync(file, 'utf8');
+//             } catch(e) {
+//                 console.log(e);
+//             }
+//             return htmlString;
+//         };
+
+//         const unsorted = readTxt();
+//         const sorted = unsorted.split('\n').sort();
+//         const unique = [...new Set(sorted)];
+
+//         const final = unique.join('\n');
+        
+//         saveToFile(final);
+//     });
+// });

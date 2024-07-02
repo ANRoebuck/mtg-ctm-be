@@ -73,7 +73,7 @@ class StringCleaner implements IStringCleaner {
     }
 
     splitOnSymbolAndSelectSection(symbol: string, section: number): IStringCleaner {
-        this.str = this.str.split(symbol)[section];
+        this.str = this.str.split(symbol)[section] || '';
         return this;
     }
 

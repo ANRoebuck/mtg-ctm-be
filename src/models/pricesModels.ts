@@ -12,3 +12,7 @@ export const getPrices = async (seller: string, searchTerm: string, saveOutput: 
 export const getSellers = (): string[] => {
     return pricesService.getSellers();
 }
+
+export const testAllModels = async (): Promise<object> => {
+    return pricesService.testAllModels();
+}

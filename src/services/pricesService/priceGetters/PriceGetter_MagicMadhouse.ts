@@ -2,7 +2,7 @@ import AbstractDataGetter from './AbstractDataGetter';
 import { AbstractJsonDataProcessor } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
 import { Price } from '../../../types/Price';
-import { currencies, Currency } from '../../../types/Currency';
+import { currencies } from '../../../types/Currency';
 import currencyService from '../../currencyService/CurrencyService';
 
 const sellerName = 'Magic Madhouse';
@@ -63,7 +63,7 @@ class DataProcessor_MagicMadhouse extends AbstractJsonDataProcessor {
                         subtitle: '',
                         isFoil
                     };
-                });
+                }).filter(p => p.stock_inStock);
             }
         });
     };

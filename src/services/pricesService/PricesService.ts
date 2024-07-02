@@ -26,6 +26,18 @@ class PricesService {
         console.log(`Pricegetter=[${priceGetter.name}]`);
         return priceGetter ? priceGetter.getPrices(searchTerm, saveOutput) : [];
     }
+
+    testAllModels(): object {
+        return Promise.all(
+            Object.entries(this.priceGetters)
+                .map(async ([sellerName, priceGetter]) => {
+                    const prices = await priceGetter
+                        .getPrices('counterspell')
+                        .then(prices => [sellerName, prices.length]);
+                    return prices;
+                }))
+                .then(Object.fromEntries);
+    }
 }
 
 // enforce singleton

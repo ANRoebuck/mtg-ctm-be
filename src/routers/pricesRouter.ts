@@ -1,5 +1,5 @@
 import express, { Application, Router, Request, Response, NextFunction } from 'express';
-import { sendPrices, sendSellers } from '../controllers/pricesControllers';
+import { sendPrices, sendSellers, sendModelsTest } from '../controllers/pricesControllers';
 import {errMethodNotAllowed} from "../errorHandling/errorHandling";
 
 const pricesRouter: Router = express.Router();
@@ -7,6 +7,10 @@ const pricesRouter: Router = express.Router();
 pricesRouter.route('/')
     .post(sendPrices)
     .get(sendSellers)
+    .all(errMethodNotAllowed);
+
+pricesRouter.route('/test-all-models')
+    .get(sendModelsTest)
     .all(errMethodNotAllowed);
 
 

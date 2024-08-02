@@ -115,6 +115,8 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
                 if (!stock.inStock) return;
 
                 const price_minorUnits = this.priceFromResultNode(subresult);
+                if (!price_minorUnits) return;
+                
                 const price_majorUnits = currencyService.minorUnitsToMajorUnits(price_minorUnits, this.currency);
                 const price_relativeUnits = currencyService.minorUnitsToRelativeUnits(price_minorUnits, this.currency);
                 const price_textRepresentation = currencyService.majorUnitsToTextRepresentation(price_majorUnits, this.currency);

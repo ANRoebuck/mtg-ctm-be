@@ -98,7 +98,7 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
 
         const resultNodes: Element[] = this.dataToResultsArray(rawData);
 
-        console.log(`Found ${resultNodes.length} potential results`);
+        // console.log(`Found ${resultNodes.length} potential results`);
 
         resultNodes.forEach(resultNode => {
 

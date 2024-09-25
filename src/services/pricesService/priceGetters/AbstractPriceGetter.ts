@@ -49,7 +49,7 @@ abstract class AbstractPriceGetter implements IPriceGetterBehaviour {
             saveToFile(`${filePath}${this.name}_${searchTerm}_prices.json`, JSON.stringify(validResults));
         }
 
-        console.log(`Returning ${validResults.length} results for seller=[${this.name}], searchTerm=[${searchTerm}]`);
+        console.log(`Returning ${validResults.length} results for searchTerm=[${searchTerm}] from seller=[${this.name}]`);
         return validResults;
     }
 

@@ -12,7 +12,7 @@ interface Args {
 
 abstract class AbstractDataGetter {
 
-    cors: string = 'https://mtg-shelf.herokuapp.com/';
+    cors: string = 'https://ctm-cors-anywhere-ba3b8ee835aa.herokuapp.com/';
     // cors: string = 'https://cors-anywhere.herokuapp.com/corsdemo/';
     baseUrl: string;
     searchPath: string;

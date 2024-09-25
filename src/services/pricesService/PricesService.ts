@@ -22,8 +22,10 @@ class PricesService {
 
     getPrices(seller: string, searchTerm: string, saveOutput: boolean): Promise<Price[]> | [] {
         console.log(`Getting prices. seller=[${seller}] , searchTerm=[${searchTerm}] , saveOutput=[${saveOutput}]`);
+
         const priceGetter: IPriceGetterBehaviour = this.priceGetters[seller];
-        console.log(`Pricegetter=[${priceGetter.name}]`);
+        if (!priceGetter) console.log(`Could not find priceGetter for seller=[${seller}]`);
+        
         return priceGetter ? priceGetter.getPrices(searchTerm, saveOutput) : [];
     }
 

@@ -2,14 +2,13 @@ import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils/utils';
+import { BE_URL_STUB } from '../../../../gateway/http';
 
 import { PriceGetter_SkywardFire } from '..';
 
 
 jest.mock('axios');
 const mockedAxios: jest.Mocked<AxiosStatic> = axios as jest.Mocked<typeof axios>;
-
-const stub = 'https://mtg-shelf.herokuapp.com/';
 
 let priceGetter: IPriceGetterBehaviour;
 
@@ -35,7 +34,7 @@ describe('PriceGetter_SkywardFire', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      stub + 'https://www.skywardfire.com/products/search?q=steam+vents',
+      BE_URL_STUB + 'https://www.skywardfire.com/products/search?q=steam+vents',
       { "headers": { "Origin": "compare-the-magic" } }
     );
     expect(results.length).toBe(5);
@@ -53,7 +52,7 @@ describe('PriceGetter_SkywardFire', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      stub + 'https://www.skywardfire.com/products/search?q=dromokas+command',
+      BE_URL_STUB + 'https://www.skywardfire.com/products/search?q=dromokas+command',
       { "headers": { "Origin": "compare-the-magic" } }
     );
     expect(results.length).toBe(5);

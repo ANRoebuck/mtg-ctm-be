@@ -2,14 +2,13 @@ import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils/utils';
+import { BE_URL_STUB } from '../../../../gateway/http';
 
 import { PriceGetter_GatheringPointGames } from '..';
 
 
 jest.mock('axios');
 const mockedAxios: jest.Mocked<AxiosStatic> = axios as jest.Mocked<typeof axios>;
-
-const stub = 'https://mtg-shelf.herokuapp.com/';
 
 let priceGetter: IPriceGetterBehaviour;
 
@@ -35,7 +34,7 @@ describe('PriceGetter_GatheringPointGames', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      stub + 'https://gatheringpointgames.co.uk/search?type=product&options%5Bprefix%5D=last&q=steam+vents',
+      BE_URL_STUB + 'https://gatheringpointgames.co.uk/search?type=product&options%5Bprefix%5D=last&q=steam+vents',
       { "headers": { "Origin": "compare-the-magic" } }
     );
     expect(results.length).toBe(7);

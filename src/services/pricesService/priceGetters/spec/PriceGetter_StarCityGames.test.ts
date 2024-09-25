@@ -2,14 +2,13 @@ import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils/utils';
+import { BE_URL_STUB } from '../../../../gateway/http';
 
 import { PriceGetter_StarCityGames } from '..';
 
 
 jest.mock('axios');
 const mockedAxios: jest.Mocked<AxiosStatic> = axios as jest.Mocked<typeof axios>;
-
-const stub = 'https://mtg-shelf.herokuapp.com/';
 
 let priceGetter: IPriceGetterBehaviour;
 
@@ -43,9 +42,9 @@ describe('PriceGetter_StarCityGames', () => {
         'FacetSelections': { 'variant_instockonly': ['Yes'] },
         'MaxPerPage': 24,
         'clientguid': 'cc3be22005ef47d3969c3de28f09571b'
-    }
+      }
     );
-    
+
     expect(results.length).toBe(9);
     expect(results).toStrictEqual(expectedResults);
   });

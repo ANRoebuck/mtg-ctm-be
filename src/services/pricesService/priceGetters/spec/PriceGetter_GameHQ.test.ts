@@ -2,14 +2,13 @@ import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils/utils';
+import { BE_URL_STUB } from '../../../../gateway/http';
 
 import { PriceGetter_GameHQ } from '..';
 
 
 jest.mock('axios');
 const mockedAxios: jest.Mocked<AxiosStatic> = axios as jest.Mocked<typeof axios>;
-
-const stub = 'https://mtg-shelf.herokuapp.com/';
 
 let priceGetter: IPriceGetterBehaviour;
 
@@ -35,7 +34,7 @@ describe('PriceGetter_GameHQ', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      stub + 'https://www.game-hq.co.uk/search?options%5Bprefix%5D=last&type=product&q=chrome+host+seedshark',
+      BE_URL_STUB + 'https://www.game-hq.co.uk/search?options%5Bprefix%5D=last&type=product&q=chrome+host+seedshark',
       { "headers": { "Origin": "compare-the-magic" } }
     );
     expect(results.length).toBe(1);

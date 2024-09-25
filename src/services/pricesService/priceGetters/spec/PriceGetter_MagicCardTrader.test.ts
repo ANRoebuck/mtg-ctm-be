@@ -2,14 +2,13 @@ import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils/utils';
+import { BE_URL_STUB } from '../../../../gateway/http';
 
 import { PriceGetter_MagicCardTrader } from '..';
 
 
 jest.mock('axios');
 const mockedAxios: jest.Mocked<AxiosStatic> = axios as jest.Mocked<typeof axios>;
-
-const stub = 'https://mtg-shelf.herokuapp.com/';
 
 let priceGetter: IPriceGetterBehaviour;
 
@@ -35,7 +34,7 @@ describe('PriceGetter_MagicCardTrader', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      stub + 'https://www.themagiccardtrader.com/products/search?q=restless+spire',
+      BE_URL_STUB + 'https://www.themagiccardtrader.com/products/search?q=restless+spire',
       { "headers": { "Origin": "compare-the-magic" } }
     );
     expect(results.length).toBe(2);

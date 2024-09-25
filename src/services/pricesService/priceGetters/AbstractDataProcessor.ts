@@ -1,11 +1,19 @@
 import { Price } from '../../../types/Price';
 import { Currency } from '../../../types/Currency';
-import { JSDOM } from 'jsdom';
+import { JSDOM, VirtualConsole } from 'jsdom';
 import currencyService from '../../currencyService/CurrencyService';
 import StringCleaner from '../../../utils/StringCleaner';
 
 export interface AbstractDataProcessor {
     processData: (rawData: any) => Price[];
+}
+
+const virtualConsole = new VirtualConsole();
+virtualConsole.on("error", () => {
+    // No-op to skip console errors.
+});
+const getDocFromString = (docStr: string): Document => {
+    return new JSDOM(docStr, { virtualConsole }).window.document;
 }
 
 export abstract class AbstractJsonDataProcessor implements AbstractDataProcessor {
@@ -116,7 +124,7 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
 
                 const price_minorUnits = this.priceFromResultNode(subresult);
                 if (!price_minorUnits) return;
-                
+
                 const price_majorUnits = currencyService.minorUnitsToMajorUnits(price_minorUnits, this.currency);
                 const price_relativeUnits = currencyService.minorUnitsToRelativeUnits(price_minorUnits, this.currency);
                 const price_textRepresentation = currencyService.majorUnitsToTextRepresentation(price_majorUnits, this.currency);
@@ -153,7 +161,8 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
     dataToResultsArray = (rawData: string): Element[] => {
         let document: Document;
         try {
-            document = new JSDOM(rawData).window.document;
+            // document = new JSDOM(rawData).window.document;
+            document = getDocFromString(rawData);
         } catch {
             console.log(`Couldn\'t parse document for seller=[${this.seller}]`);
             return [];

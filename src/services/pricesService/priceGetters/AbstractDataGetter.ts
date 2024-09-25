@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { BE_URL_STUB } from '../../../gateway/http';
 
 
 // axios.defaults.headers.common['origin'] = "CTM";
@@ -14,8 +15,6 @@ interface Args {
 abstract class AbstractDataGetter {
 
     name: string;
-    cors: string = 'https://ctm-cors-anywhere-ba3b8ee835aa.herokuapp.com/';
-    // cors: string = 'https://cors-anywhere.herokuapp.com/corsdemo/';
     baseUrl: string;
     searchPath: string;
     searchSuffix: string;
@@ -44,7 +43,7 @@ abstract class AbstractDataGetter {
             + searchTerm.toLowerCase().split(' ').join(this.searchJoin)
             + this.searchSuffix;
         console.log('requesting data from ' + url);    
-        return this.cors + url;
+        return BE_URL_STUB + url;
     };
 
     extractData = ({ data } : { data: string }): string => data || '';

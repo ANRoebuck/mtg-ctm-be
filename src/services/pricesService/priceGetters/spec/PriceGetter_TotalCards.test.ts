@@ -2,14 +2,13 @@ import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils/utils';
+import { BE_URL_STUB } from '../../../../gateway/http';
 
 import { PriceGetter_TotalCards } from '..';
 
 
 jest.mock('axios');
 const mockedAxios: jest.Mocked<AxiosStatic> = axios as jest.Mocked<typeof axios>;
-
-const stub = 'https://mtg-shelf.herokuapp.com/';
 
 let priceGetter: IPriceGetterBehaviour;
 
@@ -35,7 +34,7 @@ describe('PriceGetter_TotalCards', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      stub + 'https://totalcards.net/search?type=product&options%5Bprefix%5D=last&q=botanical+sanctum',
+      BE_URL_STUB + 'https://totalcards.net/search?type=product&options%5Bprefix%5D=last&q=botanical+sanctum',
       { "headers": { "Origin": "compare-the-magic" } }
     );
     expect(results.length).toBe(2);

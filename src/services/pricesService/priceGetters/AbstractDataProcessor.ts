@@ -151,7 +151,13 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
     }
 
     dataToResultsArray = (rawData: string): Element[] => {
-        const document: Document = new JSDOM(rawData).window.document;
+        let document: Document;
+        try {
+            document = new JSDOM(rawData).window.document;
+        } catch {
+            console.log(`Couldn\'t parse document for seller=[${this.seller}]`);
+            return [];
+        }
         return [...document.querySelectorAll(this.resultSelector)];
     }
 

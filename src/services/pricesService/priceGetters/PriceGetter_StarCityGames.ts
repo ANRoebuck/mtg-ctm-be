@@ -21,6 +21,7 @@ class PriceGetter_StarCityGames extends AbstractPriceGetter {
 class DataGetter_StarCityGames_New extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://essearchapi-na.hawksearch.com/api/v2/search',
             searchPath: '',
             searchSuffix: '',

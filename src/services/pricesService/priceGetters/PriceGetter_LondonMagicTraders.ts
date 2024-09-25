@@ -18,6 +18,7 @@ class PriceGetter_LondonMagicTraders extends AbstractPriceGetter {
 class DataGetter_LondonMagicTraders extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://londonmagictraders.com/',
             searchPath: 'search?q=',
             searchSuffix: '&options%5Bprefix%5D=last&filter.v.availability=1',

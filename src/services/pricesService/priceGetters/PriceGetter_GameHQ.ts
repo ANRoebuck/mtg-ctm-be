@@ -19,6 +19,7 @@ class PriceGetter_GameHQ extends AbstractPriceGetter {
 class DataGetter_GameHQ extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://www.game-hq.co.uk/',
             searchPath: 'search?options%5Bprefix%5D=last&type=product&q=',
             searchSuffix: '',

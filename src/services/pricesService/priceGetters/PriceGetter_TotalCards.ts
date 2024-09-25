@@ -19,6 +19,7 @@ class PriceGetter_TotalCards extends AbstractPriceGetter {
 class DataGetter_TotalCards extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://totalcards.net/',
             searchPath: 'search?type=product&options%5Bprefix%5D=last&q=',
             searchSuffix: '',

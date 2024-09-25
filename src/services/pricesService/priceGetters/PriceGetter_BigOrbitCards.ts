@@ -20,6 +20,7 @@ class PriceGetter_BigOrbitCards extends AbstractPriceGetter {
 class DataGetter_BigOrbitCards extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://www.bigorbitcards.co.uk/',
             searchPath: 'shop-all-games/search/',
             searchSuffix: '/',

@@ -18,6 +18,7 @@ class PriceGetter_LazyDragonGaming extends AbstractPriceGetter {
 class DataGetter_LazyDragonGaming extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://www.lazydragongaming.com/',
             searchPath: 'search?q=*',
             searchSuffix: '*',

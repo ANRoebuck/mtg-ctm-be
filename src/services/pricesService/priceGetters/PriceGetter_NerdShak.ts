@@ -18,6 +18,7 @@ class PriceGetter_NerdShak extends AbstractPriceGetter {
 class DataGetter_NerdShak extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://nerdshak.com/',
             searchPath: 'search?q=*',
             searchSuffix: '*',

@@ -18,6 +18,7 @@ class PriceGetter_Hareruya extends AbstractPriceGetter {
 class DataGetter_Hareruya extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://www.hareruyamtg.com/en/',
             searchPath: 'products/search?suggest_type=all&product=',
             searchSuffix: '',

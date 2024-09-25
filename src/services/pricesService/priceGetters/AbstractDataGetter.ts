@@ -4,6 +4,7 @@ import axios from 'axios';
 // axios.defaults.headers.common['origin'] = "CTM";
 
 interface Args {
+    name: string,
     baseUrl: string,
     searchPath: string,
     searchSuffix: string,
@@ -12,6 +13,7 @@ interface Args {
 
 abstract class AbstractDataGetter {
 
+    name: string;
     cors: string = 'https://ctm-cors-anywhere-ba3b8ee835aa.herokuapp.com/';
     // cors: string = 'https://cors-anywhere.herokuapp.com/corsdemo/';
     baseUrl: string;
@@ -19,7 +21,8 @@ abstract class AbstractDataGetter {
     searchSuffix: string;
     searchJoin: string;
 
-    constructor( { baseUrl, searchPath, searchSuffix, searchJoin } : Args ) {
+    constructor( { name, baseUrl, searchPath, searchSuffix, searchJoin } : Args ) {
+        this.name = name;
         this.baseUrl = baseUrl;
         this.searchPath = searchPath;
         this.searchSuffix = searchSuffix;
@@ -30,7 +33,7 @@ abstract class AbstractDataGetter {
         .get(this.searchTermToUrl(searchTerm), { 'headers': { 'Origin': 'compare-the-magic' } })
         .then(this.extractData)
         .catch((e) => {
-            console.log('Failed to get data');
+            console.log(`Failed to get data for seller=[${this.name}] searchTerm=[${searchTerm}]`);
             // console.log(e);
             return '';
         });

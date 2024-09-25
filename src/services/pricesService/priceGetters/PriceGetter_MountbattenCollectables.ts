@@ -18,6 +18,7 @@ class PriceGetter_MountbattenCollectables extends AbstractPriceGetter {
 class DataGetter_MountbattenCollectables extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://www.mountbattencollectables.com/',
             searchPath: 'products/search?q=',
             searchSuffix: '',

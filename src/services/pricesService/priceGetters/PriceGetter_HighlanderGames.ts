@@ -18,6 +18,7 @@ class PriceGetter_HighlanderGames extends AbstractPriceGetter {
 class DataGetter_HighlanderGames extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://highlandergames.co.uk/search?type=product&q=',
             searchPath: 'search?type=product&q=',
             searchSuffix: '',

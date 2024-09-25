@@ -19,6 +19,7 @@ class PriceGetter_DiceSaloon extends AbstractPriceGetter {
 class DataGetter_DiceSaloon extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://www.dicesaloonsingles.co.uk/',
             searchPath: 'search?options%5Bprefix%5D=last&type=product&q=',
             searchSuffix: '',

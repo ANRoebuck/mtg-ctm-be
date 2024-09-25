@@ -19,6 +19,7 @@ class PriceGetter_GatheringPointGames extends AbstractPriceGetter {
 class DataGetter_GatheringPointGames extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://gatheringpointgames.co.uk/',
             searchPath: 'search?type=product&options%5Bprefix%5D=last&q=',
             searchSuffix: '',

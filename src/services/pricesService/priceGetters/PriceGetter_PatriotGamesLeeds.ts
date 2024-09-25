@@ -18,6 +18,7 @@ class PriceGetter_PatriotGamesLeeds extends AbstractPriceGetter {
 class DataGetter_PatriotGamesLeeds extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://www.patriotgamesleeds.com/',
             searchPath: 'index.php?main_page=advanced_search_result&search_in_description=1&keyword=',
             searchSuffix: '',

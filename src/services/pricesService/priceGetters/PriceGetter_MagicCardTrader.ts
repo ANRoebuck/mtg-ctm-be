@@ -18,6 +18,7 @@ class PriceGetter_MagicCardTrader extends AbstractPriceGetter {
 class DataGetter_MagicCardTrader extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://www.themagiccardtrader.com/',
             searchPath: 'products/search?q=',
             searchSuffix: '',

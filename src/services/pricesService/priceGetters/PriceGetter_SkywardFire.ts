@@ -18,6 +18,7 @@ class PriceGetter_SkywardFire extends AbstractPriceGetter {
 class DataGetter_SkywardFire extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://www.skywardfire.com/',
             searchPath: 'products/search?q=',
             searchSuffix: '',

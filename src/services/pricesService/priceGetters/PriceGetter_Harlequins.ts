@@ -18,6 +18,7 @@ class PriceGetter_Harlequins extends AbstractPriceGetter {
 class DataGetter_Harlequins extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://www.harlequins-games.com/',
             searchPath: 'products/search?q=',
             searchSuffix: '&c=8&disable_mobile=1',

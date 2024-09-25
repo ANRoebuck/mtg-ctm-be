@@ -18,6 +18,7 @@ class PriceGetter_LvlUp extends AbstractPriceGetter {
 class DataGetter_LvlUp extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://lvlupgaming.co.uk/',
             searchPath: 'search?type=product&options%5Bprefix%5D=last&q=',
             searchSuffix: '',

@@ -18,6 +18,7 @@ class PriceGetter_Manaleak extends AbstractPriceGetter {
 class DataGetter_Manaleak extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://www.manaleak.com/',
             searchPath: '/index.php?route=product/search&search=',
             searchSuffix: '#/availability=1',

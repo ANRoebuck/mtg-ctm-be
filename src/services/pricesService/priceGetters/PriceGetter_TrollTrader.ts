@@ -18,6 +18,7 @@ class PriceGetter_TrollTrader extends AbstractPriceGetter {
 class DataGetter_TrollTrader extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://www.trolltradercards.com/',
             searchPath: 'products/search?q=',
             searchSuffix: '',

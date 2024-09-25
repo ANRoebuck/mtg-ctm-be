@@ -18,6 +18,7 @@ class PriceGetter_BoardsAndSwords extends AbstractPriceGetter {
 class DataGetter_BoardsAndSwords extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://www.boardsandswords.co.uk/',
             searchPath: 'search?type=product&options%5Bprefix%5D=last&q=',
             searchSuffix: '',

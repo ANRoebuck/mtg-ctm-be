@@ -18,6 +18,7 @@ class PriceGetter_ManaGaming extends AbstractPriceGetter {
 class DataGetter_ManaGaming extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://managaming.shop/',
             searchPath: 'search?page=1&q=%2A',
             searchSuffix: '%2A',

@@ -41,6 +41,7 @@ class PriceGetter_Axion_Foil extends AbstractPriceGetter {
 class DataGetter_Axion_NonFoil extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://www.axionnow.com/',
             searchPath: 'search?type=product&q=',
             searchSuffix: '&filter.v.availability=1&filter.v.option.finish=Non-Foil',
@@ -52,6 +53,7 @@ class DataGetter_Axion_NonFoil extends AbstractDataGetter {
 class DataGetter_Axion_Foil extends AbstractDataGetter {
     constructor() {
         super({
+            name: sellerName,
             baseUrl: 'https://www.axionnow.com/',
             searchPath: 'search?type=product&q=',
             searchSuffix: '&filter.v.availability=1&filter.v.option.finish=Foil',

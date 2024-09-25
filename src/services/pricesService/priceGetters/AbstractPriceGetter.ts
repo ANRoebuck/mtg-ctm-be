@@ -34,10 +34,10 @@ abstract class AbstractPriceGetter implements IPriceGetterBehaviour {
         const rawData: string = await this.dataGetter.getData(sanitisedSearchTerm);
 
         const foundItems: Price[] = this.dataProcessor.processData(rawData);
-        console.log(`Parsed ${foundItems.length} potential results`);
+        // console.log(`Parsed ${foundItems.length} potential results`);
 
         const validResults = foundItems.filter(result => strongMatch(result.title, sanitisedSearchTerm));
-        console.log(`Found ${validResults.length} valid results`);
+        // console.log(`Found ${validResults.length} valid results`);
 
         if (saveOutput) {
             // for use during development
@@ -49,6 +49,7 @@ abstract class AbstractPriceGetter implements IPriceGetterBehaviour {
             saveToFile(`${filePath}${this.name}_${searchTerm}_prices.json`, JSON.stringify(validResults));
         }
 
+        console.log(`Returning ${validResults.length} results for seller=[${this.name}], searchTerm=[${searchTerm}]`);
         return validResults;
     }
 

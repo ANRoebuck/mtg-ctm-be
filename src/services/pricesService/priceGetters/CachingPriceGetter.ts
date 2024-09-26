@@ -1,5 +1,8 @@
 import { IPriceGetterBehaviour } from './AbstractPriceGetter';
 import { Price } from '../../../types/Price';
+import { HOURS, MINUTES } from '../../../utils/time';
+
+const DEFAULT_CACHING_AGE: number = 1 * HOURS + 30 * MINUTES;
 
 interface TimeStampedPrices {
     timeStamp: number,
@@ -16,12 +19,13 @@ class CachingPriceGetter {
     #cachedPricesMap: CachedPricesMap = {};
     #priceGetter: IPriceGetterBehaviour;
 
-    constructor(cachingAge: number, priceGetter: IPriceGetterBehaviour){
+    constructor(cachingAge: number = DEFAULT_CACHING_AGE, priceGetter: IPriceGetterBehaviour){
         this.#cachingAge = cachingAge;
         this.#priceGetter = priceGetter;
     }
 
     search = async (searchTerm: string): Promise<Price[]> => {
+        this.#invalidateStalePrices();
 
         if(this.#hasCachedPrices(searchTerm)) {
             return this.#getCachedPrices(searchTerm);
@@ -32,20 +36,15 @@ class CachingPriceGetter {
 
     #hasCachedPrices = (searchTerm: string): boolean => {
         const cachedPrices = this.#cachedPricesMap[searchTerm];
-        if(!cachedPrices) {
-            return false;
-        }
+        return Boolean(cachedPrices);
+    }
 
-        const cachedPricesInDate = cachedPrices.timeStamp > (Date.now() - this.#cachingAge);
-        if(!cachedPricesInDate) {
-            this.#invalidatePrices(searchTerm);
-            return false;
-        }
-
-        return true;
+    #cachedPricesInDate = (searchTerm: string): boolean => {
+        return this.#cachedPricesMap[searchTerm].timeStamp > (Date.now() - this.#cachingAge);
     }
 
     #getCachedPrices = (searchTerm: string): Price[] => {
+        console.log(`returning cached prices for ${searchTerm}`);
         return this.#cachedPricesMap[searchTerm].prices;
     }
 
@@ -63,8 +62,12 @@ class CachingPriceGetter {
         }
     }
 
-    #invalidatePrices = (searchTerm: string) => {
-        // this.cachedPricesMap.delete(searchTerm);
+    #invalidateStalePrices = (): void => {
+        Object.keys(this.#cachedPricesMap).forEach((k) => {
+            if (!this.#cachedPricesInDate(k)) {
+                delete this.#cachedPricesMap[k];
+            }
+        });
     }
 
 }

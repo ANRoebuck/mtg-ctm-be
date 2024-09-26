@@ -2,9 +2,10 @@ import { Price } from "../../../../types/Price";
 import { IPriceGetterBehaviour } from "../AbstractPriceGetter";
 import CachingPriceGetter from "../CachingPriceGetter";
 import PriceGetter_Axion from '../PriceGetter_Axion';
+import { SECONDS } from "../../../../utils/time";
 
 
-jest.useFakeTimers();
+
 
 
 const mockSearch = jest.fn();
@@ -15,32 +16,43 @@ jest.mock('../PriceGetter_Axion', () => {
 });
 
 let mockPriceGetter: IPriceGetterBehaviour;
+let cachingPriceGetter: CachingPriceGetter;
 
-beforeEach(() => {
-    mockSearch.mockReset();
-    mockPriceGetter = new PriceGetter_Axion();
-});
 
-afterAll(() => jest.useRealTimers());
 
 describe('CachingPriceGetter', () => {
-    it('Requests results from PriceGetter', async () => {
-        const cachingPriceGetter = new CachingPriceGetter(0, mockPriceGetter);
-        mockSearch.mockReturnValueOnce(somePrices).mockReturnValueOnce(morePrices);
 
-        const prices = await(cachingPriceGetter.search('foo'));
+    beforeAll(() => jest.useFakeTimers());
+
+    beforeEach(() => {
+        mockPriceGetter = new PriceGetter_Axion();
+    
+        cachingPriceGetter =
+            new CachingPriceGetter(
+                (2 * SECONDS),
+                mockPriceGetter
+            );
+    
+        mockSearch
+            .mockReset()
+            .mockReturnValueOnce(somePrices)
+            .mockReturnValueOnce(morePrices)
+            .mockReturnValueOnce(evenMorePrices);
+    });
+    
+    afterAll(() => jest.useRealTimers());
+
+    it('Requests results from PriceGetter', async () => {
+        const prices = await (cachingPriceGetter.search('foo'));
 
         expect(mockPriceGetter.getPrices).toHaveBeenCalledWith('foo');
         expect(prices).toBe(somePrices);
     });
 
     it('Returns cached results if requested again within age limit', async () => {
-        const cachingPriceGetter = new CachingPriceGetter(1000, mockPriceGetter);
-        mockSearch.mockReturnValueOnce(somePrices).mockReturnValueOnce(morePrices);
-
-        const firstPrices = await(cachingPriceGetter.search('foo'));
+        const firstPrices = await (cachingPriceGetter.search('foo'));
         // call again immediately
-        const secondPrices = await(cachingPriceGetter.search('foo'));
+        const secondPrices = await (cachingPriceGetter.search('foo'));
 
         expect(mockPriceGetter.getPrices).toHaveBeenCalledTimes(1);
         expect(firstPrices).toBe(somePrices);
@@ -48,19 +60,22 @@ describe('CachingPriceGetter', () => {
     });
 
     it('Requests results a second time if requested after age limit expires', async () => {
-        const cachingPriceGetter = new CachingPriceGetter(1000, mockPriceGetter);
-        mockSearch.mockReturnValueOnce(somePrices).mockReturnValueOnce(morePrices);
+        const firstPrices = await (cachingPriceGetter.search('foo'));
 
-        const firstPrices = await(cachingPriceGetter.search('foo'));
+        jest.advanceTimersByTime(2 * SECONDS);
 
-        jest.advanceTimersByTime(2000);
-
-        const secondPrices = await(cachingPriceGetter.search('foo'));
+        const secondPrices = await (cachingPriceGetter.search('foo'));
 
         expect(mockPriceGetter.getPrices).toHaveBeenCalledTimes(2);
         expect(firstPrices).toBe(somePrices);
         expect(secondPrices).toBe(morePrices);
     });
+
+    // it('Invalidates old prices on new search', () => {
+
+    // to test this will require exposing the cachedPricesMap
+
+    // });
 
 });
 
@@ -105,6 +120,22 @@ const morePrices: Price[] = [
         stock_inStock: true,
         stock_level: 'ccc',
         subtitle: 'ccc',
+        isFoil: true,
+    }
+];
+
+const evenMorePrices: Price[] = [
+    {
+        seller: 'ddd',
+        title: 'ddd',
+        imgSrc: 'ddd',
+        productRef: 'ddd',
+        expansion: 'ddd',
+        price_relativeUnits: 0,
+        price_textRepresentation: 'ddd',
+        stock_inStock: true,
+        stock_level: 'ddd',
+        subtitle: 'ddd',
         isFoil: true,
     }
 ];

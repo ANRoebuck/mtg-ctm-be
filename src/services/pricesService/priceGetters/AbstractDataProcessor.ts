@@ -11,6 +11,7 @@ export interface AbstractDataProcessor {
 const virtualConsole = new VirtualConsole();
 virtualConsole.on("error", () => {
     // No-op to skip console errors.
+    // https://stackoverflow.com/questions/69906136/console-error-error-could-not-parse-css-stylesheet
 });
 const getDocFromString = (docStr: string): Document => {
     return new JSDOM(docStr, { virtualConsole }).window.document;

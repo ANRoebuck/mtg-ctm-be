@@ -29,8 +29,8 @@ describe('CachingPriceGetter', () => {
     
         cachingPriceGetter =
             new CachingPriceGetter(
+                mockPriceGetter,
                 (2 * SECONDS),
-                mockPriceGetter
             );
     
         mockSearch
@@ -43,16 +43,16 @@ describe('CachingPriceGetter', () => {
     afterAll(() => jest.useRealTimers());
 
     it('Requests results from PriceGetter', async () => {
-        const prices = await (cachingPriceGetter.search('foo'));
+        const prices = await (cachingPriceGetter.getPrices('foo'));
 
         expect(mockPriceGetter.getPrices).toHaveBeenCalledWith('foo');
         expect(prices).toBe(somePrices);
     });
 
     it('Returns cached results if requested again within age limit', async () => {
-        const firstPrices = await (cachingPriceGetter.search('foo'));
+        const firstPrices = await (cachingPriceGetter.getPrices('foo'));
         // call again immediately
-        const secondPrices = await (cachingPriceGetter.search('foo'));
+        const secondPrices = await (cachingPriceGetter.getPrices('foo'));
 
         expect(mockPriceGetter.getPrices).toHaveBeenCalledTimes(1);
         expect(firstPrices).toBe(somePrices);
@@ -60,11 +60,11 @@ describe('CachingPriceGetter', () => {
     });
 
     it('Requests results a second time if requested after age limit expires', async () => {
-        const firstPrices = await (cachingPriceGetter.search('foo'));
+        const firstPrices = await (cachingPriceGetter.getPrices('foo'));
 
         jest.advanceTimersByTime(2 * SECONDS);
 
-        const secondPrices = await (cachingPriceGetter.search('foo'));
+        const secondPrices = await (cachingPriceGetter.getPrices('foo'));
 
         expect(mockPriceGetter.getPrices).toHaveBeenCalledTimes(2);
         expect(firstPrices).toBe(somePrices);

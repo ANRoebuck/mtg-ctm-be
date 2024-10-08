@@ -24,8 +24,9 @@ import {
     PriceGetter_TotalCards,
     PriceGetter_TrollTrader
 } from './';
+import CachingPriceGetter from './CachingPriceGetter';
 
-const priceGettersArray: IPriceGetterBehaviour[] = [
+const priceGetters: IPriceGetterBehaviour[] = [
     new PriceGetter_Axion(),
     // Big Orbit has almost all items out of stock
     // new PriceGetter_BigOrbitCards(),
@@ -59,15 +60,18 @@ const priceGettersArray: IPriceGetterBehaviour[] = [
 ];
 
 const configurePriceGetters = (): { [key: string]: IPriceGetterBehaviour } => {
-    
-    const priceGetters = priceGettersArray.reduce((acc: { [key: string]: IPriceGetterBehaviour }, ele : IPriceGetterBehaviour) => {
-        acc[ele.name] = ele;
-        return acc;
-    }, {});
 
-    console.log(`Configured ${priceGettersArray.length} priceGetters`);
+    const confiuredPriceGetters = priceGetters
+        .map(priceGetter => new CachingPriceGetter(priceGetter))
+        .reduce((acc: { [key: string]: IPriceGetterBehaviour }, ele: IPriceGetterBehaviour) => {
+            acc[ele.name] = ele;
+            return acc;
+        }, {});
 
-    return priceGetters;
+    console.log(`Configured ${priceGetters.length} priceGetters`);
+    console.log(Object.keys(confiuredPriceGetters));
+
+    return confiuredPriceGetters;
 }
 
 export default configurePriceGetters;

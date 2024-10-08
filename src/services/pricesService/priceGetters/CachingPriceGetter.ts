@@ -13,18 +13,20 @@ interface CachedPricesMap {
     [searchTerm: string]: TimeStampedPrices,
 }
 
-class CachingPriceGetter {
+class CachingPriceGetter implements IPriceGetterBehaviour {
 
+    name: string;
     #cachingAge: number;
     #cachedPricesMap: CachedPricesMap = {};
     #priceGetter: IPriceGetterBehaviour;
 
-    constructor(cachingAge: number = DEFAULT_CACHING_AGE, priceGetter: IPriceGetterBehaviour){
+    constructor(priceGetter: IPriceGetterBehaviour, cachingAge: number = DEFAULT_CACHING_AGE){
+        this.name = priceGetter.name;
         this.#cachingAge = cachingAge;
         this.#priceGetter = priceGetter;
     }
 
-    search = async (searchTerm: string): Promise<Price[]> => {
+    getPrices = async (searchTerm: string): Promise<Price[]> => {
         this.#invalidateStalePrices();
 
         if(this.#hasCachedPrices(searchTerm)) {

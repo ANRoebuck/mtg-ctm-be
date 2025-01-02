@@ -217,7 +217,7 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
 
     productRefFromResultNode = (resultNode: Element): string => {
         const attributeValue = this.getFirstelementAttr(resultNode, this.productSelector, this.productRefAttribute);
-        return this.productBaseUrl + new StringCleaner(attributeValue).trimWhitespace().get();
+        return this.productBaseUrl + new StringCleaner(attributeValue).trimWhitespace().removeQueryParams().get();
     }
 
 

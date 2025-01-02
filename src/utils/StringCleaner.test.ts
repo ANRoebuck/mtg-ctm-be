@@ -48,6 +48,17 @@ describe('StringCleaner', () => {
         expect(output).toBe(expected);
     });
 
+    it('removes query params from url string', () => {
+        const input = 'https://www.axionnow.com//products/mtg-singles-rvr-steamvents-412?_pos=2&_sid=d388dd3e9&_ss=r&_fid=4328b684d&variant=47557758058813';
+        const expected = 'https://www.axionnow.com//products/mtg-singles-rvr-steamvents-412';
+
+        const output: string = new StringCleaner(input)
+            .removeQueryParams()
+            .get();
+
+        expect(output).toBe(expected);
+    });
+
     it('removes segment in square brackets', () => {
         const input = 'foo [bar]';
         const expected = 'foo ';

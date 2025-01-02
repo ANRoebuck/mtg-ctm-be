@@ -6,6 +6,7 @@ interface IStringCleaner {
     removeLineBreakHtml: () => IStringCleaner,
     removeNewLines: () => IStringCleaner,
     removeNonDigits: () => IStringCleaner,
+    removeQueryParams: () => IStringCleaner,
     removeSegmentInSquareBrackets: () => IStringCleaner,
     removeTrailingComma: () => IStringCleaner,
     removeTrailingFOIL: () => IStringCleaner,
@@ -44,6 +45,11 @@ class StringCleaner implements IStringCleaner {
 
     removeNonDigits(): IStringCleaner {
         this.str = this.str.replace(/\D/g,'');
+        return this;
+    }
+
+    removeQueryParams(): IStringCleaner {
+        this.str = this.str.replace(/(.*)\?(.*)/g, `$1`);
         return this;
     }
 

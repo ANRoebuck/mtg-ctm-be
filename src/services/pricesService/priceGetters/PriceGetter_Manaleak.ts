@@ -2,6 +2,7 @@ import AbstractDataGetter from './AbstractDataGetter';
 import { AbstractHtmlDataProcessor, Stock } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
 import { currencies } from '../../../types/Currency';
+import StringCleaner from '../../../utils/StringCleaner';
 
 const sellerName = 'Manaleak';
 
@@ -63,6 +64,12 @@ class DataProcessor_Manaleak extends AbstractHtmlDataProcessor {
         // Stock count is not displayed. An out of stock banner either is or is not present.
         let isInStock: boolean = resultNode.querySelectorAll(this.stockSelector).length === 0;
         return isInStock ? { inStock: true, level: '' + 1 } : { inStock: false, level: '' + 0 };
+    }
+
+    // @Override
+    productRefFromResultNode = (resultNode: Element): string => {
+        const attributeValue = this.getFirstelementAttr(resultNode, this.productSelector, this.productRefAttribute);
+        return this.productBaseUrl + new StringCleaner(attributeValue).trimWhitespace().get();
     }
 }
 

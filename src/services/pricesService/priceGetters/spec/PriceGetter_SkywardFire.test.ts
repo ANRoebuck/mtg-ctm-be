@@ -2,7 +2,7 @@ import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils/utils';
-import { BE_URL_STUB } from '../../../../gateway/http';
+import { MTG_CTM_CORS_ANYWHERE } from '../../../../gateway/http';
 
 import { PriceGetter_SkywardFire } from '..';
 
@@ -34,7 +34,7 @@ describe('PriceGetter_SkywardFire', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      BE_URL_STUB + 'https://www.skywardfire.com/products/search?q=steam+vents',
+      MTG_CTM_CORS_ANYWHERE + 'https://www.skywardfire.com/products/search?q=steam+vents',
       { "headers": { "Origin": "compare-the-magic" } }
     );
     expect(results.length).toBe(5);
@@ -52,7 +52,7 @@ describe('PriceGetter_SkywardFire', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      BE_URL_STUB + 'https://www.skywardfire.com/products/search?q=dromokas+command',
+      MTG_CTM_CORS_ANYWHERE + 'https://www.skywardfire.com/products/search?q=dromokas+command',
       { "headers": { "Origin": "compare-the-magic" } }
     );
     expect(results.length).toBe(5);

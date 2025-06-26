@@ -2,7 +2,7 @@ import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils/utils';
-import { BE_URL_STUB } from '../../../../gateway/http';
+import { MTG_CTM_CORS_ANYWHERE } from '../../../../gateway/http';
 
 import { PriceGetter_MagicMadhouse } from '..';
 
@@ -34,7 +34,7 @@ describe('PriceGetter_MagicMadhouse', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      BE_URL_STUB + 'https://eucs25.ksearchnet.com/cloud-search/n-search/search?ticket=klevu-161710301480613427&term=watery%20grave&paginationStartsFrom=0&sortPrice=false&ipAddress=undefined&analyticsApiKey=klevu-161710301480613427&showOutOfStockProducts=true&klevuFetchPopularTerms=false&klevu_priceInterval=500&fetchMinMaxPrice=true&klevu_multiSelectFilters=true&noOfResults=36&klevuSort=rel&enableFilters=true&filterResults=&visibility=search&category=KLEVU_PRODUCT&klevu_filterLimit=400&sv=121&lsqt=&responseType=json&priceFieldSuffix=GBP&klevu_loginCustomerGroup=',
+      MTG_CTM_CORS_ANYWHERE + 'https://eucs25.ksearchnet.com/cloud-search/n-search/search?ticket=klevu-161710301480613427&term=watery%20grave&paginationStartsFrom=0&sortPrice=false&ipAddress=undefined&analyticsApiKey=klevu-161710301480613427&showOutOfStockProducts=true&klevuFetchPopularTerms=false&klevu_priceInterval=500&fetchMinMaxPrice=true&klevu_multiSelectFilters=true&noOfResults=36&klevuSort=rel&enableFilters=true&filterResults=&visibility=search&category=KLEVU_PRODUCT&klevu_filterLimit=400&sv=121&lsqt=&responseType=json&priceFieldSuffix=GBP&klevu_loginCustomerGroup=',
       { "headers": { "Origin": "compare-the-magic" } }
     );
     expect(results.length).toBe(9);

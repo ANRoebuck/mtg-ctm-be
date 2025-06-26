@@ -2,7 +2,7 @@ import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils/utils';
-import { BE_URL_STUB } from '../../../../gateway/http';
+import { MTG_CTM_CORS_ANYWHERE } from '../../../../gateway/http';
 
 import { PriceGetter_PatriotGamesLeeds } from '..';
 
@@ -34,7 +34,7 @@ describe('PriceGetter_PatriotGamesLeeds', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      BE_URL_STUB + 'https://www.patriotgamesleeds.com/index.php?main_page=advanced_search_result&search_in_description=1&keyword=steam+vents',
+      MTG_CTM_CORS_ANYWHERE + 'https://www.patriotgamesleeds.com/index.php?main_page=advanced_search_result&search_in_description=1&keyword=steam+vents',
       { "headers": { "Origin": "compare-the-magic" } }
     );
     expect(results.length).toBe(4);

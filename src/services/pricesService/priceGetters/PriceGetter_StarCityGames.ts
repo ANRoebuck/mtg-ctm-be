@@ -1,5 +1,5 @@
 import AbstractDataGetter from './AbstractDataGetter';
-import { AbstractHtmlDataProcessor, AbstractJsonDataProcessor } from './AbstractDataProcessor';
+import { AbstractJsonDataProcessor } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
 import { currencies } from '../../../types/Currency';
 import axios from 'axios';
@@ -42,9 +42,9 @@ class DataGetter_StarCityGames_New extends AbstractDataGetter {
             }
         )
         .then(this.extractData)
-        .catch((_) => {
-            console.log('Failed to get data');
-            // console.log(e);
+        .catch((e) => {
+            console.log(`Failed to get data for seller=[${this.name}] searchTerm=[${searchTerm}]`);
+            console.log(e);
             return '';
         });
 
@@ -182,7 +182,5 @@ class DataProcessor_StarCityGames_New extends AbstractJsonDataProcessor {
 //         });
 //     }
 // }
-
-// const removeTags = (text: string): string => text.replace(/<.*?>/g, '');
 
 export default PriceGetter_StarCityGames;

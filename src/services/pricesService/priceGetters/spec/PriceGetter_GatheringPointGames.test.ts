@@ -2,7 +2,7 @@ import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils/utils';
-import { BE_URL_STUB } from '../../../../gateway/http';
+import { MTG_CTM_CORS_ANYWHERE } from '../../../../gateway/http';
 
 import { PriceGetter_GatheringPointGames } from '..';
 
@@ -34,7 +34,7 @@ describe('PriceGetter_GatheringPointGames', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      BE_URL_STUB + 'https://gatheringpointgames.co.uk/search?type=product&options%5Bprefix%5D=last&q=steam+vents',
+      MTG_CTM_CORS_ANYWHERE + 'https://gatheringpointgames.co.uk/search?type=product&options%5Bprefix%5D=last&q=steam+vents',
       { "headers": { "Origin": "compare-the-magic" } }
     );
     expect(results.length).toBe(7);

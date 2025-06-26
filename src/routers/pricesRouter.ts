@@ -1,6 +1,6 @@
-import express, { Application, Router, Request, Response, NextFunction } from 'express';
+import express, { Router } from 'express';
 import { sendPrices, sendSellers, sendModelsTest } from '../controllers/pricesControllers';
-import {errMethodNotAllowed} from "../errorHandling/errorHandling";
+import { errMethodNotAllowed } from "../errorHandling/errorHandling";
 
 const pricesRouter: Router = express.Router();
 

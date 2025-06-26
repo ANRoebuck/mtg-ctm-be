@@ -1,7 +1,7 @@
 import {
     IPriceGetterBehaviour,
     PriceGetter_Axion,
-    // PriceGetter_BigOrbitCards,
+    PriceGetter_BigOrbitCards,
     PriceGetter_BoardsAndSwords,
     PriceGetter_DiceSaloon,
     PriceGetter_GameHQ,
@@ -29,7 +29,7 @@ import CachingPriceGetter from './CachingPriceGetter';
 const priceGetters: IPriceGetterBehaviour[] = [
     new PriceGetter_Axion(),
     // Big Orbit has almost all items out of stock
-    // new PriceGetter_BigOrbitCards(),
+    new PriceGetter_BigOrbitCards(),
     new PriceGetter_BoardsAndSwords,
     // Want to add ChaosCards but currently unable due to lazy-loading and inaccessible API
     new PriceGetter_DiceSaloon(),

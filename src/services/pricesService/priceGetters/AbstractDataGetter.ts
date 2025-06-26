@@ -1,8 +1,6 @@
 import axios from 'axios';
-import { BE_URL_STUB } from '../../../gateway/http';
+import { MTG_CTM_CORS_ANYWHERE } from '../../../gateway/http';
 
-
-// axios.defaults.headers.common['origin'] = "CTM";
 
 interface Args {
     name: string,
@@ -30,10 +28,11 @@ abstract class AbstractDataGetter {
 
     getData = async (searchTerm: string) : Promise<string> => axios
         .get(this.searchTermToUrl(searchTerm), { 'headers': { 'Origin': 'compare-the-magic' } })
+        // .get(this.searchTermToUrl(searchTerm))
         .then(this.extractData)
         .catch((e) => {
             console.log(`Failed to get data for seller=[${this.name}] searchTerm=[${searchTerm}]`);
-            // console.log(e);
+            console.log(e);
             return '';
         });
 
@@ -42,11 +41,14 @@ abstract class AbstractDataGetter {
             + this.searchPath
             + searchTerm.toLowerCase().split(' ').join(this.searchJoin)
             + this.searchSuffix;
-        console.log('requesting data from ' + url);    
-        return BE_URL_STUB + url;
+        console.log('Requesting data from ' + url);    
+        return MTG_CTM_CORS_ANYWHERE + url;
     };
 
-    extractData = ({ data } : { data: string }): string => data || '';
+    extractData = ({ data } : { data: string }): string => {
+        console.log('Extracting data');
+        return data || '';
+    }
 }
 
 export default AbstractDataGetter;

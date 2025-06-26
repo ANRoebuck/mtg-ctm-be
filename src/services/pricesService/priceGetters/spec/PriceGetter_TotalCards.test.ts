@@ -2,7 +2,7 @@ import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils/utils';
-import { BE_URL_STUB } from '../../../../gateway/http';
+import { MTG_CTM_CORS_ANYWHERE } from '../../../../gateway/http';
 
 import { PriceGetter_TotalCards } from '..';
 
@@ -34,7 +34,7 @@ describe('PriceGetter_TotalCards', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      BE_URL_STUB + 'https://totalcards.net/search?type=product&options%5Bprefix%5D=last&q=botanical+sanctum',
+      MTG_CTM_CORS_ANYWHERE + 'https://totalcards.net/search?type=product&options%5Bprefix%5D=last&q=botanical+sanctum',
       { "headers": { "Origin": "compare-the-magic" } }
     );
     expect(results.length).toBe(2);

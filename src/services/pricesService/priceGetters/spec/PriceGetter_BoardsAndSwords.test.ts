@@ -2,7 +2,7 @@ import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils/utils';
-import { BE_URL_STUB } from '../../../../gateway/http';
+import { MTG_CTM_CORS_ANYWHERE } from '../../../../gateway/http';
 
 import { PriceGetter_BoardsAndSwords } from '..';
 
@@ -34,7 +34,7 @@ describe('PriceGetter_BoardsAndSwords', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      BE_URL_STUB + 'https://www.boardsandswords.co.uk/search?type=product&options%5Bprefix%5D=last&q=steam+vents',
+      MTG_CTM_CORS_ANYWHERE + 'https://www.boardsandswords.co.uk/search?type=product&options%5Bprefix%5D=last&q=steam+vents',
       {"headers": {"Origin": "compare-the-magic"}}
     );
     expect(results.length).toBe(1);

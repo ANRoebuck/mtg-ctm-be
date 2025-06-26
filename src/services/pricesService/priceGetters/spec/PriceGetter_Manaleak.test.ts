@@ -2,7 +2,7 @@ import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils/utils';
-import { BE_URL_STUB } from '../../../../gateway/http';
+import { MTG_CTM_CORS_ANYWHERE } from '../../../../gateway/http';
 
 import { PriceGetter_Manaleak } from '..';
 
@@ -34,7 +34,7 @@ describe('PriceGetter_Manaleak', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      BE_URL_STUB + 'https://www.manaleak.com//index.php?route=product/search&search=tarmogoyf#/availability=1',
+      MTG_CTM_CORS_ANYWHERE + 'https://www.manaleak.com//index.php?route=product/search&search=tarmogoyf#/availability=1',
       { "headers": { "Origin": "compare-the-magic" } }
     );
     expect(results.length).toBe(4);

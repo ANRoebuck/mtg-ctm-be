@@ -4,7 +4,7 @@ import AbstractPriceGetter from './AbstractPriceGetter';
 import AggregatingPriceGetter from './AggregatingPriceGetter';
 import { currencies } from '../../../types/Currency';
 
-const sellerName = 'Axion Now';
+const sellerName = 'Axion Now'; 
 
 class PriceGetter_Axion extends AggregatingPriceGetter {
     constructor() {

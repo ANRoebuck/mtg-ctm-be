@@ -54,7 +54,7 @@ class DataProcessor_Manaleak extends AbstractHtmlDataProcessor {
             imgSrcAttribute: 'data-src',
 
             productSelector: 'div.image > a',
-            productBaseUrl: 'https://www.manaleak.com/',
+            productBaseUrl: '',
             productRefAttribute: 'href',
         });
     }

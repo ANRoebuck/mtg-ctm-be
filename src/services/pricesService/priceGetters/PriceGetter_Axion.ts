@@ -75,7 +75,7 @@ const args = {
     subtitleSelector: '',
     subtitleFromText: () => '',
 
-    priceSelector: 'div[class="#product-card-caption @offset-top"] > div[class="#product-card-price"] > dl > div > dd',
+    priceSelector: 'div[class="#product-card-caption @offset-top"] > div[class="#product-card-price"] > dl[class="#price"] > div > dd > span[class="#price-value"]',
     priceValueFromPriceText: (text: string): number => parseInt(text.replace(/\D/g, '')),
     stockSelector: 'a', // there is no stock selector, but map requires an element
     stockValueFromStockText: (_: string): number => 1,

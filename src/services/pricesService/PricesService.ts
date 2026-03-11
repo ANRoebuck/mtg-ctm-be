@@ -1,4 +1,10 @@
 import { IPriceGetterBehaviour } from "./priceGetters/AbstractPriceGetter";
+
+type SellerTestResult = {
+    status: 'ok' | 'no results';
+    resultCount: number;
+    searchTerm: string;
+}
 import configurePriceGetters from "./priceGetters/configurePriceGetters";
 import { Price } from '../../types/Price';
 import Seller from '../../types/Seller';
@@ -30,16 +36,22 @@ class PricesService {
         return priceGetter ? priceGetter.getPrices(searchTerm, saveOutput) : [];
     }
 
-    testAllModels(): object {
-        return Promise.all(
-            Object.entries(this.priceGetters)
-                .map(async ([sellerName, priceGetter]) => {
-                    const prices = await priceGetter
-                        .getPrices('counterspell')
-                        .then(prices => [sellerName, prices.length]);
-                    return prices;
-                }))
-                .then(Object.fromEntries);
+    async testAllModels(): Promise<{ [sellerName: string]: SellerTestResult }> {
+        const searchTerms = ['Steam Vents', 'Lightning Bolt', 'Counterspell'];
+
+        const entries = await Promise.all(
+            Object.entries(this.priceGetters).map(async ([sellerName, priceGetter]) => {
+                for (const searchTerm of searchTerms) {
+                    const prices = await priceGetter.getPrices(searchTerm);
+                    if (prices.length > 0) {
+                        return [sellerName, { status: 'ok', resultCount: prices.length, searchTerm }];
+                    }
+                }
+                return [sellerName, { status: 'no results', resultCount: 0, searchTerm: searchTerms[searchTerms.length - 1] }];
+            })
+        );
+
+        return Object.fromEntries(entries);
     }
 }
 

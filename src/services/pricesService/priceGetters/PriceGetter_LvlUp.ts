@@ -1,9 +1,13 @@
 import AbstractDataGetter from './AbstractDataGetter';
-import { AbstractHtmlDataProcessor, Stock } from './AbstractDataProcessor';
+import { AbstractJsonDataProcessor } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
+import { Price } from '../../../types/Price';
 import { currencies } from '../../../types/Currency';
+import currencyService from '../../currencyService/CurrencyService';
+import StringCleaner from '../../../utils/StringCleaner';
 
 const sellerName = 'Lvl Up Gaming';
+const baseUrl = 'https://lvlupgaming.co.uk';
 
 class PriceGetter_LvlUp extends AbstractPriceGetter {
     constructor() {
@@ -21,79 +25,53 @@ class DataGetter_LvlUp extends AbstractDataGetter {
     constructor() {
         super({
             name: sellerName,
-            baseUrl: 'https://lvlupgaming.co.uk/',
-            searchPath: 'search?type=product&options%5Bprefix%5D=last&q=',
-            searchSuffix: '',
+            baseUrl: `${baseUrl}/`,
+            searchPath: 'search/suggest.json?q=',
+            searchSuffix: '&resources[type]=product&resources[limit]=20',
             searchJoin: '+',
         });
     }
 }
 
-class DataProcessor_LvlUp extends AbstractHtmlDataProcessor {
+class DataProcessor_LvlUp extends AbstractJsonDataProcessor {
     constructor() {
         super({
             seller: sellerName,
             currency: currencies.GBP,
 
-            resultSelector: 'div.list-view-items > div > div.grid-view-item > div.grid-view-item__link',
-            titleSelector: 'div > a > div.product-detail > div.h4',
+            processData: (rawData: any): Price[] => {
+                const products: any[] = rawData?.resources?.results?.products || [];
 
-            useSubResults: false,
-            subresultSelector: '',
-            subtitleSelector: '',
-            subtitleFromText: () => '',
+                return products
+                    .filter((p: any) => p.type === 'Singles' && p.available)
+                    .map((p: any): Price => {
+                        const title: string = p.title;
+                        const imgSrc: string = p.image;
+                        const productRef: string = baseUrl + new StringCleaner(p.url).trimWhitespace().removeQueryParams().get();
+                        const tags: string[] = p.tags || [];
+                        const expansion: string = tags.find((t: string) => /^[A-Z0-9]{2,6}$/.test(t)) || '';
+                        const price_majorUnits: number = parseFloat(p.price);
+                        const price_minorUnits: number = Math.round(price_majorUnits * 100);
+                        const price_relativeUnits = currencyService.minorUnitsToRelativeUnits(price_minorUnits, currencies.GBP);
+                        const price_textRepresentation = currencyService.majorUnitsToTextRepresentation(price_majorUnits, currencies.GBP);
+                        const isFoil: boolean = title.toLowerCase().includes('foil') || tags.includes('Foil');
 
-            priceSelector: 'div > div > div.product-price > span.product-price__price',
-            priceValueFromPriceText: (text: string): number => parseInt(text.replace(/\D/g, '')),
-            stockSelector: 'div.nm-cartmain > form > div.product-form__item > a > span.value',
-            stockValueFromStockText: (x: string): number => parseInt(x),    // not used
-            isFoilSelector: 'div > span > select > option',
-            expansionSelector: 'div > a > div.product-detail > div.h4',
-
-            imgSelector: 'div.product-card-list2__image-wrapper > a > div > div > img',
-            imgBaseUrl: 'https:',
-            imgSrcAttribute: 'src',
-
-            productSelector: 'div.product-card-list2__image-wrapper > a',
-            productBaseUrl: 'https://lvlupgaming.co.uk',
-            productRefAttribute: 'href',
+                        return {
+                            seller: sellerName,
+                            title,
+                            imgSrc,
+                            productRef,
+                            expansion,
+                            price_relativeUnits,
+                            price_textRepresentation,
+                            stock_inStock: true,
+                            stock_level: '1',
+                            subtitle: '',
+                            isFoil,
+                        };
+                    });
+            }
         });
-    }
-
-    // @Override
-    stockFromResultNode = (resultNode: Element): Stock => {
-        // Stock count is not displayed
-        // Out of stock banner loads lazily and cannot be used
-        // There is a tool-tip element displayed when hovering over add-to-cart button
-        // The text from this element is either 'SOLD OUT' or 'Add To Cart'
-        // The add-to-cart button itself may be absent, in which case item is out of stock
-        const addToCartToolTipElement: string = this.getFirstElementHtml(resultNode, this.stockSelector);
-        const inStock: boolean = addToCartToolTipElement?.includes('Add To Cart') || false;
-        return {
-            inStock,
-            level: inStock ? '1' : '0'
-        };
-    }
-
-    // @Override
-    titleFromResultNode = (resultNode: Element): string => {
-        const title: string = this.getFirstElementHtml(resultNode, this.titleSelector)
-            .replace(/(.*)\[(.*)\]/g, `$1`)                     // ignore segment in [square brackets]
-            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);      // remove leading+trailing whitespace
-
-        let subtitle: string = this.getFirstElementWithAttrHtml(resultNode, this.isFoilSelector, 'selected')
-            .replace(/\n/, '')                                  // remove new line characters
-            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);      // remove leading+trailing whitespace
-        subtitle = subtitle && ` - ${subtitle}`;
-
-        return `${title}${subtitle}`;
-    }
-
-    // @Override
-    expansionFromResultNode = (resultNode: Element): string => {
-        return this.getFirstElementHtml(resultNode, this.expansionSelector)
-            .replace(/(.*)\[(.*)\]/g, `$2`)                     // take segment in [square brackets]
-            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`);      // remove leading+trailing whitespace
     }
 }
 

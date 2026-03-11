@@ -1,9 +1,12 @@
 import AbstractDataGetter from './AbstractDataGetter';
-import { AbstractHtmlDataProcessor } from './AbstractDataProcessor';
+import { AbstractJsonDataProcessor } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
+import { Price } from '../../../types/Price';
 import { currencies } from '../../../types/Currency';
+import currencyService from '../../currencyService/CurrencyService';
 
 const sellerName = 'Hareruya';
+const baseUrl = 'https://www.hareruyamtg.com';
 
 class PriceGetter_Hareruya extends AbstractPriceGetter {
     constructor() {
@@ -21,57 +24,52 @@ class DataGetter_Hareruya extends AbstractDataGetter {
     constructor() {
         super({
             name: sellerName,
-            baseUrl: 'https://www.hareruyamtg.com/en/',
-            searchPath: 'products/search?suggest_type=all&product=',
+            baseUrl: `${baseUrl}/en/products/search/`,
+            searchPath: 'unisearch_api?rows=50&kw=',
             searchSuffix: '',
             searchJoin: '+',
         });
     }
 }
 
-class DataProcessor_Hareruya extends AbstractHtmlDataProcessor {
+class DataProcessor_Hareruya extends AbstractJsonDataProcessor {
     constructor() {
         super({
             seller: sellerName,
             currency: currencies.JPY,
 
-            resultSelector: 'ul.itemListLine > li.itemList',
-            titleSelector: 'div.itemData > a',
+            processData: (rawData: any): Price[] => {
+                const docs: any[] = rawData?.response?.docs || [];
 
-            useSubResults: false,
-            subresultSelector: '',
-            subtitleSelector: '',
-            subtitleFromText: () => '',
+                return docs
+                    .filter((p: any) => parseInt(p.stock) > 0)
+                    .map((p: any): Price => {
+                        const title: string = p.card_name;
+                        const imgSrc: string = p.image_url;
+                        const productRef: string = `${baseUrl}/en/products/detail/${p.product}`;
+                        const expansion: string = (p.product_name_en?.match(/\[([A-Z0-9]+)\]/) || [])[1] || '';
+                        const price_minorUnits: number = parseInt(p.price);
+                        const price_majorUnits: number = currencyService.minorUnitsToMajorUnits(price_minorUnits, currencies.JPY);
+                        const price_relativeUnits = currencyService.minorUnitsToRelativeUnits(price_minorUnits, currencies.JPY);
+                        const price_textRepresentation = currencyService.majorUnitsToTextRepresentation(price_majorUnits, currencies.JPY);
+                        const isFoil: boolean = p.foil_flg === '1';
 
-            priceSelector: 'div.itemData > div.itemDetail > p.itemDetail__price',
-            priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g, '')),
-            stockSelector: 'div.itemData > div.itemDetail > p.itemDetail__stock',
-            stockValueFromStockText: (text): number => parseInt(text.replace(/\D/g, '')),
-            isFoilSelector: 'div.itemData > a',
-            expansionSelector: 'div.itemData > a',
-
-            imgSelector: 'a> div.itemImg > img',
-            imgBaseUrl: '',
-            imgSrcAttribute: 'data-original',
-
-            productSelector: 'div.itemData > a',
-            productBaseUrl: 'https://www.hareruyamtg.com',
-            productRefAttribute: 'href',
+                        return {
+                            seller: sellerName,
+                            title,
+                            imgSrc,
+                            productRef,
+                            expansion,
+                            price_relativeUnits,
+                            price_textRepresentation,
+                            stock_inStock: true,
+                            stock_level: p.stock,
+                            subtitle: '',
+                            isFoil,
+                        };
+                    });
+            }
         });
-    }
-
-    // @Override
-    titleFromResultNode = (resultNode: Element): string => {
-        return this.getFirstElementHtml(resultNode, this.titleSelector)
-            .replace(/(.*)\[.*/g, `$1`)                      // take first segment before opening [
-            .replace(/[【】《》\[\]■ ◆]/g, ' ')               // remove weird brackets
-            .replace(/([\s]*)(\S[\s\S]*\S)([\s]*)/, `$2`)    // remove leading+trailing whitespace
-    }
-
-    // @Override
-    expansionFromResultNode = (resultNode: Element): string => {
-        return this.getFirstElementHtml(resultNode, this.expansionSelector)
-            .replace(/.*\[(.*)\]/g, `$1`);
     }
 }
 

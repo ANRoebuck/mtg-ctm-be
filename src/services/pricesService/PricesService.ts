@@ -37,7 +37,7 @@ class PricesService {
     }
 
     async testAllModels(): Promise<{ [sellerName: string]: SellerTestResult }> {
-        const searchTerms = ['Steam Vents', 'Lightning Bolt', 'Counterspell'];
+        const searchTerms = ['Steam Vents', 'Glen Elendra Guardian', 'Lightning Bolt', 'Counterspell'];
 
         const entries = await Promise.all(
             Object.entries(this.priceGetters).map(async ([sellerName, priceGetter]) => {

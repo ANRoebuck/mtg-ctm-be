@@ -1,10 +1,13 @@
 import AbstractDataGetter from './AbstractDataGetter';
-import { AbstractHtmlDataProcessor, Stock } from './AbstractDataProcessor';
+import { AbstractJsonDataProcessor } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
+import { Price } from '../../../types/Price';
 import { currencies } from '../../../types/Currency';
+import currencyService from '../../currencyService/CurrencyService';
 import StringCleaner from '../../../utils/StringCleaner';
 
 const sellerName = 'Total Cards';
+const baseUrl = 'https://totalcards.net';
 
 class PriceGetter_TotalCards extends AbstractPriceGetter {
     constructor() {
@@ -22,68 +25,56 @@ class DataGetter_TotalCards extends AbstractDataGetter {
     constructor() {
         super({
             name: sellerName,
-            baseUrl: 'https://totalcards.net/',
-            searchPath: 'search?type=product&options%5Bprefix%5D=last&q=',
-            searchSuffix: '',
+            baseUrl: `${baseUrl}/`,
+            searchPath: 'search/suggest.json?q=',
+            searchSuffix: '&resources[type]=product&resources[limit]=20',
             searchJoin: '+',
         });
     }
 }
 
-class DataProcessor_TotalCards extends AbstractHtmlDataProcessor {
+class DataProcessor_TotalCards extends AbstractJsonDataProcessor {
     constructor() {
         super({
             seller: sellerName,
             currency: currencies.GBP,
 
-            resultSelector: 'div#search-item-wrapper > div > div.box-inner',
-            titleSelector: 'div.product-footer > a',
+            processData: (rawData: any): Price[] => {
+                const products: any[] = rawData?.resources?.results?.products || [];
 
-            useSubResults: false,
-            subresultSelector: '',
-            subtitleSelector: '',
-            subtitleFromText: () => '',
+                return products
+                    .filter((p: any) => p.type === 'Single Card' && p.available)
+                    .map((p: any): Price => {
+                        // Title format: "Magic The Gathering - {Set} - {Card Name} - {Number}"
+                        // Occasionally: "Magic The Gathering - {Set} - {Subset} - {Card Name} - {Number}"
+                        const parts: string[] = p.title.split(' - ');
+                        const isFoil: boolean = p.title.toLowerCase().includes('foil');
+                        const title: string = parts[parts.length - 2];
+                        const expansion: string = parts.slice(1, parts.length - 2).join(' - ');
 
-            priceSelector: 'div.product-footer > div.price-box',
-            priceValueFromPriceText: (text: string): number => parseInt(text.replace(/\D/g, '')),
-            stockSelector: 'div.product-image > div.badge-wrap > span.badge.sold-out',
-            stockValueFromStockText: (x: string): number => parseInt(x),    // not used
-            isFoilSelector: 'div.product-footer > a',
-            expansionSelector: 'div.product-footer > a',
+                        const imgSrc: string = p.image;
+                        const productRef: string = baseUrl + new StringCleaner(p.url).trimWhitespace().removeQueryParams().get();
+                        const price_majorUnits: number = parseFloat(p.price);
+                        const price_minorUnits: number = Math.round(price_majorUnits * 100);
+                        const price_relativeUnits = currencyService.minorUnitsToRelativeUnits(price_minorUnits, currencies.GBP);
+                        const price_textRepresentation = currencyService.majorUnitsToTextRepresentation(price_majorUnits, currencies.GBP);
 
-            imgSelector: 'div.product-image > div.image-inner > a > image-srcset > img',
-            imgBaseUrl: 'https:',
-            imgSrcAttribute: 'src',
-
-            productSelector: 'div.product-footer > a',
-            productBaseUrl: 'https://totalcards.net',
-            productRefAttribute: 'href',
+                        return {
+                            seller: sellerName,
+                            title,
+                            imgSrc,
+                            productRef,
+                            expansion,
+                            price_relativeUnits,
+                            price_textRepresentation,
+                            stock_inStock: true,
+                            stock_level: '1',
+                            subtitle: '',
+                            isFoil,
+                        };
+                    });
+            }
         });
-    }
-
-    // @Override
-    stockFromResultNode = (resultNode: Element): Stock => {
-        // Stock count is not displayed. An out of stock banner either is or is not present.
-        let isInStock: boolean = resultNode.querySelectorAll(this.stockSelector).length === 0;
-        return isInStock ? { inStock: true, level: '1' } : { inStock: false, level: '0' };
-    }
-
-    // @Override
-    titleFromResultNode = (resultNode: Element): string => {
-        const html = this.getFirstElementHtml(resultNode, this.titleSelector);
-        return new StringCleaner(html)
-            .splitOnSymbolAndSelectSection('-', 2)
-            .trimWhitespace()
-            .get();
-    }
-
-    // @Override
-    expansionFromResultNode = (resultNode: Element): string => {
-        const html = this.getFirstElementHtml(resultNode, this.expansionSelector);
-        return new StringCleaner(html)
-            .splitOnSymbolAndSelectSection('-', 1)
-            .trimWhitespace()
-            .get();
     }
 }
 

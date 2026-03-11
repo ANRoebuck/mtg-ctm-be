@@ -1,25 +1,32 @@
 import { IPriceGetterBehaviour } from './AbstractPriceGetter';
 import { Price } from '../../../types/Price';
+import Region from '../../../types/Region';
 import { saveToFile } from '../../../utils/utils';
 
 interface Args {
     name: string,
+    region: Region,
+    logoUrl: string,
     priceGetters: IPriceGetterBehaviour[]
 }
 
 class AggregatingPriceGetter {
 
     name: string;
+    region: Region;
+    logoUrl: string;
     priceGetters: IPriceGetterBehaviour[];
 
-    constructor({ name, priceGetters }: Args) {
+    constructor({ name, region, logoUrl, priceGetters }: Args) {
         this.name = name;
+        this.region = region;
+        this.logoUrl = logoUrl;
         this.priceGetters = priceGetters;
     }
 
     getPrices = async (searchTerm: string, saveOutput: boolean = false): Promise<Price[]> => {
         let aggregatedPrices: Price[] = [];
-        
+
         await Promise.all(this.priceGetters.map(async getter => {
             const prices = await getter.getPrices(searchTerm, false);
             prices.forEach(p => aggregatedPrices.push(p));

@@ -9,6 +9,8 @@ class PriceGetter_LvlUp extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '',
             dataGetter: new DataGetter_LvlUp(),
             dataProcessor: new DataProcessor_LvlUp(),
         });

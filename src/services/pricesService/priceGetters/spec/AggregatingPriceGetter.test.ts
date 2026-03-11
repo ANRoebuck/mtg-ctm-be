@@ -38,7 +38,7 @@ beforeEach(() => {
 
 describe('CachingPriceGetter', () => {
     it('Requests results from each PriceGetter', async () => {
-        const aggregatingPriceGetter = new AggregatingPriceGetter({ name: 'someSeller', priceGetters: mockPriceGetters });
+        const aggregatingPriceGetter = new AggregatingPriceGetter({ name: 'someSeller', region: 'UK', logoUrl: '', priceGetters: mockPriceGetters });
         
         mockSearch1.mockReturnValueOnce([priceA, priceB]);
         mockSearch2.mockReturnValueOnce([priceC]);

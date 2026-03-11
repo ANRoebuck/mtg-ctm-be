@@ -9,6 +9,8 @@ class PriceGetter_TrollTrader extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '',
             dataGetter: new DataGetter_TrollTrader(),
             dataProcessor: new DataProcessor_TrollTrader(),
         });

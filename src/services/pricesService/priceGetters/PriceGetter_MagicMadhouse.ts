@@ -11,6 +11,8 @@ class PriceGetter_MagicMadhouse extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '',
             dataGetter: new DataGetter_MagicMadhouse(),
             dataProcessor: new DataProcessor_MagicMadhouse(),
         });

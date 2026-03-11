@@ -9,6 +9,8 @@ class PriceGetter_Hareruya extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'Rest of World',
+            logoUrl: '',
             dataGetter: new DataGetter_Hareruya(),
             dataProcessor: new DataProcessor_Hareruya(),
         });

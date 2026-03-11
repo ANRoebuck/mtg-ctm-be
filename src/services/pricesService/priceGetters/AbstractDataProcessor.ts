@@ -6,6 +6,7 @@ import StringCleaner from '../../../utils/StringCleaner';
 
 export interface AbstractDataProcessor {
     processData: (rawData: any) => Price[];
+    serializeRawData: (rawData: any) => string;
 }
 
 const virtualConsole = new VirtualConsole();
@@ -23,6 +24,7 @@ export abstract class AbstractJsonDataProcessor implements AbstractDataProcessor
     currency: Currency;
 
     processData: (rawData: any) => Price[];
+    serializeRawData = (rawData: any): string => JSON.stringify(rawData, null, 2);
 
     constructor({
         seller,
@@ -101,6 +103,8 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
         this.productRefAttribute = productRefAttribute;
     }
 
+
+    serializeRawData = (rawData: string): string => rawData;
 
     processData = (rawData: string): Price[] => {
         const processedResults: Price[] = [];
@@ -227,8 +231,8 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
     }
 
 
-    // returns false for an undefined string
-    isFoilFromString = (str: string): boolean => Boolean(str) && str.toLowerCase().includes('foil');
+    // returns false for an undefined string, and for strings containing "non-foil" / "nonfoil" / "non foil"
+    isFoilFromString = (str: string): boolean => Boolean(str) && /(?<!non[-\s]?)foil/i.test(str);
     isFoilFromResultNode = (resultNode: Element): boolean => {
         const str = this.getFirstElementHtml(resultNode, this.isFoilSelector);
         return this.isFoilFromString(str);

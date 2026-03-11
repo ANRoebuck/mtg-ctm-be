@@ -26,7 +26,7 @@ abstract class AbstractDataGetter {
         this.searchJoin = searchJoin;
     }
 
-    getData = async (searchTerm: string) : Promise<string> => axios
+    getData = async (searchTerm: string) : Promise<any> => axios
         .get(this.searchTermToUrl(searchTerm), { 'headers': { 'Origin': 'compare-the-magic' } })
         // .get(this.searchTermToUrl(searchTerm))
         .then(this.extractData)
@@ -41,13 +41,13 @@ abstract class AbstractDataGetter {
             + this.searchPath
             + searchTerm.toLowerCase().split(' ').join(this.searchJoin)
             + this.searchSuffix;
-        console.log('Requesting data from ' + url);    
+        console.log('Requesting data from ' + url);
         return MTG_CTM_CORS_ANYWHERE + url;
     };
 
-    extractData = ({ data } : { data: string }): string => {
+    extractData = ({ data } : { data: any }): any => {
         console.log('Extracting data');
-        return data || '';
+        return data ?? '';
     }
 }
 

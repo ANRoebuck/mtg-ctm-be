@@ -9,6 +9,8 @@ class PriceGetter_HighlanderGames extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '',
             dataGetter: new DataGetter_HighlanderGames(),
             dataProcessor: new DataProcessor_HighlanderGames(),
         });

@@ -9,6 +9,8 @@ class PriceGetter_LazyDragonGaming extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '',
             dataGetter: new DataGetter_LazyDragonGaming(),
             dataProcessor: new DataProcessor_LazyDragonGaming(),
         });

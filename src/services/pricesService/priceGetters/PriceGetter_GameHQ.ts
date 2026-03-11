@@ -10,6 +10,8 @@ class PriceGetter_GameHQ extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '',
             dataGetter: new DataGetter_GameHQ(),
             dataProcessor: new DataProcessor_GameHQ(),
         });

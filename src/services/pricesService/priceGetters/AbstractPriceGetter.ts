@@ -1,16 +1,21 @@
 import AbstractDataGetter from './AbstractDataGetter';
 import { AbstractDataProcessor } from './AbstractDataProcessor';
 import { Price } from '../../../types/Price';
+import Region from '../../../types/Region';
 import { sanitizeString, saveToFile, strongMatch } from '../../../utils/utils';
 
 type Args = {
     name: string,
+    region: Region,
+    logoUrl: string,
     dataGetter: AbstractDataGetter,
     dataProcessor: AbstractDataProcessor,
 }
 
 export interface IPriceGetterBehaviour {
     name: string;
+    region: Region;
+    logoUrl: string;
     getPrices(searchTerm: string, saveOutput?: boolean): Promise<Price[]>;
 }
 
@@ -18,11 +23,15 @@ export interface IPriceGetterBehaviour {
 abstract class AbstractPriceGetter implements IPriceGetterBehaviour {
 
     name: string;
+    region: Region;
+    logoUrl: string;
     dataGetter: AbstractDataGetter;
     dataProcessor: AbstractDataProcessor;
 
-    constructor({ name, dataGetter, dataProcessor }: Args) {
+    constructor({ name, region, logoUrl, dataGetter, dataProcessor }: Args) {
         this.name = name;
+        this.region = region;
+        this.logoUrl = logoUrl;
         this.dataGetter = dataGetter;
         this.dataProcessor = dataProcessor;
     }
@@ -31,7 +40,7 @@ abstract class AbstractPriceGetter implements IPriceGetterBehaviour {
 
         const sanitisedSearchTerm = sanitizeString(searchTerm);
 
-        const rawData: string = await this.dataGetter.getData(sanitisedSearchTerm);
+        const rawData = await this.dataGetter.getData(sanitisedSearchTerm);
 
         const foundItems: Price[] = this.dataProcessor.processData(rawData);
         // console.log(`Parsed ${foundItems.length} potential results`);
@@ -41,11 +50,10 @@ abstract class AbstractPriceGetter implements IPriceGetterBehaviour {
 
         if (saveOutput) {
             // for use during development
-            // when true, raw HTML and processed results will be output to local directory (gitignored)
+            // when true, raw data and processed results will be output to local directory (gitignored)
             console.log('Saving output');
             const filePath: string = './src/services/pricesService/priceGetters/output/'
-            saveToFile(`${filePath}${this.name}_${searchTerm}_html.txt`, rawData);
-            // saveToFile(`${filePath}${this.name}_${searchTerm}_html.txt`, JSON.stringify(rawData));
+            saveToFile(`${filePath}${this.name}_${searchTerm}_raw.txt`, this.dataProcessor.serializeRawData(rawData));
             saveToFile(`${filePath}${this.name}_${searchTerm}_prices.json`, JSON.stringify(validResults));
         }
 

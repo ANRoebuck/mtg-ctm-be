@@ -1,6 +1,7 @@
 import { IPriceGetterBehaviour } from "./priceGetters/AbstractPriceGetter";
 import configurePriceGetters from "./priceGetters/configurePriceGetters";
 import { Price } from '../../types/Price';
+import Seller from '../../types/Seller';
 
 class PricesService {
 
@@ -10,8 +11,8 @@ class PricesService {
         this.priceGetters = configurePriceGetters();
     }
 
-    getSellers(): string[] {
-        return Object.keys(this.priceGetters);
+    getSellers(): Seller[] {
+        return Object.values(this.priceGetters).map(({ name, region, logoUrl }) => ({ name, region, logoUrl }));
     }
 
     isValidSeller(seller: string): boolean {
@@ -25,7 +26,7 @@ class PricesService {
 
         const priceGetter: IPriceGetterBehaviour = this.priceGetters[seller];
         if (!priceGetter) console.log(`Could not find priceGetter for seller=[${seller}]`);
-        
+
         return priceGetter ? priceGetter.getPrices(searchTerm, saveOutput) : [];
     }
 

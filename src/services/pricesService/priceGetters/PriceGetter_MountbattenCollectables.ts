@@ -9,6 +9,8 @@ class PriceGetter_MountbattenCollectables extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '',
             dataGetter: new DataGetter_MountbattenCollectables(),
             dataProcessor: new DataProcessor_MountbattenCollectables(),
         });

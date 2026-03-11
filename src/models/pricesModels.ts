@@ -1,4 +1,5 @@
 import { Price } from '../types/Price';
+import Seller from '../types/Seller';
 import pricesService from '../services/pricesService/PricesService';
 
 
@@ -9,7 +10,7 @@ export const getPrices = async (seller: string, searchTerm: string, saveOutput: 
     return Promise.reject({ status:404, message: `Invalid seller: ${seller}` });
 }
 
-export const getSellers = (): string[] => {
+export const getSellers = (): Seller[] => {
     return pricesService.getSellers();
 }
 

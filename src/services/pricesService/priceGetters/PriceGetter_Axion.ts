@@ -10,6 +10,8 @@ class PriceGetter_Axion extends AggregatingPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '',
             priceGetters: [
                 new PriceGetter_Axion_NonFoil(),
                 new PriceGetter_Axion_Foil(),
@@ -22,6 +24,8 @@ class PriceGetter_Axion_NonFoil extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '',
             dataGetter: new DataGetter_Axion_NonFoil(),
             dataProcessor: new DataProcessor_Axion_NonFoil(),
         });
@@ -32,6 +36,8 @@ class PriceGetter_Axion_Foil extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '',
             dataGetter: new DataGetter_Axion_Foil(),
             dataProcessor: new DataProcessor_Axion_Foil(),
         });

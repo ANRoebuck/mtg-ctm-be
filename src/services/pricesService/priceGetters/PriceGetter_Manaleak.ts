@@ -10,6 +10,8 @@ class PriceGetter_Manaleak extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '',
             dataGetter: new DataGetter_Manaleak(),
             dataProcessor: new DataProcessor_Manaleak(),
         });

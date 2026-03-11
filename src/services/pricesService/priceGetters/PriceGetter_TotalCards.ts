@@ -10,6 +10,8 @@ class PriceGetter_TotalCards extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '',
             dataGetter: new DataGetter_TotalCards(),
             dataProcessor: new DataProcessor_TotalCards(),
         });

@@ -9,6 +9,8 @@ class PriceGetter_BoardsAndSwords extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '',
             dataGetter: new DataGetter_BoardsAndSwords(),
             dataProcessor: new DataProcessor_BoardsAndSwords(),
         });

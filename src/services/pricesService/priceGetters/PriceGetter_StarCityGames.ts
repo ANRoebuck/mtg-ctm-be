@@ -11,6 +11,8 @@ class PriceGetter_StarCityGames extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'North America',
+            logoUrl: '',
             dataGetter: new DataGetter_StarCityGames_New(),
             dataProcessor: new DataProcessor_StarCityGames_New(),
         });

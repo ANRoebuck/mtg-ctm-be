@@ -15,6 +15,9 @@ import PriceGetter_LondonMagicTraders from './PriceGetter_LondonMagicTraders';
 import PriceGetter_LvlUp from './PriceGetter_LvlUp';
 import PriceGetter_MagicCardTrader from './PriceGetter_MagicCardTrader';
 import PriceGetter_MagicMadhouse from './PriceGetter_MagicMadhouse';
+import PriceGetter_MightyLancer from './PriceGetter_MightyLancer';
+import PriceGetter_CosmicCollectables from './PriceGetter_CosmicCollectables';
+import PriceGetter_GearheadGames from './PriceGetter_GearheadGames';
 import PriceGetter_ManaGaming from './PriceGetter_ManaGaming';
 import PriceGetter_Manaleak from './PriceGetter_Manaleak';
 import PriceGetter_MountbattenCollectables from './PriceGetter_MountbattenCollectables';
@@ -24,6 +27,12 @@ import PriceGetter_SkywardFire from './PriceGetter_SkywardFire';
 import PriceGetter_StarCityGames from './PriceGetter_StarCityGames';
 import PriceGetter_TotalCards from './PriceGetter_TotalCards';
 import PriceGetter_TrollTrader from './PriceGetter_TrollTrader';
+import PriceGetter_BazaarOfMagic from './PriceGetter_BazaarOfMagic';
+import PriceGetter_MrCardSingles from './PriceGetter_MrCardSingles';
+import PriceGetter_FaceToFaceGames from './PriceGetter_FaceToFaceGames';
+import PriceGetter_Untap from './PriceGetter_Untap';
+import PriceGetter_401Games from './PriceGetter_401Games';
+import PriceGetter_WaypointGames from './PriceGetter_WaypointGames';
 
 export {
     AbstractPriceGetter,
@@ -51,4 +60,13 @@ export {
     PriceGetter_StarCityGames,
     PriceGetter_TotalCards,
     PriceGetter_TrollTrader,
+    PriceGetter_MightyLancer,
+    PriceGetter_CosmicCollectables,
+    PriceGetter_GearheadGames,
+    PriceGetter_BazaarOfMagic,
+    PriceGetter_MrCardSingles,
+    PriceGetter_FaceToFaceGames,
+    PriceGetter_Untap,
+    PriceGetter_401Games,
+    PriceGetter_WaypointGames,
 }

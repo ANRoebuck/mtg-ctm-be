@@ -1,5 +1,5 @@
 import AbstractDataGetter from './AbstractDataGetter';
-import { AbstractHtmlDataProcessor, AbstractJsonDataProcessor } from './AbstractDataProcessor';
+import { AbstractHtmlDataProcessor } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
 import { currencies } from '../../../types/Currency';
 import axios from 'axios';
@@ -11,6 +11,8 @@ class PriceGetter_BigOrbitCards extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '',
             dataGetter: new DataGetter_BigOrbitCards(),
             dataProcessor: new DataProcesor_BigOrbitCards(),
         });
@@ -21,8 +23,8 @@ class DataGetter_BigOrbitCards extends AbstractDataGetter {
     constructor() {
         super({
             name: sellerName,
-            baseUrl: 'http://www.bigorbitcards.co.uk/',
-            searchPath: 'magic-the-gathering/search/',
+            baseUrl: 'https://www.bigorbitcards.co.uk/',
+            searchPath: 'shop-all-games/search/',
             searchSuffix: '/',
             searchJoin: '+',
         });

@@ -12,7 +12,7 @@ class PriceGetter_StarCityGames extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'North America',
-            logoUrl: '',
+            logoUrl: '/images/Star_City_Games_logo_new_250x100.png',
             dataGetter: new DataGetter_StarCityGames_New(),
             dataProcessor: new DataProcessor_StarCityGames_New(),
         });

@@ -1,11 +1,12 @@
-import { Price } from '../types/Price';
+import { Price, PriceResult } from '../types/Price';
 import Seller from '../types/Seller';
 import pricesService from '../services/pricesService/PricesService';
 
 
-export const getPrices = async (seller: string, searchTerm: string, saveOutput: boolean): Promise<Price[]> => {
+export const getPrices = async (seller: string, searchTerm: string, saveOutput: boolean): Promise<PriceResult[]> => {
     if (pricesService.isValidSeller(seller)) {
-        return pricesService.getPrices(seller, searchTerm, saveOutput);
+        return Promise.resolve(pricesService.getPrices(seller, searchTerm, saveOutput))
+            .then(prices => prices.map(price => ({ ...price, searchTerm })));
     }
     return Promise.reject({ status:404, message: `Invalid seller: ${seller}` });
 }

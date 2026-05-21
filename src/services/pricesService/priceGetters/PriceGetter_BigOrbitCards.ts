@@ -12,7 +12,7 @@ class PriceGetter_BigOrbitCards extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'UK',
-            logoUrl: '',
+            logoUrl: '/images/Big_Orbit_Cards_logo_300x120.png',
             dataGetter: new DataGetter_BigOrbitCards(),
             dataProcessor: new DataProcesor_BigOrbitCards(),
         });

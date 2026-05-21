@@ -10,7 +10,7 @@ class PriceGetter_LondonMagicTraders extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'UK',
-            logoUrl: '',
+            logoUrl: '/images/London_Magic_Traders_logo_150x60.png',
             dataGetter: new DataGetter_LondonMagicTraders(),
             dataProcessor: new DataProcessor_LondonMagicTraders(),
         });

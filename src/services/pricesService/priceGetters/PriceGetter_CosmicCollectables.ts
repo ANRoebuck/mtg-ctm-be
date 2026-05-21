@@ -14,7 +14,7 @@ class PriceGetter_CosmicCollectables extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'UK',
-            logoUrl: '',
+            logoUrl: '/images/Cosmic_Collectables_logo_300x120.png',
             dataGetter: new DataGetter_CosmicCollectables(),
             dataProcessor: new DataProcessor_CosmicCollectables(),
         });

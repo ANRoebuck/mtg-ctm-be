@@ -14,7 +14,7 @@ class PriceGetter_TotalCards extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'UK',
-            logoUrl: '',
+            logoUrl: '/images/Total_Cards_logo_500x200.png',
             dataGetter: new DataGetter_TotalCards(),
             dataProcessor: new DataProcessor_TotalCards(),
         });

@@ -26,6 +26,9 @@ export const strongMatch = (textBody: string, searchTerm: string, bannedTerms: s
     return regex.test(sanitizedTextBody);
 }
 
+// Returns false for undefined/empty strings and for strings containing "non-foil" / "nonfoil" / "non foil"
+export const isFoil = (str: string): boolean => Boolean(str) && /(?<!non[-\s]?)foil/i.test(str);
+
 export const saveToFile = (filePath: string, contents: string) => {
     try {
         writeFileSync(filePath, contents);

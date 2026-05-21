@@ -10,7 +10,7 @@ class PriceGetter_LazyDragonGaming extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'UK',
-            logoUrl: '',
+            logoUrl: '/images/Lazy_Dragon_Gaming_logo_3_300x120.png',
             dataGetter: new DataGetter_LazyDragonGaming(),
             dataProcessor: new DataProcessor_LazyDragonGaming(),
         });

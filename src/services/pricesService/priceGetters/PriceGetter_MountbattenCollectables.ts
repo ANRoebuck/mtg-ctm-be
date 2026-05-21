@@ -10,7 +10,7 @@ class PriceGetter_MountbattenCollectables extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'UK',
-            logoUrl: '',
+            logoUrl: '/images/Mountbatten_ Collectables_logo_150x60.png',
             dataGetter: new DataGetter_MountbattenCollectables(),
             dataProcessor: new DataProcessor_MountbattenCollectables(),
         });

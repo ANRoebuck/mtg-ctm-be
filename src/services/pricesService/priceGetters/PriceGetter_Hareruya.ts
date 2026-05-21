@@ -13,7 +13,7 @@ class PriceGetter_Hareruya extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'Rest of World',
-            logoUrl: '',
+            logoUrl: '/images/Hareruya_logo_150x60.png',
             dataGetter: new DataGetter_Hareruya(),
             dataProcessor: new DataProcessor_Hareruya(),
         });

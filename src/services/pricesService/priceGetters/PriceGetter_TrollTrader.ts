@@ -10,7 +10,7 @@ class PriceGetter_TrollTrader extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'UK',
-            logoUrl: '',
+            logoUrl: '/images/Troll_Trader_logo_new_600x240.png',
             dataGetter: new DataGetter_TrollTrader(),
             dataProcessor: new DataProcessor_TrollTrader(),
         });

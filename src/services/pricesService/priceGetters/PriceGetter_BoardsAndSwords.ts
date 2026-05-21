@@ -14,7 +14,7 @@ class PriceGetter_BoardsAndSwords extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'UK',
-            logoUrl: '',
+            logoUrl: '/images/Boards_&_Swords_logo_5to2.png',
             dataGetter: new DataGetter_BoardsAndSwords(),
             dataProcessor: new DataProcessor_BoardsAndSwords(),
         });

@@ -14,7 +14,7 @@ class PriceGetter_WaypointGames extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'North America',
-            logoUrl: '',
+            logoUrl: '/images/Waypoint_Games_logo_300x120.png',
             dataGetter: new DataGetter_WaypointGames(),
             dataProcessor: new DataProcessor_WaypointGames(),
         });

@@ -10,7 +10,7 @@ class PriceGetter_HighlanderGames extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'UK',
-            logoUrl: '',
+            logoUrl: '/images/Highlander_Games_logo_b_5to2.png',
             dataGetter: new DataGetter_HighlanderGames(),
             dataProcessor: new DataProcessor_HighlanderGames(),
         });

@@ -14,7 +14,7 @@ class PriceGetter_MrCardSingles extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'UK',
-            logoUrl: '',
+            logoUrl: '/images/Mr_Card_Singles_logo_300x120.png',
             dataGetter: new DataGetter_MrCardSingles(),
             dataProcessor: new DataProcessor_MrCardSingles(),
         });

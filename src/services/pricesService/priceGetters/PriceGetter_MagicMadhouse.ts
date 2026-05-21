@@ -12,7 +12,7 @@ class PriceGetter_MagicMadhouse extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'UK',
-            logoUrl: '',
+            logoUrl: '/images/Magic_Madhouse_logo_150x60.png',
             dataGetter: new DataGetter_MagicMadhouse(),
             dataProcessor: new DataProcessor_MagicMadhouse(),
         });

@@ -14,7 +14,7 @@ class PriceGetter_MightyLancer extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'UK',
-            logoUrl: '',
+            logoUrl: '/images/Mighty_Lancer_Games_logo_300x120.png',
             dataGetter: new DataGetter_MightyLancer(),
             dataProcessor: new DataProcessor_MightyLancer(),
         });

@@ -22,7 +22,7 @@ class PriceGetter_Untap extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'Europe',
-            logoUrl: '',
+            logoUrl: '/images/Untap_logo_300x120.png',
             dataGetter: new DataGetter_Untap(),
             dataProcessor: new DataProcessor_Untap(),
         });

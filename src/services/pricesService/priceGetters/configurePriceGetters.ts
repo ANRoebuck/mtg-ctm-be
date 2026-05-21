@@ -1,10 +1,12 @@
 import {
     IPriceGetterBehaviour,
     PriceGetter_401Games,
+    PriceGetter_7thCityCollectables,
     PriceGetter_Axion,
     // PriceGetter_BazaarOfMagic,
     // PriceGetter_BigOrbitCards,
     PriceGetter_BoardsAndSwords,
+    PriceGetter_BossMinis,
     PriceGetter_CosmicCollectables,
     // PriceGetter_DiceSaloon,
     PriceGetter_FaceToFaceGames,
@@ -19,6 +21,7 @@ import {
     PriceGetter_LvlUp,
     PriceGetter_MagicCardTrader,
     PriceGetter_MagicMadhouse,
+    PriceGetter_MoxInTheHole,
     // PriceGetter_ManaGaming,
     PriceGetter_Manaleak,
     PriceGetter_MightyLancer,
@@ -30,6 +33,7 @@ import {
     PriceGetter_StarCityGames,
     PriceGetter_TotalCards,
     PriceGetter_TrollTrader,
+    PriceGetter_UnicornCards,
     // PriceGetter_Untap,
     PriceGetter_WaypointGames,
 } from './';
@@ -37,6 +41,7 @@ import CachingPriceGetter from './CachingPriceGetter';
 
 const priceGetters: IPriceGetterBehaviour[] = [
     new PriceGetter_401Games(),
+    new PriceGetter_7thCityCollectables(),
     new PriceGetter_Axion(),
     // Bazaar of Magic — HTML scraper using href-pattern selectors (no CSS class names needed).
     // Selectors unverified pending live test.
@@ -44,6 +49,7 @@ const priceGetters: IPriceGetterBehaviour[] = [
     // Big Orbit blocks automated searches
     // new PriceGetter_BigOrbitCards(),
     new PriceGetter_BoardsAndSwords(),
+    new PriceGetter_BossMinis(),
     // Want to add ChaosCards but currently unable due to lazy-loading and inaccessible API
     new PriceGetter_CosmicCollectables(),
     // Dice Saloon currently has no MTG singles in stock — getter updated to Shopify JSON API; re-enable when stock returns
@@ -65,6 +71,7 @@ const priceGetters: IPriceGetterBehaviour[] = [
     // new PriceGetter_ManaGaming(),
     new PriceGetter_Manaleak(),
     new PriceGetter_MightyLancer(),
+    new PriceGetter_MoxInTheHole(),
     // Mountbatten's site appears to have closed down
     // new PriceGetter_MountbattenCollectables(),
     new PriceGetter_MrCardSingles(),
@@ -75,6 +82,7 @@ const priceGetters: IPriceGetterBehaviour[] = [
     new PriceGetter_StarCityGames(),
     new PriceGetter_TotalCards(),
     new PriceGetter_TrollTrader(),
+    new PriceGetter_UnicornCards(),
     // Untap (untap.cz) - Czech PrestaShop store. Selectors unverified; site is behind Cloudflare challenge.
     // new PriceGetter_Untap(),
     new PriceGetter_WaypointGames(),

@@ -11,7 +11,7 @@ class PriceGetter_Axion extends AggregatingPriceGetter {
         super({
             name: sellerName,
             region: 'UK',
-            logoUrl: '',
+            logoUrl: '/images/Axion_Now_logo_300x120.png',
             priceGetters: [
                 new PriceGetter_Axion_NonFoil(),
                 new PriceGetter_Axion_Foil(),

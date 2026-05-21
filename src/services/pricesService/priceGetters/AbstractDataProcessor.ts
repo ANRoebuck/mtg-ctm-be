@@ -3,6 +3,7 @@ import { Currency } from '../../../types/Currency';
 import { JSDOM, VirtualConsole } from 'jsdom';
 import currencyService from '../../currencyService/CurrencyService';
 import StringCleaner from '../../../utils/StringCleaner';
+import { isFoil as isFoilString } from '../../../utils/utils';
 
 export interface AbstractDataProcessor {
     processData: (rawData: any) => Price[];
@@ -51,6 +52,8 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
     subresultSelector: string;
     subtitleSelector: string;
     subtitleFromText: (x: string) => string;
+    titleFromText?: (x: string) => string;
+    expansionFromText?: (x: string) => string;
 
     priceSelector: string;
     priceValueFromPriceText: (x: string) => number;
@@ -70,6 +73,7 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
     constructor({
         seller, currency: currencyCode, resultSelector, titleSelector,
         useSubResults, subresultSelector, subtitleSelector, subtitleFromText,
+        titleFromText, expansionFromText,
         priceSelector, priceValueFromPriceText, stockSelector, stockValueFromStockText,
         expansionSelector, isFoilSelector,
         imgSelector, imgBaseUrl, imgSrcAttribute,
@@ -85,7 +89,9 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
         this.useSubResults = useSubResults;
         this.subresultSelector = subresultSelector;
         this.subtitleSelector = subtitleSelector;
-        this.subtitleFromText = subtitleFromText
+        this.subtitleFromText = subtitleFromText;
+        this.titleFromText = titleFromText;
+        this.expansionFromText = expansionFromText;
 
         this.priceSelector = priceSelector;
         this.priceValueFromPriceText = priceValueFromPriceText;
@@ -203,7 +209,8 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
 
     titleFromResultNode = (resultNode: Element): string => {
         const str = this.getFirstElementHtml(resultNode, this.titleSelector);
-        return new StringCleaner(str).trimWhitespace().get();
+        const cleaned = new StringCleaner(str).trimWhitespace().get();
+        return this.titleFromText ? this.titleFromText(cleaned) : cleaned;
     }
 
 
@@ -227,12 +234,12 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
 
     expansionFromResultNode = (resultNode: Element): string => {
         const str = this.getFirstElementHtml(resultNode, this.expansionSelector);
-        return new StringCleaner(str).trimWhitespace().get();
+        const cleaned = new StringCleaner(str).trimWhitespace().get();
+        return this.expansionFromText ? this.expansionFromText(cleaned) : cleaned;
     }
 
 
-    // returns false for an undefined string, and for strings containing "non-foil" / "nonfoil" / "non foil"
-    isFoilFromString = (str: string): boolean => Boolean(str) && /(?<!non[-\s]?)foil/i.test(str);
+    isFoilFromString = (str: string): boolean => isFoilString(str);
     isFoilFromResultNode = (resultNode: Element): boolean => {
         const str = this.getFirstElementHtml(resultNode, this.isFoilSelector);
         return this.isFoilFromString(str);
@@ -257,6 +264,8 @@ interface HtmlProcoessorArgs {
     subresultSelector: string,
     subtitleSelector: string,
     subtitleFromText: (x: string) => string,
+    titleFromText?: (x: string) => string,
+    expansionFromText?: (x: string) => string,
 
     priceSelector: string,
     priceValueFromPriceText: (x: string) => number,

@@ -1,6 +1,7 @@
 import AbstractPriceGetter from './AbstractPriceGetter';
 import { IPriceGetterBehaviour } from './AbstractPriceGetter';
 
+import PriceGetter_7thCityCollectables from './PriceGetter_7thCityCollectables';
 import PriceGetter_Axion from './PriceGetter_Axion';
 import PriceGetter_BigOrbitCards from './PriceGetter_BigOrbitCards';
 import PriceGetter_BoardsAndSwords from './PriceGetter_BoardsAndSwords';
@@ -27,16 +28,20 @@ import PriceGetter_SkywardFire from './PriceGetter_SkywardFire';
 import PriceGetter_StarCityGames from './PriceGetter_StarCityGames';
 import PriceGetter_TotalCards from './PriceGetter_TotalCards';
 import PriceGetter_TrollTrader from './PriceGetter_TrollTrader';
+import PriceGetter_UnicornCards from './PriceGetter_UnicornCards';
 import PriceGetter_BazaarOfMagic from './PriceGetter_BazaarOfMagic';
 import PriceGetter_MrCardSingles from './PriceGetter_MrCardSingles';
 import PriceGetter_FaceToFaceGames from './PriceGetter_FaceToFaceGames';
 import PriceGetter_Untap from './PriceGetter_Untap';
 import PriceGetter_401Games from './PriceGetter_401Games';
+import PriceGetter_BossMinis from './PriceGetter_BossMinis';
+import PriceGetter_MoxInTheHole from './PriceGetter_MoxInTheHole';
 import PriceGetter_WaypointGames from './PriceGetter_WaypointGames';
 
 export {
     AbstractPriceGetter,
     IPriceGetterBehaviour,
+    PriceGetter_7thCityCollectables,
     PriceGetter_Axion,
     PriceGetter_BigOrbitCards,
     PriceGetter_BoardsAndSwords,
@@ -60,6 +65,7 @@ export {
     PriceGetter_StarCityGames,
     PriceGetter_TotalCards,
     PriceGetter_TrollTrader,
+    PriceGetter_UnicornCards,
     PriceGetter_MightyLancer,
     PriceGetter_CosmicCollectables,
     PriceGetter_GearheadGames,
@@ -68,5 +74,7 @@ export {
     PriceGetter_FaceToFaceGames,
     PriceGetter_Untap,
     PriceGetter_401Games,
+    PriceGetter_BossMinis,
+    PriceGetter_MoxInTheHole,
     PriceGetter_WaypointGames,
 }

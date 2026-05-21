@@ -14,7 +14,7 @@ class PriceGetter_401Games extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'North America',
-            logoUrl: '',
+            logoUrl: '/images/401_Games_logo_300x120.png',
             dataGetter: new DataGetter_401Games(),
             dataProcessor: new DataProcessor_401Games(),
         });

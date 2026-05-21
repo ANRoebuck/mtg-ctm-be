@@ -14,7 +14,7 @@ class PriceGetter_BazaarOfMagic extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'Europe',
-            logoUrl: '',
+            logoUrl: '/images/Bazaar_of_Magic_logo_300x120.png',
             dataGetter: new DataGetter_BazaarOfMagic(),
             dataProcessor: new DataProcessor_BazaarOfMagic(),
         });

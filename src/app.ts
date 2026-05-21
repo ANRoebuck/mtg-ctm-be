@@ -15,6 +15,8 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 
 app.use('/api', apiRouter);
 
+app.use('/images', express.static('static/images'));
+
 app.use('/*', errHandleInvalidEnpoint);
 app.use(errHandleCustom);
 

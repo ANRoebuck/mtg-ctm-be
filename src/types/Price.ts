@@ -11,3 +11,5 @@ export type Price = {
     subtitle: string,
     isFoil: boolean,
 }
+
+export type PriceResult = Price & { searchTerm: string }

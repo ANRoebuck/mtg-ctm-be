@@ -14,7 +14,7 @@ class PriceGetter_FaceToFaceGames extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'North America',
-            logoUrl: '',
+            logoUrl: '/images/Face_to_Face_Games_logo_300x120.png',
             dataGetter: new DataGetter_FaceToFaceGames(),
             dataProcessor: new DataProcessor_FaceToFaceGames(),
         });

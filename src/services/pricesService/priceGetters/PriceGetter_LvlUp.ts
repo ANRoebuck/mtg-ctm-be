@@ -14,7 +14,7 @@ class PriceGetter_LvlUp extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'UK',
-            logoUrl: '',
+            logoUrl: '/images/Lvl_Up_Gaming_logo_150x60.png',
             dataGetter: new DataGetter_LvlUp(),
             dataProcessor: new DataProcessor_LvlUp(),
         });

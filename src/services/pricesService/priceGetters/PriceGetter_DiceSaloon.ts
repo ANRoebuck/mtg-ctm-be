@@ -14,7 +14,7 @@ class PriceGetter_DiceSaloon extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'UK',
-            logoUrl: '',
+            logoUrl: '/images/Dice_Saloon_logo_500x200.png',
             dataGetter: new DataGetter_DiceSaloon(),
             dataProcessor: new DataProcessor_DiceSaloon(),
         });

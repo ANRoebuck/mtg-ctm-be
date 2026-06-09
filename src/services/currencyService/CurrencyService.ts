@@ -71,8 +71,12 @@ class CurrencyService {
             this.setConversionRates(normalizedRates);
             console.log('CurrencyService: conversion rates updated successfully');
         } catch (e) {
-            console.log('CurrencyService: failed to fetch conversion rates, retaining existing rates');
-            console.log(e);
+            console.error('CurrencyService: failed to fetch conversion rates, retaining existing rates');
+            if (axios.isAxiosError(e)) {
+                console.error(`[${e.code ?? 'UNKNOWN'}] ${e.message} (HTTP ${e.response?.status ?? 'N/A'})`);
+            } else {
+                console.error(e);
+            }
         }
     }
 

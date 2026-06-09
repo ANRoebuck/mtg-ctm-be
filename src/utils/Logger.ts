@@ -46,4 +46,6 @@ export const testLogger = (logMethod: LogMethod) => new Logger(logMethod);
 
 const logger = new Logger(console.log);
 
+export const VERBOSE_LOGGING = true;
+
 export default logger;

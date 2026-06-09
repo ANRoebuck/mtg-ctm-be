@@ -33,7 +33,7 @@ export const saveToFile = (filePath: string, contents: string) => {
     try {
         writeFileSync(filePath, contents);
     } catch (e) {
-        console.log(e);
+        console.error(e);
     }
 }
 
@@ -43,7 +43,7 @@ export const readHtmlString = (sellerName: string, searchTerm: string, suffix: s
         const file = `./src/services/pricesService/priceGetters/spec/test-resources/${sellerName}_${searchTerm}${suffix}_html.txt`;
         htmlString = readFileSync(file, 'utf8');
     } catch(e) {
-        console.log(e);
+        console.error(e);
     }
     return htmlString;
 }
@@ -54,7 +54,7 @@ export const readResults = (sellerName: string, searchTerm: string, suffix: stri
         const file = `./src/services/pricesService/priceGetters/spec/test-resources/${sellerName}_${searchTerm}${suffix}_prices.json`;
         results = JSON.parse(readFileSync(file, 'utf8'));
     } catch(e) {
-        console.log(e);
+        console.error(e);
     }
     return results;
 }

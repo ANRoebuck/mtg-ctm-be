@@ -6,7 +6,7 @@ import { currencies } from '../../../types/Currency';
 import currencyService from '../../currencyService/CurrencyService';
 import StringCleaner from '../../../utils/StringCleaner';
 
-const sellerName = 'Boards & Swords';
+const sellerName = 'Boards and Swords';
 const baseUrl = 'https://www.boardsandswords.co.uk';
 
 class PriceGetter_BoardsAndSwords extends AbstractPriceGetter {
@@ -14,7 +14,7 @@ class PriceGetter_BoardsAndSwords extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'UK',
-            logoUrl: '/images/Boards_&_Swords_logo_5to2.png',
+            logoUrl: '/images/Boards_and_Swords_logo_5to2.png',
             dataGetter: new DataGetter_BoardsAndSwords(),
             dataProcessor: new DataProcessor_BoardsAndSwords(),
         });

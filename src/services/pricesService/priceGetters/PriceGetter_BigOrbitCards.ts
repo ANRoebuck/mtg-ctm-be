@@ -12,7 +12,7 @@ class PriceGetter_BigOrbitCards extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'UK',
-            logoUrl: '/images/Big_Orbit_Cards_logo_300x120.png',
+            logoUrl: '/images/Big_Orbit_Cards_logo_150x60.png',
             dataGetter: new DataGetter_BigOrbitCards(),
             dataProcessor: new DataProcesor_BigOrbitCards(),
         });
@@ -38,12 +38,8 @@ class DataGetter_BigOrbitCards extends AbstractDataGetter {
                 'lazyElementSelector': 'div.products > article.product-miniature',
             }
         )
-        .then(this.extractData)
-        .catch((e) => {
-            console.log(`Failed to get data for seller=[${this.name}] searchTerm=[${searchTerm}]`);
-            console.log(e);
-            return '';
-        });
+        .then((response) => this.extractData(response, searchTerm))
+        .catch((e) => this.handleDataError(searchTerm, e));
 
     // @Override
     searchTermToUrl = (searchTerm: string) => {

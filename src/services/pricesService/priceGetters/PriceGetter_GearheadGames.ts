@@ -14,7 +14,7 @@ class PriceGetter_GearheadGames extends AbstractPriceGetter {
         super({
             name: sellerName,
             region: 'UK',
-            logoUrl: '/images/Gearhead_Games_logo_2_300x120.png',
+            logoUrl: '/images/Gearhead_Games_logo_300x120.png',
             dataGetter: new DataGetter_GearheadGames(),
             dataProcessor: new DataProcessor_GearheadGames(),
         });

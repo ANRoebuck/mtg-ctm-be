@@ -43,12 +43,8 @@ class DataGetter_StarCityGames_New extends AbstractDataGetter {
                 'clientguid': 'cc3be22005ef47d3969c3de28f09571b'
             }
         )
-        .then(this.extractData)
-        .catch((e) => {
-            console.log(`Failed to get data for seller=[${this.name}] searchTerm=[${searchTerm}]`);
-            console.log(e);
-            return '';
-        });
+        .then((response) => this.extractData(response, searchTerm))
+        .catch((e) => this.handleDataError(searchTerm, e));
 
 }
 

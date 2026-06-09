@@ -1,4 +1,5 @@
 import AbstractDataGetter from './AbstractDataGetter';
+import { VERBOSE_LOGGING } from '../../../utils/Logger';
 import { AbstractDataProcessor } from './AbstractDataProcessor';
 import { Price } from '../../../types/Price';
 import Region from '../../../types/Region';
@@ -57,7 +58,7 @@ abstract class AbstractPriceGetter implements IPriceGetterBehaviour {
             saveToFile(`${filePath}${this.name}_${searchTerm}_prices.json`, JSON.stringify(validResults));
         }
 
-        console.log(`Returning ${validResults.length} results for searchTerm=[${searchTerm}] from seller=[${this.name}]`);
+        if (VERBOSE_LOGGING) console.log(`Returning ${validResults.length} results for searchTerm=[${searchTerm}] from seller=[${this.name}]`);
         return validResults;
     }
 

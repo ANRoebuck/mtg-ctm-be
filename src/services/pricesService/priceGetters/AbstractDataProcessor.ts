@@ -175,7 +175,7 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
             // document = new JSDOM(rawData).window.document;
             document = getDocFromString(rawData);
         } catch {
-            console.log(`Couldn\'t parse document for seller=[${this.seller}]`);
+            console.error(`Couldn\'t parse document for seller=[${this.seller}]`);
             return [];
         }
         return [...document.querySelectorAll(this.resultSelector)];
@@ -185,10 +185,10 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
     subresultsFromResultNode = (resultNode: Element): Element[] => [...resultNode.querySelectorAll(this.subresultSelector)];
 
 
-    getFirstElementHtml = (node: Element, selector: string): string => [...node.querySelectorAll(selector)][0]?.innerHTML || '';
-    getFirstelementAttr = (node: Element, selector: string, attr: string): string => [...node.querySelectorAll(selector)][0]?.getAttribute(attr) || '';
-    getFirstElementWithAttrHtml = (node: Element, selector: string, attr: string): string => [...node.querySelectorAll(selector)]
-        .find((node: Element): boolean => node.hasAttribute(attr))?.innerHTML || '';
+    getFirstElementHtml = (node: Element, selector: string): string => selector ? ([...node.querySelectorAll(selector)][0]?.innerHTML || '') : '';
+    getFirstelementAttr = (node: Element, selector: string, attr: string): string => selector ? ([...node.querySelectorAll(selector)][0]?.getAttribute(attr) || '') : '';
+    getFirstElementWithAttrHtml = (node: Element, selector: string, attr: string): string => selector ? ([...node.querySelectorAll(selector)]
+        .find((node: Element): boolean => node.hasAttribute(attr))?.innerHTML || '') : '';
 
 
     stockFromResultNode = (resultNode: Element): Stock => {

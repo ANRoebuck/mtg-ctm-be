@@ -48,12 +48,8 @@ class DataGetter_Untap extends AbstractDataGetter {
                 'lazyElementSelector': 'article.product-miniature',
             }
         )
-        .then(this.extractData)
-        .catch((e) => {
-            console.log(`Failed to get data for seller=[${this.name}] searchTerm=[${searchTerm}]`);
-            console.log(e);
-            return '';
-        });
+        .then((response) => this.extractData(response, searchTerm))
+        .catch((e) => this.handleDataError(searchTerm, e));
 
     // @Override — do not route through CORS proxy
     searchTermToUrl = (searchTerm: string) => {

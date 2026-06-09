@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Logo Processor</title>
+<style>
+  body { font-family: sans-serif; max-width: 700px; margin: 40px auto; padding: 0 20px; background: #1a1a2e; color: #eee; }
+  h1 { color: #e94560; }
+  .drop-zone { border: 2px dashed #e94560; border-radius: 12px; padding: 40px; text-align: center; cursor: pointer; margin: 20px 0; transition: background 0.2s; }
+  .drop-zone:hover, .drop-zone.drag-over { background: #16213e; }
+  input[type=file] { display: none; }
+  label { display: flex; flex-direction: column; gap: 8px; margin: 12px 0; font-size: 14px; color: #aaa; }
+  label span { color: #eee; font-weight: 600; }
+  input[type=number], input[type=color] { background: #16213e; border: 1px solid #444; border-radius: 6px; color: #eee; padding: 6px 10px; width: 80px; }
+  input[type=color] { width: 50px; height: 32px; padding: 2px; cursor: pointer; }
+  .controls { display: flex; flex-wrap: wrap; gap: 20px; background: #16213e; border-radius: 12px; padding: 20px; margin: 16px 0; }
+  button { background: #e94560; color: white; border: none; border-radius: 8px; padding: 12px 28px; font-size: 16px; cursor: pointer; margin-top: 10px; }
+  button:hover { background: #c73652; }
+  button:disabled { background: #555; cursor: not-allowed; }
+  .preview { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; margin-top: 20px; }
+  .preview-box { background: #16213e; border-radius: 10px; padding: 16px; text-align: center; }
+  .preview-box p { margin: 8px 0 0; font-size: 12px; color: #aaa; }
+  canvas { display: block; border: 1px solid #333; }
+  #status { margin: 10px 0; padding: 10px 16px; border-radius: 8px; font-size: 14px; }
+  .info { background: #0f3460; }
+  .success { background: #1a4731; color: #6fcf97; }
+  .row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+<h1>🖼 Logo Processor</h1>
+<p>Drop any logo image below. It will be auto-cropped, padded to 5:2 ratio, and saved as a 150×60 PNG.</p>
+
+<div class="drop-zone" id="dropZone">
+  <input type="file" id="fileInput" accept="image/*">
+  <p>📂 Drop image here or click to browse</p>
+  <p style="font-size:12px;color:#888">Supports PNG, JPG, WebP, SVG</p>
+</div>
+
+<div class="controls">
+  <label>
+    <span>Background colour</span>
+    <div class="row">
+      <input type="color" id="bgColor" value="#000000">
+      <span id="bgHex" style="font-size:13px;color:#aaa">#000000</span>
+    </div>
+  </label>
+  <label>
+    <span>Crop tolerance (0–50)</span>
+    <input type="number" id="tolerance" value="20" min="0" max="50">
+  </label>
+  <label>
+    <span>Output size</span>
+    <div style="display:flex;align-items:center;gap:8px;margin-top:4px;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+        <span style="font-size:12px;color:#888;">Width</span>
+        <input type="number" id="outW" value="300" min="75" max="1200">
+      </div>
+      <span style="color:#666;margin-top:18px;">×</span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+        <span style="font-size:12px;color:#888;">Height</span>
+        <input type="number" id="outH" value="120" min="30" max="480">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;margin-top:18px;">
+        <button type="button" id="sizeUp"   title="Increase size" style="padding:4px 10px;font-size:14px;margin:0;">▲</button>
+        <button type="button" id="sizeDown" title="Decrease size" style="padding:4px 10px;font-size:14px;margin:0;">▼</button>
+      </div>
+    </div>
+    <label style="flex-direction:row;align-items:center;gap:8px;margin:4px 0 0;cursor:pointer;">
+      <input type="checkbox" id="lockRatio" checked style="width:16px;height:16px;accent-color:#e94560;cursor:pointer;">
+      <span style="font-weight:400;font-size:13px;color:#aaa;">Lock 5:2 ratio</span>
+    </label>
+  </label>
+  <label>
+    <span>Border padding (px)</span>
+    <div style="display:flex;gap:16px;align-items:flex-end;margin-top:4px;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+        <span style="font-size:12px;color:#888;">Top</span>
+        <input type="number" id="padTop" value="0" min="0" max="40">
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+        <span style="font-size:12px;color:#888;">Right</span>
+        <input type="number" id="padRight" value="0" min="0" max="40">
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+        <span style="font-size:12px;color:#888;">Bottom</span>
+        <input type="number" id="padBottom" value="0" min="0" max="40">
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+        <span style="font-size:12px;color:#888;">Left</span>
+        <input type="number" id="padLeft" value="0" min="0" max="40">
+      </div>
+    </div>
+    <span style="font-size:12px;color:#888">Added inside the output, same colour as background</span>
+  </label>
+  <label style="flex-direction:row;align-items:center;gap:10px;cursor:pointer;">
+    <input type="checkbox" id="rearrange" checked style="width:18px;height:18px;accent-color:#e94560;cursor:pointer;">
+    <span>Move text beside logo <span style="font-weight:400;color:#888;font-size:12px;">(for stacked logo-above-text layouts)</span></span>
+  </label>
+</div>
+
+<button id="processBtn" disabled>Process Logo</button>
+<div id="status" class="info" style="display:none"></div>
+
+<div class="preview" id="preview"></div>
+
+<script>
+let loadedImage = null;
+
+const dropZone = document.getElementById('dropZone');
+const fileInput = document.getElementById('fileInput');
+const processBtn = document.getElementById('processBtn');
+const bgColorInput = document.getElementById('bgColor');
+const bgHex = document.getElementById('bgHex');
+
+const outW       = document.getElementById('outW');
+const outH       = document.getElementById('outH');
+const lockRatio  = document.getElementById('lockRatio');
+const sizeUp     = document.getElementById('sizeUp');
+const sizeDown   = document.getElementById('sizeDown');
+const RATIO      = 2.5;
+const STEP       = 30; // width step per arrow click (height = 12)
+
+function updateArrows() {
+  const locked = lockRatio.checked;
+  sizeUp.disabled   = !locked;
+  sizeDown.disabled = !locked;
+  sizeUp.style.opacity   = locked ? '1' : '0.3';
+  sizeDown.style.opacity = locked ? '1' : '0.3';
+}
+
+lockRatio.addEventListener('change', updateArrows);
+updateArrows();
+
+outW.addEventListener('input', () => {
+  if (lockRatio.checked) outH.value = Math.round(parseInt(outW.value) / RATIO);
+});
+outH.addEventListener('input', () => {
+  if (lockRatio.checked) outW.value = Math.round(parseInt(outH.value) * RATIO);
+});
+
+sizeUp.addEventListener('click', () => {
+  const newW = Math.min(1200, (parseInt(outW.value) || 300) + STEP);
+  outW.value = newW;
+  outH.value = Math.round(newW / RATIO);
+});
+sizeDown.addEventListener('click', () => {
+  const newW = Math.max(75, (parseInt(outW.value) || 300) - STEP);
+  outW.value = newW;
+  outH.value = Math.round(newW / RATIO);
+});
+
+
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.classList.remove('drag-over');
+  if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', () => { if (fileInput.files[0]) loadFile(fileInput.files[0]); });
+bgColorInput.addEventListener('input', () => { bgHex.textContent = bgColorInput.value; });
+
+function detectBackgroundColour(img) {
+  const c = document.createElement('canvas');
+  c.width = img.width;
+  c.height = img.height;
+  const ctx = c.getContext('2d');
+  ctx.drawImage(img, 0, 0);
+  const { data } = ctx.getImageData(0, 0, img.width, img.height);
+  const w = img.width, h = img.height;
+
+  // Sample all pixels on the outer edge
+  const counts = {};
+  const sample = (x, y) => {
+    const i = (y * w + x) * 4;
+    // Quantise to nearest 8 to group near-identical colours
+    const r = Math.round(data[i]   / 8) * 8;
+    const g = Math.round(data[i+1] / 8) * 8;
+    const b = Math.round(data[i+2] / 8) * 8;
+    const key = `${r},${g},${b}`;
+    counts[key] = (counts[key] || 0) + 1;
+  };
+
+  for (let x = 0; x < w; x++) { sample(x, 0); sample(x, h - 1); }
+  for (let y = 1; y < h - 1; y++) { sample(0, y); sample(w - 1, y); }
+
+  const [r, g, b] = Object.entries(counts)
+    .sort((a, b) => b[1] - a[1])[0][0]
+    .split(',').map(Number);
+
+  return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('');
+}
+
+function loadFile(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      loadedImage = img;
+      processBtn.disabled = false;
+      const detected = detectBackgroundColour(img);
+      bgColorInput.value = detected;
+      bgHex.textContent = detected;
+      setStatus(`Loaded: ${file.name} (${img.width}×${img.height}px) — background detected as ${detected}`, 'info');
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function hexToRgb(hex) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return [r,g,b];
+}
+
+function autoCrop(imageData, width, height, bgRgb, tolerance) {
+  const data = imageData.data;
+  const isBg = (x, y) => {
+    const i = (y * width + x) * 4;
+    return Math.abs(data[i]   - bgRgb[0]) <= tolerance &&
+           Math.abs(data[i+1] - bgRgb[1]) <= tolerance &&
+           Math.abs(data[i+2] - bgRgb[2]) <= tolerance;
+  };
+
+  let top = 0, bottom = height, left = 0, right = width;
+
+  outer: for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) if (!isBg(x,y)) { top = y; break outer; }
+  }
+  outer: for (let y = height-1; y >= 0; y--) {
+    for (let x = 0; x < width; x++) if (!isBg(x,y)) { bottom = y+1; break outer; }
+  }
+  outer: for (let x = 0; x < width; x++) {
+    for (let y = 0; y < height; y++) if (!isBg(x,y)) { left = x; break outer; }
+  }
+  outer: for (let x = width-1; x >= 0; x--) {
+    for (let y = 0; y < height; y++) if (!isBg(x,y)) { right = x+1; break outer; }
+  }
+
+  // Add 2px margin
+  top    = Math.max(0, top - 2);
+  bottom = Math.min(height, bottom + 2);
+  left   = Math.max(0, left - 2);
+  right  = Math.min(width, right + 2);
+
+  return { top, bottom, left, right };
+}
+
+// Attempt to split a stacked (logo-above-text) image into graphic and text regions,
+// then place them side by side: graphic left, text right.
+//
+// Improvements over v1:
+// 1. Gap must be a sustained run of rows (not just one sparse row) to avoid
+//    false positives on internal gaps within geometric logo marks.
+// 2. Search is biased toward the lower portion of the image (text lives below).
+// 3. Content character analysis: text rows tend to have a narrow vertical span
+//    of non-bg pixels (thin strokes) vs graphic rows which are chunkier.
+function rearrangeLogoText(canvas, bgRgb, tolerance) {
+  const w = canvas.width, h = canvas.height;
+  const ctx = canvas.getContext('2d');
+  const { data } = ctx.getImageData(0, 0, w, h);
+
+  const isBg = (x, y) => {
+    const i = (y * w + x) * 4;
+    return Math.abs(data[i]   - bgRgb[0]) <= tolerance &&
+           Math.abs(data[i+1] - bgRgb[1]) <= tolerance &&
+           Math.abs(data[i+2] - bgRgb[2]) <= tolerance;
+  };
+
+  // Per-row stats: fill count and horizontal extent (rightmost - leftmost non-bg)
+  const rowFill   = new Int32Array(h);
+  const rowLeft   = new Int32Array(h).fill(w);
+  const rowRight  = new Int32Array(h).fill(-1);
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      if (!isBg(x, y)) {
+        rowFill[y]++;
+        if (x < rowLeft[y])  rowLeft[y]  = x;
+        if (x > rowRight[y]) rowRight[y] = x;
+      }
+    }
+  }
+
+  // Find content extent
+  let contentTop = -1, contentBottom = -1;
+  for (let y = 0; y < h; y++)          if (rowFill[y] > 0) { contentTop    = y; break; }
+  for (let y = h - 1; y >= 0; y--)    if (rowFill[y] > 0) { contentBottom = y; break; }
+  if (contentTop < 0 || contentBottom - contentTop < 10) return null;
+
+  const contentH = contentBottom - contentTop + 1;
+
+  // Search window: between 35% and 85% down the content height.
+  // Biased lower than v1 (was 20%–80%) so we avoid the interior of tall graphics.
+  const searchStart = contentTop + Math.floor(contentH * 0.35);
+  const searchEnd   = contentTop + Math.floor(contentH * 0.85);
+
+  // A gap row: fill < 6% of width AND horizontal extent < 30% of width.
+  // Both conditions must hold to reject wide-but-sparse decorative rows.
+  const maxFill   = Math.round(w * 0.06);
+  const maxExtent = Math.round(w * 0.30);
+  const isGapRow  = y => rowFill[y] <= maxFill &&
+                         (rowRight[y] < 0 || (rowRight[y] - rowLeft[y]) <= maxExtent);
+
+  // Collect all sustained gap runs (minimum 2 rows wide).
+  // Improvement 1: require a run, not just a single row.
+  const MIN_GAP_ROWS = 2;
+  const gaps = []; // { start, end, midY }
+  let inGap = false, gapStart = 0;
+  for (let y = searchStart; y <= searchEnd; y++) {
+    if (isGapRow(y)) {
+      if (!inGap) { inGap = true; gapStart = y; }
+    } else {
+      if (inGap) {
+        if (y - gapStart >= MIN_GAP_ROWS)
+          gaps.push({ start: gapStart, end: y - 1, midY: Math.round((gapStart + y - 1) / 2) });
+        inGap = false;
+      }
+    }
+  }
+  if (inGap && searchEnd - gapStart >= MIN_GAP_ROWS)
+    gaps.push({ start: gapStart, end: searchEnd, midY: Math.round((gapStart + searchEnd) / 2) });
+
+  if (gaps.length === 0) return null;
+
+  // Improvement 2 & 3: score each gap.
+  // Prefer gaps that are:
+  //   (a) lower in the image — text is in the lower portion
+  //   (b) followed by rows that look like text: consistent, narrower horizontal extent
+  const scoreGap = ({ start, end, midY }) => {
+    // Position score: favour gaps in the lower half of the search window
+    const posScore = (midY - searchStart) / (searchEnd - searchStart); // 0..1, higher = lower
+
+    // Text-character score: sample rows below the gap and measure their
+    // horizontal extent variance. Text lines are relatively consistent in width.
+    const sampleRows = [];
+    for (let y = end + 1; y <= Math.min(contentBottom, end + 40); y++) {
+      if (rowFill[y] > 0) sampleRows.push(rowRight[y] - rowLeft[y]);
+    }
+    let textScore = 0;
+    if (sampleRows.length >= 2) {
+      const mean = sampleRows.reduce((a, b) => a + b, 0) / sampleRows.length;
+      const variance = sampleRows.reduce((a, b) => a + (b - mean) ** 2, 0) / sampleRows.length;
+      const cv = Math.sqrt(variance) / (mean || 1); // coefficient of variation
+      // Lower CV = more consistent = more text-like → higher score
+      textScore = Math.max(0, 1 - cv);
+    }
+
+    // Gap width score: longer gaps are more likely to be real separators
+    const gapScore = Math.min(1, (end - start) / 6);
+
+    return posScore * 0.4 + textScore * 0.4 + gapScore * 0.2;
+  };
+
+  const bestGap = gaps.sort((a, b) => scoreGap(b) - scoreGap(a))[0];
+  const splitY  = bestGap.midY;
+
+  // Tightly crop a horizontal band of the canvas
+  const cropRegion = (y0, y1) => {
+    let rTop = y1, rBottom = y0, rLeft = w, rRight = 0;
+    for (let y = y0; y <= y1; y++) {
+      if (rowFill[y] === 0) continue;
+      if (y < rTop)    rTop    = y;
+      if (y > rBottom) rBottom = y;
+      if (rowLeft[y]  < rLeft)  rLeft  = rowLeft[y];
+      if (rowRight[y] > rRight) rRight = rowRight[y];
+    }
+    if (rTop > rBottom || rLeft > rRight) return null;
+    const rw = rRight - rLeft + 1, rh = rBottom - rTop + 1;
+    const out = document.createElement('canvas');
+    out.width = rw; out.height = rh;
+    out.getContext('2d').drawImage(canvas, rLeft, rTop, rw, rh, 0, 0, rw, rh);
+    return out;
+  };
+
+  const graphicCanvas = cropRegion(contentTop, splitY - 1);
+  const textCanvas    = cropRegion(splitY + 1, contentBottom);
+  if (!graphicCanvas || !textCanvas) return null;
+
+  // Compose: scale both regions to the same height, place side by side with a gap
+  const targetH = Math.max(graphicCanvas.height, textCanvas.height);
+  const gW = Math.round(graphicCanvas.width * (targetH / graphicCanvas.height));
+  const tW = Math.round(textCanvas.width    * (targetH / textCanvas.height));
+  const gap = Math.round(targetH * 0.25);
+
+  const out = document.createElement('canvas');
+  out.width  = gW + gap + tW;
+  out.height = targetH;
+  const outCtx = out.getContext('2d');
+  outCtx.fillStyle = bgColorInput.value;
+  outCtx.fillRect(0, 0, out.width, out.height);
+  outCtx.imageSmoothingEnabled = true;
+  outCtx.imageSmoothingQuality = 'high';
+  outCtx.drawImage(graphicCanvas, 0, 0, gW, targetH);
+  outCtx.drawImage(textCanvas,    gW + gap, 0, tW, targetH);
+
+  return { canvas: out, splitY };
+}
+
+processBtn.addEventListener('click', () => {
+  if (!loadedImage) return;
+
+  const outWval = parseInt(outW.value) || 300;
+  const outHval = parseInt(outH.value) || 120;
+  const tolerance = parseInt(document.getElementById('tolerance').value) || 20;
+  const padTop    = parseInt(document.getElementById('padTop').value)    || 0;
+  const padRight  = parseInt(document.getElementById('padRight').value)  || 0;
+  const padBottom = parseInt(document.getElementById('padBottom').value) || 0;
+  const padLeft   = parseInt(document.getElementById('padLeft').value)   || 0;
+  const bgRgb = hexToRgb(bgColorInput.value);
+
+  const doRearrange = document.getElementById('rearrange').checked;
+
+  // Draw source onto canvas to get pixel data
+  const srcCanvas = document.createElement('canvas');
+  srcCanvas.width = loadedImage.width;
+  srcCanvas.height = loadedImage.height;
+  const srcCtx = srcCanvas.getContext('2d');
+  srcCtx.fillStyle = bgColorInput.value;
+  srcCtx.fillRect(0, 0, srcCanvas.width, srcCanvas.height);
+  srcCtx.drawImage(loadedImage, 0, 0);
+  const imageData = srcCtx.getImageData(0, 0, srcCanvas.width, srcCanvas.height);
+
+  // Auto-crop
+  const { top, bottom, left, right } = autoCrop(imageData, loadedImage.width, loadedImage.height, bgRgb, tolerance);
+  const cw = right - left;
+  const ch = bottom - top;
+  setStatus(`Cropped to ${cw}×${ch}px (from ${loadedImage.width}×${loadedImage.height}px)`, 'info');
+
+  // Extract cropped region
+  const cropCanvas = document.createElement('canvas');
+  cropCanvas.width = cw;
+  cropCanvas.height = ch;
+  cropCanvas.getContext('2d').drawImage(srcCanvas, left, top, cw, ch, 0, 0, cw, ch);
+
+  // Optionally rearrange stacked logo+text into side-by-side layout
+  let layoutCanvas = cropCanvas;
+  let rearranged = false;
+  if (doRearrange) {
+    const result = rearrangeLogoText(cropCanvas, bgRgb, tolerance);
+    if (result) {
+      layoutCanvas = result.canvas;
+      rearranged = true;
+    }
+  }
+
+  // Pad to target ratio
+  const targetRatio = outWval / outHval;
+  const lw = layoutCanvas.width, lh = layoutCanvas.height;
+  const currentRatio = lw / lh;
+  let padW, padH, pasteX, pasteY;
+
+  if (currentRatio > targetRatio) {
+    padW = lw;
+    padH = Math.round(lw / targetRatio);
+    pasteX = 0;
+    pasteY = Math.round((padH - lh) / 2);
+  } else {
+    padH = lh;
+    padW = Math.round(lh * targetRatio);
+    pasteX = Math.round((padW - lw) / 2);
+    pasteY = 0;
+  }
+
+  const padCanvas = document.createElement('canvas');
+  padCanvas.width = padW;
+  padCanvas.height = padH;
+  const padCtx = padCanvas.getContext('2d');
+  padCtx.fillStyle = bgColorInput.value;
+  padCtx.fillRect(0, 0, padW, padH);
+  padCtx.drawImage(layoutCanvas, pasteX, pasteY);
+
+  // Scale to output size, respecting per-side border padding.
+  // Use contain-fit so the image is never squashed — scale uniformly to fit
+  // within the padded area, then centre it.
+  const finalCanvas = document.createElement('canvas');
+  finalCanvas.width = outWval;
+  finalCanvas.height = outHval;
+  const finalCtx = finalCanvas.getContext('2d');
+  finalCtx.imageSmoothingEnabled = true;
+  finalCtx.imageSmoothingQuality = 'high';
+  finalCtx.fillStyle = bgColorInput.value;
+  finalCtx.fillRect(0, 0, outWval, outHval);
+
+  const availW = outWval - padLeft - padRight;
+  const availH = outHval - padTop - padBottom;
+  const scale  = Math.min(availW / padCanvas.width, availH / padCanvas.height);
+  const drawW  = Math.round(padCanvas.width  * scale);
+  const drawH  = Math.round(padCanvas.height * scale);
+  const drawX  = padLeft + Math.round((availW - drawW) / 2);
+  const drawY  = padTop  + Math.round((availH - drawH) / 2);
+  finalCtx.drawImage(padCanvas, drawX, drawY, drawW, drawH);
+
+  // Show previews
+  const preview = document.getElementById('preview');
+  preview.innerHTML = '';
+
+  addPreview(preview, srcCanvas,   `Original (${loadedImage.width}×${loadedImage.height})`, 150);
+  addPreview(preview, cropCanvas,  `Cropped (${cw}×${ch})`, 150);
+  if (rearranged) {
+    addPreview(preview, layoutCanvas, `Rearranged (${layoutCanvas.width}×${layoutCanvas.height})`, 150);
+  }
+  addPreview(preview, padCanvas,   `Padded (${padW}×${padH})`, 150);
+
+  // Final output — display at actual size
+  const outBox = document.createElement('div');
+  outBox.className = 'preview-box';
+  const outLabel = document.createElement('p');
+  outLabel.textContent = `Output: ${outWval}×${outHval}px (actual size)`;
+  outBox.appendChild(finalCanvas);
+  outBox.appendChild(outLabel);
+  preview.appendChild(outBox);
+
+  // Download button
+  const dataUrl = finalCanvas.toDataURL('image/png');
+  const dlBtn = document.createElement('button');
+  dlBtn.textContent = '⬇ Download PNG';
+  dlBtn.style.marginTop = '16px';
+  dlBtn.addEventListener('click', () => {
+    const link = document.createElement('a');
+    link.download = 'logo_' + outWval + 'x' + outHval + '.png';
+    link.href = dataUrl;
+    link.click();
+  });
+  preview.appendChild(dlBtn);
+
+  const note = rearranged ? ' Text moved beside logo.' : doRearrange ? ' No stacked layout detected — used as-is.' : '';
+  setStatus(`✅ Done! Output: ${outWval}×${outHval}px.${note} Click Download to save.`, 'success');
+});
+
+function addPreview(container, canvas, label, maxW) {
+  const box = document.createElement('div');
+  box.className = 'preview-box';
+  const scale = Math.min(1, maxW / canvas.width);
+  const displayCanvas = document.createElement('canvas');
+  displayCanvas.width = Math.round(canvas.width * scale);
+  displayCanvas.height = Math.round(canvas.height * scale);
+  displayCanvas.getContext('2d').drawImage(canvas, 0, 0, displayCanvas.width, displayCanvas.height);
+  const p = document.createElement('p');
+  p.textContent = label;
+  box.appendChild(displayCanvas);
+  box.appendChild(p);
+  container.appendChild(box);
+}
+
+function setStatus(msg, type) {
+  const el = document.getElementById('status');
+  el.textContent = msg;
+  el.className = type;
+  el.style.display = 'block';
+}
+</script>
+</body>
+</html>

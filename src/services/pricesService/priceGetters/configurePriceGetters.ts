@@ -54,12 +54,14 @@ const priceGetters: IPriceGetterBehaviour[] = [
     new PriceGetter_CosmicCollectables(),
     // Dice Saloon currently has no MTG singles in stock — getter updated to Shopify JSON API; re-enable when stock returns
     // new PriceGetter_DiceSaloon(),
+    // 403 errors for F2F
     new PriceGetter_FaceToFaceGames(),
     new PriceGetter_GameHQ(),
     new PriceGetter_GatheringPointGames(),
     new PriceGetter_GearheadGames(),
     new PriceGetter_Hareruya(),
-    new PriceGetter_Harlequins(),
+    // Harlequins is "down for maintenance"
+    // new PriceGetter_Harlequins(),
     new PriceGetter_HighlanderGames(),
     // Lazy Dragon Gaming's site shows all cards as out of stock. Not sure if maintenance or shutting down
     // new PriceGetter_LazyDragonGaming(),
@@ -70,6 +72,7 @@ const priceGetters: IPriceGetterBehaviour[] = [
     // ManaGaming removed following repeated complaints from customers regarding poor service
     // new PriceGetter_ManaGaming(),
     new PriceGetter_Manaleak(),
+    // 403 errors for Mightlancer
     new PriceGetter_MightyLancer(),
     new PriceGetter_MoxInTheHole(),
     // Mountbatten's site appears to have closed down
@@ -85,6 +88,7 @@ const priceGetters: IPriceGetterBehaviour[] = [
     new PriceGetter_UnicornCards(),
     // Untap (untap.cz) - Czech PrestaShop store. Selectors unverified; site is behind Cloudflare challenge.
     // new PriceGetter_Untap(),
+    // 403 errors for Waypoint
     new PriceGetter_WaypointGames(),
 ];
 
@@ -97,8 +101,7 @@ const configurePriceGetters = (): { [key: string]: IPriceGetterBehaviour } => {
             return acc;
         }, {});
 
-    console.log(`Configured ${priceGetters.length} priceGetters`);
-    console.log(Object.keys(confiuredPriceGetters));
+    console.log(`Configured ${priceGetters.length} priceGetters: [${Object.keys(confiuredPriceGetters).join(', ')}]`);
 
     return confiuredPriceGetters;
 }

@@ -3,7 +3,7 @@ import { Price } from '../types/Price';
 
 export const sanitizeString = (text: string) => text.toLowerCase().replace(/[\n'-]/g, '').normalize("NFD").replace(/\p{Diacritic}/gu, '');
 
-const defaultBannedTerms = ['artcard', 'artseries', '(Art)'];
+const defaultBannedTerms = ['artcard', 'art card', 'artseries', 'art series', '(Art)'];
 
 export const strongMatch = (textBody: string, searchTerm: string, bannedTerms: string[] = defaultBannedTerms) => {
 

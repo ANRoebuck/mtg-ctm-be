@@ -68,15 +68,17 @@ describe('strongMatch', () => {
     });
 
     it('false for banned terms; case insensitive', () => {
-        const bannedTerms = ['foo', '(Bar)'];
+        const bannedTerms = ['foo', '(Bar)', 'two words'];
         const searchTerm = 'match me';
         const textBody1 = 'bad string despite match me foo';
         const textBody2 = 'bad string despite match me (bar)';
         const textBody3 = 'good string match me bar';   // bar not in brackets
+        const textBody4 = 'bad string despite match me with two words banned phrase';
   
         expect(strongMatch(textBody1, searchTerm, bannedTerms)).toBeFalsy();
         expect(strongMatch(textBody2, searchTerm, bannedTerms)).toBeFalsy();
         expect(strongMatch(textBody3, searchTerm, bannedTerms)).toBeTruthy();
+        expect(strongMatch(textBody4, searchTerm, bannedTerms)).toBeFalsy();
     });
 
     it('ignores certain punctuation', () => {

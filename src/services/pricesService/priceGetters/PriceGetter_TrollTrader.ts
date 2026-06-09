@@ -55,7 +55,7 @@ class DataProcessor_TrollTrader extends AbstractHtmlDataProcessor {
             imgSrcAttribute: 'src',
 
             productSelector: 'div.inner > div > div.image > a',
-            productBaseUrl: 'https://www.trolltradercards.com/',
+            productBaseUrl: 'https://www.trolltradercards.com',
             productRefAttribute: 'href',
         });
     }

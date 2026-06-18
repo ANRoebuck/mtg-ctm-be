@@ -3,7 +3,6 @@ import { AbstractHtmlDataProcessor } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
 import { currencies } from '../../../types/Currency';
 import axios from 'axios';
-import { MTG_CTM_SCRAPE } from '../../../gateway/http';
 
 const sellerName = 'Big Orbit Cards';
 
@@ -24,7 +23,7 @@ class DataGetter_BigOrbitCards extends AbstractDataGetter {
         super({
             name: sellerName,
             baseUrl: 'https://www.bigorbitcards.co.uk/',
-            searchPath: 'shop-all-games/search/',
+            searchPath: 'magic-the-gathering/search/',
             searchSuffix: '/',
             searchJoin: '+',
         });
@@ -32,12 +31,20 @@ class DataGetter_BigOrbitCards extends AbstractDataGetter {
 
     // @Override
     getData = async (searchTerm: string): Promise<string> => axios
-        .post(MTG_CTM_SCRAPE,
-            {
-                'targetUrl': this.searchTermToUrl(searchTerm),
-                'lazyElementSelector': 'div.products > article.product-miniature',
-            }
-        )
+        .get(this.searchTermToUrl(searchTerm), {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+                'Accept-Language': 'en-GB,en-US;q=0.9,en;q=0.8',
+                'Accept-Encoding': 'gzip, deflate, br',
+                'Connection': 'keep-alive',
+                'Sec-Fetch-Dest': 'document',
+                'Sec-Fetch-Mode': 'navigate',
+                'Sec-Fetch-Site': 'none',
+                'Sec-Fetch-User': '?1',
+                'Upgrade-Insecure-Requests': '1',
+            },
+        })
         .then((response) => this.extractData(response, searchTerm))
         .catch((e) => this.handleDataError(searchTerm, e));
 

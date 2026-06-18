@@ -9,6 +9,8 @@ class PriceGetter_TrollTrader extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '/images/Troll_Trader_logo_new_600x240.png',
             dataGetter: new DataGetter_TrollTrader(),
             dataProcessor: new DataProcessor_TrollTrader(),
         });
@@ -53,7 +55,7 @@ class DataProcessor_TrollTrader extends AbstractHtmlDataProcessor {
             imgSrcAttribute: 'src',
 
             productSelector: 'div.inner > div > div.image > a',
-            productBaseUrl: 'https://www.trolltradercards.com/',
+            productBaseUrl: 'https://www.trolltradercards.com',
             productRefAttribute: 'href',
         });
     }

@@ -10,6 +10,8 @@ class PriceGetter_PatriotGamesLeeds extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '/images/Patriot_Games_Leeds_logo_150x60.png',
             dataGetter: new DataGetter_PatriotGamesLeeds(),
             dataProcessor: new DataProceesor_PatriotGamesLeeds(),
         });

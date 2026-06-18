@@ -1,6 +1,14 @@
 import { IPriceGetterBehaviour } from "./priceGetters/AbstractPriceGetter";
+import { VERBOSE_LOGGING } from '../../utils/Logger';
+
+type SellerTestResult = {
+    status: 'ok' | 'no results';
+    resultCount: number;
+    searchTerm: string;
+}
 import configurePriceGetters from "./priceGetters/configurePriceGetters";
 import { Price } from '../../types/Price';
+import Seller from '../../types/Seller';
 
 class PricesService {
 
@@ -10,8 +18,8 @@ class PricesService {
         this.priceGetters = configurePriceGetters();
     }
 
-    getSellers(): string[] {
-        return Object.keys(this.priceGetters);
+    getSellers(): Seller[] {
+        return Object.values(this.priceGetters).map(({ name, region, logoUrl }) => ({ name, region, logoUrl }));
     }
 
     isValidSeller(seller: string): boolean {
@@ -21,24 +29,30 @@ class PricesService {
     }
 
     getPrices(seller: string, searchTerm: string, saveOutput: boolean): Promise<Price[]> | [] {
-        console.log(`Getting prices. seller=[${seller}] , searchTerm=[${searchTerm}] , saveOutput=[${saveOutput}]`);
+        if (VERBOSE_LOGGING) console.log(`Getting prices. seller=[${seller}] , searchTerm=[${searchTerm}] , saveOutput=[${saveOutput}]`);
 
         const priceGetter: IPriceGetterBehaviour = this.priceGetters[seller];
-        if (!priceGetter) console.log(`Could not find priceGetter for seller=[${seller}]`);
-        
+        if (!priceGetter) console.error(`Could not find priceGetter for seller=[${seller}]`);
+
         return priceGetter ? priceGetter.getPrices(searchTerm, saveOutput) : [];
     }
 
-    testAllModels(): object {
-        return Promise.all(
-            Object.entries(this.priceGetters)
-                .map(async ([sellerName, priceGetter]) => {
-                    const prices = await priceGetter
-                        .getPrices('counterspell')
-                        .then(prices => [sellerName, prices.length]);
-                    return prices;
-                }))
-                .then(Object.fromEntries);
+    async testAllModels(): Promise<{ [sellerName: string]: SellerTestResult }> {
+        const searchTerms = ['Steam Vents', 'Glen Elendra Guardian', 'Lightning Bolt', 'Counterspell'];
+
+        const entries = await Promise.all(
+            Object.entries(this.priceGetters).map(async ([sellerName, priceGetter]) => {
+                for (const searchTerm of searchTerms) {
+                    const prices = await priceGetter.getPrices(searchTerm);
+                    if (prices.length > 0) {
+                        return [sellerName, { status: 'ok', resultCount: prices.length, searchTerm }];
+                    }
+                }
+                return [sellerName, { status: 'no results', resultCount: 0, searchTerm: searchTerms[searchTerms.length - 1] }];
+            })
+        );
+
+        return Object.fromEntries(entries);
     }
 }
 

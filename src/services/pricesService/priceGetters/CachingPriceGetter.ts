@@ -1,5 +1,6 @@
 import { IPriceGetterBehaviour } from './AbstractPriceGetter';
 import { Price } from '../../../types/Price';
+import Region from '../../../types/Region';
 import { HOURS, MINUTES } from '../../../utils/time';
 
 const DEFAULT_CACHING_AGE: number = 1 * HOURS + 30 * MINUTES;
@@ -16,12 +17,16 @@ interface CachedPricesMap {
 class CachingPriceGetter implements IPriceGetterBehaviour {
 
     name: string;
+    region: Region;
+    logoUrl: string;
     #cachingAge: number;
     #cachedPricesMap: CachedPricesMap = {};
     #priceGetter: IPriceGetterBehaviour;
 
     constructor(priceGetter: IPriceGetterBehaviour, cachingAge: number = DEFAULT_CACHING_AGE){
         this.name = priceGetter.name;
+        this.region = priceGetter.region;
+        this.logoUrl = priceGetter.logoUrl;
         this.#cachingAge = cachingAge;
         this.#priceGetter = priceGetter;
     }

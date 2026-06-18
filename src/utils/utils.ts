@@ -3,7 +3,7 @@ import { Price } from '../types/Price';
 
 export const sanitizeString = (text: string) => text.toLowerCase().replace(/[\n'-]/g, '').normalize("NFD").replace(/\p{Diacritic}/gu, '');
 
-const defaultBannedTerms = ['artcard', 'artseries', '(Art)'];
+const defaultBannedTerms = ['artcard', 'art card', 'artseries', 'art series', '(Art)'];
 
 export const strongMatch = (textBody: string, searchTerm: string, bannedTerms: string[] = defaultBannedTerms) => {
 
@@ -26,11 +26,14 @@ export const strongMatch = (textBody: string, searchTerm: string, bannedTerms: s
     return regex.test(sanitizedTextBody);
 }
 
+// Returns false for undefined/empty strings and for strings containing "non-foil" / "nonfoil" / "non foil"
+export const isFoil = (str: string): boolean => Boolean(str) && /(?<!non[-\s]?)foil/i.test(str);
+
 export const saveToFile = (filePath: string, contents: string) => {
     try {
         writeFileSync(filePath, contents);
     } catch (e) {
-        console.log(e);
+        console.error(e);
     }
 }
 
@@ -40,7 +43,7 @@ export const readHtmlString = (sellerName: string, searchTerm: string, suffix: s
         const file = `./src/services/pricesService/priceGetters/spec/test-resources/${sellerName}_${searchTerm}${suffix}_html.txt`;
         htmlString = readFileSync(file, 'utf8');
     } catch(e) {
-        console.log(e);
+        console.error(e);
     }
     return htmlString;
 }
@@ -51,7 +54,7 @@ export const readResults = (sellerName: string, searchTerm: string, suffix: stri
         const file = `./src/services/pricesService/priceGetters/spec/test-resources/${sellerName}_${searchTerm}${suffix}_prices.json`;
         results = JSON.parse(readFileSync(file, 'utf8'));
     } catch(e) {
-        console.log(e);
+        console.error(e);
     }
     return results;
 }

@@ -9,6 +9,8 @@ class PriceGetter_MagicCardTrader extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '/images/Magic_Card_Trader_logo_black_150x60.png',
             dataGetter: new DataGetter_MagicCardTrader(),
             dataProcessor: new DataProcessor_MagicCardTrader(),
         });

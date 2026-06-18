@@ -11,7 +11,7 @@ const configureAxios = () => {
             rejectUnauthorized: false,
         })
         axios.defaults.httpsAgent = httpsAgent;
-        console.log(`NODE_ENV=[${process.env.NODE_ENV}], RejectUnauthorized is disabled.`);
+        console.warn(`NODE_ENV=[${process.env.NODE_ENV}], RejectUnauthorized is disabled.`);
     }
 };
 

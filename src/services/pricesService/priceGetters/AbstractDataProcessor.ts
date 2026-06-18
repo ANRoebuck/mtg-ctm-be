@@ -3,9 +3,11 @@ import { Currency } from '../../../types/Currency';
 import { JSDOM, VirtualConsole } from 'jsdom';
 import currencyService from '../../currencyService/CurrencyService';
 import StringCleaner from '../../../utils/StringCleaner';
+import { isFoil as isFoilString } from '../../../utils/utils';
 
 export interface AbstractDataProcessor {
     processData: (rawData: any) => Price[];
+    serializeRawData: (rawData: any) => string;
 }
 
 const virtualConsole = new VirtualConsole();
@@ -23,6 +25,7 @@ export abstract class AbstractJsonDataProcessor implements AbstractDataProcessor
     currency: Currency;
 
     processData: (rawData: any) => Price[];
+    serializeRawData = (rawData: any): string => JSON.stringify(rawData, null, 2);
 
     constructor({
         seller,
@@ -49,6 +52,8 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
     subresultSelector: string;
     subtitleSelector: string;
     subtitleFromText: (x: string) => string;
+    titleFromText?: (x: string) => string;
+    expansionFromText?: (x: string) => string;
 
     priceSelector: string;
     priceValueFromPriceText: (x: string) => number;
@@ -68,6 +73,7 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
     constructor({
         seller, currency: currencyCode, resultSelector, titleSelector,
         useSubResults, subresultSelector, subtitleSelector, subtitleFromText,
+        titleFromText, expansionFromText,
         priceSelector, priceValueFromPriceText, stockSelector, stockValueFromStockText,
         expansionSelector, isFoilSelector,
         imgSelector, imgBaseUrl, imgSrcAttribute,
@@ -83,7 +89,9 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
         this.useSubResults = useSubResults;
         this.subresultSelector = subresultSelector;
         this.subtitleSelector = subtitleSelector;
-        this.subtitleFromText = subtitleFromText
+        this.subtitleFromText = subtitleFromText;
+        this.titleFromText = titleFromText;
+        this.expansionFromText = expansionFromText;
 
         this.priceSelector = priceSelector;
         this.priceValueFromPriceText = priceValueFromPriceText;
@@ -101,6 +109,8 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
         this.productRefAttribute = productRefAttribute;
     }
 
+
+    serializeRawData = (rawData: string): string => rawData;
 
     processData = (rawData: string): Price[] => {
         const processedResults: Price[] = [];
@@ -165,7 +175,7 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
             // document = new JSDOM(rawData).window.document;
             document = getDocFromString(rawData);
         } catch {
-            console.log(`Couldn\'t parse document for seller=[${this.seller}]`);
+            console.error(`Couldn\'t parse document for seller=[${this.seller}]`);
             return [];
         }
         return [...document.querySelectorAll(this.resultSelector)];
@@ -175,10 +185,10 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
     subresultsFromResultNode = (resultNode: Element): Element[] => [...resultNode.querySelectorAll(this.subresultSelector)];
 
 
-    getFirstElementHtml = (node: Element, selector: string): string => [...node.querySelectorAll(selector)][0]?.innerHTML || '';
-    getFirstelementAttr = (node: Element, selector: string, attr: string): string => [...node.querySelectorAll(selector)][0]?.getAttribute(attr) || '';
-    getFirstElementWithAttrHtml = (node: Element, selector: string, attr: string): string => [...node.querySelectorAll(selector)]
-        .find((node: Element): boolean => node.hasAttribute(attr))?.innerHTML || '';
+    getFirstElementHtml = (node: Element, selector: string): string => selector ? ([...node.querySelectorAll(selector)][0]?.innerHTML || '') : '';
+    getFirstelementAttr = (node: Element, selector: string, attr: string): string => selector ? ([...node.querySelectorAll(selector)][0]?.getAttribute(attr) || '') : '';
+    getFirstElementWithAttrHtml = (node: Element, selector: string, attr: string): string => selector ? ([...node.querySelectorAll(selector)]
+        .find((node: Element): boolean => node.hasAttribute(attr))?.innerHTML || '') : '';
 
 
     stockFromResultNode = (resultNode: Element): Stock => {
@@ -199,7 +209,8 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
 
     titleFromResultNode = (resultNode: Element): string => {
         const str = this.getFirstElementHtml(resultNode, this.titleSelector);
-        return new StringCleaner(str).trimWhitespace().get();
+        const cleaned = new StringCleaner(str).trimWhitespace().get();
+        return this.titleFromText ? this.titleFromText(cleaned) : cleaned;
     }
 
 
@@ -223,12 +234,12 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
 
     expansionFromResultNode = (resultNode: Element): string => {
         const str = this.getFirstElementHtml(resultNode, this.expansionSelector);
-        return new StringCleaner(str).trimWhitespace().get();
+        const cleaned = new StringCleaner(str).trimWhitespace().get();
+        return this.expansionFromText ? this.expansionFromText(cleaned) : cleaned;
     }
 
 
-    // returns false for an undefined string
-    isFoilFromString = (str: string): boolean => Boolean(str) && str.toLowerCase().includes('foil');
+    isFoilFromString = (str: string): boolean => isFoilString(str);
     isFoilFromResultNode = (resultNode: Element): boolean => {
         const str = this.getFirstElementHtml(resultNode, this.isFoilSelector);
         return this.isFoilFromString(str);
@@ -253,6 +264,8 @@ interface HtmlProcoessorArgs {
     subresultSelector: string,
     subtitleSelector: string,
     subtitleFromText: (x: string) => string,
+    titleFromText?: (x: string) => string,
+    expansionFromText?: (x: string) => string,
 
     priceSelector: string,
     priceValueFromPriceText: (x: string) => number,

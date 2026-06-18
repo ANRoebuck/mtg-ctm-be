@@ -9,6 +9,8 @@ class PriceGetter_ManaGaming extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '/images/Mana_Gaming_logo_150x60.png',
             dataGetter: new DataGetter_ManaGaming(),
             dataProcessor: new DataProcessor_ManaGaming(),
         });

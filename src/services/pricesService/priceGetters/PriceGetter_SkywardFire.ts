@@ -9,6 +9,8 @@ class PriceGetter_SkywardFire extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '/images/Skyward_Fire_Games_logo_grey_300x120.png',
             dataGetter: new DataGetter_SkywardFire(),
             dataProcessor: new DataProcessor_SkywardFire(),
         });

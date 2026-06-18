@@ -9,6 +9,8 @@ class PriceGetter_Harlequins extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '/images/Harlequins_logo_150x60.png',
             dataGetter: new DataGetter_Harlequins(),
             dataProcessor: new DataProcessor_Harlequins(),
         });

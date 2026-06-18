@@ -9,6 +9,8 @@ class PriceGetter_NerdShak extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '/images/Nerd_Shak_Cropped_logo_150x60.jpg',
             dataGetter: new DataGetter_NerdShak(),
             dataProcessor: new DataProcessor_NerdShak(),
         });

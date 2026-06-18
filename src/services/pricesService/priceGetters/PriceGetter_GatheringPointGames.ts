@@ -10,6 +10,8 @@ class PriceGetter_GatheringPointGames extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '/images/Gathering_Point_Games_logo_450x180.png',
             dataGetter: new DataGetter_GatheringPointGames(),
             dataProcessor: new DataProcessor_GatheringPointGames(),
         });

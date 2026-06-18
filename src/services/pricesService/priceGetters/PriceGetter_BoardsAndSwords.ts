@@ -1,14 +1,20 @@
 import AbstractDataGetter from './AbstractDataGetter';
-import { AbstractHtmlDataProcessor, Stock } from './AbstractDataProcessor';
+import { AbstractJsonDataProcessor } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
+import { Price } from '../../../types/Price';
 import { currencies } from '../../../types/Currency';
+import currencyService from '../../currencyService/CurrencyService';
+import StringCleaner from '../../../utils/StringCleaner';
 
-const sellerName = 'Boards & Swords';
+const sellerName = 'Boards and Swords';
+const baseUrl = 'https://www.boardsandswords.co.uk';
 
 class PriceGetter_BoardsAndSwords extends AbstractPriceGetter {
     constructor() {
         super({
             name: sellerName,
+            region: 'UK',
+            logoUrl: '/images/Boards_and_Swords_logo_5to2.png',
             dataGetter: new DataGetter_BoardsAndSwords(),
             dataProcessor: new DataProcessor_BoardsAndSwords(),
         });
@@ -19,51 +25,54 @@ class DataGetter_BoardsAndSwords extends AbstractDataGetter {
     constructor() {
         super({
             name: sellerName,
-            baseUrl: 'https://www.boardsandswords.co.uk/',
-            searchPath: 'search?type=product&options%5Bprefix%5D=last&q=',
-            searchSuffix: '',
+            baseUrl: `${baseUrl}/`,
+            searchPath: 'search/suggest.json?q=',
+            searchSuffix: '&resources[type]=product&resources[limit]=20',
             searchJoin: '+',
         });
     }
 }
 
-class DataProcessor_BoardsAndSwords extends AbstractHtmlDataProcessor {
+class DataProcessor_BoardsAndSwords extends AbstractJsonDataProcessor {
     constructor() {
         super({
             seller: sellerName,
             currency: currencies.GBP,
 
-            resultSelector: 'div.collectionGrid > div.productCard__card',
-            titleSelector: 'div.productCard__lower > p.productCard__title > a',
+            processData: (rawData: any): Price[] => {
+                const products: any[] = rawData?.resources?.results?.products || [];
 
-            useSubResults: false,
-            subresultSelector: '',
-            subtitleSelector: '',
-            subtitleFromText: () => '',
+                return products
+                    .filter((p: any) => p.type === 'Singles' && p.available)
+                    .map((p: any): Price => {
+                        const title: string = p.title;
+                        const imgSrc: string = p.image;
+                        const productRef: string = baseUrl + new StringCleaner(p.url).trimWhitespace().removeQueryParams().get();
+                        const tags: string[] = p.tags || [];
+                        const expansion: string = tags.find((t: string) => /^[A-Z0-9]{2,6}$/.test(t)) || '';
+                        const price_majorUnits: number = parseFloat(p.price);
+                        const price_minorUnits: number = Math.round(price_majorUnits * 100);
+                        const price_relativeUnits = currencyService.minorUnitsToRelativeUnits(price_minorUnits, currencies.GBP);
+                        const price_textRepresentation = currencyService.majorUnitsToTextRepresentation(price_majorUnits, currencies.GBP);
+                        const isFoil: boolean = title.toLowerCase().includes('foil') || tags.includes('Foil');
 
-            priceSelector: 'div.productCard__lower > p.productCard__price',
-            priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g,'')),
-            stockSelector: 'div.productCard__button',
-            stockValueFromStockText: (x: string): number => parseInt(x),    // not used
-            isFoilSelector: 'div.productCard__lower > p.productCard__title > a',
-            expansionSelector: 'div.productCard__lower > p.productCard__setName',
-
-            imgSelector: 'div.productCard__upper > a > div.productCard__imageWrap > img',
-            imgBaseUrl: 'https:',
-            imgSrcAttribute: 'data-src',
-
-            productSelector: 'div.productCard__lower > p.productCard__title > a',
-            productBaseUrl: 'https://www.boardsandswords.co.uk',
-            productRefAttribute: 'href',
+                        return {
+                            seller: sellerName,
+                            title,
+                            imgSrc,
+                            productRef,
+                            expansion,
+                            price_relativeUnits,
+                            price_textRepresentation,
+                            stock_inStock: true,
+                            stock_level: '1',
+                            subtitle: '',
+                            isFoil,
+                        };
+                    });
+            }
         });
     }
-
-        // @Override
-        stockFromResultNode = (resultNode: Element): Stock => {
-            // Stock count is not displayed. An out of stock banner either is or is not present.
-            let isInStock: boolean = resultNode.querySelectorAll(this.stockSelector).length === 0;
-            return isInStock ? { inStock: true, level: '1' } : { inStock: false, level: '0' };
-        }
 }
 
 export default PriceGetter_BoardsAndSwords;

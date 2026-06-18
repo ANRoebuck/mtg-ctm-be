@@ -21,8 +21,9 @@ export const errMethodNotAllowed = (req: Request, res: Response, next: NextFunct
 
 // custom error
 export const errHandleCustom = (err: HttpException, req: Request, res: Response, next: NextFunction) => {
-    console.log(err);
-    res.status(err.status).send({ message: err.message });
+    const { status = 500, message } = err;
+    console.error(`[${status}] ${message}`);
+    res.status(status).send({ message });
 };
 
 class HttpException extends Error {

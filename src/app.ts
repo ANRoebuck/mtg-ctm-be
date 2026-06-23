@@ -1,5 +1,6 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
+import path from 'path';
 import apiRouter from './routers/apiRouter';
 import { errHandleCustomError, errHandleInvalidEnpoint } from "./errorHandling/errorHandling";
 import configureAxios from './gateway/configureAxios';
@@ -18,6 +19,7 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 app.use('/api', apiRouter);
 
 app.use('/images', express.static('static/images'));
+app.get('/favicon.ico', (_req: Request, res: Response) => res.sendFile(path.resolve('static/favicon.ico')));
 
 app.use('/*', errHandleInvalidEnpoint);
 app.use(errHandleCustomError);

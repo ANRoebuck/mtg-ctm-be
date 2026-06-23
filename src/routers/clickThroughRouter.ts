@@ -1,20 +1,20 @@
 import express, { Router } from 'express';
 import { postClickThrough, sendClickThroughsBySeller, sendClickThroughsByCard, deleteClickThroughs } from '../controllers/clickThroughControllers';
-import { errMethodNotAllowed } from '../errorHandling/errorHandling';
+import { errHandleMethodNotAllowed } from '../errorHandling/errorHandling';
 
 const clickThroughRouter: Router = express.Router();
 
 clickThroughRouter.route('/')
     .post(postClickThrough)
     .delete(deleteClickThroughs)
-    .all(errMethodNotAllowed);
+    .all(errHandleMethodNotAllowed);
 
 clickThroughRouter.route('/sellers')
     .get(sendClickThroughsBySeller)
-    .all(errMethodNotAllowed);
+    .all(errHandleMethodNotAllowed);
 
 clickThroughRouter.route('/cards')
     .get(sendClickThroughsByCard)
-    .all(errMethodNotAllowed);
+    .all(errHandleMethodNotAllowed);
 
 export default clickThroughRouter;

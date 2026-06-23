@@ -1,5 +1,5 @@
 import { IPriceGetterBehaviour } from "./priceGetters/AbstractPriceGetter";
-import { VERBOSE_LOGGING } from '../../utils/Logger';
+import { VERBOSE_LOGGING, ts } from '../../utils/Logger';
 
 type SellerTestResult = {
     status: 'ok' | 'no results';
@@ -29,10 +29,10 @@ class PricesService {
     }
 
     getPrices(seller: string, searchTerm: string, saveOutput: boolean): Promise<Price[]> | [] {
-        if (VERBOSE_LOGGING) console.log(`Getting prices. seller=[${seller}] , searchTerm=[${searchTerm}] , saveOutput=[${saveOutput}]`);
+        if (VERBOSE_LOGGING) console.log(`[${ts()}] [PricesService.getPrices] Getting prices. seller=[${seller}] , searchTerm=[${searchTerm}] , saveOutput=[${saveOutput}]`);
 
         const priceGetter: IPriceGetterBehaviour = this.priceGetters[seller];
-        if (!priceGetter) console.error(`Could not find priceGetter for seller=[${seller}]`);
+        if (!priceGetter) console.error(`[${ts()}] [PricesService.getPrices] Could not find priceGetter for seller=[${seller}]`);
 
         return priceGetter ? priceGetter.getPrices(searchTerm, saveOutput) : [];
     }

@@ -1,17 +1,17 @@
 import express, { Router } from 'express';
 import { sendPrices, sendSellers, sendModelsTest } from '../controllers/pricesControllers';
-import { errMethodNotAllowed } from "../errorHandling/errorHandling";
+import { errHandleMethodNotAllowed } from "../errorHandling/errorHandling";
 
 const pricesRouter: Router = express.Router();
 
 pricesRouter.route('/')
     .post(sendPrices)
     .get(sendSellers)
-    .all(errMethodNotAllowed);
+    .all(errHandleMethodNotAllowed);
 
 pricesRouter.route('/test-all-models')
     .get(sendModelsTest)
-    .all(errMethodNotAllowed);
+    .all(errHandleMethodNotAllowed);
 
 
 export default pricesRouter;

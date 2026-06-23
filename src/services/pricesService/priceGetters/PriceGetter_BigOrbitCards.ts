@@ -3,6 +3,7 @@ import { AbstractHtmlDataProcessor } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
 import { currencies } from '../../../types/Currency';
 import axios from 'axios';
+import { ts } from '../../../utils/Logger';
 
 const sellerName = 'Big Orbit Cards';
 
@@ -54,7 +55,7 @@ class DataGetter_BigOrbitCards extends AbstractDataGetter {
             + this.searchPath
             + searchTerm.toLowerCase().split(' ').join(this.searchJoin)
             + this.searchSuffix;
-        console.log('Requesting data from ' + url);
+        console.log(`[${ts()}] [AbstractDataGetter.searchTermToUrl] Requesting data from ${url}`);
         return url;
     };
 }

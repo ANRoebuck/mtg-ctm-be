@@ -1,4 +1,5 @@
 import { IPriceGetterBehaviour } from './AbstractPriceGetter';
+import { ts } from '../../../utils/Logger';
 import { Price } from '../../../types/Price';
 import Region from '../../../types/Region';
 import { saveToFile } from '../../../utils/utils';
@@ -35,7 +36,7 @@ class AggregatingPriceGetter {
         if (saveOutput) {
             // for use during development
             // when true, raw HTML and processed results will be output to local directory (gitignored)
-            console.log('Saving output');
+            console.log(`[${ts()}] [AggregatingPriceGetter.getPrices] Saving output`);
             const filePath: string = './src/services/pricesService/priceGetters/output/'
             saveToFile(`${filePath}${this.name}_${searchTerm}_prices.json`, JSON.stringify(aggregatedPrices));
         }

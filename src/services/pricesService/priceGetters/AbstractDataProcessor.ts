@@ -1,4 +1,5 @@
 import { Price } from '../../../types/Price';
+import { ts } from '../../../utils/Logger';
 import { Currency } from '../../../types/Currency';
 import { JSDOM, VirtualConsole } from 'jsdom';
 import currencyService from '../../currencyService/CurrencyService';
@@ -175,7 +176,7 @@ export abstract class AbstractHtmlDataProcessor implements AbstractDataProcessor
             // document = new JSDOM(rawData).window.document;
             document = getDocFromString(rawData);
         } catch {
-            console.error(`Couldn\'t parse document for seller=[${this.seller}]`);
+            console.error(`[${ts()}] [AbstractHtmlDataProcessor.dataToResultsArray] Couldn\'t parse document for seller=[${this.seller}]`);
             return [];
         }
         return [...document.querySelectorAll(this.resultSelector)];

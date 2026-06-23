@@ -4,6 +4,7 @@ import AbstractPriceGetter from './AbstractPriceGetter';
 import { currencies } from '../../../types/Currency';
 import axios from 'axios';
 import { MTG_CTM_SCRAPE } from '../../../gateway/http';
+import { ts } from '../../../utils/Logger';
 
 // untap.cz is a Czech PrestaShop store. It serves a Cloudflare JS challenge to
 // non-browser requests, so we use MTG_CTM_SCRAPE (headless Chrome) to fetch pages.
@@ -57,7 +58,7 @@ class DataGetter_Untap extends AbstractDataGetter {
             + this.searchPath
             + searchTerm.toLowerCase().split(' ').join(this.searchJoin)
             + this.searchSuffix;
-        console.log('Requesting data from ' + url);
+        console.log(`[${ts()}] [AbstractDataGetter.searchTermToUrl] Requesting data from ${url}`);
         return url;
     };
 }

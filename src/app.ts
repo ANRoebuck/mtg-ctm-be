@@ -3,6 +3,7 @@ import cors from 'cors';
 import apiRouter from './routers/apiRouter';
 import { errHandleCustom, errHandleInvalidEnpoint } from "./errorHandling/errorHandling";
 import configureAxios from './gateway/configureAxios';
+import { ts } from './utils/Logger';
 
 const app: Application = express();
 
@@ -23,6 +24,6 @@ app.use(errHandleCustom);
 
 const port = process.env.PORT || 5001;
 
-app.listen(port, () => console.log('Server listening on port ' + port));
+app.listen(port, () => console.log(`[${ts()}] Server listening on port ${port}`));
 
 configureAxios();

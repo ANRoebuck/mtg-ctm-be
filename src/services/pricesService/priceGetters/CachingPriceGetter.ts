@@ -1,4 +1,5 @@
 import { IPriceGetterBehaviour } from './AbstractPriceGetter';
+import { ts } from '../../../utils/Logger';
 import { Price } from '../../../types/Price';
 import Region from '../../../types/Region';
 import { HOURS, MINUTES } from '../../../utils/time';
@@ -51,7 +52,7 @@ class CachingPriceGetter implements IPriceGetterBehaviour {
     }
 
     #getCachedPrices = (searchTerm: string): Price[] => {
-        console.log(`returning cached prices for ${searchTerm}`);
+        console.log(`[${ts()}] [CachingPriceGetter.#getCachedPrices] Returning cached prices for ${searchTerm}`);
         return this.#cachedPricesMap[searchTerm].prices;
     }
 

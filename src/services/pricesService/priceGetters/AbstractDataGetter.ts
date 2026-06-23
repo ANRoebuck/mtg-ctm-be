@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { MTG_CTM_CORS_ANYWHERE } from '../../../gateway/http';
-import { VERBOSE_LOGGING } from '../../../utils/Logger';
+import { VERBOSE_LOGGING, ts } from '../../../utils/Logger';
 
 
 interface Args {
@@ -34,11 +34,11 @@ abstract class AbstractDataGetter {
         .catch((e) => this.handleDataError(searchTerm, e));
 
     protected handleDataError = (searchTerm: string, e: unknown): '' => {
-        console.error(`Failed to get data for seller=[${this.name}] searchTerm=[${searchTerm}]`);
+        console.error(`[${ts()}] [AbstractDataGetter.handleDataError] Failed to get data for seller=[${this.name}] searchTerm=[${searchTerm}]`);
         if (axios.isAxiosError(e)) {
-            console.error(`[${e.code ?? 'UNKNOWN'}] ${e.message} (HTTP ${e.response?.status ?? 'N/A'}, url=${e.config?.url})`);
+            console.error(`[${ts()}] [AbstractDataGetter.handleDataError] [${e.code ?? 'UNKNOWN'}] ${e.message} (HTTP ${e.response?.status ?? 'N/A'}, url=${e.config?.url})`);
         } else {
-            console.error(e);
+            console.error(`[${ts()}] [AbstractDataGetter.handleDataError]`, e);
         }
         return '';
     }
@@ -48,12 +48,12 @@ abstract class AbstractDataGetter {
             + this.searchPath
             + searchTerm.toLowerCase().split(' ').join(this.searchJoin)
             + this.searchSuffix;
-        if (VERBOSE_LOGGING) console.log('Requesting data from ' + url);
+        if (VERBOSE_LOGGING) console.log(`[${ts()}] Requesting data from ${url}`);
         return MTG_CTM_CORS_ANYWHERE + url;
     };
 
     extractData = ({ data } : { data: any }, searchTerm: string): any => {
-        console.log(`Extracting data for seller=[${this.name}] searchTerm=[${searchTerm}]`);
+        console.log(`[${ts()}] [AbstractDataGetter.extractData] Extracting data for seller=[${this.name}] searchTerm=[${searchTerm}]`);
         return data ?? '';
     }
 }

@@ -1,5 +1,5 @@
 import AbstractDataGetter from './AbstractDataGetter';
-import { VERBOSE_LOGGING } from '../../../utils/Logger';
+import { VERBOSE_LOGGING, ts } from '../../../utils/Logger';
 import { AbstractDataProcessor } from './AbstractDataProcessor';
 import { Price } from '../../../types/Price';
 import Region from '../../../types/Region';
@@ -52,13 +52,13 @@ abstract class AbstractPriceGetter implements IPriceGetterBehaviour {
         if (saveOutput) {
             // for use during development
             // when true, raw data and processed results will be output to local directory (gitignored)
-            console.log('Saving output');
+            console.log(`[${ts()}] [AbstractPriceGetter.getPrices] Saving output`);
             const filePath: string = './src/services/pricesService/priceGetters/output/'
             saveToFile(`${filePath}${this.name}_${searchTerm}_raw.txt`, this.dataProcessor.serializeRawData(rawData));
             saveToFile(`${filePath}${this.name}_${searchTerm}_prices.json`, JSON.stringify(validResults));
         }
 
-        if (VERBOSE_LOGGING) console.log(`Returning ${validResults.length} results for searchTerm=[${searchTerm}] from seller=[${this.name}]`);
+        if (VERBOSE_LOGGING) console.log(`[${ts()}] [AbstractPriceGetter.getPrices] Returning ${validResults.length} results for searchTerm=[${searchTerm}] from seller=[${this.name}]`);
         return validResults;
     }
 

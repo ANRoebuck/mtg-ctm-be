@@ -2,6 +2,7 @@
 
 import https from 'https';
 import axios from 'axios';
+import { ts } from '../utils/Logger';
 
 const configureAxios = () => {
 
@@ -11,7 +12,7 @@ const configureAxios = () => {
             rejectUnauthorized: false,
         })
         axios.defaults.httpsAgent = httpsAgent;
-        console.warn(`NODE_ENV=[${process.env.NODE_ENV}], RejectUnauthorized is disabled.`);
+        console.warn(`[${ts()}] [configureAxios] NODE_ENV=[${process.env.NODE_ENV}], RejectUnauthorized is disabled.`);
     }
 };
 

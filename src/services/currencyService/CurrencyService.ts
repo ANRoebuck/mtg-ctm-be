@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { currencies, Currency } from "../../types/Currency";
 import { EXCHANGE_RATE_API_URL } from "../../gateway/http";
+import { ts } from '../../utils/Logger';
 
 
 class CurrencyService {
@@ -69,13 +70,13 @@ class CurrencyService {
             );
 
             this.setConversionRates(normalizedRates);
-            console.log('CurrencyService: conversion rates updated successfully');
+            console.log(`[${ts()}] [CurrencyService.fetchAndUpdateConversionRates] Conversion rates updated successfully`);
         } catch (e) {
-            console.error('CurrencyService: failed to fetch conversion rates, retaining existing rates');
+            console.error(`[${ts()}] [CurrencyService.fetchAndUpdateConversionRates] failed to fetch conversion rates, retaining existing rates`);
             if (axios.isAxiosError(e)) {
-                console.error(`[${e.code ?? 'UNKNOWN'}] ${e.message} (HTTP ${e.response?.status ?? 'N/A'})`);
+                console.error(`[${ts()}] [CurrencyService.fetchAndUpdateConversionRates] [${e.code ?? 'UNKNOWN'}] ${e.message} (HTTP ${e.response?.status ?? 'N/A'})`);
             } else {
-                console.error(e);
+                console.error(`[${ts()}] [CurrencyService.fetchAndUpdateConversionRates]`, e);
             }
         }
     }

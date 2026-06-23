@@ -38,6 +38,7 @@ import {
     PriceGetter_WaypointGames,
 } from './';
 import CachingPriceGetter from './CachingPriceGetter';
+import { ts } from '../../../utils/Logger';
 
 const priceGetters: IPriceGetterBehaviour[] = [
     new PriceGetter_401Games(),
@@ -101,7 +102,7 @@ const configurePriceGetters = (): { [key: string]: IPriceGetterBehaviour } => {
             return acc;
         }, {});
 
-    console.log(`Configured ${priceGetters.length} priceGetters: [${Object.keys(confiuredPriceGetters).join(', ')}]`);
+    console.log(`[${ts()}] [configurePriceGetters] Configured ${priceGetters.length} priceGetters: [${Object.keys(confiuredPriceGetters).join(', ')}]`);
 
     return confiuredPriceGetters;
 }

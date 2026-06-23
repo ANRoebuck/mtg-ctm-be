@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { Price } from '../types/Price';
+import { ts } from './Logger';
 
 export const sanitizeString = (text: string) => text.toLowerCase().replace(/[\n'-]/g, '').normalize("NFD").replace(/\p{Diacritic}/gu, '');
 
@@ -33,7 +34,7 @@ export const saveToFile = (filePath: string, contents: string) => {
     try {
         writeFileSync(filePath, contents);
     } catch (e) {
-        console.error(e);
+        console.error(`[${ts()}] [utils.saveToFile] Error saving to file: ${filePath}`, e);
     }
 }
 
@@ -43,7 +44,7 @@ export const readHtmlString = (sellerName: string, searchTerm: string, suffix: s
         const file = `./src/services/pricesService/priceGetters/spec/test-resources/${sellerName}_${searchTerm}${suffix}_html.txt`;
         htmlString = readFileSync(file, 'utf8');
     } catch(e) {
-        console.error(e);
+        console.error(`[${ts()}] [utils.readHtmlString] Error reading HTML string`, e);
     }
     return htmlString;
 }
@@ -54,7 +55,18 @@ export const readResults = (sellerName: string, searchTerm: string, suffix: stri
         const file = `./src/services/pricesService/priceGetters/spec/test-resources/${sellerName}_${searchTerm}${suffix}_prices.json`;
         results = JSON.parse(readFileSync(file, 'utf8'));
     } catch(e) {
-        console.error(e);
+        console.error(`[${ts()}] [utils.readResults] Error reading results`, e);
     }
     return results;
+}
+
+export const readRawData = (sellerName: string, searchTerm: string, suffix: string = ''): string => {
+    let rawData: string = '';
+    try {
+        const file = `./src/services/pricesService/priceGetters/spec/test-resources/${sellerName}_${searchTerm}${suffix}_raw.txt`;
+        rawData = readFileSync(file, 'utf8');
+    } catch(e) {
+        console.error(`[${ts()}] [utils.readRawData] Error reading raw data`, e);
+    }
+    return rawData;
 }

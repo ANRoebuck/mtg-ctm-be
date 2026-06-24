@@ -2,7 +2,6 @@ import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils/utils';
-import { MTG_CTM_CORS_ANYWHERE } from '../../../../gateway/http';
 
 import { PriceGetter_TrollTrader } from '..';
 
@@ -34,7 +33,7 @@ describe('PriceGetter_TrollTrader', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      MTG_CTM_CORS_ANYWHERE + 'https://www.trolltradercards.com/products/search?q=tarmogoyf',
+      'https://www.trolltradercards.com/products/search?q=tarmogoyf',
       { "headers": { "Origin": "compare-the-magic" } }
     );
     expect(results.length).toBe(8);

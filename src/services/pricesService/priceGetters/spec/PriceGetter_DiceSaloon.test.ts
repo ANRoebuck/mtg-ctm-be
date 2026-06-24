@@ -2,7 +2,6 @@ import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils/utils';
-import { MTG_CTM_CORS_ANYWHERE } from '../../../../gateway/http';
 
 import { PriceGetter_DiceSaloon } from '..';
 
@@ -34,7 +33,7 @@ describe('PriceGetter_DiceSaloon', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      MTG_CTM_CORS_ANYWHERE + 'https://www.dicesaloonsingles.co.uk/search?options%5Bprefix%5D=last&type=product&q=steam+vents',
+      'https://www.dicesaloonsingles.co.uk/search?options%5Bprefix%5D=last&type=product&q=steam+vents',
       { "headers": { "Origin": "compare-the-magic" } }
     );
     expect(results.length).toBe(2);

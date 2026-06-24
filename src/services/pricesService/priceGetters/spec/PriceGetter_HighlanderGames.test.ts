@@ -2,7 +2,6 @@ import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils/utils';
-import { MTG_CTM_CORS_ANYWHERE } from '../../../../gateway/http';
 
 import { PriceGetter_HighlanderGames } from '..';
 
@@ -34,7 +33,7 @@ describe('PriceGetter_HighlanderGames', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      MTG_CTM_CORS_ANYWHERE + 'https://highlandergames.co.uk/search?type=product&q=search?type=product&q=tarmogoyf',
+      'https://highlandergames.co.uk/search?type=product&q=search?type=product&q=tarmogoyf',
       { "headers": { "Origin": "compare-the-magic" } }
     );
     expect(results.length).toBe(3);
@@ -52,7 +51,7 @@ describe('PriceGetter_HighlanderGames', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      MTG_CTM_CORS_ANYWHERE + 'https://highlandergames.co.uk/search?type=product&q=search?type=product&q=steam+vents',
+      'https://highlandergames.co.uk/search?type=product&q=search?type=product&q=steam+vents',
       { "headers": { "Origin": "compare-the-magic" } }
     );
     expect(results.length).toBe(1);

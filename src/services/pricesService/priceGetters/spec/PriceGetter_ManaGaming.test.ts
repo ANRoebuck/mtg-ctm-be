@@ -2,7 +2,6 @@ import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils/utils';
-import { MTG_CTM_CORS_ANYWHERE } from '../../../../gateway/http';
 
 import { PriceGetter_ManaGaming } from '..';
 
@@ -34,7 +33,7 @@ describe('PriceGetter_ManaGaming', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      MTG_CTM_CORS_ANYWHERE + 'https://managaming.shop/search?page=1&q=%2Asteam%20vents%2A',
+      'https://managaming.shop/search?page=1&q=%2Asteam%20vents%2A',
       {"headers": {"Origin": "compare-the-magic"}}
     );
     expect(results.length).toBe(4);

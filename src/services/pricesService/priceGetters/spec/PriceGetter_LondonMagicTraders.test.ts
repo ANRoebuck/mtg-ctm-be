@@ -2,7 +2,6 @@ import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils/utils';
-import { MTG_CTM_CORS_ANYWHERE } from '../../../../gateway/http';
 
 import { PriceGetter_LondonMagicTraders } from '..';
 
@@ -34,7 +33,7 @@ describe('PriceGetter_LondonMagicTraders', () => {
     const results: Price[] = await priceGetter.getPrices(searchTerm);
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      MTG_CTM_CORS_ANYWHERE + 'https://londonmagictraders.com/search?q=hallowed+fountain&options%5Bprefix%5D=last&filter.v.availability=1',
+      'https://londonmagictraders.com/search?q=hallowed+fountain&options%5Bprefix%5D=last&filter.v.availability=1',
       {"headers": {"Origin": "compare-the-magic"}}
     );
     expect(results.length).toBe(4);

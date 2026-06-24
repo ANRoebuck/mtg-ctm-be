@@ -1,4 +1,4 @@
-import AbstractDataGetter from './AbstractDataGetter';
+import AbstractScrapingDataGetter from './AbstractScrapingDataGetter';
 import { AbstractHtmlDataProcessor } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
 import AggregatingPriceGetter from './AggregatingPriceGetter';
@@ -26,7 +26,7 @@ class PriceGetter_Axion_NonFoil extends AbstractPriceGetter {
             name: sellerName,
             region: 'UK',
             logoUrl: '',
-            dataGetter: new DataGetter_Axion_NonFoil(),
+            dataGetter: new ScrapingDataGetter_Axion_NonFoil(),
             dataProcessor: new DataProcessor_Axion_NonFoil(),
         });
     }
@@ -38,32 +38,60 @@ class PriceGetter_Axion_Foil extends AbstractPriceGetter {
             name: sellerName,
             region: 'UK',
             logoUrl: '',
-            dataGetter: new DataGetter_Axion_Foil(),
+            dataGetter: new ScrapingDataGetter_Axion_Foil(),
             dataProcessor: new DataProcessor_Axion_Foil(),
         });
     }
 }
 
-class DataGetter_Axion_NonFoil extends AbstractDataGetter {
+// class DataGetter_Axion_NonFoil extends AbstractDataGetter {
+//     constructor() {
+//         super({
+//             name: sellerName,
+//             baseUrl: 'https://www.axionnow.com/',
+//             searchPath: 'search?type=product&q=',
+//             searchSuffix: '&filter.v.availability=1&filter.v.option.finish=Non-Foil',
+//             searchJoin: '+'
+//         });
+//     }
+// }
+
+// class DataGetter_Axion_Foil extends AbstractDataGetter {
+//     constructor() {
+//         super({
+//             name: sellerName,
+//             baseUrl: 'https://www.axionnow.com/',
+//             searchPath: 'search?type=product&q=',
+//             searchSuffix: '&filter.v.availability=1&filter.v.option.finish=Foil',
+//             searchJoin: '+'
+//         });
+//     }
+// }
+
+// lazyElementSelector: adjust this CSS selector to match a product element on the Axion
+// search results page. If null, the scraper waits a fixed 3 seconds instead.
+class ScrapingDataGetter_Axion_NonFoil extends AbstractScrapingDataGetter {
     constructor() {
         super({
             name: sellerName,
             baseUrl: 'https://www.axionnow.com/',
             searchPath: 'search?type=product&q=',
             searchSuffix: '&filter.v.availability=1&filter.v.option.finish=Non-Foil',
-            searchJoin: '+'
+            searchJoin: '+',
+            lazyElementSelector: null,
         });
     }
 }
 
-class DataGetter_Axion_Foil extends AbstractDataGetter {
+class ScrapingDataGetter_Axion_Foil extends AbstractScrapingDataGetter {
     constructor() {
         super({
             name: sellerName,
             baseUrl: 'https://www.axionnow.com/',
             searchPath: 'search?type=product&q=',
             searchSuffix: '&filter.v.availability=1&filter.v.option.finish=Foil',
-            searchJoin: '+'
+            searchJoin: '+',
+            lazyElementSelector: null,
         });
     }
 }

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { MTG_CTM_CORS_ANYWHERE } from '../../../gateway/http';
 import { VERBOSE_LOGGING, ts } from '../../../utils/Logger';
 
 
@@ -49,7 +48,7 @@ abstract class AbstractDataGetter {
             + searchTerm.toLowerCase().split(' ').join(this.searchJoin)
             + this.searchSuffix;
         if (VERBOSE_LOGGING) console.log(`[${ts()}] Requesting data from ${url}`);
-        return MTG_CTM_CORS_ANYWHERE + url;
+        return url;
     };
 
     extractData = ({ data } : { data: any }, searchTerm: string): any => {

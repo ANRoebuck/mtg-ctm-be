@@ -2,7 +2,6 @@ import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
 import { Price } from '../../../../types/Price';
 import { readHtmlString, readResults } from '../../../../utils/utils';
-import { MTG_CTM_CORS_ANYWHERE } from '../../../../gateway/http';
 
 import { PriceGetter_Axion } from '..';
 
@@ -41,11 +40,11 @@ describe('PriceGetter_Axion', () => {
     expect(mockedAxios.get).toHaveBeenCalledTimes(2);
     expect(mockedAxios.get.mock.calls).toEqual([
       [
-        MTG_CTM_CORS_ANYWHERE + 'https://www.axionnow.com/search?type=product&q=steam+vents&filter.v.availability=1&filter.v.option.finish=Non-Foil',
+        'https://www.axionnow.com/search?type=product&q=steam+vents&filter.v.availability=1&filter.v.option.finish=Non-Foil',
         { "headers": { "Origin": "compare-the-magic" } }
       ],
       [
-        MTG_CTM_CORS_ANYWHERE + 'https://www.axionnow.com/search?type=product&q=steam+vents&filter.v.availability=1&filter.v.option.finish=Foil',
+        'https://www.axionnow.com/search?type=product&q=steam+vents&filter.v.availability=1&filter.v.option.finish=Foil',
         { "headers": { "Origin": "compare-the-magic" } }
       ],
     ]);

@@ -31,7 +31,7 @@ import {
     PriceGetter_PatriotGamesLeeds,
     PriceGetter_SkywardFire,
     PriceGetter_StarCityGames,
-    PriceGetter_TotalCards,
+    // PriceGetter_TotalCards,
     PriceGetter_TrollTrader,
     PriceGetter_UnicornCards,
     // PriceGetter_Untap,
@@ -84,7 +84,8 @@ const priceGetters: IPriceGetterBehaviour[] = [
     new PriceGetter_PatriotGamesLeeds(),
     new PriceGetter_SkywardFire(),
     new PriceGetter_StarCityGames(),
-    new PriceGetter_TotalCards(),
+    // Total Cards — all listings show as out of stock on their HTML search page (confirmed Jun 2026 after switching from JSON suggest API to HTML scraper)
+    // new PriceGetter_TotalCards(),
     new PriceGetter_TrollTrader(),
     new PriceGetter_UnicornCards(),
     // Untap (untap.cz) - Czech PrestaShop store. Selectors unverified; site is behind Cloudflare challenge.

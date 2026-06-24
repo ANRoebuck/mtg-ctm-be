@@ -23,18 +23,21 @@ describe('PriceGetter_TotalCards', () => {
   });
 
   it('gets results for Botanical Sanctum', async () => {
-    const searchTerm = 'Botanical Sanctum';
+    const searchTerm = 'botanical sanctum';
 
     const expectedResults = readResults(priceGetter.name, searchTerm);
 
     const htmlString = readHtmlString(priceGetter.name, searchTerm);
-    mockedAxios.get.mockResolvedValueOnce({ data: htmlString });
+    mockedAxios.post.mockResolvedValueOnce({ data: htmlString });
 
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
-    expect(mockedAxios.get).toHaveBeenCalledWith(
-      'https://totalcards.net/search?type=product&options%5Bprefix%5D=last&q=botanical+sanctum',
-      { "headers": { "Origin": "compare-the-magic" } }
+    expect(mockedAxios.post).toHaveBeenCalledWith(
+      'http://localhost:5002/api/scrape',
+      {
+        targetUrl: 'https://totalcards.net/search?type=product&options%5Bprefix%5D=last&q=botanical+sanctum',
+        lazyElementSelector: null,
+      }
     );
     expect(results.length).toBe(2);
     expect(results).toStrictEqual(expectedResults);

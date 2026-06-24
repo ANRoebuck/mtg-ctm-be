@@ -1,5 +1,5 @@
 import AbstractDataGetter from './AbstractDataGetter';
-import { VERBOSE_LOGGING, ts } from '../../../utils/Logger';
+import { ts } from '../../../utils/Logger';
 import { AbstractDataProcessor } from './AbstractDataProcessor';
 import { Price } from '../../../types/Price';
 import Region from '../../../types/Region';
@@ -41,7 +41,9 @@ abstract class AbstractPriceGetter implements IPriceGetterBehaviour {
 
         const sanitisedSearchTerm = sanitizeString(searchTerm);
 
+        const start = Date.now();
         const rawData = await this.dataGetter.getData(sanitisedSearchTerm);
+        const elapsed = Date.now() - start;
 
         const foundItems: Price[] = this.dataProcessor.processData(rawData);
         // console.log(`Parsed ${foundItems.length} potential results`);
@@ -58,7 +60,7 @@ abstract class AbstractPriceGetter implements IPriceGetterBehaviour {
             saveToFile(`${filePath}${this.name}_${searchTerm}_prices.json`, JSON.stringify(validResults));
         }
 
-        if (VERBOSE_LOGGING) console.log(`[${ts()}] [AbstractPriceGetter.getPrices] Returning ${validResults.length} results for searchTerm=[${searchTerm}] from seller=[${this.name}]`);
+        console.log(`[${ts()}] [AbstractPriceGetter.getPrices] Returning ${validResults.length} results for searchTerm=[${searchTerm}] from seller=[${this.name}] in ${elapsed}ms`);
         return validResults;
     }
 

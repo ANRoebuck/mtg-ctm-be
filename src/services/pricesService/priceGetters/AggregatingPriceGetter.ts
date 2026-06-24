@@ -41,6 +41,7 @@ class AggregatingPriceGetter {
             saveToFile(`${filePath}${this.name}_${searchTerm}_prices.json`, JSON.stringify(aggregatedPrices));
         }
 
+        console.log(`[${ts()}] [AggregatingPriceGetter.getPrices] Returning ${aggregatedPrices.length} results for searchTerm=[${searchTerm}] from seller=[${this.name}]`);
         return aggregatedPrices;
     }
 }

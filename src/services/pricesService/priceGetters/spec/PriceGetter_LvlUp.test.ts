@@ -36,7 +36,7 @@ describe('PriceGetter_LvlUp', () => {
       'http://localhost:5002/api/scrape',
       {
         targetUrl: 'https://lvlupgaming.co.uk/search?type=product&options%5Bprefix%5D=last&q=steam+vents',
-        lazyElementSelector: '.list-view-items.products-display',
+        lazyElementSelector: '.product-grid-container',
       }
     );
     expect(results.length).toBe(3);

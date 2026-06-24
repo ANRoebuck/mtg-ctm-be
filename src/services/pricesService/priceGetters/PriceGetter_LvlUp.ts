@@ -38,7 +38,7 @@ class ScrapingDataGetter_LvlUp extends AbstractScrapingDataGetter {
             searchPath: 'search?type=product&options%5Bprefix%5D=last&q=',
             searchSuffix: '',
             searchJoin: '+',
-            lazyElementSelector: '.list-view-items.products-display',
+            lazyElementSelector: '.product-grid-container',
         });
     }
 }

@@ -76,7 +76,7 @@ class ScrapingDataGetter_Axion_NonFoil extends AbstractScrapingDataGetter {
             searchPath: 'search?type=product&q=',
             searchSuffix: '&filter.v.availability=1&filter.v.option.finish=Non-Foil',
             searchJoin: '+',
-            lazyElementSelector: 'div[data-results]',
+            lazyElementSelector: '#collection-grid',
         });
     }
 }
@@ -89,7 +89,7 @@ class ScrapingDataGetter_Axion_Foil extends AbstractScrapingDataGetter {
             searchPath: 'search?type=product&q=',
             searchSuffix: '&filter.v.availability=1&filter.v.option.finish=Foil',
             searchJoin: '+',
-            lazyElementSelector: 'div[data-results]',
+            lazyElementSelector: '#collection-grid',
         });
     }
 }

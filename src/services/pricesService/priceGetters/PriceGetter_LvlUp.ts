@@ -82,54 +82,52 @@ class ScrapingDataGetter_LvlUp extends AbstractScrapingDataGetter {
 //     }
 // }
 
+// class DataProcessor_LvlUp extends AbstractHtmlDataProcessor — old theme (pre-Jun 2026)
+// Old theme used BinderPOS product-card-list2 layout with per-card variant dropdowns.
+// Selectors: resultSelector: 'div.product-card-list2', titleSelector: 'div.h4.grid-view-item__title',
+//   expansionFromResultNode extracted "[Set]" from title, stockSelector: '.grid-view-item--sold-out'.
+
 class DataProcessor_LvlUp extends AbstractHtmlDataProcessor {
     constructor() {
         super({
             seller: sellerName,
             currency: currencies.GBP,
 
-            resultSelector: 'div.product-card-list2',
+            // Dawn theme — each product is a card-wrapper div
+            resultSelector: 'div.card-wrapper.product-card-wrapper',
 
-            // titleFromResultNode overridden below — combines card name + selected variant
-            titleSelector: 'div.h4.grid-view-item__title',
+            // Title is "Steam Vents (267)" — strip trailing collector number (and any suffix after it)
+            titleSelector: 'h3.card__heading.h5 a',
+            titleFromText: (text): string => text.replace(/\s*\(\d+[a-z]?\).*$/i, '').trim(),
 
             useSubResults: false,
             subresultSelector: '',
             subtitleSelector: '',
             subtitleFromText: () => '',
 
-            // Expansion is in brackets in the title text: "Steam Vents [Guildpact]" → "Guildpact"
-            expansionSelector: 'div.h4.grid-view-item__title',
-            expansionFromText: (text): string => text.match(/\[(.*?)\]/)?.[1]?.trim() ?? '',
+            // Expansion is not shown on search result cards in this theme
+            expansionSelector: '',
 
-            priceSelector: '.product-price__price.is-bold',
+            // Price displayed as "From £11.89 GBP" — strip non-digits to get pence integer
+            priceSelector: '.price-item.price-item--regular',
             priceValueFromPriceText: (text): number => parseInt(text.replace(/\D/g, '')),
 
-            // .grid-view-item--sold-out is on the inner div only for sold-out cards.
-            // span.value.outstock is always present with "SOLD OUT" text (CSS-toggled by JS) — not usable.
-            stockSelector: '.grid-view-item--sold-out',
+            // "Sold out" badge is present when OOS, absent when in stock
+            stockSelector: '.card__badge .badge',
             stockValueFromStockText: (text): number => text ? 0 : 1,
 
-            // Selected variant option contains "Foil" for foil cards: "Near Mint Foil"
-            isFoilSelector: 'option[selected]',
+            // Foil and non-foil are variants within the same card — not distinguishable per card in this theme
+            isFoilSelector: '',
 
-            imgSelector: '.grid-view-item__image',
+            imgSelector: '.card__media img',
             imgBaseUrl: 'https:',
             imgSrcAttribute: 'src',
 
-            productSelector: 'a[href*="/products/"]',
+            productSelector: 'h3.card__heading.h5 a',
             productBaseUrl: baseUrl,
             productRefAttribute: 'href',
         });
     }
-
-    // @Override — title = card name (strip [set]) + selected variant: "Steam Vents - Near Mint Foil"
-    titleFromResultNode = (resultNode: Element): string => {
-        const rawTitle = this.getFirstElementHtml(resultNode, this.titleSelector);
-        const cardName = rawTitle.replace(/\s*\[.*?\].*$/, '').trim();
-        const variant = resultNode.querySelector('option[selected]')?.textContent?.trim() ?? '';
-        return variant ? `${cardName} - ${variant}` : cardName;
-    };
 }
 
 export default PriceGetter_LvlUp;

@@ -39,7 +39,7 @@ describe('PriceGetter_LvlUp', () => {
         lazyElementSelector: '.product-grid-container',
       }
     );
-    expect(results.length).toBe(3);
+    expect(results.length).toBe(5);
     expect(results).toStrictEqual(expectedResults);
   });
 

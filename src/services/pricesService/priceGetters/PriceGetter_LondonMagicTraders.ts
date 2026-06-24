@@ -1,4 +1,4 @@
-import AbstractDataGetter from './AbstractDataGetter';
+import AbstractScrapingDataGetter from './AbstractScrapingDataGetter';
 import { AbstractHtmlDataProcessor, Stock } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
 import { currencies } from '../../../types/Currency';
@@ -11,13 +11,25 @@ class PriceGetter_LondonMagicTraders extends AbstractPriceGetter {
             name: sellerName,
             region: 'UK',
             logoUrl: '/images/London_Magic_Traders_logo_150x60.png',
-            dataGetter: new DataGetter_LondonMagicTraders(),
+            dataGetter: new ScrapingDataGetter_LondonMagicTraders(),
             dataProcessor: new DataProcessor_LondonMagicTraders(),
         });
     }
 }
 
-class DataGetter_LondonMagicTraders extends AbstractDataGetter {
+// class DataGetter_LondonMagicTraders extends AbstractDataGetter {
+//     constructor() {
+//         super({
+//             name: sellerName,
+//             baseUrl: 'https://londonmagictraders.com/',
+//             searchPath: 'search?q=',
+//             searchSuffix: '&options%5Bprefix%5D=last&filter.v.availability=1',
+//             searchJoin: '+',
+//         });
+//     }
+// }
+
+class ScrapingDataGetter_LondonMagicTraders extends AbstractScrapingDataGetter {
     constructor() {
         super({
             name: sellerName,
@@ -25,6 +37,7 @@ class DataGetter_LondonMagicTraders extends AbstractDataGetter {
             searchPath: 'search?q=',
             searchSuffix: '&options%5Bprefix%5D=last&filter.v.availability=1',
             searchJoin: '+',
+            lazyElementSelector: 'ul.product-grid',
         });
     }
 }

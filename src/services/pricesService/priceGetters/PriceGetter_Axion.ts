@@ -68,8 +68,6 @@ class PriceGetter_Axion_Foil extends AbstractPriceGetter {
 //     }
 // }
 
-// lazyElementSelector: adjust this CSS selector to match a product element on the Axion
-// search results page. If null, the scraper waits a fixed 3 seconds instead.
 class ScrapingDataGetter_Axion_NonFoil extends AbstractScrapingDataGetter {
     constructor() {
         super({
@@ -78,7 +76,7 @@ class ScrapingDataGetter_Axion_NonFoil extends AbstractScrapingDataGetter {
             searchPath: 'search?type=product&q=',
             searchSuffix: '&filter.v.availability=1&filter.v.option.finish=Non-Foil',
             searchJoin: '+',
-            lazyElementSelector: null,
+            lazyElementSelector: 'div[data-results]',
         });
     }
 }
@@ -91,7 +89,7 @@ class ScrapingDataGetter_Axion_Foil extends AbstractScrapingDataGetter {
             searchPath: 'search?type=product&q=',
             searchSuffix: '&filter.v.availability=1&filter.v.option.finish=Foil',
             searchJoin: '+',
-            lazyElementSelector: null,
+            lazyElementSelector: 'div[data-results]',
         });
     }
 }

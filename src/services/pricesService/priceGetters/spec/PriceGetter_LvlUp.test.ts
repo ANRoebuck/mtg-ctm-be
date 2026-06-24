@@ -28,13 +28,16 @@ describe('PriceGetter_LvlUp', () => {
     const expectedResults = readResults(priceGetter.name, searchTerm);
 
     const htmlString = readHtmlString(priceGetter.name, searchTerm);
-    mockedAxios.get.mockResolvedValueOnce({ data: htmlString });
+    mockedAxios.post.mockResolvedValueOnce({ data: htmlString });
 
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
-    expect(mockedAxios.get).toHaveBeenCalledWith(
-      'https://lvlupgaming.co.uk/search?type=product&options%5Bprefix%5D=last&q=steam+vents',
-      { "headers": { "Origin": "compare-the-magic" } }
+    expect(mockedAxios.post).toHaveBeenCalledWith(
+      'http://localhost:5002/api/scrape',
+      {
+        targetUrl: 'https://lvlupgaming.co.uk/search?type=product&options%5Bprefix%5D=last&q=steam+vents',
+        lazyElementSelector: '.list-view-items.products-display',
+      }
     );
     expect(results.length).toBe(3);
     expect(results).toStrictEqual(expectedResults);

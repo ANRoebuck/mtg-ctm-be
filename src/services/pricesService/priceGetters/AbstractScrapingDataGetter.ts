@@ -11,6 +11,11 @@ interface ScrapingArgs {
     searchSuffix: string;
     searchJoin: string;
     // CSS selector Playwright waits for before capturing the page HTML.
+    // Strongly recommended: always set this, even for non-lazy pages. When set, the scrape
+    // service responds as soon as the element appears rather than waiting a fixed 3-second
+    // timeout, which meaningfully reduces response time. Use a structural element that is
+    // always present in the loaded page even when there are no results (e.g. a search results
+    // wrapper div), not a result card (which would be absent on empty pages).
     // If null, the scraper falls back to a fixed 3-second wait.
     lazyElementSelector?: string | null;
 }
@@ -22,6 +27,9 @@ abstract class AbstractScrapingDataGetter extends AbstractDataGetter {
     constructor({ lazyElementSelector = null, ...rest }: ScrapingArgs) {
         super(rest);
         this.lazyElementSelector = lazyElementSelector;
+        if (lazyElementSelector === null) {
+            console.warn(`[AbstractScrapingDataGetter] No lazyElementSelector set for seller=[${rest.name}] — scrape service will fall back to a fixed 3-second wait. Set a selector for faster responses.`);
+        }
     }
 
     // @Override — POST to headless-browser scrape service instead of direct HTTP GET

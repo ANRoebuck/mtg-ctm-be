@@ -38,7 +38,7 @@ class ScrapingDataGetter_TotalCards extends AbstractScrapingDataGetter {
             searchPath: 'search?type=product&options%5Bprefix%5D=last&q=',
             searchSuffix: '',
             searchJoin: '+',
-            lazyElementSelector: null,
+            lazyElementSelector: 'div.search-results-wrapper',
         });
     }
 }

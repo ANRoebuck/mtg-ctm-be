@@ -48,6 +48,7 @@ const priceGetters: IPriceGetterBehaviour[] = [
     // Selectors unverified pending live test.
     // new PriceGetter_BazaarOfMagic(),
     // Big Orbit blocks automated searches
+    // Big Orbit Cards — scrape service works but stock levels are very poor (confirmed Jun 2026)
     // new PriceGetter_BigOrbitCards(),
     new PriceGetter_BoardsAndSwords(),
     new PriceGetter_BossMinis(),

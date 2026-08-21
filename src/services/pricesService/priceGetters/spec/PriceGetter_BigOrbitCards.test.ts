@@ -1,15 +1,12 @@
 import axios, { AxiosStatic } from 'axios';
 import { IPriceGetterBehaviour } from '../AbstractPriceGetter';
-import { Price } from '../../../../types/Price';
-import { readHtmlString, readResults } from '../../../../utils/utils';
+import { readHtmlString } from '../../../../utils/utils';
 
 import { PriceGetter_BigOrbitCards } from '..';
 
 
 jest.mock('axios');
 const mockedAxios: jest.Mocked<AxiosStatic> = axios as jest.Mocked<typeof axios>;
-
-const stub = 'https://mtg-shelf.herokuapp.com/';
 
 let priceGetter: IPriceGetterBehaviour;
 
@@ -24,19 +21,24 @@ describe('PriceGetter_BigOrbitCards', () => {
     expect(priceGetter.name).toBe('Big Orbit Cards');
   });
 
-  // it('gets results for Seachrome Coast', async () => {
-  //   const searchTerm = 'Seachrome Coast';
+  it('gets results for Seachrome Coast', async () => {
+    const searchTerm = 'Seachrome Coast';
 
-  //   const expectedResults = readResults(priceGetter.name, searchTerm);
+    const htmlString = readHtmlString(priceGetter.name, searchTerm);
+    mockedAxios.post.mockResolvedValueOnce({ data: htmlString });
 
-  //   const htmlString = readHtmlString(priceGetter.name, searchTerm);
-  //   mockedAxios.get.mockResolvedValueOnce({ data: htmlString });
+    await priceGetter.getPrices(searchTerm, false);
 
-  //   const results: Price[] = await priceGetter.search(searchTerm, false);
-
-  //   expect(mockedAxios.get).toHaveBeenCalledWith(stub + 'https://www.bigorbitcards.co.uk/shop-all-games/search/seachrome+coast/', {"headers": {"Origin": "compare-the-magic"}});
-  //   // expect(results.length).toBe(7);
-  //   // expect(results).toStrictEqual(expectedResults);
-  // });
+    expect(mockedAxios.post).toHaveBeenCalledWith(
+      'http://localhost:5002/api/scrape',
+      {
+        targetUrl: 'https://www.bigorbitcards.co.uk/magic-the-gathering/search/seachrome+coast/?resultsPerPage=96',
+        lazyElementSelector: 'article.product-miniature',
+      }
+    );
+    // Result count and exact match not asserted — selectors unverified against live site
+    // expect(results.length).toBe(7);
+    // expect(results).toStrictEqual(expectedResults);
+  });
 
 });

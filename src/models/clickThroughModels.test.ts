@@ -1,4 +1,4 @@
-import { recordClickThrough, getClickThroughsBySeller, getClickThroughsByCard, pruneClickThroughs, resetClickThroughs } from './clickThroughModels';
+import { recordClickThrough, getClickThroughsBySeller, getClickThroughsByCard, getClickThroughsCardsBySeller, pruneClickThroughs, resetClickThroughs } from './clickThroughModels';
 
 beforeEach(() => {
     resetClickThroughs();
@@ -114,6 +114,53 @@ describe('getClickThroughsByCard', () => {
         const result = await getClickThroughsByCard(30);
         expect(result).toHaveLength(1);
         expect(result[0].name).toBe('New Card');
+    });
+});
+
+describe('getClickThroughsCardsBySeller', () => {
+    it('returns empty array when no events recorded', async () => {
+        expect(await getClickThroughsCardsBySeller()).toEqual([]);
+    });
+
+    it('returns one entry per seller, each with its own card breakdown', async () => {
+        await recordClickThrough('Lightning Bolt', '401 Games');
+        await recordClickThrough('Lightning Bolt', '401 Games');
+        await recordClickThrough('Counterspell', '401 Games');
+        await recordClickThrough('Lightning Bolt', 'Face to Face');
+
+        const result = await getClickThroughsCardsBySeller();
+        expect(result).toHaveLength(2);
+
+        const fof = result.find(r => r.seller === '401 Games');
+        expect(fof?.cards).toEqual([
+            { name: 'Lightning Bolt', count: 2 },
+            { name: 'Counterspell', count: 1 },
+        ]);
+
+        const ftf = result.find(r => r.seller === 'Face to Face');
+        expect(ftf?.cards).toEqual([{ name: 'Lightning Bolt', count: 1 }]);
+    });
+
+    it('sorts sellers by total click-through count descending', async () => {
+        await recordClickThrough('Lightning Bolt', 'Face to Face');
+        await recordClickThrough('Lightning Bolt', '401 Games');
+        await recordClickThrough('Counterspell', '401 Games');
+
+        const result = await getClickThroughsCardsBySeller();
+        expect(result[0].seller).toBe('401 Games');
+        expect(result[1].seller).toBe('Face to Face');
+    });
+
+    it('filters to the last N days when days param is provided', async () => {
+        jest.setSystemTime(new Date('2026-01-01'));
+        await recordClickThrough('Old Card', 'Old Seller');
+
+        jest.setSystemTime(new Date('2026-04-22'));
+        await recordClickThrough('New Card', 'New Seller');
+
+        const result = await getClickThroughsCardsBySeller(30);
+        expect(result).toHaveLength(1);
+        expect(result[0].seller).toBe('New Seller');
     });
 });
 

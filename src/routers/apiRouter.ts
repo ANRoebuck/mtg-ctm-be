@@ -1,7 +1,6 @@
 import express, { Router } from 'express';
 import pricesRouter from './pricesRouter';
-import searchHistoryRouter from './searchHistoryRouter';
-import clickThroughRouter from './clickThroughRouter';
+import dataRouter from './dataRouter';
 import infoRouter from './infoRouter';
 import { errHandleMethodNotAllowed } from '../errorHandling/errorHandling';
 
@@ -13,8 +12,7 @@ apiRouter.route('/')
     .all(errHandleMethodNotAllowed)
 
 apiRouter.use('/prices', pricesRouter);
-apiRouter.use('/search-history', searchHistoryRouter);
-apiRouter.use('/click-through', clickThroughRouter);
+apiRouter.use('/data', dataRouter);
 apiRouter.use('/info', infoRouter);
 
 export default apiRouter;

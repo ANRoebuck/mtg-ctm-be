@@ -52,8 +52,9 @@ class CachingPriceGetter implements IPriceGetterBehaviour {
     }
 
     #getCachedPrices = (searchTerm: string): Price[] => {
-        console.log(`[${ts()}] [CachingPriceGetter.#getCachedPrices] Returning cached prices for ${searchTerm}`);
-        return this.#cachedPricesMap[searchTerm].prices;
+        const prices = this.#cachedPricesMap[searchTerm].prices;
+        console.log(`[${ts()}] [CachingPriceGetter.#getCachedPrices] Returning ${prices.length} cached results for searchTerm=[${searchTerm}] from seller=[${this.name}]`);
+        return prices;
     }
 
     #getFreshPrices = async (searchTerm: string): Promise<Price[]> => {

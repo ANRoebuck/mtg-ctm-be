@@ -1,4 +1,4 @@
-import { strongMatch } from "./utils";
+import { strongMatch, sanitizeString } from "./utils";
 
 
 describe('strongMatch', () => {
@@ -88,8 +88,45 @@ describe('strongMatch', () => {
         const searchTerm2 = 'apos\'trophe';
         const textBody2 = 'apostrophe'
 
+        const searchTerm3 = 'The Eagles Are Coming!';
+        const textBody3 = 'The Eagles Are Coming';
+
         expect(strongMatch(textBody1, searchTerm1)).toBeTruthy();
         expect(strongMatch(textBody2, searchTerm2)).toBeTruthy();
+        expect(strongMatch(textBody3, searchTerm3)).toBeTruthy();
     })
+
+    it('matches split card names using only the first half', () => {
+        const searchTerm = 'Fire // Ice';
+        const textBody = 'Fire';
+
+        expect(strongMatch(textBody, searchTerm)).toBeTruthy();
+    });
+
+});
+
+describe('sanitizeString', () => {
+
+    it('takes only the first half of a split card name', () => {
+        expect(sanitizeString('Fire // Ice')).toBe('fire');
+    });
+
+    it('discards everything after the first "//", however many there are', () => {
+        expect(sanitizeString('Who // What // When // Where // Why')).toBe('who');
+    });
+
+    it('does not collapse "//" into the surrounding words as if it were regular punctuation', () => {
+        expect(sanitizeString('Fire // Ice')).not.toBe('fire ice');
+    });
+
+    it('leaves a lone slash untouched (only a double slash triggers split-card handling)', () => {
+        expect(sanitizeString('Wear / Tear')).toBe('wear / tear');
+    });
+
+    it('strips common punctuation', () => {
+        expect(sanitizeString('The Eagles Are Coming!')).toBe('the eagles are coming');
+        expect(sanitizeString('Will you find it?')).toBe('will you find it');
+        expect(sanitizeString('Kongming, "Sleeping Dragon"')).toBe('kongming sleeping dragon');
+    });
 
 });

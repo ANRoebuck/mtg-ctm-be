@@ -2,7 +2,15 @@ import { readFileSync, writeFileSync } from 'fs';
 import { Price } from '../types/Price';
 import { ts } from './Logger';
 
-export const sanitizeString = (text: string) => text.toLowerCase().replace(/[\n'-]/g, '').normalize("NFD").replace(/\p{Diacritic}/gu, '');
+// Split cards (e.g. "Fire // Ice") are treated as a search for the first half only — the "//" must be
+// discarded before general punctuation stripping, otherwise it collapses into "fire ice".
+export const sanitizeString = (text: string) => text
+    .split('//')[0]
+    .trim()
+    .toLowerCase()
+    .replace(/[\n'",.:;!?-]/g, '')
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, '');
 
 const defaultBannedTerms = ['artcard', 'art card', 'artseries', 'art series', '(Art)'];
 

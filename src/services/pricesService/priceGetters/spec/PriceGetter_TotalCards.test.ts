@@ -28,7 +28,7 @@ describe('PriceGetter_TotalCards', () => {
     const expectedResults = readResults(priceGetter.name, searchTerm);
 
     const htmlString = readHtmlString(priceGetter.name, searchTerm);
-    mockedAxios.post.mockResolvedValueOnce({ data: htmlString });
+    mockedAxios.post.mockResolvedValueOnce({ data: { html: htmlString, queueWaitMs: 0, scrapeMs: 0 } });
 
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 

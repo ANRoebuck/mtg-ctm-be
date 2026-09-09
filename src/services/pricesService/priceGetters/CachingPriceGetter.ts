@@ -61,7 +61,7 @@ class CachingPriceGetter implements IPriceGetterBehaviour {
     #getFreshPrices = async (searchTerm: string): Promise<Price[]> => {
         const start = Date.now();
         const prices: Price[] = await this.#priceGetter.getPrices(searchTerm);
-        const elapsedMs = Date.now() - start;
+        const elapsedMs = this.#priceGetter.getLastElapsedMs?.(searchTerm) ?? (Date.now() - start);
         this.#cachePrices(searchTerm, prices, elapsedMs);
         return prices;
     }

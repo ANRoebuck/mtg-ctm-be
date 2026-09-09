@@ -25,7 +25,7 @@ describe('PriceGetter_BigOrbitCards', () => {
     const searchTerm = 'Seachrome Coast';
 
     const htmlString = readHtmlString(priceGetter.name, searchTerm);
-    mockedAxios.post.mockResolvedValueOnce({ data: htmlString });
+    mockedAxios.post.mockResolvedValueOnce({ data: { html: htmlString, queueWaitMs: 0, scrapeMs: 0 } });
 
     await priceGetter.getPrices(searchTerm, false);
 

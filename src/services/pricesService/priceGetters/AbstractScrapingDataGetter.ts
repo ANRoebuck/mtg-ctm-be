@@ -23,6 +23,9 @@ interface ScrapingArgs {
 abstract class AbstractScrapingDataGetter extends AbstractDataGetter {
 
     lazyElementSelector: string | null;
+    // last reported scrapeMs per searchTerm — excludes time spent queued behind
+    // MAX_CONCURRENT_BROWSERS other scrapes, see docs/browser-pool-design.md in mtg-ctm-scrape.
+    #lastScrapeMs: { [searchTerm: string]: number } = {};
 
     constructor({ lazyElementSelector = null, ...rest }: ScrapingArgs) {
         super(rest);
@@ -41,8 +44,25 @@ abstract class AbstractScrapingDataGetter extends AbstractDataGetter {
                 lazyElementSelector: this.lazyElementSelector,
             })
             .then((response) => this.extractData(response, searchTerm))
-            .catch((e) => this.handleDataError(searchTerm, e));
+            .catch((e) => {
+                // clear any stale scrapeMs from a previous success for this searchTerm, so a
+                // failed fetch doesn't get reported as taking however long the last success took.
+                delete this.#lastScrapeMs[searchTerm];
+                return this.handleDataError(searchTerm, e);
+            });
     };
+
+    // @Override — the scrape service reports { html, queueWaitMs, scrapeMs } rather than
+    // raw HTML, since a request can sit queued behind other scrapes before it even starts.
+    extractData = ({ data }: { data: any }, searchTerm: string): any => {
+        console.log(`[${ts()}] [AbstractScrapingDataGetter.extractData] Extracting data for seller=[${this.name}] searchTerm=[${searchTerm}]`);
+        if (typeof data?.scrapeMs === 'number') {
+            this.#lastScrapeMs[searchTerm] = data.scrapeMs;
+        }
+        return data?.html ?? '';
+    }
+
+    getLastElapsedMs = (searchTerm: string): number | undefined => this.#lastScrapeMs[searchTerm];
 
     // Build the raw target URL without the CORS proxy prefix — the scrape service
     // fetches the page directly from a headless browser, so no proxy is needed.

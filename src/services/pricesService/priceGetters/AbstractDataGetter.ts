@@ -32,6 +32,11 @@ abstract class AbstractDataGetter {
         .then((response) => this.extractData(response, searchTerm))
         .catch((e) => this.handleDataError(searchTerm, e));
 
+    // optional: overridden by data getters that route through a queued external service
+    // (see AbstractScrapingDataGetter) to report the queue-excluded fetch duration for a
+    // given searchTerm, instead of AbstractPriceGetter falling back to wall-clock timing.
+    getLastElapsedMs?: (searchTerm: string) => number | undefined;
+
     protected handleDataError = (searchTerm: string, e: unknown): '' => {
         console.error(`[${ts()}] [AbstractDataGetter.handleDataError] Failed to get data for seller=[${this.name}] searchTerm=[${searchTerm}]`);
         if (axios.isAxiosError(e)) {

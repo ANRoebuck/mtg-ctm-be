@@ -31,6 +31,7 @@ abstract class AbstractPriceGetter implements IPriceGetterBehaviour {
     logoUrl: string;
     dataGetter: AbstractDataGetter;
     dataProcessor: AbstractDataProcessor;
+    #lastElapsedMs: { [searchTerm: string]: number } = {};
 
     constructor({ name, region, logoUrl, dataGetter, dataProcessor }: Args) {
         this.name = name;
@@ -46,7 +47,11 @@ abstract class AbstractPriceGetter implements IPriceGetterBehaviour {
 
         const start = Date.now();
         const rawData = await this.dataGetter.getData(sanitisedSearchTerm);
-        const elapsed = Date.now() - start;
+        // prefer the dataGetter's own reported duration when it has one — e.g. a scraping
+        // getter can report time actually spent scraping, excluding any time this request
+        // spent queued behind other scrapes. Falls back to wall-clock timing otherwise.
+        const elapsed = this.dataGetter.getLastElapsedMs?.(sanitisedSearchTerm) ?? (Date.now() - start);
+        this.#lastElapsedMs[searchTerm] = elapsed;
 
         const foundItems: Price[] = this.dataProcessor.processData(rawData);
         // console.log(`Parsed ${foundItems.length} potential results`);
@@ -66,6 +71,8 @@ abstract class AbstractPriceGetter implements IPriceGetterBehaviour {
         console.log(`[${ts()}] [AbstractPriceGetter.getPrices] Returning ${validResults.length} results for searchTerm=[${searchTerm}] from seller=[${this.name}] in ${elapsed}ms`);
         return validResults;
     }
+
+    getLastElapsedMs = (searchTerm: string): number | undefined => this.#lastElapsedMs[searchTerm];
 
 }
 

@@ -28,16 +28,41 @@ describe('PriceGetter_TrollTrader', () => {
     const expectedResults = readResults(priceGetter.name, searchTerm);
 
     const htmlString = readHtmlString(priceGetter.name, searchTerm);
-    mockedAxios.get.mockResolvedValueOnce({ data: htmlString });
+    mockedAxios.post.mockResolvedValueOnce({ data: htmlString });
 
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
-    expect(mockedAxios.get).toHaveBeenCalledWith(
-      'https://www.trolltradercards.com/products/search?q=tarmogoyf',
-      { "headers": { "Origin": "compare-the-magic" } }
+    expect(mockedAxios.post).toHaveBeenCalledWith(
+      'http://localhost:5002/api/scrape',
+      {
+        targetUrl: 'https://www.trolltradercards.com/search?type=product&q=tarmogoyf&options%5Bprefix%5D=last&filter.v.availability=1',
+        lazyElementSelector: '#filter-results',
+      }
     );
-    expect(results.length).toBe(8);
+    expect(results.length).toBe(11);
     expect(results).toStrictEqual(expectedResults);
   });
 
 });
+
+
+// Old test for the pre-Sept 2026 CrystalCommerce-platform site (mocked a plain axios.get),
+// kept for reference — replaced above when Troll Trader migrated to Shopify.
+//
+// it('gets results for Tarmogoyf', async () => {
+//   const searchTerm = 'Tarmogoyf';
+//
+//   const expectedResults = readResults(priceGetter.name, searchTerm);
+//
+//   const htmlString = readHtmlString(priceGetter.name, searchTerm);
+//   mockedAxios.get.mockResolvedValueOnce({ data: htmlString });
+//
+//   const results: Price[] = await priceGetter.getPrices(searchTerm, false);
+//
+//   expect(mockedAxios.get).toHaveBeenCalledWith(
+//     'https://www.trolltradercards.com/products/search?q=tarmogoyf',
+//     { "headers": { "Origin": "compare-the-magic" } }
+//   );
+//   expect(results.length).toBe(8);
+//   expect(results).toStrictEqual(expectedResults);
+// });

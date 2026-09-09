@@ -5,6 +5,7 @@ type SellerTestResult = {
     status: 'ok' | 'no results';
     resultCount: number;
     searchTerm: string;
+    elapsedMs: number;
 }
 import configurePriceGetters from "./priceGetters/configurePriceGetters";
 import { Price } from '../../types/Price';
@@ -42,13 +43,16 @@ class PricesService {
 
         const entries = await Promise.all(
             Object.entries(this.priceGetters).map(async ([sellerName, priceGetter]) => {
+                let elapsedMs = 0;
                 for (const searchTerm of searchTerms) {
+                    const start = Date.now();
                     const prices = await priceGetter.getPrices(searchTerm);
+                    elapsedMs = Date.now() - start;
                     if (prices.length > 0) {
-                        return [sellerName, { status: 'ok', resultCount: prices.length, searchTerm }];
+                        return [sellerName, { status: 'ok', resultCount: prices.length, searchTerm, elapsedMs }];
                     }
                 }
-                return [sellerName, { status: 'no results', resultCount: 0, searchTerm: searchTerms[searchTerms.length - 1] }];
+                return [sellerName, { status: 'no results', resultCount: 0, searchTerm: searchTerms[searchTerms.length - 1], elapsedMs }];
             })
         );
 

@@ -47,7 +47,7 @@ class PricesService {
                 for (const searchTerm of searchTerms) {
                     const start = Date.now();
                     const prices = await priceGetter.getPrices(searchTerm);
-                    elapsedMs = Date.now() - start;
+                    elapsedMs = priceGetter.getLastElapsedMs?.(searchTerm) ?? (Date.now() - start);
                     if (prices.length > 0) {
                         return [sellerName, { status: 'ok', resultCount: prices.length, searchTerm, elapsedMs }];
                     }

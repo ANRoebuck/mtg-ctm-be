@@ -18,6 +18,9 @@ export interface IPriceGetterBehaviour {
     region: Region;
     logoUrl: string;
     getPrices(searchTerm: string, saveOutput?: boolean): Promise<Price[]>;
+    // reports how long the underlying fetch actually took, even when getPrices() itself
+    // was served from a cache and returned near-instantly. Implemented by CachingPriceGetter.
+    getLastElapsedMs?(searchTerm: string): number | undefined;
 }
 
 

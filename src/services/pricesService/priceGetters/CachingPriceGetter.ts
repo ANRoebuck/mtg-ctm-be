@@ -9,6 +9,7 @@ const DEFAULT_CACHING_AGE: number = 1 * HOURS + 30 * MINUTES;
 interface TimeStampedPrices {
     timeStamp: number,
     prices: Price[],
+    elapsedMs: number,
 }
 
 interface CachedPricesMap {
@@ -58,17 +59,26 @@ class CachingPriceGetter implements IPriceGetterBehaviour {
     }
 
     #getFreshPrices = async (searchTerm: string): Promise<Price[]> => {
+        const start = Date.now();
         const prices: Price[] = await this.#priceGetter.getPrices(searchTerm);
-        this.#cachePrices(searchTerm, prices);
+        const elapsedMs = Date.now() - start;
+        this.#cachePrices(searchTerm, prices, elapsedMs);
         return prices;
     }
 
-    #cachePrices = (searchTerm: string, prices: Price[]): void => {
+    #cachePrices = (searchTerm: string, prices: Price[], elapsedMs: number): void => {
         const timeStamp: number = Date.now();
         this.#cachedPricesMap[searchTerm] = {
             timeStamp,
             prices,
+            elapsedMs,
         }
+    }
+
+    // the duration of the original fetch that populated the cache, even if this
+    // particular searchTerm is now being served from cache rather than fetched fresh.
+    getLastElapsedMs = (searchTerm: string): number | undefined => {
+        return this.#cachedPricesMap[searchTerm]?.elapsedMs;
     }
 
     #invalidateStalePrices = (): void => {

@@ -10,6 +10,9 @@ export const postSearchHistory = (req: Request, res: Response, next: NextFunctio
 
 export const sendSearchHistory = (req: Request, res: Response, next: NextFunction) => {
     const days = req.query.days !== undefined ? Number(req.query.days) : undefined;
+    if (days !== undefined && (isNaN(days) || days <= 0)) {
+        return next({ status: 400, message: 'days must be a positive number' });
+    }
     getSearchHistory(days)
         .then(searchHistory => res.status(200).send({ searchHistory }))
         .catch(next);

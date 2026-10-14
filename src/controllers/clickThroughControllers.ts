@@ -10,6 +10,9 @@ export const postClickThrough = (req: Request, res: Response, next: NextFunction
 
 export const sendClickThroughsBySeller = (req: Request, res: Response, next: NextFunction) => {
     const days = req.query.days !== undefined ? Number(req.query.days) : undefined;
+    if (days !== undefined && (isNaN(days) || days <= 0)) {
+        return next({ status: 400, message: 'days must be a positive number' });
+    }
     getClickThroughsBySeller(days)
         .then(clickThroughs => res.status(200).send({ clickThroughs }))
         .catch(next);
@@ -17,6 +20,9 @@ export const sendClickThroughsBySeller = (req: Request, res: Response, next: Nex
 
 export const sendClickThroughsByCard = (req: Request, res: Response, next: NextFunction) => {
     const days = req.query.days !== undefined ? Number(req.query.days) : undefined;
+    if (days !== undefined && (isNaN(days) || days <= 0)) {
+        return next({ status: 400, message: 'days must be a positive number' });
+    }
     getClickThroughsByCard(days)
         .then(clickThroughs => res.status(200).send({ clickThroughs }))
         .catch(next);
@@ -24,6 +30,9 @@ export const sendClickThroughsByCard = (req: Request, res: Response, next: NextF
 
 export const sendClickThroughsCardsBySeller = (req: Request, res: Response, next: NextFunction) => {
     const days = req.query.days !== undefined ? Number(req.query.days) : undefined;
+    if (days !== undefined && (isNaN(days) || days <= 0)) {
+        return next({ status: 400, message: 'days must be a positive number' });
+    }
     getClickThroughsCardsBySeller(days)
         .then(clickThroughs => res.status(200).send({ clickThroughs }))
         .catch(next);

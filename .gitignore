@@ -4,3 +4,4 @@
 package-lock.json
 src/services/pricesService/priceGetters/output
 .claude
+scripts/reconstructed-data-*.json

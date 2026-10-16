@@ -34,7 +34,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const apiBaseURL = "foo"; // TODO: point this at the NEW, persistent deployment before running
+const apiBaseURL = "https://compare-the-magic.duckdns.org"; // TODO: point this at the NEW, persistent deployment before running
 const adminImportToken = "foo"; // TODO: replace with however the new import endpoints are actually secured
 
 const RECONSTRUCTED_DATA_FILENAME_PATTERN = /^reconstructed-data-\d+\.json$/;

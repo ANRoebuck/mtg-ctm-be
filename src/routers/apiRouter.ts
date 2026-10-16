@@ -2,6 +2,7 @@ import express, { Router } from 'express';
 import pricesRouter from './pricesRouter';
 import dataRouter from './dataRouter';
 import infoRouter from './infoRouter';
+import adminImportRouter from './adminImportRouter';
 import { errHandleMethodNotAllowed } from '../errorHandling/errorHandling';
 
 
@@ -14,5 +15,6 @@ apiRouter.route('/')
 apiRouter.use('/prices', pricesRouter);
 apiRouter.use('/data', dataRouter);
 apiRouter.use('/info', infoRouter);
+apiRouter.use('/admin/import', adminImportRouter); // TEMPORARY: remove after the one-off historical data replay
 
 export default apiRouter;

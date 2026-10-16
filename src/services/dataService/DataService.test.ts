@@ -110,3 +110,40 @@ describe('persistence', () => {
         expect(await service.getSearchHistory()).toEqual([]);
     });
 });
+
+describe('temporary historical import', () => {
+    it('expands counts into dated events, persists them, and only works once', async () => {
+        const first = open();
+        await expect(first.importSearchHistory([
+            { term: 'Lightning Bolt', count: 3, timestamp: '2024-01-01T00:00:00.000Z' },
+            { term: 'Counterspell', count: 1, timestamp: '2024-01-02T00:00:00.000Z' },
+        ])).resolves.toEqual({ imported: 4 });
+        await expect(first.importClickThroughs([
+            { card: 'Lightning Bolt', seller: 'Axion', count: 2, timestamp: '2024-01-01T00:00:00.000Z' },
+        ])).resolves.toEqual({ imported: 2 });
+
+        await expect(first.importSearchHistory([])).rejects.toMatchObject({ status: 400 });
+        await expect(first.importClickThroughs([])).rejects.toMatchObject({ status: 400 });
+        first.close();
+
+        const second = open();
+        const history = await second.getSearchHistory();
+        expect(history.find(h => h.term === 'Lightning Bolt')).toMatchObject({
+            count: 3, lastSearchedAt: new Date('2024-01-01T00:00:00.000Z'),
+        });
+        expect(await second.getClickThroughsBySeller()).toEqual([{ name: 'Axion', count: 2 }]);
+    });
+
+    it('rejects invalid entries without writing anything or using up the guard', async () => {
+        const service = open();
+        await expect(service.importSearchHistory([
+            { term: 'Ok', count: 1, timestamp: '2024-01-01T00:00:00.000Z' },
+            { term: 'Bad', count: 0, timestamp: '2024-01-01T00:00:00.000Z' },
+        ])).rejects.toMatchObject({ status: 400 });
+        expect(await service.getSearchHistory()).toEqual([]);
+
+        await expect(service.importSearchHistory([
+            { term: 'Ok', count: 1, timestamp: '2024-01-01T00:00:00.000Z' },
+        ])).resolves.toEqual({ imported: 1 });
+    });
+});

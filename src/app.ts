@@ -9,7 +9,7 @@ import { ts } from './utils/Logger';
 const app: Application = express();
 
 app.set('trust proxy', true);
-app.use(express.json());
+app.use(express.json({ limit: '10mb' })); // TEMPORARY: raised from 100kb for the historical data import
 app.use(cors());
 
 app.get('/', (req: Request, res: Response, next: NextFunction) => {

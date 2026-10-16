@@ -39,7 +39,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const apiBaseURL = "foo"; // TODO: point this at the live app before running, e.g. "https://mtg-ctm-be.example.com"
+const apiBaseURL = "https://compare-the-magic.duckdns.org"; // TODO: point this at the live app before running, e.g. "https://mtg-ctm-be.example.com"
 
 const MS_PER_DAY = 24 * 60 * 60 * 1000;
 

@@ -63,6 +63,24 @@ const persistenceError = (err: unknown) => {
     return { status: 500, message: 'Failed to persist event' };
 }
 
+export interface SearchImportEntry {
+    term: string;
+    count: number;
+    timestamp: string;
+}
+
+export interface ClickThroughImportEntry {
+    card: string;
+    seller: string;
+    count: number;
+    timestamp: string;
+}
+
+const invalidImport = (message: string) => Promise.reject({ status: 400, message });
+
+const validCountAndTimestamp = (entry: any): boolean =>
+    Number.isInteger(entry?.count) && entry.count > 0 && parseDate(entry?.timestamp) !== null;
+
 export class DataService {
 
     #searchEvents: SearchEvent[] = [];
@@ -90,6 +108,55 @@ export class DataService {
         this.#clickThroughEvents = this.#clickThroughLog.load();
         console.log(`[${ts()}] [DataService] Loaded ${this.#searchEvents.length} search events and ` +
             `${this.#clickThroughEvents.length} click-through events from ${dataDir}`);
+    }
+
+    // TEMPORARY: one-off import of reconstructed historical data (see scripts/replayHistoricalData.js).
+    // Each guard flips on success so a second run is rejected instead of doubling the data.
+    // Remove these methods, the guards and the /api/admin/import routes once the replay has been run.
+    #searchHistoryImported = false;
+    #clickThroughsImported = false;
+
+    importSearchHistory = (entries: SearchImportEntry[]): Promise<{ imported: number }> => {
+        if (this.#searchHistoryImported) return invalidImport('search history has already been imported');
+        if (!Array.isArray(entries) || !entries.every(e => typeof e?.term === 'string' && validCountAndTimestamp(e))) {
+            return invalidImport('entries must be an array of { term, count, timestamp }');
+        }
+
+        const events: SearchEvent[] = [];
+        for (const { term, count, timestamp } of entries) {
+            for (let i = 0; i < count; i++) events.push({ term, searchedAt: new Date(timestamp) });
+        }
+
+        try {
+            this.#searchLog?.append(events);
+        } catch (err) {
+            return Promise.reject(persistenceError(err));
+        }
+        for (const event of events) this.#searchEvents.push(event);
+        this.#searchHistoryImported = true;
+        return Promise.resolve({ imported: events.length });
+    }
+
+    importClickThroughs = (entries: ClickThroughImportEntry[]): Promise<{ imported: number }> => {
+        if (this.#clickThroughsImported) return invalidImport('click-throughs have already been imported');
+        if (!Array.isArray(entries) || !entries.every(e =>
+            typeof e?.card === 'string' && typeof e?.seller === 'string' && validCountAndTimestamp(e))) {
+            return invalidImport('entries must be an array of { card, seller, count, timestamp }');
+        }
+
+        const events: ClickThroughEvent[] = [];
+        for (const { card, seller, count, timestamp } of entries) {
+            for (let i = 0; i < count; i++) events.push({ card, seller, clickedAt: new Date(timestamp) });
+        }
+
+        try {
+            this.#clickThroughLog?.append(events);
+        } catch (err) {
+            return Promise.reject(persistenceError(err));
+        }
+        for (const event of events) this.#clickThroughEvents.push(event);
+        this.#clickThroughsImported = true;
+        return Promise.resolve({ imported: events.length });
     }
 
     close = (): void => {

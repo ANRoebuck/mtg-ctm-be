@@ -1,24 +1,17 @@
-// To migrate to Postgres (e.g. Neon or Supabase free tier):
-//   1. npm install pg @types/pg
-//   2. Set DATABASE_URL env var on Heroku (the add-on or external service provides this)
-//   3. Create the tables:
-//        CREATE TABLE search_events (term TEXT NOT NULL, searched_at TIMESTAMPTZ NOT NULL DEFAULT NOW());
-//        CREATE TABLE click_through_events (
-//            card TEXT NOT NULL, seller TEXT NOT NULL, clicked_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-//        );
-//   4. Replace the methods below with SQL equivalents — the signatures stay the same:
-//        recordSearchHistory        → INSERT INTO search_events (term) VALUES ($1), ($2), ...
-//        getSearchHistory           → SELECT term, COUNT(*) AS count, MAX(searched_at) AS last_searched_at
-//                                       FROM search_events
-//                                       WHERE ($1::int IS NULL OR searched_at >= NOW() - ($1 || ' days')::interval)
-//                                       GROUP BY term ORDER BY count DESC
-//        pruneSearchHistory         → DELETE FROM search_events WHERE searched_at < NOW() - ($1 || ' days')::interval
-//        recordClickThrough         → INSERT INTO click_through_events (card, seller) VALUES ($1, $2)
-//        getClickThroughsBySeller/  → SELECT <key> AS name, COUNT(*) AS count
-//        getClickThroughsByCard        FROM click_through_events
-//                                       WHERE ($1::int IS NULL OR clicked_at >= NOW() - ($1 || ' days')::interval)
-//                                       GROUP BY <key> ORDER BY count DESC
-//        pruneClickThroughs         → DELETE FROM click_through_events WHERE clicked_at < NOW() - ($1 || ' days')::interval
+import os from 'os';
+import path from 'path';
+import { EventLog } from './EventLog';
+import { ts } from '../../utils/Logger';
+
+// Events are persisted to append-only JSONL logs (see EventLog) in a data directory and
+// loaded back into memory on startup. Reads are served from memory; every write goes to
+// disk first. The directory is DATA_DIR if set, otherwise ~/.mtg-ctm-be, so that
+// redeploying the app (which replaces the checkout) leaves the data alone. Under jest
+// (NODE_ENV=test) nothing is persisted.
+//
+// To move to SQLite later: create search_events / click_through_events tables matching the
+// interfaces below, import the two .jsonl files once, then swap the EventLog calls in this
+// class for INSERT / DELETE statements and the in-memory aggregations for GROUP BY queries.
 
 interface SearchEvent {
     term: string;
@@ -47,12 +40,65 @@ export interface SellerCardBreakdown {
     cards: ClickThroughEntry[];
 }
 
-class DataService {
+const parseDate = (raw: unknown): Date | null => {
+    if (typeof raw !== 'string') return null;
+    const date = new Date(raw);
+    return isNaN(date.getTime()) ? null : date;
+}
+
+const parseSearchEvent = (raw: any): SearchEvent | null => {
+    const searchedAt = parseDate(raw?.searchedAt);
+    return typeof raw?.term === 'string' && searchedAt ? { term: raw.term, searchedAt } : null;
+}
+
+const parseClickThroughEvent = (raw: any): ClickThroughEvent | null => {
+    const clickedAt = parseDate(raw?.clickedAt);
+    return typeof raw?.card === 'string' && typeof raw?.seller === 'string' && clickedAt
+        ? { card: raw.card, seller: raw.seller, clickedAt }
+        : null;
+}
+
+const persistenceError = (err: unknown) => {
+    console.error(`[${ts()}] [DataService] Failed to persist event`, err);
+    return { status: 500, message: 'Failed to persist event' };
+}
+
+export class DataService {
 
     #searchEvents: SearchEvent[] = [];
     #clickThroughEvents: ClickThroughEvent[] = [];
+    #searchLog: EventLog<SearchEvent> | null = null;
+    #clickThroughLog: EventLog<ClickThroughEvent> | null = null;
+
+    // dataDir null => in-memory only. Throws if the directory can't be created/read, so
+    // that a misconfigured deploy fails loudly rather than silently losing data.
+    constructor(dataDir: string | null = null) {
+        if (dataDir === null) return;
+
+        this.#searchLog = new EventLog<SearchEvent>(
+            path.join(dataDir, 'search-events.jsonl'),
+            e => ({ term: e.term, searchedAt: e.searchedAt.toISOString() }),
+            parseSearchEvent,
+        );
+        this.#clickThroughLog = new EventLog<ClickThroughEvent>(
+            path.join(dataDir, 'click-through-events.jsonl'),
+            e => ({ card: e.card, seller: e.seller, clickedAt: e.clickedAt.toISOString() }),
+            parseClickThroughEvent,
+        );
+
+        this.#searchEvents = this.#searchLog.load();
+        this.#clickThroughEvents = this.#clickThroughLog.load();
+        console.log(`[${ts()}] [DataService] Loaded ${this.#searchEvents.length} search events and ` +
+            `${this.#clickThroughEvents.length} click-through events from ${dataDir}`);
+    }
+
+    close = (): void => {
+        this.#searchLog?.close();
+        this.#clickThroughLog?.close();
+    }
 
     resetSearchHistory = (): void => {
+        this.#searchLog?.rewrite([]);
         this.#searchEvents = [];
     }
 
@@ -61,7 +107,13 @@ class DataService {
             return Promise.reject({ status: 400, message: 'searchedFor must be an array of strings' });
         }
         const now = new Date();
-        searchedFor.forEach(term => this.#searchEvents.push({ term, searchedAt: now }));
+        const events = searchedFor.map(term => ({ term, searchedAt: now }));
+        try {
+            this.#searchLog?.append(events);
+        } catch (err) {
+            return Promise.reject(persistenceError(err));
+        }
+        this.#searchEvents.push(...events);
         return Promise.resolve();
     }
 
@@ -86,12 +138,19 @@ class DataService {
 
     pruneSearchHistory = (olderThanDays: number): Promise<{ removed: number }> => {
         const cutoff = new Date(Date.now() - olderThanDays * 24 * 60 * 60 * 1000);
-        const before = this.#searchEvents.length;
-        this.#searchEvents = this.#searchEvents.filter(e => e.searchedAt >= cutoff);
-        return Promise.resolve({ removed: before - this.#searchEvents.length });
+        const kept = this.#searchEvents.filter(e => e.searchedAt >= cutoff);
+        const removed = this.#searchEvents.length - kept.length;
+        try {
+            if (removed > 0) this.#searchLog?.rewrite(kept);
+        } catch (err) {
+            return Promise.reject(persistenceError(err));
+        }
+        this.#searchEvents = kept;
+        return Promise.resolve({ removed });
     }
 
     resetClickThroughs = (): void => {
+        this.#clickThroughLog?.rewrite([]);
         this.#clickThroughEvents = [];
     }
 
@@ -99,7 +158,13 @@ class DataService {
         if (!card || !seller) {
             return Promise.reject({ status: 400, message: 'card and seller are required' });
         }
-        this.#clickThroughEvents.push({ card, seller, clickedAt: new Date() });
+        const event = { card, seller, clickedAt: new Date() };
+        try {
+            this.#clickThroughLog?.append([event]);
+        } catch (err) {
+            return Promise.reject(persistenceError(err));
+        }
+        this.#clickThroughEvents.push(event);
         return Promise.resolve();
     }
 
@@ -153,12 +218,23 @@ class DataService {
 
     pruneClickThroughs = (olderThanDays: number): Promise<{ removed: number }> => {
         const cutoff = new Date(Date.now() - olderThanDays * 24 * 60 * 60 * 1000);
-        const before = this.#clickThroughEvents.length;
-        this.#clickThroughEvents = this.#clickThroughEvents.filter(e => e.clickedAt >= cutoff);
-        return Promise.resolve({ removed: before - this.#clickThroughEvents.length });
+        const kept = this.#clickThroughEvents.filter(e => e.clickedAt >= cutoff);
+        const removed = this.#clickThroughEvents.length - kept.length;
+        try {
+            if (removed > 0) this.#clickThroughLog?.rewrite(kept);
+        } catch (err) {
+            return Promise.reject(persistenceError(err));
+        }
+        this.#clickThroughEvents = kept;
+        return Promise.resolve({ removed });
     }
 }
 
-const dataService = new DataService();
+const resolveDataDir = (): string | null => {
+    if (process.env.NODE_ENV === 'test') return null;
+    return process.env.DATA_DIR || path.join(os.homedir(), '.mtg-ctm-be');
+}
+
+const dataService = new DataService(resolveDataDir());
 
 export default dataService;

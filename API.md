@@ -318,7 +318,9 @@ Search history and click-through logic both live in `DataService` (`src/services
 
 ## Notes on persistence
 
-Search history and click-through data are currently stored **in-memory** (plain arrays inside `DataService.ts`) and are lost on server restart. `DataService.ts` contains a documented migration path to Postgres (e.g. Neon/Supabase) with equivalent SQL for each method, should durable storage be needed.
+Search history and click-through events are persisted to two append-only JSONL files (`search-events.jsonl` and `click-through-events.jsonl`) and loaded back into memory on startup. Each write is fsynced before the request returns, so events survive crashes, redeploys and power cuts; a partial last line left by a power cut is discarded on the next start.
+
+The files live in `DATA_DIR` if set, otherwise `~/.mtg-ctm-be`. This must be somewhere a redeploy doesn't replace. The app logs how many events it loaded (and from where) on startup, and refuses to start if the directory can't be created. Tests (`NODE_ENV=test`) don't persist anything. See `EventLog.ts` for the file handling and the header of `DataService.ts` for the outline of a later move to SQLite.
 
 ## Sellers
 

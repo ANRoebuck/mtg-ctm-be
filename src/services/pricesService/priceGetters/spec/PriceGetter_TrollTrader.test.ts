@@ -28,16 +28,13 @@ describe('PriceGetter_TrollTrader', () => {
     const expectedResults = readResults(priceGetter.name, searchTerm);
 
     const htmlString = readHtmlString(priceGetter.name, searchTerm);
-    mockedAxios.post.mockResolvedValueOnce({ data: { html: htmlString, queueWaitMs: 0, scrapeMs: 0 } });
+    mockedAxios.get.mockResolvedValueOnce({ data: htmlString });
 
     const results: Price[] = await priceGetter.getPrices(searchTerm, false);
 
-    expect(mockedAxios.post).toHaveBeenCalledWith(
-      'http://localhost:5002/api/scrape',
-      {
-        targetUrl: 'https://www.trolltradercards.com/search?type=product&q=tarmogoyf&options%5Bprefix%5D=last&filter.v.availability=1',
-        lazyElementSelector: '#filter-results',
-      }
+    expect(mockedAxios.get).toHaveBeenCalledWith(
+      'https://www.trolltradercards.com/search?type=product&q=tarmogoyf&options%5Bprefix%5D=last&filter.v.availability=1',
+      { "headers": { "Origin": "compare-the-magic" } }
     );
     expect(results.length).toBe(11);
     expect(results).toStrictEqual(expectedResults);

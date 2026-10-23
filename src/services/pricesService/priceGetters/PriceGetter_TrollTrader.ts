@@ -1,4 +1,4 @@
-import AbstractScrapingDataGetter from './AbstractScrapingDataGetter';
+import AbstractDataGetter from './AbstractDataGetter';
 import { AbstractHtmlDataProcessor, Stock } from './AbstractDataProcessor';
 import AbstractPriceGetter from './AbstractPriceGetter';
 import { currencies } from '../../../types/Currency';
@@ -12,21 +12,29 @@ class PriceGetter_TrollTrader extends AbstractPriceGetter {
             name: sellerName,
             region: 'UK',
             logoUrl: '/images/Troll_Trader_logo_new_600x240.png',
-            dataGetter: new ScrapingDataGetter_TrollTrader(),
+            dataGetter: new DataGetter_TrollTrader(),
             dataProcessor: new DataProcessor_TrollTrader(),
         });
     }
 }
 
-// Troll Trader migrated to Shopify (Sept 2026). Search results are server-rendered, but we still
-// route through the scrape service for consistency/reliability with the other Shopify sellers.
+// Troll Trader migrated to Shopify (Sept 2026). Search results are server-rendered, so a plain
+// axios GET is enough — no scrape service / headless browser needed.
 //
-// TODO: this hasn't actually been confirmed necessary for this site — manual requests with no
-// browser fingerprint and no JS execution successfully returned full search results, and we haven't
-// tested whether Cloudflare (or similar) bot detection kicks in under real production traffic.
-// Worth investigating reverting to a plain AbstractDataGetter (direct axios GET, like the old
-// pre-Shopify model below) if the scrape service proves unnecessary here.
-class ScrapingDataGetter_TrollTrader extends AbstractScrapingDataGetter {
+// Checked 2026-10-23, prompted by a reported layout change: the live markup was unchanged from the
+// Sept fixture and every selector below still matched. A direct GET (axios user agent, with the
+// usual `Origin: compare-the-magic` header) returned HTTP 200 with the full page — all 50 cards and
+// the #filter-results container already in the raw HTML — 8 times out of 8, with no Cloudflare or
+// other bot challenge. We were routing via the scrape service only "for consistency" with the other
+// Shopify sellers, so we switched to the plain getter (faster, one less moving part).
+//
+// Caveat: that testing was from a dev machine (likely a residential IP), not production. Shopify
+// bot protection could treat datacentre traffic at volume differently. If Troll Trader starts
+// returning non-200s, challenge pages or empty results in production, the fallback is to switch
+// back to AbstractScrapingDataGetter (add `lazyElementSelector: '#filter-results'`; the commit
+// that introduced this note shows the previous setup), or ideally try the plain GET first and
+// fall back to the scrape service on failure.
+class DataGetter_TrollTrader extends AbstractDataGetter {
     constructor() {
         super({
             name: sellerName,
@@ -35,7 +43,6 @@ class ScrapingDataGetter_TrollTrader extends AbstractScrapingDataGetter {
             // Only show available (in-stock) results, matching the last word typed
             searchSuffix: '&options%5Bprefix%5D=last&filter.v.availability=1',
             searchJoin: '+',
-            lazyElementSelector: '#filter-results',
         });
     }
 }
@@ -123,7 +130,8 @@ export default PriceGetter_TrollTrader;
 
 
 // Old CrystalCommerce-platform model (pre-Sept 2026), kept for reference — replaced above when
-// Troll Trader migrated to Shopify.
+// Troll Trader migrated to Shopify. (Note: the getter above has since been reinstated for the
+// Shopify site; only the processor below is obsolete.)
 //
 // class DataGetter_TrollTrader extends AbstractDataGetter {
 //     constructor() {

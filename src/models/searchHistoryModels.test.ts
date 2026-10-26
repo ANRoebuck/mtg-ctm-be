@@ -1,4 +1,4 @@
-import { recordSearchHistory, getSearchHistory, pruneSearchHistory, resetSearchHistory } from './searchHistoryModels';
+import { recordSearchHistory, getSearchHistory, pruneSearchHistory, resetSearchHistory, getRecentSearches } from './searchHistoryModels';
 
 beforeEach(() => {
     resetSearchHistory();
@@ -117,5 +117,35 @@ describe('pruneSearchHistory', () => {
     it('returns 0 when history is empty', async () => {
         const { removed } = await pruneSearchHistory(30);
         expect(removed).toBe(0);
+    });
+});
+
+describe('getRecentSearches', () => {
+    it('returns raw events, most recent first, limited to count', async () => {
+        await recordSearchHistory(['A']);
+        jest.advanceTimersByTime(1000);
+        await recordSearchHistory(['B']);
+        jest.advanceTimersByTime(1000);
+        await recordSearchHistory(['A']);
+
+        const result = await getRecentSearches(2);
+        expect(result.map(e => e.term)).toEqual(['A', 'B']);
+        expect(result[0].searchedAt.getTime()).toBeGreaterThan(result[1].searchedAt.getTime());
+    });
+
+    it('returns everything if fewer than count exist', async () => {
+        await recordSearchHistory(['A']);
+        expect(await getRecentSearches(50)).toHaveLength(1);
+    });
+
+    it('caps at 100 rather than rejecting', async () => {
+        await recordSearchHistory(Array.from({ length: 150 }, (_, i) => `term${i}`));
+        const result = await getRecentSearches(1000);
+        expect(result).toHaveLength(100);
+        expect(result[0].term).toBe('term149');
+    });
+
+    it.each([0, -1, 1.5, NaN])('rejects invalid count %p', async count => {
+        await expect(getRecentSearches(count)).rejects.toMatchObject({ status: 400 });
     });
 });

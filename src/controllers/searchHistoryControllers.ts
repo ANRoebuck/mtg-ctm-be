@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { recordSearchHistory, getSearchHistory, pruneSearchHistory } from '../models/searchHistoryModels';
+import { recordSearchHistory, getSearchHistory, getRecentSearches, pruneSearchHistory } from '../models/searchHistoryModels';
 
 export const postSearchHistory = (req: Request, res: Response, next: NextFunction) => {
     const { searchedFor = [] } = { ...req.body };
@@ -15,6 +15,12 @@ export const sendSearchHistory = (req: Request, res: Response, next: NextFunctio
     }
     getSearchHistory(days)
         .then(searchHistory => res.status(200).send({ searchHistory }))
+        .catch(next);
+};
+
+export const sendRecentSearches = (req: Request, res: Response, next: NextFunction) => {
+    getRecentSearches(Number(req.query.count))
+        .then(recentSearches => res.status(200).send({ recentSearches }))
         .catch(next);
 };
 

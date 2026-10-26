@@ -13,10 +13,12 @@ import { ts } from '../../utils/Logger';
 // interfaces below, import the two .jsonl files once, then swap the EventLog calls in this
 // class for INSERT / DELETE statements and the in-memory aggregations for GROUP BY queries.
 
-interface SearchEvent {
+export interface SearchEvent {
     term: string;
     searchedAt: Date;
 }
+
+export const MAX_RECENT_EVENTS = 100;
 
 export interface SearchHistoryEntry {
     term: string;
@@ -24,7 +26,7 @@ export interface SearchHistoryEntry {
     lastSearchedAt: Date;
 }
 
-interface ClickThroughEvent {
+export interface ClickThroughEvent {
     card: string;
     seller: string;
     clickedAt: Date;
@@ -201,6 +203,18 @@ export class DataService {
 
         const result = Array.from(aggregated.values()).sort((a, b) => b.count - a.count);
         return Promise.resolve(result);
+    }
+
+    // Raw events, most recent first. Capped at MAX_RECENT_EVENTS rather than rejecting larger requests.
+    getRecentSearches = (count: number): Promise<SearchEvent[]> => this.#recent(this.#searchEvents, count);
+
+    getRecentClickThroughs = (count: number): Promise<ClickThroughEvent[]> => this.#recent(this.#clickThroughEvents, count);
+
+    #recent = <T>(events: T[], count: number): Promise<T[]> => {
+        if (!Number.isInteger(count) || count < 1) {
+            return Promise.reject({ status: 400, message: 'count must be a positive integer' });
+        }
+        return Promise.resolve(events.slice(-Math.min(count, MAX_RECENT_EVENTS)).reverse());
     }
 
     pruneSearchHistory = (olderThanDays: number): Promise<{ removed: number }> => {

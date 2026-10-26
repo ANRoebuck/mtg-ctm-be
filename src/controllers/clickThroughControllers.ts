@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { recordClickThrough, getClickThroughsBySeller, getClickThroughsByCard, getClickThroughsCardsBySeller, pruneClickThroughs } from '../models/clickThroughModels';
+import { recordClickThrough, getClickThroughsBySeller, getClickThroughsByCard, getClickThroughsCardsBySeller, getRecentClickThroughs, pruneClickThroughs } from '../models/clickThroughModels';
 
 export const postClickThrough = (req: Request, res: Response, next: NextFunction) => {
     const { card = '', seller = '' } = { ...req.body };
@@ -35,6 +35,12 @@ export const sendClickThroughsCardsBySeller = (req: Request, res: Response, next
     }
     getClickThroughsCardsBySeller(days)
         .then(clickThroughs => res.status(200).send({ clickThroughs }))
+        .catch(next);
+};
+
+export const sendRecentClickThroughs = (req: Request, res: Response, next: NextFunction) => {
+    getRecentClickThroughs(Number(req.query.count))
+        .then(recentClickThroughs => res.status(200).send({ recentClickThroughs }))
         .catch(next);
 };
 

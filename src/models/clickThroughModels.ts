@@ -1,6 +1,6 @@
-import dataService, { ClickThroughEntry, SellerCardBreakdown } from '../services/dataService/DataService';
+import dataService, { ClickThroughEntry, SellerCardBreakdown, ClickThroughEvent } from '../services/dataService/DataService';
 
-export { ClickThroughEntry, SellerCardBreakdown };
+export { ClickThroughEntry, SellerCardBreakdown, ClickThroughEvent };
 
 export const resetClickThroughs = (): void => {
     dataService.resetClickThroughs();
@@ -24,4 +24,8 @@ export const getClickThroughsCardsBySeller = (days?: number): Promise<SellerCard
 
 export const pruneClickThroughs = (olderThanDays: number): Promise<{ removed: number }> => {
     return dataService.pruneClickThroughs(olderThanDays);
+}
+
+export const getRecentClickThroughs = (count: number): Promise<ClickThroughEvent[]> => {
+    return dataService.getRecentClickThroughs(count);
 }

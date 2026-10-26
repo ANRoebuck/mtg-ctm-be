@@ -1,4 +1,4 @@
-import { recordClickThrough, getClickThroughsBySeller, getClickThroughsByCard, getClickThroughsCardsBySeller, pruneClickThroughs, resetClickThroughs } from './clickThroughModels';
+import { recordClickThrough, getClickThroughsBySeller, getClickThroughsByCard, getClickThroughsCardsBySeller, pruneClickThroughs, resetClickThroughs, getRecentClickThroughs } from './clickThroughModels';
 
 beforeEach(() => {
     resetClickThroughs();
@@ -191,5 +191,36 @@ describe('pruneClickThroughs', () => {
     it('returns 0 when there are no events', async () => {
         const { removed } = await pruneClickThroughs(30);
         expect(removed).toBe(0);
+    });
+});
+
+describe('getRecentClickThroughs', () => {
+    it('returns raw events, most recent first, limited to count', async () => {
+        await recordClickThrough('A', 'Seller 1');
+        jest.advanceTimersByTime(1000);
+        await recordClickThrough('B', 'Seller 2');
+        jest.advanceTimersByTime(1000);
+        await recordClickThrough('C', 'Seller 1');
+
+        const result = await getRecentClickThroughs(2);
+        expect(result.map(e => e.card)).toEqual(['C', 'B']);
+        expect(result[0]).toMatchObject({ seller: 'Seller 1' });
+        expect(result[0].clickedAt.getTime()).toBeGreaterThan(result[1].clickedAt.getTime());
+    });
+
+    it('returns everything if fewer than count exist', async () => {
+        await recordClickThrough('A', 'Seller 1');
+        expect(await getRecentClickThroughs(50)).toHaveLength(1);
+    });
+
+    it('caps at 100 rather than rejecting', async () => {
+        for (let i = 0; i < 150; i++) await recordClickThrough(`card${i}`, 'Seller 1');
+        const result = await getRecentClickThroughs(1000);
+        expect(result).toHaveLength(100);
+        expect(result[0].card).toBe('card149');
+    });
+
+    it.each([0, -1, 1.5, NaN])('rejects invalid count %p', async count => {
+        await expect(getRecentClickThroughs(count)).rejects.toMatchObject({ status: 400 });
     });
 });

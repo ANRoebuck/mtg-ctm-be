@@ -18,7 +18,12 @@ export interface SearchEvent {
     searchedAt: Date;
 }
 
+export const DEFAULT_RECENT_EVENTS = 20;
 export const MAX_RECENT_EVENTS = 100;
+export const DEFAULT_DAYS_BY_DATE = 30;
+export const MAX_DAYS_BY_DATE = 100;
+
+export type CountsByDate = Record<string, number>;
 
 export interface SearchHistoryEntry {
     term: string;
@@ -206,9 +211,34 @@ export class DataService {
     }
 
     // Raw events, most recent first. Capped at MAX_RECENT_EVENTS rather than rejecting larger requests.
-    getRecentSearches = (count: number): Promise<SearchEvent[]> => this.#recent(this.#searchEvents, count);
+    getRecentSearches = (count: number = DEFAULT_RECENT_EVENTS): Promise<SearchEvent[]> => this.#recent(this.#searchEvents, count);
 
-    getRecentClickThroughs = (count: number): Promise<ClickThroughEvent[]> => this.#recent(this.#clickThroughEvents, count);
+    getRecentClickThroughs = (count: number = DEFAULT_RECENT_EVENTS): Promise<ClickThroughEvent[]> => this.#recent(this.#clickThroughEvents, count);
+
+    getSearchesByDate = (days: number = DEFAULT_DAYS_BY_DATE): Promise<CountsByDate> =>
+        this.#countByDate(this.#searchEvents.map(e => e.searchedAt), days);
+
+    getClickThroughsByDate = (days: number = DEFAULT_DAYS_BY_DATE): Promise<CountsByDate> =>
+        this.#countByDate(this.#clickThroughEvents.map(e => e.clickedAt), days);
+
+    // Counts per UTC calendar date (YYYY-MM-DD) for today and the previous days - 1 dates, oldest
+    // first, including dates with no events. Capped at MAX_DAYS_BY_DATE rather than rejecting larger requests.
+    #countByDate = (timestamps: Date[], days: number): Promise<CountsByDate> => {
+        if (!Number.isInteger(days) || days < 1) {
+            return Promise.reject({ status: 400, message: 'days must be a positive integer' });
+        }
+        const dayMs = 24 * 60 * 60 * 1000;
+        const now = Date.now();
+        const counts: CountsByDate = {};
+        for (let i = Math.min(days, MAX_DAYS_BY_DATE) - 1; i >= 0; i--) {
+            counts[new Date(now - i * dayMs).toISOString().slice(0, 10)] = 0;
+        }
+        for (const timestamp of timestamps) {
+            const date = timestamp.toISOString().slice(0, 10);
+            if (date in counts) counts[date]++;
+        }
+        return Promise.resolve(counts);
+    }
 
     #recent = <T>(events: T[], count: number): Promise<T[]> => {
         if (!Number.isInteger(count) || count < 1) {

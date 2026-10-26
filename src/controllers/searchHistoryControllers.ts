@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { recordSearchHistory, getSearchHistory, getRecentSearches, pruneSearchHistory } from '../models/searchHistoryModels';
+import { recordSearchHistory, getSearchHistory, getRecentSearches, pruneSearchHistory, getSearchesByDate } from '../models/searchHistoryModels';
 
 export const postSearchHistory = (req: Request, res: Response, next: NextFunction) => {
     const { searchedFor = [] } = { ...req.body };
@@ -19,8 +19,16 @@ export const sendSearchHistory = (req: Request, res: Response, next: NextFunctio
 };
 
 export const sendRecentSearches = (req: Request, res: Response, next: NextFunction) => {
-    getRecentSearches(Number(req.query.count))
+    const count = req.query.count !== undefined ? Number(req.query.count) : undefined;
+    getRecentSearches(count)
         .then(recentSearches => res.status(200).send({ recentSearches }))
+        .catch(next);
+};
+
+export const sendSearchesByDate = (req: Request, res: Response, next: NextFunction) => {
+    const days = req.query.days !== undefined ? Number(req.query.days) : undefined;
+    getSearchesByDate(days)
+        .then(searchesByDate => res.status(200).send({ searchesByDate }))
         .catch(next);
 };
 

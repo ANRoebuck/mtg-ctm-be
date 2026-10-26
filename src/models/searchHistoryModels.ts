@@ -1,4 +1,4 @@
-import dataService, { SearchHistoryEntry, SearchEvent } from '../services/dataService/DataService';
+import dataService, { CountsByDate, SearchHistoryEntry, SearchEvent } from '../services/dataService/DataService';
 
 export { SearchHistoryEntry, SearchEvent };
 
@@ -18,6 +18,10 @@ export const pruneSearchHistory = (olderThanDays: number): Promise<{ removed: nu
     return dataService.pruneSearchHistory(olderThanDays);
 }
 
-export const getRecentSearches = (count: number): Promise<SearchEvent[]> => {
+export const getRecentSearches = (count?: number): Promise<SearchEvent[]> => {
     return dataService.getRecentSearches(count);
+}
+
+export const getSearchesByDate = (days?: number): Promise<CountsByDate> => {
+    return dataService.getSearchesByDate(days);
 }

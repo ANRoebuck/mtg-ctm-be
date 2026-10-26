@@ -1,4 +1,4 @@
-import { recordSearchHistory, getSearchHistory, pruneSearchHistory, resetSearchHistory, getRecentSearches } from './searchHistoryModels';
+import { recordSearchHistory, getSearchHistory, pruneSearchHistory, resetSearchHistory, getRecentSearches, getSearchesByDate } from './searchHistoryModels';
 
 beforeEach(() => {
     resetSearchHistory();
@@ -138,6 +138,11 @@ describe('getRecentSearches', () => {
         expect(await getRecentSearches(50)).toHaveLength(1);
     });
 
+    it('defaults to 20 when count is not provided', async () => {
+        await recordSearchHistory(Array.from({ length: 30 }, (_, i) => `term${i}`));
+        expect(await getRecentSearches()).toHaveLength(20);
+    });
+
     it('caps at 100 rather than rejecting', async () => {
         await recordSearchHistory(Array.from({ length: 150 }, (_, i) => `term${i}`));
         const result = await getRecentSearches(1000);
@@ -147,5 +152,44 @@ describe('getRecentSearches', () => {
 
     it.each([0, -1, 1.5, NaN])('rejects invalid count %p', async count => {
         await expect(getRecentSearches(count)).rejects.toMatchObject({ status: 400 });
+    });
+});
+
+describe('getSearchesByDate', () => {
+    beforeEach(() => {
+        jest.setSystemTime(new Date('2025-03-31T12:00:00Z'));
+    });
+
+    it('counts per date, oldest first, including empty dates', async () => {
+        jest.setSystemTime(new Date('2025-03-30T09:00:00Z'));
+        await recordSearchHistory(['Lightning Bolt']);
+        await recordSearchHistory(['Lightning Bolt']);
+        jest.setSystemTime(new Date('2025-03-31T12:00:00Z'));
+
+        const result = await getSearchesByDate(3);
+        expect(result).toEqual({ '2025-03-29': 0, '2025-03-30': 2, '2025-03-31': 0 });
+        expect(Object.keys(result)).toEqual(['2025-03-29', '2025-03-30', '2025-03-31']);
+    });
+
+    it('excludes events older than the window', async () => {
+        jest.setSystemTime(new Date('2025-03-20T12:00:00Z'));
+        await recordSearchHistory(['Lightning Bolt']);
+        jest.setSystemTime(new Date('2025-03-31T12:00:00Z'));
+        await recordSearchHistory(['Lightning Bolt']);
+
+        const result = await getSearchesByDate(5);
+        expect(Object.values(result).reduce((a, b) => a + b, 0)).toBe(1);
+    });
+
+    it('defaults to 30 days', async () => {
+        expect(Object.keys(await getSearchesByDate())).toHaveLength(30);
+    });
+
+    it('caps at 100 days rather than rejecting', async () => {
+        expect(Object.keys(await getSearchesByDate(1000))).toHaveLength(100);
+    });
+
+    it.each([0, -1, 1.5, NaN])('rejects invalid days %p', async days => {
+        await expect(getSearchesByDate(days)).rejects.toMatchObject({ status: 400 });
     });
 });

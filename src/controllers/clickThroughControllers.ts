@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { recordClickThrough, getClickThroughsBySeller, getClickThroughsByCard, getClickThroughsCardsBySeller, getRecentClickThroughs, pruneClickThroughs } from '../models/clickThroughModels';
+import { recordClickThrough, getClickThroughsBySeller, getClickThroughsByCard, getClickThroughsCardsBySeller, getRecentClickThroughs, pruneClickThroughs, getClickThroughsByDate } from '../models/clickThroughModels';
 
 export const postClickThrough = (req: Request, res: Response, next: NextFunction) => {
     const { card = '', seller = '' } = { ...req.body };
@@ -39,8 +39,16 @@ export const sendClickThroughsCardsBySeller = (req: Request, res: Response, next
 };
 
 export const sendRecentClickThroughs = (req: Request, res: Response, next: NextFunction) => {
-    getRecentClickThroughs(Number(req.query.count))
+    const count = req.query.count !== undefined ? Number(req.query.count) : undefined;
+    getRecentClickThroughs(count)
         .then(recentClickThroughs => res.status(200).send({ recentClickThroughs }))
+        .catch(next);
+};
+
+export const sendClickThroughsByDate = (req: Request, res: Response, next: NextFunction) => {
+    const days = req.query.days !== undefined ? Number(req.query.days) : undefined;
+    getClickThroughsByDate(days)
+        .then(clickThroughsByDate => res.status(200).send({ clickThroughsByDate }))
         .catch(next);
 };
 

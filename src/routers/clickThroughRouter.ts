@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import { postClickThrough, sendClickThroughsBySeller, sendClickThroughsByCard, sendClickThroughsCardsBySeller, sendRecentClickThroughs, deleteClickThroughs } from '../controllers/clickThroughControllers';
+import { postClickThrough, sendClickThroughsBySeller, sendClickThroughsByCard, sendClickThroughsCardsBySeller, sendRecentClickThroughs, deleteClickThroughs, sendClickThroughsByDate } from '../controllers/clickThroughControllers';
 import { errHandleMethodNotAllowed } from '../errorHandling/errorHandling';
 
 const clickThroughRouter: Router = express.Router();
@@ -23,6 +23,10 @@ clickThroughRouter.route('/cards-by-seller')
 
 clickThroughRouter.route('/recent')
     .get(sendRecentClickThroughs)
+    .all(errHandleMethodNotAllowed);
+
+clickThroughRouter.route('/by-date')
+    .get(sendClickThroughsByDate)
     .all(errHandleMethodNotAllowed);
 
 export default clickThroughRouter;

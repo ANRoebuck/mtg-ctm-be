@@ -1,4 +1,4 @@
-import { recordClickThrough, getClickThroughsBySeller, getClickThroughsByCard, getClickThroughsCardsBySeller, pruneClickThroughs, resetClickThroughs, getRecentClickThroughs } from './clickThroughModels';
+import { recordClickThrough, getClickThroughsBySeller, getClickThroughsByCard, getClickThroughsCardsBySeller, pruneClickThroughs, resetClickThroughs, getRecentClickThroughs, getClickThroughsByDate } from './clickThroughModels';
 
 beforeEach(() => {
     resetClickThroughs();
@@ -213,6 +213,11 @@ describe('getRecentClickThroughs', () => {
         expect(await getRecentClickThroughs(50)).toHaveLength(1);
     });
 
+    it('defaults to 20 when count is not provided', async () => {
+        for (let i = 0; i < 30; i++) await recordClickThrough(`card${i}`, 'Seller 1');
+        expect(await getRecentClickThroughs()).toHaveLength(20);
+    });
+
     it('caps at 100 rather than rejecting', async () => {
         for (let i = 0; i < 150; i++) await recordClickThrough(`card${i}`, 'Seller 1');
         const result = await getRecentClickThroughs(1000);
@@ -222,5 +227,44 @@ describe('getRecentClickThroughs', () => {
 
     it.each([0, -1, 1.5, NaN])('rejects invalid count %p', async count => {
         await expect(getRecentClickThroughs(count)).rejects.toMatchObject({ status: 400 });
+    });
+});
+
+describe('getClickThroughsByDate', () => {
+    beforeEach(() => {
+        jest.setSystemTime(new Date('2025-03-31T12:00:00Z'));
+    });
+
+    it('counts per date, oldest first, including empty dates', async () => {
+        jest.setSystemTime(new Date('2025-03-30T09:00:00Z'));
+        await recordClickThrough('Lightning Bolt', '401 Games');
+        await recordClickThrough('Lightning Bolt', '401 Games');
+        jest.setSystemTime(new Date('2025-03-31T12:00:00Z'));
+
+        const result = await getClickThroughsByDate(3);
+        expect(result).toEqual({ '2025-03-29': 0, '2025-03-30': 2, '2025-03-31': 0 });
+        expect(Object.keys(result)).toEqual(['2025-03-29', '2025-03-30', '2025-03-31']);
+    });
+
+    it('excludes events older than the window', async () => {
+        jest.setSystemTime(new Date('2025-03-20T12:00:00Z'));
+        await recordClickThrough('Lightning Bolt', '401 Games');
+        jest.setSystemTime(new Date('2025-03-31T12:00:00Z'));
+        await recordClickThrough('Lightning Bolt', '401 Games');
+
+        const result = await getClickThroughsByDate(5);
+        expect(Object.values(result).reduce((a, b) => a + b, 0)).toBe(1);
+    });
+
+    it('defaults to 30 days', async () => {
+        expect(Object.keys(await getClickThroughsByDate())).toHaveLength(30);
+    });
+
+    it('caps at 100 days rather than rejecting', async () => {
+        expect(Object.keys(await getClickThroughsByDate(1000))).toHaveLength(100);
+    });
+
+    it.each([0, -1, 1.5, NaN])('rejects invalid days %p', async days => {
+        await expect(getClickThroughsByDate(days)).rejects.toMatchObject({ status: 400 });
     });
 });

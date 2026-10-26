@@ -13,6 +13,7 @@ import {
     PriceGetter_GameHQ,
     PriceGetter_GatheringPointGames,
     PriceGetter_GearheadGames,
+    // PriceGetter_GenieCards,
     PriceGetter_Hareruya,
     PriceGetter_Harlequins,
     PriceGetter_HighlanderGames,
@@ -61,6 +62,8 @@ const priceGetters: IPriceGetterBehaviour[] = [
     new PriceGetter_GameHQ(),
     new PriceGetter_GatheringPointGames(),
     new PriceGetter_GearheadGames(),
+    // Genie Cards — temporarily disabled while the model is being worked on; uncomment to re-enable
+    // new PriceGetter_GenieCards(),
     new PriceGetter_Hareruya(),
     // Harlequins is "down for maintenance"
     // new PriceGetter_Harlequins(),

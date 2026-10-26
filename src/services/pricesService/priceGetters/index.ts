@@ -19,6 +19,7 @@ import PriceGetter_MagicMadhouse from './PriceGetter_MagicMadhouse';
 import PriceGetter_MightyLancer from './PriceGetter_MightyLancer';
 import PriceGetter_CosmicCollectables from './PriceGetter_CosmicCollectables';
 import PriceGetter_GearheadGames from './PriceGetter_GearheadGames';
+import PriceGetter_GenieCards from './PriceGetter_GenieCards';
 import PriceGetter_ManaGaming from './PriceGetter_ManaGaming';
 import PriceGetter_Manaleak from './PriceGetter_Manaleak';
 import PriceGetter_MountbattenCollectables from './PriceGetter_MountbattenCollectables';
@@ -69,6 +70,7 @@ export {
     PriceGetter_MightyLancer,
     PriceGetter_CosmicCollectables,
     PriceGetter_GearheadGames,
+    PriceGetter_GenieCards,
     PriceGetter_BazaarOfMagic,
     PriceGetter_MrCardSingles,
     PriceGetter_FaceToFaceGames,

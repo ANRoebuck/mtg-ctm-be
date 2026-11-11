@@ -72,7 +72,8 @@ const priceGetters: IPriceGetterBehaviour[] = [
     // new PriceGetter_LazyDragonGaming(),
     new PriceGetter_LondonMagicTraders(),
     new PriceGetter_LvlUp(),
-    new PriceGetter_MagicCardTrader(),
+    // Magic Card Trader's store is currently down (reason unknown). Kept in case it comes back up
+    // new PriceGetter_MagicCardTrader(),
     new PriceGetter_MagicMadhouse(),
     // ManaGaming removed following repeated complaints from customers regarding poor service
     // new PriceGetter_ManaGaming(),
